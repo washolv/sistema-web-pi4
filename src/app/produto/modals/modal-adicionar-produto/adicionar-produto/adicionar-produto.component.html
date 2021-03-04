@@ -1,0 +1,32 @@
+<form>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Nome</label>
+      <input type="text" class="form-control" name="nome" placeholder="Nome" [(ngModel)]="produto.nome" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Descricao</label>
+      <input type="text" class="form-control" name="Descricao" placeholder="Descricao" [(ngModel)]="produto.descricao" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefaultUsername">Preço</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend2">@</span>
+        </div>
+        <input type="text" class="form-control" name="Preço" placeholder="Preço" aria-describedby="inputGroupPrepend2" [(ngModel)]="produto.preco" required>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault03">Qtd. em estoque</label>
+      <input type="text" class="form-control" name="quantidadeEstoque" placeholder="Qtd. em estoque" [(ngModel)]="produto.quantidadeEstoque" required>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">Categoria</label>
+      <input type="text" class="form-control" name="categoria" placeholder="Categoria" [(ngModel)]="produto.categoria" required>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="addProduto()"type="submit">Cadastrar</button>
+</form>

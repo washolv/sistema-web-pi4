@@ -1,0 +1,30 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="col-12">
+      <div class="table-responsive custom-table-form-box">
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Produto</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Qtd. Estoque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produto of produtos;let i=index">
+              <td>{{produto.nome}}</td>
+              <td>{{produto.categoria}}</td>
+              <td>{{produto.descricao}}</td>
+              <td>{{produto.preco}}</td>
+              <td>{{produto.quantidadeEstoque}}</td>
+              <td><button class="button">Editar</button></td>
+              <td><button class="button">Excluir</button></td>
+          </tbody>
+        </table>
+        <button class="button" (click)="adicionarProduto()">Novo Produto</button>
+      </div>
+    </div>
+  </div>
+</div>
