@@ -9,7 +9,7 @@ import { Produto } from '../modules/produto/models/Produto';
 })
 export class ProdutoService {
 
-  apiUrl = environment.baseAPIUrl;
+  apiUrl = environment.baseAPIUrl+'/produtos';
 
   constructor(private http: HttpClient) {
   }

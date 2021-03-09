@@ -1,5 +1,3 @@
-import { Byte } from "@angular/compiler/src/util";
-
 export class Produto {
   id?: number;
   nome?: number;
@@ -8,7 +6,7 @@ export class Produto {
   quantidadeEstoque?: number;
   categoria?: string;
   habilitado?: boolean;
-  imagemProduto?: FormData;
+ // imagemProduto?: File;
 }
 
 export class imagem{

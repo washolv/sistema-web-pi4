@@ -33,7 +33,7 @@ export class ModalAdicionarProdutoComponent implements OnInit {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', file);
     console.log(file);
-    this.produto.imagemProduto=uploadImageData;
+    //this.produto.imagemProduto=uploadImageData;
   }
 
 
