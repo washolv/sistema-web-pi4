@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Produto } from '../modules/produto/models/Produto';
 
@@ -18,9 +18,15 @@ export class ProdutoService {
   public getProdutos(): Observable<Produto[]> {
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos`);
   }
-  public postProduto(produto: Produto): Observable<Produto> {
-    console.log(produto);
-    return this.http.post<Produto>(`${this.apiUrl}`, produto);
+  public getImagensProduto(id: number): Observable<FormData> {
+    return this.http.get<FormData>(`${this.apiUrl}/imagens/${id}`);
+  }
+  public postProduto(produto: Produto): Observable<Produto[]> {
+    const t= this.http.post<Produto[]>(`${this.apiUrl}`, produto);
+    return t;
+  }
+  public postFotoProduto(imagens:FormData, id:number): Observable<FormData> {
+    return this.http.post<FormData>(`${this.urlImage}/produto/${id}`, imagens);
   }
   public deleteProduto(id: number): Observable<Produto> {
     return this.http.delete<Produto>(`${this.apiUrl}/${id}`);

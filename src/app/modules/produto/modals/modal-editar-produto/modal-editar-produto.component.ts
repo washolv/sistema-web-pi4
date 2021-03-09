@@ -25,6 +25,9 @@ export class ModalEditarProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.produtoService.getImagensProduto(this.produto.id!).subscribe(response =>
+       console.log(response)
+      );
   }
   public createForm(): FormGroup {
     return this.fb.group({
