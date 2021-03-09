@@ -6,7 +6,7 @@ export class Produto {
   quantidadeEstoque?: number;
   categoria?: string;
   habilitado?: boolean;
- // imagemProduto?: File;
+  imagemProduto?: File;
 }
 
 export class imagem{

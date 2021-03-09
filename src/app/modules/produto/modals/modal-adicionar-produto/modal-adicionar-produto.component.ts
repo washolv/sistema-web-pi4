@@ -11,6 +11,7 @@ import { Produto } from '../../models/Produto';
 })
 export class ModalAdicionarProdutoComponent implements OnInit {
   public produto: Produto = new Produto();
+  public images = [];
   constructor(private produtoService: ProdutoService, public router: Router, public dialogRef: MatDialogRef<ModalAdicionarProdutoComponent>) {
 
   }
@@ -28,16 +29,13 @@ export class ModalAdicionarProdutoComponent implements OnInit {
   }
   processFile(event: any) {
 
-    const file = event.target.files[0];
+    let uploadImageData = new FormData();
 
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', file);
-    console.log(file);
-    //this.produto.imagemProduto=uploadImageData;
+    for (const file of event.target.files) {
+      uploadImageData.append('arquivos', file);
+    }
+    this.produtoService.uploadImage(uploadImageData).subscribe(response => console.log(response));
   }
-
-
-
   ngOnInit() {
   }
 

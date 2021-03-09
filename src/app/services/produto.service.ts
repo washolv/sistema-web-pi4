@@ -10,6 +10,7 @@ import { Produto } from '../modules/produto/models/Produto';
 export class ProdutoService {
 
   apiUrl = environment.baseAPIUrl+'/produtos';
+  urlImage=environment.baseAPIUrl+'/imagens';
 
   constructor(private http: HttpClient) {
   }
@@ -27,12 +28,8 @@ export class ProdutoService {
   public editarProduto(produto: Produto): Observable<Produto> {
     return this.http.put<Produto>(`${this.apiUrl}`, produto);
   }
-  public uploadImage(image: File): Observable<Object> {
-    const formData = new FormData();
-
-    formData.append('image', image);
-
-    return this.http.post('/api/v1/image-upload', formData);
+  public uploadImage(imagens: FormData): Observable<Object> {
+    return this.http.post(`${this.urlImage}`, imagens);
   }
 
 }
