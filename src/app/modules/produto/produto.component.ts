@@ -61,7 +61,7 @@ export class ProdutoComponent implements OnInit {
 
   editarProduto(produto: Produto) {
     const dialogRef = this.dialog.open(ModalEditarProdutoComponent, {
-      panelClass: 'custom-modais', backdropClass: 'blur', height: '430px', width: '550px',
+      panelClass: 'custom-modais', backdropClass: 'blur', height: '800x', width: '1000px',
       data:{
         prod: produto
       }

@@ -20,7 +20,6 @@ export class ModalAdicionarProdutoComponent implements OnInit {
 
   SalveImage(id: number) {
 
-    console.log(this.produtoRetorno);
     this.closeModal();
     let uploadImageData = new FormData();
     for (const file of this.files) {
@@ -30,7 +29,7 @@ export class ModalAdicionarProdutoComponent implements OnInit {
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
         this.closeModal();
-        //window.location.reload()
+        window.location.reload()
       }
     });
   }
@@ -43,18 +42,6 @@ export class ModalAdicionarProdutoComponent implements OnInit {
     });
   }
 
-  /*public addFotoProduto() {
-    let uploadImageData = new FormData();
-    for (const file of this.files) {
-      uploadImageData.append('arquivos', file);
-    }
-    this.produtoService.postFotoProduto(uploadImageData, this.produtoRetorno.id!).subscribe((response: any) => {
-      if (response) {
-        this.closeModal();
-        window.location.reload()
-      }
-    });
-  }*/
   public closeModal() {
     this.dialogRef.close();
   }
