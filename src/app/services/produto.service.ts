@@ -40,8 +40,7 @@ export class ProdutoService {
   }
   public editarProduto(produto: Produto): Observable<Produto> {
     console.log(produto);
-    const t=this.http.put<Produto>(`${this.apiUrl}/produtos/${produto.id}`, produto);
-    console.log(t);
+    const t=this.http.put<Produto>(`${this.apiUrl}/produtos`, produto);
     return t;
   }
   public uploadImage(imagens: FormData): Observable<Object> {

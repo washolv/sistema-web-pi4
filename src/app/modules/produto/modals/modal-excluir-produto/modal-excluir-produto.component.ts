@@ -21,9 +21,10 @@ export class ModalExcluirProdutoComponent implements OnInit {
   public Excluir() {
     this.produtoService.deleteProduto(this.prod.id!).subscribe((response: any) => {
       if (response) {
-        window.location.reload()
+        window.location.reload();
       }
     });
+    window.location.reload();
   }
   public Close(){
     this.dialogRef.close();

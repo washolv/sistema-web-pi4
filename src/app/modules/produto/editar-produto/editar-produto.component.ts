@@ -46,13 +46,13 @@ export class EditarProdutoComponent implements OnInit {
       });
     }else{
       return this.fb.group({
-        id: new FormControl(produto.id),
-        nome: new FormControl(produto.nome),
-        descricao: new FormControl(produto.descricao),
-        quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
-        preco: new FormControl(produto.preco),
-        categoria: new FormControl(produto.categoria),
-        status: new FormControl(produto.status),
+        id: new FormControl(produto.id, Validators.required),
+        nome: new FormControl(produto.nome, Validators.required),
+        descricao: new FormControl(produto.descricao, Validators.required),
+        quantidadeEstoque: new FormControl(produto.quantidadeEstoque, Validators.required),
+        preco: new FormControl(produto.preco, Validators.required),
+        categoria: new FormControl(produto.categoria,Validators.required),
+        status: new FormControl(produto.status,Validators.required),
       });
     }
   }
