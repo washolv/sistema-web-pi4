@@ -19,6 +19,9 @@ export class ProdutoComponent implements OnInit {
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
 
+  totalRegistros: number=0;
+  page: number=1
+
   constructor(private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
     this.searchFilter.pipe(
       debounceTime(1000),
@@ -28,6 +31,7 @@ export class ProdutoComponent implements OnInit {
           .subscribe((response: Produto[]) => {
             if (response) {
               this.produtos = response;
+              this.totalRegistros=this.produtos.length
             }
           });
       });
@@ -37,6 +41,7 @@ export class ProdutoComponent implements OnInit {
     this.produtoService.getProdutos()
       .subscribe((response: Produto[]) => {
         this.produtos = response;
+        this.totalRegistros=this.produtos.length;
       }, err => {
         console.log(err);
       });

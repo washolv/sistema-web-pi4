@@ -4,8 +4,8 @@
     <!--INPUT FILTRAGEM DE PRODUTOS-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <div class="row d-flex justify-content-center">
-        <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"(ngModelChange)="this.searchFilter.next($event)"
-        [(ngModel)]="filtroPesquisa" />
+        <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"
+          (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
         <label class="ml-2 custom-lbl-filter">
           <button class="custon-btn-filter">
           </button>
@@ -33,7 +33,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let produto of produtos;let i=index">
+          <tr *ngFor="let produto of produtos| paginate: {id: 'listing_pagination',
+          itemsPerPage: 10,
+          currentPage: this.page,
+          totalItems: totalRegistros};let i=index ">
             <td>{{produto.nome}}</td>
             <td>{{produto.categoria}}</td>
             <td>{{produto.descricao}}</td>
@@ -41,9 +44,10 @@
             <td>{{produto.quantidadeEstoque}}</td>
             <td>
               <label class="container">
-                <input type="checkbox" disabled [(ngModel)]="produto.status" (change)="toggleVisibility($event, produto)"/>
-                  <span class="checkmark"></span>
-                </label>
+                <input type="checkbox" disabled [(ngModel)]="produto.status"
+                  (change)="toggleVisibility($event, produto)" />
+                <span class="checkmark"></span>
+              </label>
             </td>
             <td><button class="btn">
                 <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
@@ -55,6 +59,12 @@
             </td>
         </tbody>
       </table>
+      <div class="row">
+        <div class="col-lg-8"></div>
+        <pagination-controls id="listing_pagination" previousLabel="Anterior" nextLabel="próximo"
+          (pageChange)="page = $event">
+        </pagination-controls>
+      </div>
     </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalEditarProdutoComponent } from './modals/modal-editar-produto/modal-editar-produto.component';
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto.component';
+import { NgxPaginationModule, PaginationControlsComponent } from 'ngx-pagination';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   declarations: [
     ProdutoComponent,
