@@ -39,3 +39,11 @@
   background-color: #a09be9;
   outline: none;
 }
+.bg-page {
+  background-color: #E6E6E6;
+}
+.custom-text-size24{
+  font-size: 22px;
+  font-weight: bold;
+}
+

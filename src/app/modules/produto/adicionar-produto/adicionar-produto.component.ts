@@ -8,11 +8,13 @@ import { Produto } from '../models/Produto';
   templateUrl: './adicionar-produto.component.html',
   styleUrls: ['./adicionar-produto.component.css']
 })
+
 export class AdicionarProdutoComponent implements OnInit {
   public produto: Produto = new Produto();
   public produtoRetorno = new Produto();
   public images = [];
   public files = [];
+  public imageData: any;
   constructor(private produtoService: ProdutoService, public router: Router) {
     this.produto.status=0;
   }
@@ -22,13 +24,13 @@ export class AdicionarProdutoComponent implements OnInit {
 
   SalveImage(id: number) {
     let uploadImageData = new FormData();
+
     for (const file of this.files) {
-      console.log(file);
       uploadImageData.append('file', file);
     }
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
-        window.location.reload()
+        console.log(response)
       }
     });
   }
@@ -36,7 +38,6 @@ export class AdicionarProdutoComponent implements OnInit {
   public addProduto() {
       this.produtoService.postProduto(this.produto).subscribe((response: any) => {
         if (response) {
-          console.log(response);
           this.produtoRetorno = response;
           this.SalveImage(this.produtoRetorno.id!)
         }
@@ -46,10 +47,8 @@ export class AdicionarProdutoComponent implements OnInit {
   toggleVisibility(e: any, produto: Produto) {
     if (e.target.checked) {
       produto.status = 1;
-      console.log(produto);
     } else {
       produto.status = 0;
-      console.log(produto);
     }
   }
 

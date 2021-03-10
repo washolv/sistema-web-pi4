@@ -10,11 +10,14 @@ import { ModalEditarProdutoComponent } from './modals/modal-editar-produto/modal
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto.component';
 import { NgxPaginationModule, PaginationControlsComponent } from 'ngx-pagination';
+import { VisualizarProdutoComponent } from './visualizar-produto/visualizar-produto.component';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
-  { path: 'editar/:id', component: EditarProdutoComponent},
-  { path: 'adicionar', component: AdicionarProdutoComponent}
+  { path: 'editar/:id', component: EditarProdutoComponent },
+  { path: 'adicionar', component: AdicionarProdutoComponent },
+  { path: 'visualizar/:id', component: VisualizarProdutoComponent }
+
 ];
 @NgModule({
   imports: [
@@ -32,13 +35,14 @@ const routes: Routes = [
     ModalEditarProdutoComponent,
     EditarProdutoComponent,
     AdicionarProdutoComponent,
+    VisualizarProdutoComponent
   ],
-  exports:[
+  exports: [
     RouterModule,
   ],
   entryComponents: [
     ModalAdicionarProdutoComponent,
     ModalExcluirProdutoComponent,
-]
+  ]
 })
 export class ProdutoModule { }

@@ -83,6 +83,9 @@ export class ProdutoComponent implements OnInit {
   editarProduto(produto: Produto) {
     this.router.navigate([`/produtos/editar`, produto.id]);
   }
+  visualizar(produto: Produto) {
+    this.router.navigate([`/produtos/visualizar`, produto.id]);
+  }
 }
 
 

@@ -8,8 +8,9 @@
       </div>
   </div>
   <hr>
+  <img [src]="imageToShow " alt="" class="img">
   <div class="col-12 col-sm-12 col-md-12">
-    <button class="mt-3 btn btn-warning" type="submit" (click)="backProdutos()">Produtos</button>
+    <button class="mt-3 btn btn-warning" type="submit"  (click)="backProdutos()">Produtos</button>
     <form [formGroup]="formProduto">
       <div class="form-row mt-4">
         <div class="col-md-12 mb-12">
@@ -18,22 +19,22 @@
         </div>
         <div class="col-md-5 mb-12">
           <label for="validationDefault02">Descricao</label>
-          <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
+          <input type="text" class="form-control" name="Descricao"  placeholder="Descricao" formControlName="descricao"
             required>
         </div>
         <div class="col-md-2 mb-3">
           <label for="validationDefaultUsername">Preço</label>
           <div class="input-group">
-            <input type="text" class="form-control" name="Preço" placeholder="Preço"
+            <input type="text" class="form-control" name="Preço"   placeholder="Preço"
               aria-describedby="inputGroupPrepend2" formControlName="preco" required>
           </div>
         </div>
         <div class="col-md-5 mb-3 ">
           <label for="validationDefaultUsername"></label>
             <div class="input-group">
-              <label for="validationDefaultUsername">Produto Habilitado:</label>
-              <input type="checkbox" formControlName="status" data-md-icheck
-                (change)="toggleVisibility($event,formProduto.value )" />
+              <label  for="validationDefaultUsername">Produto Habilitado:</label>
+              <input type="checkbox"  formControlName="status" data-md-icheck
+                 />
             </div>
         </div>
       </div>
@@ -50,8 +51,6 @@
             required>
         </div>
       </div>
-      <button class="mt-3 btn btn-primary" (click)="editarProduto(formProduto.value)" type="submit">Salvar
-        Alterações</button>
     </form>
   </div>
 </div>
