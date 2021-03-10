@@ -24,7 +24,6 @@ export class ModalExcluirProdutoComponent implements OnInit {
         window.location.reload()
       }
     });
-    window.location.reload()
   }
   public Close(){
     this.dialogRef.close();

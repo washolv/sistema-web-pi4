@@ -20,9 +20,9 @@
           </div>
         </div>
         <div class="col-md-4 mb-3 ">
-          <label for="validationDefaultUsername">Ativo</label>
+          <label for="validationDefaultUsername">Produto Habilitado</label>
           <div class="form-check form-switch">
-            <input class="form-check-input" (click)="habilitaProduto($event)" type="checkbox" id="ativo">
+            <input class="form-check-input" (click)="toggleVisibility($event, produto)" type="checkbox" id="ativo">
           </div>
         </div>
       </div>

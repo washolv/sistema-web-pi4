@@ -1,6 +1,6 @@
 import { PathLocationStrategy } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -32,32 +32,47 @@ export class EditarProdutoComponent implements OnInit {
 
   }
   public createForm(produto: Produto): FormGroup {
-    return this.fb.group({
-      id: new FormControl(produto.id),
-      nome: new FormControl(produto.nome),
-      descricao: new FormControl(produto.descricao),
-      quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
-      preco: new FormControl(produto.preco),
-      categoria: new FormControl(produto.categoria),
-      status: new FormControl(produto.status)
-    });
+    const status=produto.status==1;
+    console.log(status);
+    if(status){
+      return this.fb.group({
+        id: new FormControl(produto.id),
+        nome: new FormControl(produto.nome),
+        descricao: new FormControl(produto.descricao),
+        quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
+        preco: new FormControl(produto.preco),
+        categoria: new FormControl(produto.categoria),
+        status: new FormControl(produto.status),
+      });
+    }else{
+      return this.fb.group({
+        id: new FormControl(produto.id),
+        nome: new FormControl(produto.nome),
+        descricao: new FormControl(produto.descricao),
+        quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
+        preco: new FormControl(produto.preco),
+        categoria: new FormControl(produto.categoria),
+        status: new FormControl(produto.status),
+      });
+    }
   }
 
   public editarProduto(p: Produto) {
     console.log(p);
     this.produtoService.editarProduto(p).subscribe((response: any) => {
       if (response) {
-        window.location.reload()
+        console.log('******')
+          console.log(response)
+        //window.location.reload()
       }
     });
   }
 
-  habilitaProduto(btn: any) {
-    let checkbox = document.getElementById('ativo');
-    if (checkbox && checkbox) {
-      console.log(checkbox);
+  toggleVisibility(e: any, produto: Produto) {
+    if (e.target.checked) {
+      produto.status = 1;
     } else {
-      console.log("O cliente não marcou o checkbox");
+      produto.status = 0;
     }
   }
   backProdutos() {

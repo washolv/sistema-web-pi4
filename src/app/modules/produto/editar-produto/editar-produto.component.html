@@ -1,40 +1,44 @@
 <div class="container-fluid">
+  <div class=row>
+    <h3>Edição de Produtos</h3>
+  </div>
   <div class="col-12 col-sm-12 col-md-12">
     <button class="mt-3 btn btn-warning" type="submit" (click)="backProdutos()">Produtos</button>
     <form [formGroup]="formProduto">
       <div class="form-row mt-4">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 mb-12">
           <label for="validationDefault01">Nome</label>
           <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
         </div>
-        <div class="col-md-4 mb-12">
+        <div class="col-md-5 mb-12">
           <label for="validationDefault02">Descricao</label>
           <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
             required>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-2 mb-3">
           <label for="validationDefaultUsername">Preço</label>
           <div class="input-group">
             <input type="text" class="form-control" name="Preço" placeholder="Preço"
               aria-describedby="inputGroupPrepend2" formControlName="preco" required>
           </div>
         </div>
-        <div class="col-md-4 mb-3 ">
-          <label for="validationDefaultUsername">Ativo</label>
-          <div class="form-check form-switch">
-            <input class="form-check-input" formControlName="status" (click)="habilitaProduto($event)" type="checkbox"
-              id="ativo">
-          </div>
+        <div class="col-md-5 mb-3 ">
+          <label for="validationDefaultUsername"></label>
+            <div class="input-group">
+              <label for="validationDefaultUsername">Produto Habilitado:</label>
+              <input type="checkbox" formControlName="status" data-md-icheck
+                (change)="toggleVisibility($event,formProduto.value )" />
+            </div>
         </div>
       </div>
 
       <div class="form-row">
-        <div class="col-md-5 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="validationDefault03">Qtd. em estoque</label>
           <input type="text" class="form-control" name="quantidadeEstoque" placeholder="Qtd. em estoque"
             formControlName="quantidadeEstoque" required>
         </div>
-        <div class="col-md-12 mb-12">
+        <div class="col-md-6 mb-6">
           <label for="validationDefault04">Categoria</label>
           <input type="text" class="form-control" name="categoria" placeholder="Categoria" formControlName="categoria"
             required>

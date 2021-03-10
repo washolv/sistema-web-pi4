@@ -6,11 +6,8 @@ export class Produto {
   quantidadeEstoque?: number;
   categoria?: string;
   status?: number;
-  imagemProduto?: File;
+  qtdEstrelas?: number;
+  caminhoImagem?: string[];
 }
 
-export class imagem{
-  id?: number;
-  caminho?: string;
-  idProduto?: number;
-}
+

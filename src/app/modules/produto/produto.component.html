@@ -4,7 +4,8 @@
     <!--INPUT FILTRAGEM DE PRODUTOS-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <div class="row d-flex justify-content-center">
-        <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise" />
+        <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"(ngModelChange)="this.searchFilter.next($event)"
+        [(ngModel)]="filtroPesquisa" />
         <label class="ml-2 custom-lbl-filter">
           <button class="custon-btn-filter">
           </button>
@@ -40,8 +41,7 @@
             <td>{{produto.quantidadeEstoque}}</td>
             <td>
               <label class="container">
-                <input type="checkbox" data-md-icheck (change)="toggleVisibility($event, produto)"/>
-                   <span *ngIf="produto.status==1"></span><span *ngIf="produto.status==0"></span>
+                <input type="checkbox" disabled [(ngModel)]="produto.status" (change)="toggleVisibility($event, produto)"/>
                   <span class="checkmark"></span>
                 </label>
             </td>

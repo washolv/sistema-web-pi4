@@ -5,6 +5,9 @@ import { ClienteComponent } from './modules/cliente/cliente.component';
 import { FuncionarioComponent } from './modules/funcionario/funcionario.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
+import { ProdutoComponent } from './modules/produto/produto.component';
+import { AdicionarProdutoComponent } from './modules/produto/adicionar-produto/adicionar-produto.component';
+import { EditarProdutoComponent } from './modules/produto/editar-produto/editar-produto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'produtos', component: MainNavComponent,
-    loadChildren: () => import('./../app/modules/produto/produto.module').then(m => m.ProdutoModule),
+    loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
   },
   {
     path: 'clientes', component: MainNavComponent, children: [

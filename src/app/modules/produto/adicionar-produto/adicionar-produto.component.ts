@@ -14,6 +14,7 @@ export class AdicionarProdutoComponent implements OnInit {
   public images = [];
   public files = [];
   constructor(private produtoService: ProdutoService, public router: Router) {
+    this.produto.status=0;
   }
 
   ngOnInit() {
@@ -33,7 +34,6 @@ export class AdicionarProdutoComponent implements OnInit {
   }
 
   public addProduto() {
-    if (this.files) {
       this.produtoService.postProduto(this.produto).subscribe((response: any) => {
         if (response) {
           console.log(response);
@@ -41,13 +41,15 @@ export class AdicionarProdutoComponent implements OnInit {
           this.SalveImage(this.produtoRetorno.id!)
         }
       });
-    }
   }
-  habilitaProduto(btn: any){
-    if(btn.target.id=="ativo"){
-      this.produto.status=1;
-    }else{
-      this.produto.status=0;
+
+  toggleVisibility(e: any, produto: Produto) {
+    if (e.target.checked) {
+      produto.status = 1;
+      console.log(produto);
+    } else {
+      produto.status = 0;
+      console.log(produto);
     }
   }
 
