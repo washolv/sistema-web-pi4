@@ -38,9 +38,16 @@
             <td>{{produto.descricao}}</td>
             <td>{{produto.preco}}</td>
             <td>{{produto.quantidadeEstoque}}</td>
-            <td>X</td>
+            <td>
+              <label class="container">
+                <input type="checkbox" data-md-icheck (change)="toggleVisibility($event, produto)"/>
+                   <span *ngIf="produto.status==1"></span><span *ngIf="produto.status==0"></span>
+                  <span class="checkmark"></span>
+                </label>
+            </td>
             <td><button class="btn">
-                <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add" alt="add">
+                <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
+                  alt="add">
               </button>
               <button class="btn">
                 <img src="../../../assets/trash.svg" (click)="excluirProduto(produto)" class="btn-icon-add" alt="add">

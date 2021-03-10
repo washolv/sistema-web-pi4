@@ -13,20 +13,20 @@ import { Produto } from '../models/Produto';
   styleUrls: ['./editar-produto.component.css']
 })
 export class EditarProdutoComponent implements OnInit {
-  public produto: Produto=new Produto();
+  public produto: Produto = new Produto();
   public formProduto: FormGroup;
-  public id: number=0;
-  constructor(private router: Router,private route: ActivatedRoute, private fb: FormBuilder,
+  public id: number = 0;
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
-      this.formProduto=this.createForm(this.produto);
-      this.route.params.subscribe( parametros => {
-          this.id=parametros['id'];
-      });
-      this.produtoService.getProdutoById(this.id).subscribe(response => {
-        this.produto=response
-        this.formProduto=this.createForm(this.produto);
-      })
-    }
+    this.formProduto = this.createForm(this.produto);
+    this.route.params.subscribe(parametros => {
+      this.id = parametros['id'];
+    });
+    this.produtoService.getProdutoById(this.id).subscribe(response => {
+      this.produto = response
+      this.formProduto = this.createForm(this.produto);
+    })
+  }
 
   ngOnInit() {
 
@@ -52,14 +52,15 @@ export class EditarProdutoComponent implements OnInit {
     });
   }
 
-  habilitaProduto(btn: any){
-    if(btn.target.id=="ativo"){
-      this.produto.status=1;
-    }else{
-      this.produto.status=0;
+  habilitaProduto(btn: any) {
+    let checkbox = document.getElementById('ativo');
+    if (checkbox && checkbox) {
+      console.log(checkbox);
+    } else {
+      console.log("O cliente não marcou o checkbox");
     }
   }
-  backProdutos(){
+  backProdutos() {
     this.router.navigate(['produtos']);
   }
 }

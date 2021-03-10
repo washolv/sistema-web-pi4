@@ -15,6 +15,8 @@ import { Produto } from './models/Produto';
 export class ProdutoComponent implements OnInit {
   public produtos: Produto[] = [];
   public filtroPesquisa: string = "";
+  marked = false;
+
   constructor(private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) { }
 
   ngOnInit() {
@@ -60,6 +62,15 @@ export class ProdutoComponent implements OnInit {
     });
   }
 
+  toggleVisibility(e: any, produto: Produto){
+    if(e.target.checked){
+      produto.status=1;
+      console.log(produto);
+    }else{
+      produto.status=0;
+      console.log(produto);
+    }
+  }
   editarProduto(produto: Produto) {
     this.router.navigate([`editar`, produto.id]);
   }
