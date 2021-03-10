@@ -7,9 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalEditarProdutoComponent } from './modals/modal-editar-produto/modal-editar-produto.component';
+import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
+import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto.component';
 
 const routes: Routes = [
-  { path: '', component: ProdutoComponent }
+  { path: '', component: ProdutoComponent },
+  { path: 'editar/:id', component: EditarProdutoComponent},
+  { path: 'adicionar', component: AdicionarProdutoComponent}
 ];
 @NgModule({
   imports: [
@@ -23,7 +27,9 @@ const routes: Routes = [
     ProdutoComponent,
     ModalAdicionarProdutoComponent,
     ModalExcluirProdutoComponent,
-    ModalEditarProdutoComponent
+    ModalEditarProdutoComponent,
+    EditarProdutoComponent,
+    AdicionarProdutoComponent,
   ],
   exports:[
     RouterModule,

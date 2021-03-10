@@ -9,20 +9,23 @@ import { Produto } from '../modules/produto/models/Produto';
 })
 export class ProdutoService {
 
-  apiUrl = environment.baseAPIUrl+'/produtos';
+  apiUrl = environment.baseAPIUrl;
   urlImage=environment.baseAPIUrl+'/imagens';
 
   constructor(private http: HttpClient) {
   }
 
   public getProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos`);
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`);
+  }
+  public getProdutoById(id: number): Observable<Produto> {
+    return this.http.get<Produto>(`${this.apiUrl}/produtos/${id}`);
   }
   public getImagensProduto(id: number): Observable<FormData> {
     return this.http.get<FormData>(`${this.apiUrl}/imagens/${id}`);
   }
   public postProduto(produto: Produto): Observable<Produto[]> {
-    const t= this.http.post<Produto[]>(`${this.apiUrl}`, produto);
+    const t= this.http.post<Produto[]>(`${this.apiUrl}/produtos`, produto);
     return t;
   }
   public postFotoProduto(imagens:FormData, id:number): Observable<FormData> {
@@ -32,7 +35,7 @@ export class ProdutoService {
     return this.http.delete<Produto>(`${this.apiUrl}/${id}`);
   }
   public editarProduto(produto: Produto): Observable<Produto> {
-    return this.http.put<Produto>(`${this.apiUrl}`, produto);
+    return this.http.put<Produto>(`${this.apiUrl}/produtos/${produto.id}`, produto);
   }
   public uploadImage(imagens: FormData): Observable<Object> {
     return this.http.post(`${this.urlImage}`, imagens);

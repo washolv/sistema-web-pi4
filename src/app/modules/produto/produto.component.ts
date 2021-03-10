@@ -13,8 +13,8 @@ import { Produto } from './models/Produto';
   styleUrls: ['./produto.component.css']
 })
 export class ProdutoComponent implements OnInit {
-  public produtos: Produto[] =[];
-  public filtroPesquisa: string="";
+  public produtos: Produto[] = [];
+  public filtroPesquisa: string = "";
   constructor(private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) { }
 
   ngOnInit() {
@@ -29,30 +29,31 @@ export class ProdutoComponent implements OnInit {
   }
 
   adicionarProduto() {
-    const dialogRef = this.dialog.open(ModalAdicionarProdutoComponent, {
+    this.router.navigate([`adicionar`]);
+    /*const dialogRef = this.dialog.open(ModalAdicionarProdutoComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: '430px', width: '550px',
 
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-       // this.produto = response;
+        // this.produto = response;
       }
     }, err => {
       console.log(err);
-    });
+    });*/
   }
 
   excluirProduto(produto: Produto) {
     console.log(produto);
-    const dialogRef = this.dialog.open(ModalExcluirProdutoComponent , {
+    const dialogRef = this.dialog.open(ModalExcluirProdutoComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
-        data:{
-          prod:produto
-        }
+      data: {
+        prod: produto
+      }
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-       // this.produto = response;
+        // this.produto = response;
       }
     }, err => {
       console.log(err);
@@ -60,19 +61,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   editarProduto(produto: Produto) {
-    const dialogRef = this.dialog.open(ModalEditarProdutoComponent, {
-      panelClass: 'custom-modais', backdropClass: 'blur', height: '800x', width: '1000px',
-      data:{
-        prod: produto
-      }
-    });
-    dialogRef.afterClosed().subscribe(response => {
-      if (response) {
-       // this.produto = response;
-      }
-    }, err => {
-      console.log(err);
-    });
+    this.router.navigate([`editar`, produto.id]);
   }
 }
 
