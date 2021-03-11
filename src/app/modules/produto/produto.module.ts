@@ -12,12 +12,14 @@ import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto
 import { NgxPaginationModule, PaginationControlsComponent } from 'ngx-pagination';
 import { VisualizarProdutoComponent } from './visualizar-produto/visualizar-produto.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AdicionarImagensProdutoComponent } from './adicionar-produto/adicionar-imagens-produto/adicionar-imagens-produto.component';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
   { path: 'editar/:id', component: EditarProdutoComponent },
   { path: 'adicionar', component: AdicionarProdutoComponent },
-  { path: 'visualizar/:id', component: VisualizarProdutoComponent }
+  { path: 'visualizar/:id', component: VisualizarProdutoComponent },
+  { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent }
 
 ];
 @NgModule({
@@ -38,7 +40,8 @@ const routes: Routes = [
     ModalEditarProdutoComponent,
     EditarProdutoComponent,
     AdicionarProdutoComponent,
-    VisualizarProdutoComponent
+    VisualizarProdutoComponent,
+    AdicionarImagensProdutoComponent
   ],
   exports: [
     RouterModule,

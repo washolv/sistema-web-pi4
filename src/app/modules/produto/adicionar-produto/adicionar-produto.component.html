@@ -11,11 +11,11 @@
     <button class="mt-3 mb-4 btn btn-warning" type="submit" (click)="backProdutos()">Produtos</button>
     <form>
       <div class="form-row">
-        <div class="col-md-12 mb-3">
+        <div class="col-lg-6 col-md-12 mb-12 mb-3">
           <label for="validationDefault01">Nome</label>
           <input type="text" class="form-control" name="nome" placeholder="Nome" [(ngModel)]="produto.nome" required>
         </div>
-        <div class="col-md-4 mb-12">
+        <div class="col-lg-6 col-md-12 mb-12 mb-3">
           <label for="validationDefault02">Descricao</label>
           <input type="text" class="form-control" name="Descricao" placeholder="Descricao"
             [(ngModel)]="produto.descricao" required>
@@ -27,7 +27,7 @@
               aria-describedby="inputGroupPrepend2" [(ngModel)]="produto.preco" required>
           </div>
         </div>
-        <div class="col-md-4 mb-3 ">
+        <div class="ml-3 col-md-4 mb-3 ">
           <label for="validationDefaultUsername">Produto Habilitado</label>
           <div class="form-check form-switch">
             <input class="form-check-input" (click)="toggleVisibility($event, produto)" type="checkbox" id="ativo">
@@ -40,23 +40,18 @@
           <input type="text" class="form-control" name="quantidadeEstoque" placeholder="Qtd. em estoque"
             [(ngModel)]="produto.quantidadeEstoque" required>
         </div>
-        <div class="col-md-12 mb-12">
+        <div class="col-lg-6 col-md-12 mb-12">
           <label for="validationDefault04">Categoria</label>
           <input type="text" class="form-control" name="categoria" placeholder="Categoria"
             [(ngModel)]="produto.categoria" required>
 
         </div>
       </div>
-
-      <div class="form-row">
-        <div class="col-md-5 mb-3">
-          <label class="image-upload-container btn btn-bwm">
-            <div class=row><span>Selecione as imagens</span></div>
-            <div class=row><input #imageInput type="file" accept="image/*" multiple (change)="processFile($event)"></div>
-          </label>
-        </div>
-      </div>
-      <button class="mt-3 btn btn-primary" (click)="addProduto()" type="submit">Cadastrar</button>
     </form>
+
+  </div>
+  <div class="custom-button ml-auto">
+    <button class="mt-3 btn btn-dark" (click)="addProduto()" type="submit">Prosseguir - Imagens</button>
   </div>
 </div>
+

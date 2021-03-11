@@ -1,82 +1,81 @@
 <body>
-      <div class="container-fluid">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
-              Listagem de Produtos
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="col-12 col-sm-12 col-md-12">
-
-          <!--INPUT FILTRAGEM DE PRODUTOS-->
-          <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
-            <div class="row d-flex justify-content-center">
-              <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"
-                (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
-              <label class="ml-2 custom-lbl-filter">
-                <button class="custon-btn-filter">
-                </button>
-              </label>
-            </div>
-            <!--FIM INPUT FILTRAGEM DE PRODUTOS-->
-
-            <!--BOTAO ADICIONAR PRODUTO-->
-            <button class="btn btn-add mb-3" type="button" (click)="adicionarProduto()">
-              <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
-            </button>
-          </div>
-
-
-          <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
-            <table class="table custom-table">
-              <thead>
-                <tr>
-                  <th scope="col">Produto</th>
-                  <th scope="col">Categoria</th>
-                  <th scope="col">Descrição</th>
-                  <th scope="col">Preço</th>
-                  <th scope="col">Qtd. Estoque</th>
-                  <th scope="col">Habilitado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let produto of produtos| paginate: {id: 'listing_pagination',
-          itemsPerPage: 10,
-          currentPage: this.page,
-          totalItems: totalRegistros};let i=index ">
-                  <td>{{produto.nome}}</td>
-                  <td>{{produto.categoria}}</td>
-                  <td>{{produto.descricao}}</td>
-                  <td>{{produto.preco}}</td>
-                  <td>{{produto.quantidadeEstoque}}</td>
-                  <td>
-                    <label class="container">
-                      <input type="checkbox" disabled [(ngModel)]="produto.status"
-                        (change)="toggleVisibility($event, produto)" />
-                      <span class="checkmark"></span>
-                    </label>
-                  </td>
-                  <button class="btn btn-success" (click)="visualizar(produto)">Visualizar</button>
-                  <td><button class="btn">
-                      <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
-                        alt="add">
-                    </button>
-                    <button class="btn">
-                      <img src="../../../assets/trash.svg" (click)="excluirProduto(produto)" class="btn-icon-add"
-                        alt="add">
-                    </button>
-                  </td>
-              </tbody>
-            </table>
-            <div class="row">
-              <div class="col-lg-8  "></div>
-              <pagination-controls id="listing_pagination" previousLabel="Anterior" nextLabel="próximo"
-                (pageChange)="page = $event">
-              </pagination-controls>
-            </div>
-          </div>
+  <div class="container-fluid">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+          Listagem de Produtos
         </div>
       </div>
+    </div>
+    <hr>
+    <div class="col-12 col-sm-12 col-md-12">
+
+      <!--INPUT FILTRAGEM DE PRODUTOS-->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
+        <div class="row d-flex justify-content-center">
+          <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"
+            (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
+          <label class="ml-2 custom-lbl-filter">
+            <button class="custon-btn-filter">
+            </button>
+          </label>
+        </div>
+        <!--FIM INPUT FILTRAGEM DE PRODUTOS-->
+
+        <!--BOTAO ADICIONAR PRODUTO-->
+        <button class="btn btn-add mb-3" type="button" (click)="adicionarProduto()">
+          <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
+        </button>
+      </div>
+
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Produto</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Qtd. Estoque</th>
+              <th scope="col">Habilitado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produto of produtos| paginate: {id: 'listing_pagination',
+                 itemsPerPage: 10,
+                 currentPage: this.page,
+                 totalItems: totalRegistros};let i=index ">
+              <td>{{produto.nome}}</td>
+              <td>{{produto.categoria}}</td>
+              <td>{{produto.descricao}}</td>
+              <td>{{produto.preco}}</td>
+              <td>{{produto.quantidadeEstoque}}</td>
+              <td>
+                <label class="container">
+                  <input type="checkbox" disabled [(ngModel)]="produto.status"
+                    (change)="toggleVisibility($event, produto)" />
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+              <button class="btn btn-success" (click)="visualizar(produto)">Visualizar</button>
+              <td><button class="btn">
+                  <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
+                    alt="add">
+                </button>
+                <button class="btn">
+                  <img src="../../../assets/trash.svg" (click)="excluirProduto(produto)" class="btn-icon-add" alt="add">
+                </button>
+              </td>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-lg-8  "></div>
+          <pagination-controls id="listing_pagination" previousLabel="Anterior" nextLabel="próximo"
+            (pageChange)="page = $event">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>

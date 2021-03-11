@@ -13,7 +13,6 @@ export class AdicionarProdutoComponent implements OnInit {
   public produto: Produto = new Produto();
   public produtoRetorno = new Produto();
   public images = [];
-  public files = [];
   public imageData: any;
   constructor(private produtoService: ProdutoService, public router: Router) {
     this.produto.status=0;
@@ -22,26 +21,10 @@ export class AdicionarProdutoComponent implements OnInit {
   ngOnInit() {
   }
 
-  SalveImage(id: number) {
-    let uploadImageData = new FormData();
-
-    for (const file of this.files) {
-      uploadImageData.append('file', file);
-    }
-    this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
-      if (response) {
-        console.log(response)
-      }
-    });
-  }
-
   public addProduto() {
-      this.produtoService.postProduto(this.produto).subscribe((response: any) => {
-        if (response) {
-          this.produtoRetorno = response;
-          this.SalveImage(this.produtoRetorno.id!)
-        }
-      });
+    this.router.navigateByUrl('/produtos/adicionar/imagens', {
+      state: { produto: this.produto }
+      })
   }
 
   toggleVisibility(e: any, produto: Produto) {
@@ -52,10 +35,8 @@ export class AdicionarProdutoComponent implements OnInit {
     }
   }
 
-  processFile(event: any) {
-    this.files = event.target.files;
-  }
   backProdutos(){
     this.router.navigate(['produtos']);
   }
+
 }
