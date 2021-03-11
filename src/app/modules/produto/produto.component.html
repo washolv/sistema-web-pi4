@@ -47,7 +47,7 @@
               <td>{{produto.nome}}</td>
               <td>{{produto.categoria}}</td>
               <td>{{produto.descricao}}</td>
-              <td>{{produto.preco}}</td>
+              <td>{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</td>
               <td>{{produto.quantidadeEstoque}}</td>
               <td>
                 <label class="container">

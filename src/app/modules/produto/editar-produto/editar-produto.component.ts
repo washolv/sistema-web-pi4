@@ -2,9 +2,9 @@ import { PathLocationStrategy } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { ModalEditarProdutoComponent } from '../modals/modal-editar-produto/modal-editar-produto.component';
 import { Produto } from '../models/Produto';
 
 @Component({
@@ -16,7 +16,10 @@ export class EditarProdutoComponent implements OnInit {
   public produto: Produto = new Produto();
   public formProduto: FormGroup;
   public id: number = 0;
-  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  mageProduto: any;
+  imageToShow: SafeResourceUrl[]=[];
+  images:any;
+  constructor(private sanitizer: DomSanitizer,private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.formProduto = this.createForm(this.produto);
     this.route.params.subscribe(parametros => {
@@ -25,6 +28,11 @@ export class EditarProdutoComponent implements OnInit {
     this.produtoService.getProdutoById(this.id).subscribe(response => {
       this.produto = response
       this.formProduto = this.createForm(this.produto);
+    })
+    this.produtoService.getImagensProduto(this.id).subscribe(response => {
+      response.forEach(element=>
+        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element}`)))
+        )
     })
   }
 
