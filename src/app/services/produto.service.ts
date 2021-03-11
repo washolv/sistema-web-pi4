@@ -25,8 +25,8 @@ export class ProdutoService {
     console.log(search);
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos/${search}`);
   }
-  public getImagensProduto(id: number): Observable<File> {
-    return this.http.get<File>(`${this.apiUrl}/imagens/produto/${id}`);
+  public getImagensProduto(id: number): Observable<File[]> {
+    return this.http.get<File[]>(`${this.apiUrl}/imagens/produto/${id}`);
   }
   public postProduto(produto: Produto): Observable<Produto[]> {
     const t = this.http.post<Produto[]>(`${this.apiUrl}/produtos`, produto);

@@ -11,6 +11,7 @@ import { EditarProdutoComponent } from './editar-produto/editar-produto.componen
 import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto.component';
 import { NgxPaginationModule, PaginationControlsComponent } from 'ngx-pagination';
 import { VisualizarProdutoComponent } from './visualizar-produto/visualizar-produto.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    MDBBootstrapModule.forRoot()
+
   ],
   declarations: [
     ProdutoComponent,

@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
     "@material/dialog": "^10.0.0",
+    "angular-bootstrap-md": "^11.0.0",
+    "angular-ui-carousel": "^0.1.10",
     "bootstrap": "^4.6.0",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.6.0",
