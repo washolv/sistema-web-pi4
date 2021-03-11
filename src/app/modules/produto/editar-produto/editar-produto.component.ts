@@ -72,11 +72,8 @@ export class EditarProdutoComponent implements OnInit {
           Validators.maxLength(1000)
         ])),
       quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
-
       preco: new FormControl(produto.preco, Validators.compose([
         Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(10)
       ])),
       categoria: new FormControl(produto.categoria,
         Validators.compose([
