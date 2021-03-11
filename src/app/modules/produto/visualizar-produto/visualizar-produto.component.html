@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
-      Editar Produto: {{produto.nome}}
+       Produto: {{produto.nome}}
     </div>
   </div>
   <hr>
@@ -30,11 +30,16 @@
 
         <div class="form-row">
           <div class="col-md-6 mb-6">
+            <label for="validationDefaultUsername">Estrelas</label>
+            <input type="text" class="form-control" name="Preço" placeholder="estrelas"
+              aria-describedby="inputGroupPrepend2" formControlName="qtdEstrelas"  required>
+              <button disabled class="mt-3 btn btn-success">Comprar</button>
+          </div>
+          <div class="col-md-6 mb-6">
             <label for="validationDefaultUsername">Preço</label>
             <input type="text" class="form-control" name="Preço" placeholder="Preço" currencyMask
               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
               aria-describedby="inputGroupPrepend2" formControlName="preco" required>
-              <button disabled class="mt-3 btn btn-success">Comprar</button>
           </div>
         </div>
       </form>

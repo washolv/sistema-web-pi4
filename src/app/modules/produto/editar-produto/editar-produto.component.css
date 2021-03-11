@@ -9,12 +9,12 @@
   position:absolute;
   top: 0;
     right: 0;
-    z-index: 10; /*not working */
+    z-index: 999; /*not working */
     pointer-events: auto;
 }
 .carousel-inner {
   pointer-events: none;
-  z-index:999;
+  z-index:10;
   width: 100%; /*this must stay */
   height: 100%; /*this must stay */
 }

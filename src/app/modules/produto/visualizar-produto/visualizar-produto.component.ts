@@ -55,6 +55,7 @@ export class VisualizarProdutoComponent implements OnInit {
         preco: new FormControl(produto.preco),
         categoria: new FormControl(produto.categoria),
         status: new FormControl(produto.status),
+        qtdEstrelas: new FormControl(produto.qtdEstrelas)
       });
     } else {
       return this.fb.group({
@@ -65,6 +66,7 @@ export class VisualizarProdutoComponent implements OnInit {
         preco: new FormControl(produto.preco, Validators.required),
         categoria: new FormControl(produto.categoria, Validators.required),
         status: new FormControl(produto.status, Validators.required),
+        qtdEstrelas: new FormControl(produto.qtdEstrelas)
       });
     }
   }

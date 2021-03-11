@@ -35,6 +35,7 @@
               <th scope="col">Categoria</th>
               <th scope="col">Descrição</th>
               <th scope="col">Preço</th>
+              <th scope="col">Estrelas</th>
               <th scope="col">Qtd. Estoque</th>
               <th scope="col">Habilitado</th>
             </tr>
@@ -48,6 +49,7 @@
               <td>{{produto.categoria}}</td>
               <td>{{produto.descricao}}</td>
               <td>{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</td>
+              <td>{{produto.qtdEstrelas}}</td>
               <td>{{produto.quantidadeEstoque}}</td>
               <td>
                 <label class="container">
@@ -72,7 +74,7 @@
         </table>
         <div class="row">
           <div class="col-lg-8  "></div>
-          <pagination-controls id="listing_pagination" previousLabel="Anterior" nextLabel="próximo"
+          <pagination-controls id="listing_pagination" _directionLinks="true" maxlength='5'  nextLabel="próximo"
             (pageChange)="page = $event">
           </pagination-controls>
         </div>

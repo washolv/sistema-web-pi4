@@ -32,6 +32,7 @@ export class ProdutoService {
   }
   public postProduto(produto: Produto): Observable<Produto[]> {
     const t = this.http.post<Produto[]>(`${this.apiUrl}/produtos`, produto);
+    console.log(produto);
     return t;
   }
   public postFotoProduto(imagens: FormData, id: number): Observable<FormData> {

@@ -49,17 +49,24 @@ export class EditarProdutoComponent implements OnInit {
 
   deleteImage(): void {
     let img;
-    if(this.idImagem){
-       img= this.imagens[this.idImagem.relatedTarget];
-    }else{
-       img= this.imagens[0];
+    if (this.idImagem) {
+      img = this.imagens[this.idImagem.relatedTarget];
+    } else {
+      img = this.imagens[0];
     }
 
-    this.produtoService.deleteImagensProduto(img.id!).subscribe(response =>{
+    this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
       console.log(response)
       window.location.reload();
     }
     );
+  }
+  editarImagens() {
+    if(this.formProduto.valid){
+      this.router.navigateByUrl('/produtos/adicionar/imagens', {
+        state: { produto: this.produto}
+        })
+    }
   }
 
   dataURItoBlob(dataURI: any) {

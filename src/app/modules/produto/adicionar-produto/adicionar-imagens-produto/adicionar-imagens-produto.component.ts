@@ -1,5 +1,6 @@
 import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -11,20 +12,38 @@ import { Produto } from '../../models/Produto';
   styleUrls: ['./adicionar-imagens-produto.component.css']
 })
 export class AdicionarImagensProdutoComponent implements OnInit {
-  public produto: Produto;
+  public produto: Produto = new Produto;
   nav: any;
-  public files:any = new Array();
-  public fileList:any = new Array();
+  public files: any = new Array();
+  public fileList: any = new Array();
   public preVisualizacao: any = new Array();
+  public isNovoProduto: boolean;
+  public imageToShow: SafeResourceUrl[] = [];
+  public imagens: any;
+  id: number = 0;
   produtoRetorno = new Produto();
-  constructor(private produtoService: ProdutoService, private router: Router) {
+  constructor(private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
+
+
     this.nav = router.getCurrentNavigation();
     this.produto = this.nav.extras.state.produto;
+    console.log(this.produto);
+
+    this.isNovoProduto = typeof this.produto.id == 'undefined';
+
+    console.log(this.isNovoProduto);
+    if (!this.isNovoProduto) {
+      this.produtoService.getImagensProduto(this.produto.id!).subscribe(response => {
+        this.imagens = response;
+        console.log(response);
+        response.forEach(element =>
+          this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+        )
+      })
+    }
   }
 
-
   ngOnInit() {
-    console.log(this.produto);
   }
 
   processFile(event: any) {
@@ -64,20 +83,31 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
-        window.location.reload();
         this.router.navigate(['/produtos/adicionar']);
       }
     });
   }
   deleteImage(url: any, i: number): void {
     this.preVisualizacao = this.preVisualizacao.filter((a: any) => a !== url);
-    for(const file of this.files){
-      if(this.files[i]!=file){
-         this.fileList.push(file);
+    for (const file of this.files) {
+      if (this.files[i] != file) {
+        this.fileList.push(file);
       }
     }
-    this.files=this.fileList;
-    this.fileList=null;
+    this.files = this.fileList;
+    this.fileList = null;
+  }
+  deleteImageBanco(url: any, i: number): void {
+    let img = this.imagens[i];
+    console.log(img)
+    this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
+      sessionStorage.setItem('idProduto', this.produto.id!.toString())
+      this.deleteImage(img, i);
+      this.router.navigateByUrl('/produtos/adicionar/imagens', {
+        state: { produto: this.produto }
+      })
+    }
+    );
   }
 
 

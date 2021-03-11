@@ -11,7 +11,7 @@
     <div class="col-lg-12 col-sm-12 col-md-12">
       <div class="row">
         <div class="col-lg-6 col-md-12">
-          <button class="mt-3 btn btn-warning" type="submit" (click)="backProdutos()">Produtos</button>
+          <button class="mt-3 btn btn-dark" type="submit" (click)="backProdutos()">Produtos</button>
           <form [formGroup]="formProduto">
             <div class="form-row mt-4">
               <div class="col-lg-6 col-sm-12 mb-12">
@@ -66,11 +66,11 @@
                 <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="sr-only">Previous</span>
-              </a>
+                </a>
               </mdb-carousel-item>
             </ng-container>
           </mdb-carousel>
-            <button (click)="deleteImage()"class="btn mt-2 btn-danger">Delete</button>
+          <button (click)="editarImagens()" class="  btn mt-2 btn-dark">Editar Imagens</button>
         </div>
       </div>
     </div>

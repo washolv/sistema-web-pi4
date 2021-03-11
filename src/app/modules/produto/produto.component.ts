@@ -29,8 +29,7 @@ export class ProdutoComponent implements OnInit {
         this.produtoService.getProdutoByDescricao(search)
           .subscribe((response: Produto[]) => {
             if (response) {
-              this.produtos = response;
-              this.totalRegistros=this.produtos.length
+              //this.produtos = response;
             }
           });
       });
@@ -41,10 +40,10 @@ export class ProdutoComponent implements OnInit {
       .subscribe((response: Produto[]) => {
         this.produtos = response;
         this.totalRegistros=this.produtos.length;
+        console.log(this.totalRegistros);
       }, err => {
         console.log(err);
       });
-    console.log(this.produtos);
   }
 
 
@@ -54,7 +53,6 @@ export class ProdutoComponent implements OnInit {
   }
 
   excluirProduto(produto: Produto) {
-    console.log(produto);
     const dialogRef = this.dialog.open(ModalExcluirProdutoComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {
@@ -73,10 +71,8 @@ export class ProdutoComponent implements OnInit {
   toggleVisibility(e: any, produto: Produto) {
     if (e.target.checked) {
       produto.status = 1;
-      console.log(produto);
     } else {
       produto.status = 0;
-      console.log(produto);
     }
   }
   editarProduto(produto: Produto) {

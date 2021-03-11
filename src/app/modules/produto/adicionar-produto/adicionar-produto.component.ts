@@ -62,6 +62,7 @@ export class AdicionarProdutoComponent implements OnInit {
           Validators.required,
         ])),
       status: new FormControl(produto.status),
+      qtdEstrelas: new FormControl(produto.qtdEstrelas)
     });
   }
 
