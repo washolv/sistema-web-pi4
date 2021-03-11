@@ -27,8 +27,6 @@
           <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
         </button>
       </div>
-
-
       <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
         <table class="table custom-table">
           <thead>
@@ -58,8 +56,11 @@
                   <span class="checkmark"></span>
                 </label>
               </td>
-              <button class="btn btn-success" (click)="visualizar(produto)">Visualizar</button>
-              <td><button class="btn">
+              <td>
+                <button class="btn">
+                  <img src="../../../assets/lupa.svg" (click)="visualizar(produto)" class="btn-icon-add" alt="add">
+                </button>
+                <button class="btn">
                   <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
                     alt="add">
                 </button>

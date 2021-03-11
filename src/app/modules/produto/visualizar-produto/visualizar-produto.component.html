@@ -6,7 +6,7 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-lg-6 col-sm-12 col-md-12">
+    <div class="col-lg-6 col-sm-12 col-md-12 mb-3">
       <button class="mt-3 btn btn-warning" type="submit" (click)="backProdutos()">Produtos</button>
       <form [formGroup]="formProduto">
         <div class="form-row mt-4">
@@ -14,7 +14,7 @@
             <label for="validationDefault01">Nome</label>
             <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
           </div>
-          <div class="col-lg-6 mb-12">
+          <div class="col-lg-6 mb-12 mt-3">
             <label for="validationDefault02">Descricao</label>
             <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
               required>

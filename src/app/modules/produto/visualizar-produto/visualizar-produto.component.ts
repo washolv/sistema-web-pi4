@@ -26,7 +26,7 @@ export class VisualizarProdutoComponent implements OnInit {
     });
     this.produtoService.getProdutoById(this.id).subscribe(response => {
       this.produto = response
-      console.log(response);
+      this.formProduto=this.createForm(this.produto);
     })
 
     this.produtoService.getImagensProduto(this.id).subscribe(response => {

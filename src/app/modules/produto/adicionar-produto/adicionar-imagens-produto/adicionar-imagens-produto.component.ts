@@ -13,8 +13,9 @@ import { Produto } from '../../models/Produto';
 export class AdicionarImagensProdutoComponent implements OnInit {
   public produto: Produto;
   nav: any;
-  public files = [];
-  public preVisualizacao: any=new Array();
+  public files:any = new Array();
+  public fileList:any = new Array();
+  public preVisualizacao: any = new Array();
   produtoRetorno = new Produto();
   constructor(private produtoService: ProdutoService, private router: Router) {
     this.nav = router.getCurrentNavigation();
@@ -32,10 +33,16 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
     for (let file of this.files) {
       const reader = new FileReader();
-      reader.readAsDataURL(file),
-        reader.onload = event => {
-          this.preVisualizacao.push(reader.result);
+      reader.readAsDataURL(file);
+      let duplicada = false;
+      /*for (let img of this.preVisualizacao) {
+        if (reader.result === img) {
+          duplicada=true;
         }
+      }*/
+      reader.onload = event => {
+        this.preVisualizacao.push(reader.result);
+      }
     }
   }
 
@@ -49,6 +56,8 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
   SalveImage(id: number) {
     let uploadImageData = new FormData();
+    let f: File;
+    var reader = new FileReader();
 
     for (const file of this.files) {
       uploadImageData.append('file', file);
@@ -59,8 +68,15 @@ export class AdicionarImagensProdutoComponent implements OnInit {
       }
     });
   }
-   deleteImage(url: any): void {
+  deleteImage(url: any, i: number): void {
     this.preVisualizacao = this.preVisualizacao.filter((a: any) => a !== url);
+    for(const file of this.files){
+      if(this.files[i]!=file){
+         this.fileList.push(file);
+      }
+    }
+    this.files=this.fileList;
+    this.fileList=null;
   }
 
 
