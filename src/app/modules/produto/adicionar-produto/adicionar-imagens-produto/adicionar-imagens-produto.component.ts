@@ -64,7 +64,8 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
-        console.log(response)
+        window.location.reload();
+        this.router.navigate(['/produtos/adicionar']);
       }
     });
   }

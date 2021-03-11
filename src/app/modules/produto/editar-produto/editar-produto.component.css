@@ -5,3 +5,16 @@
   font-size: 22px;
   font-weight: bold;
 }
+.myButton{
+  position:absolute;
+  top: 0;
+    right: 0;
+    z-index: 10; /*not working */
+    pointer-events: auto;
+}
+.carousel-inner {
+  pointer-events: none;
+  z-index:999;
+  width: 100%; /*this must stay */
+  height: 100%; /*this must stay */
+}

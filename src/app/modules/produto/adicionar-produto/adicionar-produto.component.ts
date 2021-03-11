@@ -26,8 +26,6 @@ export class AdicionarProdutoComponent implements OnInit {
   }
 
   public addProduto(p: Produto) {
-    console.log(p);
-    //console.log(this.formProduto.valid)
     if(this.formProduto.valid){
       this.router.navigateByUrl('/produtos/adicionar/imagens', {
         state: { produto: p}

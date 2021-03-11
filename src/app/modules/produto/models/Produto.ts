@@ -11,3 +11,11 @@ export class Produto {
 }
 
 
+export class Imagem{
+  imagem?: File;
+  id?: number;
+  caminho?: string;
+  imagemPrincipal?: boolean;
+}
+
+

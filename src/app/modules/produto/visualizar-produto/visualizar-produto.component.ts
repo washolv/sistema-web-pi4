@@ -16,7 +16,7 @@ export class VisualizarProdutoComponent implements OnInit {
   formProduto: FormGroup;
   imageProduto: any;
   imageToShow: SafeResourceUrl[]=[];
-  images:any;
+  imagens:any;
   cont: number=0;
   constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
@@ -30,9 +30,11 @@ export class VisualizarProdutoComponent implements OnInit {
     })
 
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
-      response.forEach(element=>
-        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element}`)))
-        )
+      this.imagens = response;
+      console.log(response);
+      response.forEach(element =>
+        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+      )
     })
 
   }

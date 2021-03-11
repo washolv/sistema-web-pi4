@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { element } from 'protractor';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { GenericValidators } from '../../shared/validators/generic-validators';
-import { Produto } from '../models/Produto';
+import { Imagem, Produto } from '../models/Produto';
 
 @Component({
   selector: 'app-editar-produto',
@@ -18,9 +18,10 @@ export class EditarProdutoComponent implements OnInit {
   public produto: Produto = new Produto();
   public formProduto: FormGroup;
   public id: number = 0;
+  public idImagem: any;
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
-  images: any;
+  imagens: Imagem[] = [];
   constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.formProduto = this.createForm(this.produto);
@@ -32,8 +33,10 @@ export class EditarProdutoComponent implements OnInit {
       this.formProduto = this.createForm(this.produto);
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
+      this.imagens = response;
+      console.log(response);
       response.forEach(element =>
-        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element}`)))
+        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
     })
 
@@ -41,14 +44,22 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
 
-  teste(img: any) {
-    this.dataURItoBlob(img);
-    console.log('sadadsa')
+  deleteImage(): void {
+    let img;
+    if(this.idImagem){
+       img= this.imagens[this.idImagem.relatedTarget];
+    }else{
+       img= this.imagens[0];
+    }
 
+    this.produtoService.deleteImagensProduto(img.id!).subscribe(response =>{
+      console.log(response)
+      window.location.reload();
+    }
+    );
   }
 
   dataURItoBlob(dataURI: any) {
@@ -84,7 +95,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   public editarProduto(p: Produto) {
-    if(this.formProduto.valid){
+    if (this.formProduto.valid) {
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
           console.log('******')
@@ -92,7 +103,7 @@ export class EditarProdutoComponent implements OnInit {
           //window.location.reload()
         }
       });
-    }else{
+    } else {
       GenericValidators.verifierValidatorsForm(this.formProduto);
     }
   }
