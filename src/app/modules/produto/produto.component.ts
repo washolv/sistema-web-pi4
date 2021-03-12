@@ -38,7 +38,6 @@ export class ProdutoComponent implements OnInit {
   }
 
   public habilitarProduto(p: Produto) {
-    console.log('*****')
       if (p.status) {
         p.status = 1;
       } else {
