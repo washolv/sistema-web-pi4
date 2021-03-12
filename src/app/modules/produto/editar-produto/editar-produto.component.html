@@ -23,18 +23,19 @@
                 <input type="text" class="form-control" name="Descricao" placeholder="Descricao"
                   formControlName="descricao" required>
               </div>
+            </div>
+            <div class="form-row mt-2">
               <div class="col-lg-6 col-sm-12">
-                <label for="validationDefaultUsername">Preço</label>
+                <label class="custom-lbl" for="validationDefaultUsername">Preço</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" pattern="[0-9]*" name="Preço" placeholder="Preço"
+                  <input type="text" class="form-control" pattern="[0-9]*" name="Preço" placeholder="Preço" currencyMask
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                     aria-describedby="inputGroupPrepend2" formControlName="preco">
                 </div>
               </div>
-              <div class="col-lg-6 col-sm-12 ">
-                <label for="validationDefaultUsername"></label>
+              <div class="mt-4 col-lg-6 col-sm-12 ">
                 <div class="input-group">
-                  <label for="validationDefaultUsername">Produto Habilitado:</label>
-                  <input type="checkbox" formControlName="status" data-md-icheck />
+                  <mat-slide-toggle formControlName="status">Habilitar Produto</mat-slide-toggle>
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ import { ModalExcluirProdutoComponent } from './modals/modal-excluir-produto/mod
 import { Produto } from './models/Produto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { LOCALE_ID } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-produto',
@@ -17,6 +18,7 @@ export class ProdutoComponent implements OnInit {
   public produtos: Produto[] = [];
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
+  color: ThemePalette = 'primary';
 
   totalRegistros: number=0;
   page: number=1
@@ -35,6 +37,19 @@ export class ProdutoComponent implements OnInit {
       });
   }
 
+  public habilitarProduto(p: Produto) {
+    console.log('*****')
+      if (p.status) {
+        p.status = 1;
+      } else {
+        p.status = 0;
+      }
+      this.produtoService.editarProduto(p).subscribe((response: any) => {
+        if (response) {
+          console.log(response)
+        }
+      });
+  }
   ngOnInit() {
     this.produtoService.getProdutos()
       .subscribe((response: Produto[]) => {

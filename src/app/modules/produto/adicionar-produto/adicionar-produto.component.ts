@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../models/Produto';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-adicionar-produto',
@@ -16,6 +17,8 @@ export class AdicionarProdutoComponent implements OnInit {
   public images = [];
   public imageData: any;
   public formProduto: FormGroup;
+  public isChecked: boolean = false;
+  public color: ThemePalette = 'primary';
 
   constructor(private fb: FormBuilder, public router: Router) {
     this.formProduto = this.createForm(this.produto);
@@ -25,16 +28,15 @@ export class AdicionarProdutoComponent implements OnInit {
   }
 
   public addProduto() {
-    if (this.formProduto.valid) {
-      if(this.formProduto.value.status){
-        this.formProduto.value.status=1;
-      }else{
-        this.formProduto.value.status=0;
-      }
-      this.router.navigateByUrl('/produtos/adicionar/imagens', {
-        state: { produto: this.formProduto.value }
-      })
+    if (this.formProduto.value) {
+      this.formProduto.value.status = 1;
+    } else {
+      this.formProduto.value.status = 0;
     }
+    this.router.navigateByUrl('/produtos/adicionar/imagens', {
+      state: { produto: this.formProduto.value }
+    })
+
   }
 
   public createForm(produto: Produto): FormGroup {
@@ -59,7 +61,7 @@ export class AdicionarProdutoComponent implements OnInit {
         Validators.compose([
           Validators.required,
         ])),
-      status: new FormControl(produto.status),
+      status: new FormControl(this.isChecked),
     });
   }
 

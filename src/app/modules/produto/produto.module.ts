@@ -13,6 +13,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AdicionarImagensProdutoComponent } from './adicionar-produto/adicionar-imagens-produto/adicionar-imagens-produto.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EditarImagensProdutoComponent } from './editar-produto/editar-imagens-produto/editar-imagens-produto.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
     CurrencyMaskModule,
+    MatSlideToggleModule
   ],
   declarations: [
     ProdutoComponent,
@@ -49,7 +51,7 @@ const routes: Routes = [
   entryComponents: [
     ModalExcluirProdutoComponent,
   ],
-  providers:[
+  providers: [
   ]
 })
 export class ProdutoModule { }

@@ -52,11 +52,7 @@
               <td>{{produto.qtdEstrelas}}</td>
               <td>{{produto.quantidadeEstoque}}</td>
               <td>
-                <label class="container">
-                  <input type="checkbox" disabled [(ngModel)]="produto.status"
-                    (change)="toggleVisibility($event, produto)" />
-                  <span class="checkmark"></span>
-                </label>
+                <mat-slide-toggle [(ngModel)]="produto.status" (change)="habilitarProduto(produto)" [color]="color" class="align-middle"></mat-slide-toggle>
               </td>
               <td>
                 <button class="btn">

@@ -8,6 +8,7 @@ import { element } from 'protractor';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { GenericValidators } from '../../shared/validators/generic-validators';
 import { Imagem, Produto } from '../models/Produto';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-editar-produto',
@@ -15,6 +16,7 @@ import { Imagem, Produto } from '../models/Produto';
   styleUrls: ['./editar-produto.component.css']
 })
 export class EditarProdutoComponent implements OnInit {
+  color: ThemePalette = 'primary';
   public produto: Produto = new Produto();
   public formProduto: FormGroup;
   public id: number = 0;
