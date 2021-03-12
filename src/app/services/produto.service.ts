@@ -30,10 +30,9 @@ export class ProdutoService {
   public deleteImagensProduto(id: number): Observable<Imagem[]> {
     return this.http.delete<Imagem[]>(`${this.apiUrl}/imagens/${id}`);
   }
-  public postProduto(produto: Produto): Observable<Produto[]> {
-    const t = this.http.post<Produto[]>(`${this.apiUrl}/produtos`, produto);
+  public postProduto(produto: Produto): Observable<Produto> {
     console.log(produto);
-    return t;
+    return this.http.post<Produto>(`${this.apiUrl}/produtos`, produto);
   }
   public postFotoProduto(imagens: FormData, id: number): Observable<FormData> {
     return this.http.post<FormData>(`${this.urlImage}/produto/${id}`, imagens);

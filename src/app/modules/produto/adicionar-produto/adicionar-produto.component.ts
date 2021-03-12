@@ -17,56 +17,53 @@ export class AdicionarProdutoComponent implements OnInit {
   public imageData: any;
   public formProduto: FormGroup;
 
-  constructor(private fb: FormBuilder, private produtoService: ProdutoService, public router: Router) {
-    this.produto.status=0;
-    this.formProduto=this.createForm(this.produto);
+  constructor(private fb: FormBuilder, public router: Router) {
+    this.formProduto = this.createForm(this.produto);
   }
 
   ngOnInit() {
   }
 
-  public addProduto(p: Produto) {
-    if(this.formProduto.valid){
+  public addProduto() {
+    if (this.formProduto.valid) {
+      if(this.formProduto.value.status){
+        this.formProduto.value.status=1;
+      }else{
+        this.formProduto.value.status=0;
+      }
       this.router.navigateByUrl('/produtos/adicionar/imagens', {
-        state: { produto: p}
-        })
+        state: { produto: this.formProduto.value }
+      })
     }
   }
 
-  toggleVisibility(e: any, produto: Produto) {
-    if (e.target.checked) {
-      produto.status = 1;
-    } else {
-      produto.status = 0;
-    }
-  }
   public createForm(produto: Produto): FormGroup {
     return this.fb.group({
-      nome: new FormControl([''], Validators.compose([
+      qtdEstrelas: new FormControl(produto.qtdEstrelas),
+      nome: new FormControl(produto.nome, Validators.compose([
         Validators.required,
-        //Validators.minLength(3),
-        //Validators.maxLength(280)
+        Validators.minLength(3),
+        Validators.maxLength(280)
       ])),
-      descricao: new FormControl([''],
+      descricao: new FormControl(produto.descricao,
         Validators.compose([
           Validators.required,
-          //Validators.minLength(3),
-          //Validators.maxLength(1000)
+          Validators.minLength(3),
+          Validators.maxLength(1000)
         ])),
-      quantidadeEstoque: new FormControl(['']),
+      quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
       preco: new FormControl(produto.preco, Validators.compose([
         Validators.required,
       ])),
-      categoria: new FormControl([''],
+      categoria: new FormControl(produto.categoria,
         Validators.compose([
           Validators.required,
         ])),
       status: new FormControl(produto.status),
-      qtdEstrelas: new FormControl(produto.qtdEstrelas)
     });
   }
 
-  backProdutos(){
+  backProdutos() {
     this.router.navigate(['produtos']);
   }
 

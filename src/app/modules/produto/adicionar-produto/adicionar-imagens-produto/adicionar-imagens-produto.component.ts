@@ -23,19 +23,14 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   id: number = 0;
   produtoRetorno = new Produto();
   constructor(private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
-
-
     this.nav = router.getCurrentNavigation();
     this.produto = this.nav.extras.state.produto;
-    console.log(this.produto);
 
     this.isNovoProduto = typeof this.produto.id == 'undefined';
 
-    console.log(this.isNovoProduto);
     if (!this.isNovoProduto) {
       this.produtoService.getImagensProduto(this.produto.id!).subscribe(response => {
         this.imagens = response;
-        console.log(response);
         response.forEach(element =>
           this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
         )
@@ -48,17 +43,12 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
   processFile(event: any) {
     this.files = event.target.files;
-    console.log(this.files);
 
     for (let file of this.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       let duplicada = false;
-      /*for (let img of this.preVisualizacao) {
-        if (reader.result === img) {
-          duplicada=true;
-        }
-      }*/
+
       reader.onload = event => {
         this.preVisualizacao.push(reader.result);
       }
@@ -66,7 +56,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
 
   addProduto() {
-    this.produtoService.postProduto(this.produto).subscribe((response: any) => {
+     this.produtoService.postProduto(this.produto).subscribe((response: any) => {
       if (response) {
         this.produtoRetorno = response;
         this.SalveImage(this.produtoRetorno.id!)
@@ -99,7 +89,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
   deleteImageBanco(url: any, i: number): void {
     let img = this.imagens[i];
-    console.log(img)
     this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
       sessionStorage.setItem('idProduto', this.produto.id!.toString())
       this.deleteImage(img, i);

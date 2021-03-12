@@ -29,7 +29,7 @@ export class ProdutoComponent implements OnInit {
         this.produtoService.getProdutoByDescricao(search)
           .subscribe((response: Produto[]) => {
             if (response) {
-              //this.produtos = response;
+              this.produtos = response;
             }
           });
       });

@@ -40,8 +40,7 @@
             <label for="validationDefaultUsername"></label>
             <div class="input-group">
               <label for="validationDefaultUsername">Produto Habilitado:
-                <input type="checkbox" class="ml-2" formControlName="status" (click)="toggleVisibility($event, produto)"
-                  data-md-icheck />
+                <input type="checkbox" formControlName="status" data-md-icheck />
               </label>
             </div>
           </div>
@@ -61,7 +60,7 @@
         </div>
       </div>
     </form>
-    <button class="mt-3 btn btn-dark" (click)="addProduto(formProduto.value)" type="submit">Prosseguir -
+    <button class="mt-3 btn btn-dark" (click)="addProduto()" type="submit">Prosseguir -
       Imagens</button>
   </div>
 </div>

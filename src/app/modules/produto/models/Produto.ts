@@ -5,7 +5,7 @@ export class Produto {
   preco?: number;
   quantidadeEstoque?: number;
   categoria?: string;
-  status?: number;
+  status?: number=0;
   qtdEstrelas?: number;
   caminhoImagem?: string[];
 }

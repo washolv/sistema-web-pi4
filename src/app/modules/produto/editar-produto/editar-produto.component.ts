@@ -62,10 +62,10 @@ export class EditarProdutoComponent implements OnInit {
     );
   }
   editarImagens() {
-    if(this.formProduto.valid){
+    if (this.formProduto.valid) {
       this.router.navigateByUrl('/produtos/adicionar/imagens', {
-        state: { produto: this.produto}
-        })
+        state: { produto: this.produto }
+      })
     }
   }
 
@@ -103,11 +103,15 @@ export class EditarProdutoComponent implements OnInit {
 
   public editarProduto(p: Produto) {
     if (this.formProduto.valid) {
+      if (this.formProduto.value.status) {
+        this.formProduto.value.status = 1;
+      } else {
+        this.formProduto.value.status = 0;
+      }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
           console.log('******')
           console.log(response)
-          //window.location.reload()
         }
       });
     } else {
@@ -115,13 +119,6 @@ export class EditarProdutoComponent implements OnInit {
     }
   }
 
-  toggleVisibility(e: any, produto: Produto) {
-    if (e.target.checked) {
-      produto.status = 1;
-    } else {
-      produto.status = 0;
-    }
-  }
   backProdutos() {
     this.router.navigate(['produtos']);
   }
