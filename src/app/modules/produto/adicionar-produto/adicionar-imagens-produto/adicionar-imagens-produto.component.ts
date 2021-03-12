@@ -17,25 +17,12 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   public files: any = new Array();
   public fileList: any = new Array();
   public preVisualizacao: any = new Array();
-  public isNovoProduto: boolean;
-  public imageToShow: SafeResourceUrl[] = [];
-  public imagens: any;
+
   id: number = 0;
   produtoRetorno = new Produto();
   constructor(private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
     this.nav = router.getCurrentNavigation();
     this.produto = this.nav.extras.state.produto;
-
-    this.isNovoProduto = typeof this.produto.id == 'undefined';
-
-    if (!this.isNovoProduto) {
-      this.produtoService.getImagensProduto(this.produto.id!).subscribe(response => {
-        this.imagens = response;
-        response.forEach(element =>
-          this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-        )
-      })
-    }
   }
 
   ngOnInit() {
@@ -56,13 +43,14 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
 
   addProduto() {
-     this.produtoService.postProduto(this.produto).subscribe((response: any) => {
+    this.produtoService.postProduto(this.produto).subscribe((response: any) => {
       if (response) {
         this.produtoRetorno = response;
         this.SalveImage(this.produtoRetorno.id!)
       }
     })
   }
+
   SalveImage(id: number) {
     let uploadImageData = new FormData();
     let f: File;
@@ -77,6 +65,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
       }
     });
   }
+
   deleteImage(url: any, i: number): void {
     this.preVisualizacao = this.preVisualizacao.filter((a: any) => a !== url);
     for (const file of this.files) {
@@ -87,18 +76,4 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     this.files = this.fileList;
     this.fileList = null;
   }
-  deleteImageBanco(url: any, i: number): void {
-    let img = this.imagens[i];
-    this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
-      sessionStorage.setItem('idProduto', this.produto.id!.toString())
-      this.deleteImage(img, i);
-      this.router.navigateByUrl('/produtos/adicionar/imagens', {
-        state: { produto: this.produto }
-      })
-    }
-    );
-  }
-
-
-
 }

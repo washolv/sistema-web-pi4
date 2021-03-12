@@ -1,0 +1,20 @@
+.bg-page {
+  background-color: #E6E6E6;
+}
+.custom-text-size24{
+  font-size: 22px;
+  font-weight: bold;
+}
+.myButton{
+  position:absolute;
+  top: 0;
+    right: 0;
+    z-index: 999; /*not working */
+    pointer-events: auto;
+}
+.carousel-inner {
+  pointer-events: none;
+  z-index:10;
+  width: 100%; /*this must stay */
+  height: 100%; /*this must stay */
+}

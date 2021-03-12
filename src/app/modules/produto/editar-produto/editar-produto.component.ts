@@ -63,9 +63,7 @@ export class EditarProdutoComponent implements OnInit {
   }
   editarImagens() {
     if (this.formProduto.valid) {
-      this.router.navigateByUrl('/produtos/adicionar/imagens', {
-        state: { produto: this.produto }
-      })
+      this.router.navigate([`/produtos/editar/imagens`, this.formProduto.value.id]);
     }
   }
 
