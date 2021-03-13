@@ -10,17 +10,18 @@ import { Produto } from '../../models/Produto';
   styleUrls: ['./editar-imagens-produto.component.css']
 })
 export class EditarImagensProdutoComponent implements OnInit {
-  public imageToShow: SafeResourceUrl[] = [];
+  public imageToShow: any = new Array();
   public imagens: any;
-  public produto: Produto=new Produto;
+  public produto: Produto = new Produto;
   public files: any = new Array();
-  id: number=0;
+  public novasImagems: any = new Array();
+  id: number = 0;
   constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
-    this.produtoService.getProdutoById(this.id).subscribe(resp=>{
-      this.produto=resp;
+    this.produtoService.getProdutoById(this.id).subscribe(resp => {
+      this.produto = resp;
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
@@ -33,18 +34,32 @@ export class EditarImagensProdutoComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  enviar() {
+    this.produtoService.uploadImage(this.novasImagems).subscribe(response=>{
+      console.log(response);
+      window.location.reload();
+    })
+  }
   processFile(event: any) {
     this.files = event.target.files;
-
     for (let file of this.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      let duplicada = false;
-
       reader.onload = event => {
-        this.imagens.push(reader.result);
+        this.novasImagems.push(reader.result);
+        this.imageToShow.push(reader.result)
       }
     }
+  }
+  deleteImage(url: any, i: number): void {
+    let fileList: any = new Array();
+    for (const img of this.imageToShow) {
+      if (img != url) {
+        fileList.push(img);
+      }
+    }
+    this.imageToShow = fileList;
   }
   deleteImageBanco(url: any, i: number): void {
     let img = this.imagens[i];
