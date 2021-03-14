@@ -14,7 +14,8 @@ export class EditarImagensProdutoComponent implements OnInit {
   public imagens: any;
   public produto: Produto = new Produto;
   public files: any = new Array();
-  public novasImagems: any = new Array();
+  public novasImagems:  any = new Array();
+  public imagensUpload: FormData=new FormData;
   id: number = 0;
   constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
     this.route.params.subscribe(parametros => {
@@ -36,7 +37,10 @@ export class EditarImagensProdutoComponent implements OnInit {
   }
 
   enviar() {
-    this.produtoService.uploadImage(this.novasImagems).subscribe(response=>{
+    for (const file of this.files) {
+      this.imagensUpload.append('file', file);
+    }
+    this.produtoService.postFotoProduto(this.imagensUpload, this.produto.id!).subscribe(response => {
       console.log(response);
       window.location.reload();
     })
@@ -47,19 +51,19 @@ export class EditarImagensProdutoComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = event => {
-        this.novasImagems.push(reader.result);
+        this.novasImagems.push(reader.result)
         this.imageToShow.push(reader.result)
       }
     }
   }
-  deleteImage(url: any, i: number): void {
+  deleteImage(url: any): void {
     let fileList: any = new Array();
-    for (const img of this.imageToShow) {
+    for (const img of this.novasImagems) {
       if (img != url) {
         fileList.push(img);
       }
     }
-    this.imageToShow = fileList;
+    this.novasImagems = fileList;
   }
   deleteImageBanco(url: any, i: number): void {
     let img = this.imagens[i];
@@ -67,5 +71,8 @@ export class EditarImagensProdutoComponent implements OnInit {
       window.location.reload();
     }
     );
+  }
+  backProdutos() {
+    this.router.navigate(['produtos/editar', this.produto.id]);
   }
 }

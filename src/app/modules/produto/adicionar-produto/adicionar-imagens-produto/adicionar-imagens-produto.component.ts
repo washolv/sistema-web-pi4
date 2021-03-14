@@ -34,8 +34,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     for (let file of this.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      let duplicada = false;
-
       reader.onload = event => {
         this.preVisualizacao.push(reader.result);
       }
@@ -53,9 +51,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
   SalveImage(id: number) {
     let uploadImageData = new FormData();
-    let f: File;
-    var reader = new FileReader();
-
     for (const file of this.files) {
       uploadImageData.append('file', file);
     }
