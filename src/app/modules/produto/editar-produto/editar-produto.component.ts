@@ -9,6 +9,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 import { GenericValidators } from '../../shared/validators/generic-validators';
 import { Imagem, Produto } from '../models/Produto';
 import {ThemePalette} from '@angular/material/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-produto',
@@ -24,7 +25,7 @@ export class EditarProdutoComponent implements OnInit {
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
   imagens: Imagem[] = [];
-  constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.formProduto = this.createForm(this.produto);
     this.route.params.subscribe(parametros => {
@@ -110,8 +111,7 @@ export class EditarProdutoComponent implements OnInit {
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
-          console.log('******')
-          console.log(response)
+          this.toastrService.error("message", "title")
         }
       });
     } else {
