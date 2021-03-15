@@ -12,6 +12,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { LoginModule } from './modules/login/login.module';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 import { Toast, ToastrModule } from 'ngx-toastr';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DashboardModule,
     HttpClientModule,
     ProdutoModule,
     LoginModule,

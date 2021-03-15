@@ -12,7 +12,7 @@ export class LoginService {
 constructor(private http: HttpClient) { }
   apiUrl = environment.baseAPIUrl;
 
-  public login(user: User){
+ /* public login(user: User){
     this.http.post<User>(`${this.apiUrl}/cliente/${user.email}`, user).subscribe(response =>{
       const result=response;
       console.log(response);
@@ -22,6 +22,13 @@ constructor(private http: HttpClient) { }
       }
       return false;
     });
+  }*/
+  public login(user: User) {
+    return new Promise((resolve) => {
+      window.localStorage.setItem('currentUser', 'teste')
+      resolve(true);
+      return true;
+    })
   }
 
   logout() {

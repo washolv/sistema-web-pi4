@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-modal-alerta',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-alerta.component.css']
 })
 export class ModalAlertaComponent implements OnInit {
-  public message: String="";
+  @Input() public message: String='';
+  @Input() public tipo: String='success';
   constructor() { }
 
   ngOnInit() {

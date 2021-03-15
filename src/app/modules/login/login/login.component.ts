@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onSubmit(){
+   onSubmit(){
     try{
       const result=this.loginService.login(this.usuario);
       console.log(`Login efetuado: ${result}`);

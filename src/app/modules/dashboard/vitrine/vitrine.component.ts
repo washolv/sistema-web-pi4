@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 
@@ -7,6 +7,7 @@ import { Produto } from '../../produto/models/Produto';
   templateUrl: './vitrine.component.html',
   styleUrls: ['./vitrine.component.css']
 })
+
 export class VitrineComponent implements OnInit {
 
   public produtos: Produto[] = [];

@@ -15,6 +15,10 @@ import { RouterModule, Routes } from '@angular/router';
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DashboardComponent, VitrineComponent]
+  declarations: [DashboardComponent, VitrineComponent],
+  exports:[
+    DashboardComponent,
+    VitrineComponent
+  ]
 })
 export class DashboardModule { }
