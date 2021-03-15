@@ -24,11 +24,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'dashboard', component: MainNavComponent, children: [
-      { path: '', component: DashboardComponent },
-    ]
-  },
-  {
     path: 'produtos', component: MainNavComponent,
     loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
   },
@@ -43,8 +38,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'produtos', component: MainNavComponent,
-    loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
+    path: 'dashboard', component: MainNavComponent,
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
 ];
 
