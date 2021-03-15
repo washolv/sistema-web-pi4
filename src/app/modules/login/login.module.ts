@@ -21,7 +21,7 @@ const routes = [
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-   MDBBootstrapModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
   ],
   declarations: [
     LoginComponent,
