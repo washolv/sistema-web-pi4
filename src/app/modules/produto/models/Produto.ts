@@ -8,6 +8,7 @@ export class Produto {
   status?: number=0;
   qtdEstrelas?: number;
   caminhoImagem?: string[];
+  imagens?: Imagem[];
 }
 
 
