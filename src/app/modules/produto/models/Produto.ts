@@ -1,3 +1,5 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
+
 export class Produto {
   id?: number;
   nome?: number;
@@ -9,6 +11,8 @@ export class Produto {
   qtdEstrelas?: number;
   caminhoImagem?: string[];
   imagens?: Imagem[];
+  imageToShow: SafeResourceUrl[]=[];
+
 }
 
 

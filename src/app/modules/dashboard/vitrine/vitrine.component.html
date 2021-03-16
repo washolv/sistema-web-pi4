@@ -18,7 +18,7 @@
 
     <div class="col-sm-4" *ngFor="let produto of produtos">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="" alt="Card image cap">
+        <img class="card-img-top" [src]="produto.imageToShow[0]" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{produto.nome}}</h5>
           <p class="card-text">{{produto.descricao}}</p>

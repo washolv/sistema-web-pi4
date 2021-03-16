@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 
@@ -11,21 +12,26 @@ import { Produto } from '../../produto/models/Produto';
 export class VitrineComponent implements OnInit {
 
   public produtos: Produto[] = [];
-
-  constructor(private produtoService: ProdutoService) {
-
-   }
-
-  ngOnInit() {
+  imageToShow: SafeResourceUrl[]=[];
+  imagens:any;
+  constructor(private sanitizer: DomSanitizer,private produtoService: ProdutoService) {
     this.produtoService.getProdutos().subscribe(response => {
       this.produtos = response,
       this.produtos.forEach(produto => {
+        produto.imageToShow=[];
         this.produtoService.getImagensProduto(produto.id!).subscribe( response => {
-          produto.imagens = response
-          console.log(produto)
-        })
+          console.log(produto.id)
+          response.forEach(element =>
+            produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+          )
+        }
+        )
       });
     });
+   }
+
+  ngOnInit() {
+
   }
 
 }
