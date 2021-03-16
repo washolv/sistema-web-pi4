@@ -108,6 +108,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   public editarProduto(p: Produto) {
+    console.log(this.formProduto.value)
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {
         this.formProduto.value.status = 1;
@@ -115,6 +116,7 @@ export class EditarProdutoComponent implements OnInit {
         this.formProduto.value.status = 0;
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
+        console.log(response)
         if (response) {
           this.modalService.showAlertSucess('Produto editado com sucesso!');
         }
