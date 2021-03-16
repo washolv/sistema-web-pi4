@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
+import { AlertService } from 'src/app/modules/shared/modal-alerta/alert.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../models/Produto';
 
@@ -20,7 +21,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
   id: number = 0;
   produtoRetorno = new Produto();
-  constructor(private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
+  constructor(private modalService: AlertService, private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
     this.nav = router.getCurrentNavigation();
     this.produto = this.nav.extras.state.produto;
   }
@@ -56,6 +57,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
+        this.modalService.showAlertSucess('Produto cadastrado!');
         this.router.navigate(['/produtos/adicionar']);
       }
     });

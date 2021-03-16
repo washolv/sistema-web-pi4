@@ -10,6 +10,9 @@ import { GenericValidators } from '../../shared/validators/generic-validators';
 import { Imagem, Produto } from '../models/Produto';
 import {ThemePalette} from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalAlertaComponent } from '../../shared/modal-alerta/modal-alerta.component';
+import { AlertService } from '../../shared/modal-alerta/alert.service';
 
 @Component({
   selector: 'app-editar-produto',
@@ -25,7 +28,9 @@ export class EditarProdutoComponent implements OnInit {
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
   imagens: Imagem[] = [];
-  constructor(private toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  bsModalRef: BsModalRef=new BsModalRef;
+
+  constructor(private modalService: AlertService ,toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.formProduto = this.createForm(this.produto);
     this.route.params.subscribe(parametros => {
@@ -111,7 +116,7 @@ export class EditarProdutoComponent implements OnInit {
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
-          this.toastrService.error("message", "title")
+          this.modalService.showAlertSucess('Produto editado com sucesso!');
         }
       });
     } else {

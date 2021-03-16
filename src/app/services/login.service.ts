@@ -23,6 +23,7 @@ constructor(private http: HttpClient) { }
       return false;
     });
   }*/
+
   public login(user: User) {
     return new Promise((resolve) => {
       window.localStorage.setItem('currentUser', 'teste')

@@ -11,8 +11,9 @@ import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { LoginModule } from './modules/login/login.module';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
-import { Toast, ToastrModule } from 'ngx-toastr';
+import {  ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ModalModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

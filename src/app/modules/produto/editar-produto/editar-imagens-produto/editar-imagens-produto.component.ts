@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/modules/shared/modal-alerta/alert.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../models/Produto';
 
@@ -17,7 +18,7 @@ export class EditarImagensProdutoComponent implements OnInit {
   public novasImagems:  any = new Array();
   public imagensUpload: FormData=new FormData;
   id: number = 0;
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
+  constructor(private modalService: AlertService, private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
@@ -42,8 +43,9 @@ export class EditarImagensProdutoComponent implements OnInit {
     }
     this.produtoService.postFotoProduto(this.imagensUpload, this.produto.id!).subscribe(response => {
       console.log(response);
-      window.location.reload();
+      this.modalService.showAlertSucess('Imagens adicionadas!');
     })
+    this.novasImagems.length=null;
   }
   processFile(event: any) {
     this.files = event.target.files;
