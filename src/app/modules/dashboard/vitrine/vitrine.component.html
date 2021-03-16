@@ -1,13 +1,20 @@
-
 <div class="container-fluid mt-5">
+  <div class="row d-flex justify-content-center mt-3 mb-5">
+    <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"
+      (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
+    <label class="ml-2 custom-lbl-filter">
+      <button class="custon-btn-filter">
+      </button>
+    </label>
+  </div>
   <div class="row">
-    <div class="col-sm-3  mb-3" *ngFor="let produto of produtos">
+    <div class="col-sm-3 mb-3" *ngFor="let produto of produtos">
       <div class="card h-100" style="width: 18rem;">
         <img class="card-img-top" [src]="produto.imageToShow[0]" alt="Imagem principal do produto">
         <div class="card-body">
           <h4 class="card-title text-center">{{produto.nome}}</h4>
           <p class="card-text">R$ {{produto.preco}}</p>
-          <p class="text-center"><a href="#" class="btn btn-info">Mais informações</a></p>
+          <p class="text-center"><a class="btn btn-info" (click)="Detalhes(produto.id!)">Mais informações</a></p>
         </div>
       </div>
     </div>

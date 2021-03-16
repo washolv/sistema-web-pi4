@@ -9,11 +9,13 @@ const routes: Routes = [
   { path: 'vitrine', component: VitrineComponent }
 ];
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ],
   declarations: [DashboardComponent, VitrineComponent],
   exports:[
