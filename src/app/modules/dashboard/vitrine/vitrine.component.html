@@ -7,8 +7,8 @@
       </button>
     </label>
   </div>
-  <div class="row">
-    <div class="col-sm-3 mb-3" *ngFor="let produto of produtos">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-3" *ngFor="let produto of produtos">
       <div class="card h-100" style="width: 18rem;">
         <img class="card-img-top" [src]="produto.imageToShow[0]" alt="Imagem principal do produto">
         <div class="card-body">
