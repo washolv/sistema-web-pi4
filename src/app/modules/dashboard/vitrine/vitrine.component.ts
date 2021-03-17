@@ -1,8 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router,Event } from '@angular/router';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
+import { pipe, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 
@@ -17,7 +17,7 @@ export class VitrineComponent implements OnInit {
   public produtos: Produto[] = [];
   imageToShow: SafeResourceUrl[] = [];
   imagens: any;
-  public loading=false;
+  public loading = false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
 
@@ -35,7 +35,8 @@ export class VitrineComponent implements OnInit {
                 console.log(produto.id)
                 response.forEach(element =>
                   produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-                )}
+                )
+              }
               )
             });
           });
@@ -58,6 +59,11 @@ export class VitrineComponent implements OnInit {
     });
   }
   Detalhes(id: number) {
-    this.router.navigate(['/produtos/visualizar', id]);
+    this.loading = true;
+    pipe(first())
+    {
+      this.router.navigate(['/produtos/visualizar', id]);
+    }
+    
   }
 }

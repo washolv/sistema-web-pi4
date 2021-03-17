@@ -22,6 +22,7 @@ export class ProdutoComponent implements OnInit {
 
   totalRegistros: number=0;
   page: number=1
+  teste: boolean=false;
 
   constructor(private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
     this.searchFilter.pipe(

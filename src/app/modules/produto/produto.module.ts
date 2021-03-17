@@ -15,15 +15,14 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EditarImagensProdutoComponent } from './editar-produto/editar-imagens-produto/editar-imagens-produto.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthGuard } from 'src/app/services/auth.guard';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
-  { path: '', component: ProdutoComponent},
-  { path: 'editar/:id', component: EditarProdutoComponent,canActivate: [AuthGuard] },
-  { path: 'adicionar', component: AdicionarProdutoComponent,canActivate: [AuthGuard] },
-  { path: 'visualizar/:id', component: VisualizarProdutoComponent},
-  { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent,canActivate: [AuthGuard] },
-  { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent,canActivate: [AuthGuard] }
+  { path: '', component: ProdutoComponent },
+  { path: 'editar/:id', component: EditarProdutoComponent, canActivate: [AuthGuard] },
+  { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AuthGuard] },
+  { path: 'visualizar/:id', component: VisualizarProdutoComponent },
+  { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent, canActivate: [AuthGuard] },
+  { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent, canActivate: [AuthGuard] }
 
 ];
 @NgModule({
@@ -35,9 +34,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
+    MDBBootstrapModule,
     CurrencyMaskModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
   ],
   declarations: [
     ProdutoComponent,
