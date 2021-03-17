@@ -14,6 +14,7 @@ import { AuthenticationComponent } from './modules/login/authentication/authenti
 import {  ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    MatProgressSpinnerModule
   ],
   bootstrap: [AppComponent]
 })

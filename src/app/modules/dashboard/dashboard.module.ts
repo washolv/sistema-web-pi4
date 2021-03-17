@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { VitrineComponent } from './vitrine/vitrine.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const routes: Routes = [
@@ -15,7 +16,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
+
   ],
   declarations: [DashboardComponent, VitrineComponent],
   exports:[

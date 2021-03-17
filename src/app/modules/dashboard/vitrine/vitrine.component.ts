@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router,Event } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -17,6 +17,7 @@ export class VitrineComponent implements OnInit {
   public produtos: Produto[] = [];
   imageToShow: SafeResourceUrl[] = [];
   imagens: any;
+  public loading=false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
 

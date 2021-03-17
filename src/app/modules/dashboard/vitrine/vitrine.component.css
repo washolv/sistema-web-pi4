@@ -10,7 +10,16 @@
   object-fit: cover;
   }
 }
-
+.loading-spinner{
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+}
 .custon-btn-filter{
   background-image: url('/assets/botao-de-menu.svg');
   background-repeat: no-repeat;
