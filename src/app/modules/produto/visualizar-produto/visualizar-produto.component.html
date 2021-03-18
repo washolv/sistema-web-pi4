@@ -47,18 +47,17 @@
         </div>
       </form>
     </div>
-
     <div class="col-lg-4">
-      <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-        <ng-container *ngFor="let img of imageToShow">
-          <mdb-carousel-item>
-            <div class="view w-100">
-              <img class="d-block w-100 custom-image" [src]="img" alt="First slide">
-              <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-          </mdb-carousel-item>
-        </ng-container>
-      </mdb-carousel>
+        <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+          <ng-container *ngFor="let img of imageToShow">
+            <mdb-carousel-item>
+              <div class="view w-100">
+                <img class="d-block w-100 custom-image" [src]="img" alt="First slide">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+              </div>
+            </mdb-carousel-item>
+          </ng-container>
+        </mdb-carousel>
     </div>
   </div>
 </div>
