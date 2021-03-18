@@ -12,3 +12,8 @@ html{
   border-radius: 10px;
 
 }
+ngb-rating {
+  font-size: 50px;
+  color: #FFC300;
+  border:none;
+}
