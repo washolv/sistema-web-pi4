@@ -19,3 +19,8 @@
   height: 100%; /*this must stay */
 }
 
+ngb-rating {
+  font-size: 50px;
+  color: #FFC300;
+  border:none;
+}

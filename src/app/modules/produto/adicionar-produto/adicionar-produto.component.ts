@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../models/Produto';
 import {ThemePalette} from '@angular/material/core';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-adicionar-produto',
   templateUrl: './adicionar-produto.component.html',
-  styleUrls: ['./adicionar-produto.component.css']
+  styleUrls: ['./adicionar-produto.component.css'],
 })
 
 export class AdicionarProdutoComponent implements OnInit {
@@ -17,17 +18,19 @@ export class AdicionarProdutoComponent implements OnInit {
   public images = [];
   public imageData: any;
   public formProduto: FormGroup;
+  public currentRate=1;
   public isChecked: boolean = false;
   public color: ThemePalette = 'primary';
-
-  constructor(private fb: FormBuilder, public router: Router) {
+  constructor(private config: NgbRatingConfig,private fb: FormBuilder, public router: Router) {
     this.formProduto = this.createForm(this.produto);
+    this.config.max=5;
   }
 
   ngOnInit() {
   }
 
   public addProduto() {
+    this.formProduto.value.qtdEstrelas=this.currentRate;
     if (this.formProduto.value) {
       this.formProduto.value.status = 1;
     } else {

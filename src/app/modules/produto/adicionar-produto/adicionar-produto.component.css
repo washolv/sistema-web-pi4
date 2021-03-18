@@ -8,3 +8,13 @@
 .custom-button{
   margin-right: 0% ;
 }
+#quantity{
+  opacity: 0.6;
+  border: none;
+}
+
+ngb-rating {
+  font-size: 50px;
+  color: #FFC300;
+  border:none;
+}

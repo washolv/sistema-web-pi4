@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProdutoComponent } from './produto.component';
 import { ModalExcluirProdutoComponent } from './modals/modal-excluir-produto/modal-excluir-produto.component';
@@ -15,6 +15,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EditarImagensProdutoComponent } from './editar-produto/editar-imagens-produto/editar-imagens-produto.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthGuard } from 'src/app/services/auth.guard';
+import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
@@ -37,6 +39,7 @@ const routes: Routes = [
     MDBBootstrapModule,
     CurrencyMaskModule,
     MatSlideToggleModule,
+    NgbModule,
   ],
   declarations: [
     ProdutoComponent,
@@ -50,10 +53,12 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
+  providers: [NgbRatingConfig],
   entryComponents: [
     ModalExcluirProdutoComponent,
   ],
-  providers: [
-  ]
+  bootstrap: [
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ProdutoModule { }

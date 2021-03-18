@@ -8,11 +8,12 @@ import { element } from 'protractor';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { GenericValidators } from '../../shared/validators/generic-validators';
 import { Imagem, Produto } from '../models/Produto';
-import {ThemePalette} from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalAlertaComponent } from '../../shared/modal-alerta/modal-alerta.component';
 import { AlertService } from '../../shared/modal-alerta/alert.service';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-editar-produto',
@@ -25,24 +26,26 @@ export class EditarProdutoComponent implements OnInit {
   public formProduto: FormGroup;
   public id: number = 0;
   public idImagem: any;
+  public currentRate: number=0;
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
   imagens: Imagem[] = [];
-  bsModalRef: BsModalRef=new BsModalRef;
+  bsModalRef: BsModalRef = new BsModalRef;
 
-  constructor(private modalService: AlertService ,toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private config: NgbRatingConfig, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
+    this.config.max = 5;
     this.formProduto = this.createForm(this.produto);
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
     this.produtoService.getProdutoById(this.id).subscribe(response => {
       this.produto = response
+      this.currentRate= <number> this.produto.qtdEstrelas;
       this.formProduto = this.createForm(this.produto);
     })
-    this.produtoService.getImagensProduto(this.id).subscribe(response => {
+    this.produtoService.getImagensProduto(this.id)  .subscribe(response => {
       this.imagens = response;
-      console.log(response);
       response.forEach(element =>
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
@@ -108,6 +111,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   public editarProduto(p: Produto) {
+    p.qtdEstrelas=this.currentRate;
     console.log(this.formProduto.value)
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {

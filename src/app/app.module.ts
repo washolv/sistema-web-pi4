@@ -6,15 +6,16 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoModule } from './modules/produto/produto.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { LoginModule } from './modules/login/login.module';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
-import {  ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -38,8 +39,10 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,NgbRating
+  ]
 })
 export class AppModule { }
