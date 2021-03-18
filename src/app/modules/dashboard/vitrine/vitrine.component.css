@@ -55,4 +55,10 @@
   margin: 0;
   box-sizing: border-box;
 }
+ngb-rating {
+  font-size: 22px;
+  color: #FFC300;
+  border:none;
+}
+
 

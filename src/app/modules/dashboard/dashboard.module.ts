@@ -11,19 +11,23 @@ const routes: Routes = [
 ];
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgbModule,
 
   ],
+  providers: [NgbRatingConfig],
   declarations: [DashboardComponent, VitrineComponent],
   exports:[
     DashboardComponent,
     VitrineComponent
-  ]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardModule { }

@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -20,8 +21,10 @@ export class VitrineComponent implements OnInit {
   public loading = false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
+  public currentRate=1;
 
-  constructor(private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+  constructor(private config: NgbRatingConfig,private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+    this.config.max=5;
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
@@ -64,6 +67,6 @@ export class VitrineComponent implements OnInit {
     {
       this.router.navigate(['/produtos/visualizar', id]);
     }
-    
+
   }
 }
