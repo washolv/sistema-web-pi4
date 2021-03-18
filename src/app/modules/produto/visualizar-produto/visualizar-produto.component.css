@@ -12,7 +12,7 @@ html{
   border-radius: 10px;
 }
 ngb-rating {
-  font-size: 50px;
+  font-size: 35px;
   color: #FFC300;
   border:none;
 }

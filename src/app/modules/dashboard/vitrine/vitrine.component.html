@@ -13,12 +13,12 @@
       <div class="card h-100" style="width: 18rem;">
         <img class="card-img-top" [src]="produto.imageToShow[0]" alt="Imagem principal do produto">
         <div class="card-body">
-          <h4 class="card-title text-center">{{produto.nome}}</h4>
-          <p class="card-text text-center">
+          <h4 class="card-title text-center custom-name">{{produto.nome}}</h4>
+          <p class="card-text text-center ">
             <ngb-rating [(rate)]="produto.qtdEstrelas!" [readonly]=true maxlength=5></ngb-rating>
           </p>
             <hr>
-          <p class="card-text ">{{produto.preco| currency:'BRL':'symbol':'0.2-2'}}</p>
+          <p class="card-text custom-price">{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</p>
           <p class="text-center"><a class="btn btn-info" (click)="Detalhes(produto.id!)">Mais informações</a></p>
         </div>
       </div>

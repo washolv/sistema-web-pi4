@@ -60,5 +60,9 @@ ngb-rating {
   color: #FFC300;
   border:none;
 }
+.custom-price{
+  font-weight: bold;
+  font-size: 18px;
+}
 
 
