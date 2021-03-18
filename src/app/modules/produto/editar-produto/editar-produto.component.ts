@@ -67,7 +67,6 @@ export class EditarProdutoComponent implements OnInit {
     }
 
     this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
-      console.log(response)
       window.location.reload();
     }
     );
@@ -81,7 +80,6 @@ export class EditarProdutoComponent implements OnInit {
   dataURItoBlob(dataURI: any) {
     var blob = new Blob([dataURI], { type: 'image/png' });
     var file = new File([blob], dataURI.fileName);
-    console.log(file);
 
   }
   public createForm(produto: Produto): FormGroup {
@@ -120,7 +118,6 @@ export class EditarProdutoComponent implements OnInit {
         this.formProduto.value.status = 0;
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
-        console.log(response)
         if (response) {
           this.modalService.showAlertSucess('Produto editado com sucesso!');
         }

@@ -35,7 +35,6 @@ export class VitrineComponent implements OnInit {
             this.produtos.forEach(produto => {
               produto.imageToShow = [];
               this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-                console.log(produto.id)
                 response.forEach(element =>
                   produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
                 )
@@ -52,7 +51,6 @@ export class VitrineComponent implements OnInit {
         this.produtos.forEach(produto => {
           produto.imageToShow = [];
           this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-            console.log(produto.id)
             response.forEach(element =>
               produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
             )

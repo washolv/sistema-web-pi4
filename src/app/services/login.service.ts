@@ -15,7 +15,6 @@ constructor(private http: HttpClient) { }
  /* public login(user: User){
     this.http.post<User>(`${this.apiUrl}/cliente/${user.email}`, user).subscribe(response =>{
       const result=response;
-      console.log(response);
       if(result){
         window.localStorage.setItem('currentUser', JSON.stringify(result))
         return true;
