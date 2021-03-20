@@ -8,6 +8,7 @@ import { Produto } from './models/Produto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { LOCALE_ID } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-produto',
@@ -50,8 +51,8 @@ export class ProdutoComponent implements OnInit {
   }
   ngOnInit() {
     this.produtoService.getProdutos()
-      .subscribe((response: Produto[]) => {
-        this.produtos = response;
+      .subscribe((response: HttpResponse<Produto[]>) => {
+        this.produtos = <Produto[]> response.body;
         this.totalRegistros=this.produtos.length;
         console.log(this.totalRegistros);
       }, err => {
