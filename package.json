@@ -24,6 +24,7 @@
     "@angular/router": "~11.2.3",
     "@material/dialog": "^10.0.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
+    "@ng-select/ng-select": "^6.1.0",
     "angular-bootstrap-md": "^11.0.0",
     "angular-ui-carousel": "^0.1.10",
     "bootstrap": "^4.6.0",

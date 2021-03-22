@@ -1,13 +1,13 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProdutoComponent } from './produto.component';
 import { ModalExcluirProdutoComponent } from './modals/modal-excluir-produto/modal-excluir-produto.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { AdicionarProdutoComponent } from './adicionar-produto/adicionar-produto.component';
-import { NgxPaginationModule, PaginationControlsComponent } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { VisualizarProdutoComponent } from './visualizar-produto/visualizar-produto.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AdicionarImagensProdutoComponent } from './adicionar-produto/adicionar-imagens-produto/adicionar-imagens-produto.component';
@@ -16,6 +16,8 @@ import { EditarImagensProdutoComponent } from './editar-produto/editar-imagens-p
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthGuard } from 'src/app/services/auth.guard';
 import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -39,6 +41,7 @@ const routes: Routes = [
     MDBBootstrapModule,
     CurrencyMaskModule,
     MatSlideToggleModule,
+    MatSelectModule,
     NgbModule,
   ],
   declarations: [
@@ -53,7 +56,10 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers: [NgbRatingConfig],
+  providers: [NgbRatingConfig,
+    CurrencyPipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+  ],
   entryComponents: [
     ModalExcluirProdutoComponent,
   ],

@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     MatProgressSpinnerModule,
     NgbModule,
-
+    NgSelectModule
   ],
   providers: [NgbRatingConfig],
   declarations: [DashboardComponent, VitrineComponent],

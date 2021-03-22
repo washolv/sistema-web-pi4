@@ -20,10 +20,18 @@ export class AdicionarProdutoComponent implements OnInit {
   public formProduto: FormGroup;
   public currentRate=1;
   public isChecked: boolean = false;
+  public categoria:any;
+  public categoriaNome: string="";
   public color: ThemePalette = 'primary';
   constructor(private config: NgbRatingConfig,private fb: FormBuilder, public router: Router) {
     this.formProduto = this.createForm(this.produto);
     this.config.max=5;
+    this.categoria = [
+      { id: 1, name: 'Cama' },
+      { id: 2, name: 'Mesa' },
+      { id: 3, name: 'banho' },
+  ];
+
   }
 
   ngOnInit() {
@@ -32,6 +40,7 @@ export class AdicionarProdutoComponent implements OnInit {
   public addProduto() {
     this.formProduto.value.qtdEstrelas=this.currentRate;
     if (this.formProduto.value) {
+      console.log(this.formProduto.value)
       this.formProduto.value.status = 1;
     } else {
       this.formProduto.value.status = 0;
@@ -60,7 +69,7 @@ export class AdicionarProdutoComponent implements OnInit {
       preco: new FormControl(produto.preco, Validators.compose([
         Validators.required,
       ])),
-      categoria: new FormControl(produto.categoria,
+      categoria: new FormControl('',
         Validators.compose([
           Validators.required,
         ])),
