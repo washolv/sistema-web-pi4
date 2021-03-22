@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
@@ -46,8 +47,8 @@ export class VitrineComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.produtoService.getProdutos().subscribe(response => {
-      this.produtos = response,
+    this.produtoService.getProdutos().subscribe((response: HttpResponse<Produto[]>) => {
+      this.produtos = <Produto[]>response.body,
         this.produtos.forEach(produto => {
           produto.imageToShow = [];
           this.produtoService.getImagensProduto(produto.id!).subscribe(response => {

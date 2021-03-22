@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Imagem, Produto } from '../modules/produto/models/Produto';
 
@@ -15,8 +15,11 @@ export class ProdutoService {
   constructor(private http: HttpClient) {
   }
 
-  public getProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`);
+  public getProdutos(): Observable<HttpResponse<Produto[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({habilitado: 'true'}),
+  };
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`, { observe: 'response', ...httpOptions });
   }
   public getProdutoById(id: number): Observable<Produto> {
     return this.http.get<Produto>(`${this.apiUrl}/produtos/${id}`);
