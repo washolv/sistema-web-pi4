@@ -41,15 +41,22 @@
               </div>
             </div>
             <div class="form-row mb-3">
-              <div class="col-lg-6 col-sm-12">
-                <label for="validationDefault03">Qtd. em estoque</label>
-                <input type="text" class="form-control" name="quantidadeEstoque" pattern="[0-9]*"
-                  placeholder="Qtd. em estoque" formControlName="quantidadeEstoque" required>
-              </div>
-              <div class="col-lg-6 col-sm-12">
-                <label for="validationDefault04">Categoria</label>
-                <input type="text" class="form-control" name="categoria" placeholder="Categoria"
-                  formControlName="categoria">
+            <div class="col-lg-3 col-sm-12">
+              <label for="validationDefault03">Qtd. em estoque</label>
+              <input type="number" class="form-control" name="quantidadeEstoque" pattern="[0-9]*"
+                placeholder="Qtd. em estoque" formControlName="quantidadeEstoque" required>
+            </div>
+            </div>
+            <div class="form-row mb-3">
+              <div class="col-lg-3 col-sm-12">
+                <mat-form-field appearance="fill">
+                  <mat-label>Categoria</mat-label>
+                  <mat-select formControlName="categoria">
+                    <mat-option *ngFor="let item of categoria" [value]="item.name">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
             <ngb-rating [(rate)]="currentRate" maxlength=5></ngb-rating>

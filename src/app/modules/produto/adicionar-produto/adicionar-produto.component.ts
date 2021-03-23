@@ -29,7 +29,7 @@ export class AdicionarProdutoComponent implements OnInit {
     this.categoria = [
       { id: 1, name: 'Cama' },
       { id: 2, name: 'Mesa' },
-      { id: 3, name: 'banho' },
+      { id: 3, name: 'Banho' },
   ];
 
   }

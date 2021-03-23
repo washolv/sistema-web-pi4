@@ -27,6 +27,7 @@ export class EditarProdutoComponent implements OnInit {
   public id: number = 0;
   public idImagem: any;
   public currentRate: number=0;
+  public categoria: any;
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
   imagens: Imagem[] = [];
@@ -50,7 +51,11 @@ export class EditarProdutoComponent implements OnInit {
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
     })
-
+    this.categoria = [
+      { id: 1, name: 'Cama' },
+      { id: 2, name: 'Mesa' },
+      { id: 3, name: 'Banho' },
+  ];
 
   }
 
