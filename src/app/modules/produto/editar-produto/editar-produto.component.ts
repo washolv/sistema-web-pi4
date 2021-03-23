@@ -33,7 +33,7 @@ export class EditarProdutoComponent implements OnInit {
   imagens: Imagem[] = [];
   bsModalRef: BsModalRef = new BsModalRef;
 
-  constructor(private config: NgbRatingConfig, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private config: NgbRatingConfig, private toastr: ToastrService, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.config.max = 5;
     this.formProduto = this.createForm(this.produto);
@@ -124,11 +124,16 @@ export class EditarProdutoComponent implements OnInit {
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
-          this.modalService.showAlertSucess('Produto editado com sucesso!');
+          this.toastr.success("Produto alterado com sucesso", "Ok",{
+            timeOut: 3000, positionClass: 'toast-top-center',
+            });
         }
+      },
+      err => {
+        this.toastr.error("Error ao alterar produto", "Falha" ,{
+        timeOut: 3000, positionClass: 'toast-top-center',
+        });
       });
-    } else {
-      GenericValidators.verifierValidatorsForm(this.formProduto);
     }
   }
 

@@ -2,6 +2,7 @@ import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { element } from 'protractor';
 import { AlertService } from 'src/app/modules/shared/modal-alerta/alert.service';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -21,7 +22,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
   id: number = 0;
   produtoRetorno = new Produto();
-  constructor(private modalService: AlertService, private sanitizer: DomSanitizer, private produtoService: ProdutoService, private router: Router) {
+  constructor(private toastr: ToastrService,private modalService: AlertService, private produtoService: ProdutoService, private router: Router) {
     this.nav = router.getCurrentNavigation();
     this.produto = this.nav.extras.state.produto;
   }
@@ -47,7 +48,11 @@ export class AdicionarImagensProdutoComponent implements OnInit {
         this.produtoRetorno = response;
         this.SalveImage(this.produtoRetorno.id!)
       }
-    })
+    }, err => {
+      this.toastr.error("Error ao adicionar produto", "Falha", {
+        timeOut: 3000, positionClass: 'toast-top-center',
+      });
+    });
   }
 
   SalveImage(id: number) {
@@ -57,7 +62,9 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
     this.produtoService.postFotoProduto(uploadImageData, id).subscribe((response: any) => {
       if (response) {
-        this.modalService.showAlertSucess('Produto cadastrado!');
+        this.toastr.success("Produto cadastrado com sucesso", "Ok",{
+          timeOut: 3000, positionClass: 'toast-top-center',
+          });
         this.router.navigate(['/produtos/adicionar']);
       }
     });
