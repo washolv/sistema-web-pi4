@@ -46,6 +46,7 @@ export class EditarImagensProdutoComponent implements OnInit {
       this.toastr.success("Imagens adicionadas com sucesso", "Ok",{
         timeOut: 3000, positionClass: 'toast-top-center',
         });
+        window.location.reload();
     })
     this.novasImagems.length = null;
   }
@@ -55,9 +56,11 @@ export class EditarImagensProdutoComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = event => {
+        this.novasImagems = this.novasImagems.filter((a: any) => a !== reader.result);
         this.novasImagems.push(reader.result)
       }
     }
+    console.log(this.novasImagems);
   }
   deleteImage(url: any, i: number): void {
     this.novasImagems = this.novasImagems.filter((a: any) => a !== url);

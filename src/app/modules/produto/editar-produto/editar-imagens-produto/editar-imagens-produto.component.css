@@ -40,6 +40,13 @@
     height: auto;
    }
   }
+@media (min-width: 768px) {
+  .img-fluid{
+    border: solid 1px;
+    border-radius: 10px;
+    height: 12vw;
+   }
+ }
 
 .custom-btn{
   margin-right: 0px;
