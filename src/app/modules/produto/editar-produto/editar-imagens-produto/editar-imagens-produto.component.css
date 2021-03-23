@@ -30,22 +30,7 @@
 .img-fluid{
   border: solid 1px;
   border-radius: 10px;
-  height: 15vw;
- }
-
-@media screen and (max-width:768px) {
-  .img-fluid{
-    border: solid 1px;
-    border-radius: 10px;
-    height: auto;
-   }
-  }
-@media (min-width: 768px) {
-  .img-fluid{
-    border: solid 1px;
-    border-radius: 10px;
-    height: 12vw;
-   }
+  height: auto;
  }
 
 .custom-btn{
