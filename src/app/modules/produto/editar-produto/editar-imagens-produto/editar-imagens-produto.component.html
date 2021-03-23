@@ -15,74 +15,58 @@
     <mat-tab-group>
       <mat-tab label="Remover Imagens">
         <div class="container-fluid">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size2 mx-auto mt-3 mb-3">
-                Remova imagens para o produto: {{produto.nome}}
-              </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size2 mx-auto mt-3 mb-3">
+              Remova imagens para o produto: {{produto.nome}}
             </div>
-            <div class="row text-center">
-              <div class="row col-lg-10 text-center">
-                <div class="row col-lg-10 text-center">
-                  <div class="col-lg-4" *ngFor="let img of imageToShow; let i=index">
-                    <div class="col-lg-12 col-sm-12">
-                      <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
-                    </div>
-                    <div class="col-lg-8">
-                    </div>
-                    <div class="col-lg-4">
-                      <button class="btn custom-btn mr-0">
-                        <img src="../../../assets/Icon material-delete.svg" (click)="deleteImageBanco(i)"
-                          class="btn-icon-add" alt="add">
-                      </button>
-                    </div>
-                  </div>
+          </div>
+          <div class="row">
+            <ng-container *ngFor="let img of imageToShow; let i=index">
+              <div class="col-lg-3">
+                <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
+                <div class="row">
+                  <button class="btn custom-btn mr-0">
+                    <img src="../../../assets/Icon material-delete.svg" (click)="deleteImageBanco(i)" class="btn-icon-add"
+                      alt="add">
+                  </button>
                 </div>
               </div>
-            </div>
+            </ng-container>
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Novas Imagens ">
+      <mat-tab label="Adicionar Imagens">
         <div class="container-fluid">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size2 mx-auto mt-3 mb-3">
-                Adicione imagens para o produto: {{produto.nome}}
-              </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size2 mx-auto mt-3 mb-3">
+              Adicione imagens para o produto: {{produto.nome}}
             </div>
-            <div class="row">
-              <div class="col-md-5 mt-3 mb-3">
-                <label class="image-upload-container btn btn-bwm">
-                  <div class=row><span>Selecione as imagens</span></div>
-                  <div class=row><input #imageInput type="file" accept="image/*" multiple
-                      (change)="processFile($event)">
-                  </div>
-                </label>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 mt-3 mb-3">
+              <label class="image-upload-container btn btn-bwm">
+                <div class=row><span>Selecione as imagens</span></div>
+                <div class=row><input #imageInput type="file" accept="image/*" multiple
+                    (change)="processFile($event)">
+                </div>
+              </label>
             </div>
-            <div class="row text-center">
-              <div class="row col-lg-10 text-center">
-                <div class="row col-lg-10 text-center">
-                  <div class="col-lg-4" *ngFor="let img of novasImagems; let i=index">
-                    <div class="col-lg-12 col-sm-12">
-                      <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
-                    </div>
-                    <div class="col-lg-8">
-                    </div>
-                    <div class="col-lg-4">
-                      <button class="btn custom-btn mr-0">
-                        <img src="../../../assets/Icon material-delete.svg" (click)="deleteImage(img, i)"
-                          class="btn-icon-add" alt="add">
-                      </button>
-                    </div>
-                  </div>
+          </div>
+          <div class="row">
+            <ng-container *ngFor="let img of novasImagems; let i=index">
+              <div class="col-lg-3">
+                <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
+                <div class="row">
+                  <button class="btn custom-btn mr-0">
+                    <img src="../../../assets/Icon material-delete.svg" (click)="deleteImage(img,i)" class="btn-icon-add"
+                      alt="add">
+                  </button>
                 </div>
               </div>
-            </div>
-            <div class="row" *ngIf="novasImagems.length > 0">
-              <button class="mt-3 btn btn-success" (click)="enviar()" type="submit">Salvar novas Imagens</button>
-            </div>
+            </ng-container>
+          </div>
+          <div class="row" *ngIf="novasImagems.length > 0">
+            <button class="mt-3 btn btn-success" (click)="enviar()" type="submit">Salvar novas Imagens</button>
           </div>
         </div>
       </mat-tab>
