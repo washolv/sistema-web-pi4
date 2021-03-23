@@ -42,7 +42,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
 
   ],
-  bootstrap: [AppComponent,NgbRating
+  bootstrap: [AppComponent
   ]
 })
 export class AppModule { }

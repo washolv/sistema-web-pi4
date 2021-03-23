@@ -17,6 +17,12 @@ export class ProdutoService {
 
   public getProdutos(): Observable<HttpResponse<Produto[]>> {
     const httpOptions = {
+      headers: new HttpHeaders({habilitado: 'false'}),
+  };
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`, { observe: 'response', ...httpOptions });
+  }
+  public getProdutosHabilitados(): Observable<HttpResponse<Produto[]>> {
+    const httpOptions = {
       headers: new HttpHeaders({habilitado: 'true'}),
   };
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`, { observe: 'response', ...httpOptions });

@@ -47,7 +47,7 @@ export class VitrineComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.produtoService.getProdutos().subscribe((response: HttpResponse<Produto[]>) => {
+    this.produtoService.getProdutosHabilitados().subscribe((response: HttpResponse<Produto[]>) => {
       this.produtos = <Produto[]>response.body,
         this.produtos.forEach(produto => {
           produto.imageToShow = [];

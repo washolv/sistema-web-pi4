@@ -46,7 +46,7 @@ export class ProdutoComponent implements OnInit {
         p.status = 0;
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
-
+          console.log(response);
       });
   }
   ngOnInit() {

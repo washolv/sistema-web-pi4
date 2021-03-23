@@ -17,7 +17,7 @@
             <ngb-rating [(rate)]="produto.qtdEstrelas!" [readonly]=true maxlength=5></ngb-rating>
           </p>
             <hr>
-          <p class="card-text custom-price">{{produto.preco | currency:'BRL':'symbol':'0.0-2':'pt'}}</p>
+          <p class="card-text custom-price">{{produto.preco| currency:'BRL':'symbol':'0.2-2'}}</p>
           <p class="text-center"><a class="btn btn-info" (click)="Detalhes(produto.id!)">Mais informações</a></p>
         </div>
       </div>
