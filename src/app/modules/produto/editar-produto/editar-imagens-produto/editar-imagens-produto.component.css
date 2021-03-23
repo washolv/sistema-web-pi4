@@ -6,7 +6,7 @@
   font-weight: bold;
 }
 .custom-text-size2{
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
 }
 .myButton{
@@ -23,9 +23,24 @@
   height: 100%; /*this must stay */
 }
 
-.img-fluid{
-  border-radius: 10px;
+.card-img-top {
+  object-fit: cover;
+  margin-right: auto;
 }
+.img-fluid{
+  border: solid 1px;
+  border-radius: 10px;
+  height: 15vw;
+ }
+
+@media screen and (max-width:768px) {
+  .img-fluid{
+    border: solid 1px;
+    border-radius: 10px;
+    height: auto;
+   }
+  }
+
 .custom-btn{
   margin-right: 0px;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from 'src/app/modules/shared/modal-alerta/alert.service';
+import {  ToastrService } from 'ngx-toastr';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../models/Produto';
 
@@ -15,10 +15,11 @@ export class EditarImagensProdutoComponent implements OnInit {
   public imagens: any;
   public produto: Produto = new Produto;
   public files: any = new Array();
-  public novasImagems:  any = new Array();
-  public imagensUpload: FormData=new FormData;
+  public fileList: any = new Array();
+  public novasImagems: any = new Array();
+  public imagensUpload: FormData = new FormData;
   id: number = 0;
-  constructor(private modalService: AlertService, private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
+  constructor(private toastr: ToastrService, private sanitizer: DomSanitizer, private route: ActivatedRoute, private produtoService: ProdutoService, private router: Router) {
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
@@ -31,7 +32,7 @@ export class EditarImagensProdutoComponent implements OnInit {
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
     })
-
+    console.log(this.imageToShow);
   }
 
   ngOnInit() {
@@ -42,10 +43,11 @@ export class EditarImagensProdutoComponent implements OnInit {
       this.imagensUpload.append('file', file);
     }
     this.produtoService.postFotoProduto(this.imagensUpload, this.produto.id!).subscribe(response => {
-      console.log(response);
-      this.modalService.showAlertSucess('Imagens adicionadas!');
+      this.toastr.success("Imagens adicionadas com sucesso", "Ok",{
+        timeOut: 3000, positionClass: 'toast-top-center',
+        });
     })
-    this.novasImagems.length=null;
+    this.novasImagems.length = null;
   }
   processFile(event: any) {
     this.files = event.target.files;
@@ -54,25 +56,24 @@ export class EditarImagensProdutoComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = event => {
         this.novasImagems.push(reader.result)
-        this.imageToShow.push(reader.result)
       }
     }
   }
-  deleteImage(url: any): void {
-    let fileList: any = new Array();
-    for (const img of this.novasImagems) {
-      if (img != url) {
-        fileList.push(img);
+  deleteImage(url: any, i: number): void {
+    this.novasImagems = this.novasImagems.filter((a: any) => a !== url);
+    for (const file of this.files) {
+      if (this.files[i] != file) {
+        this.fileList.push(file);
       }
     }
-    this.novasImagems = fileList;
+    this.files = this.fileList;
+    this.fileList = null;
   }
-  deleteImageBanco(url: any, i: number): void {
+  deleteImageBanco(i: number): void {
     let img = this.imagens[i];
-    this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
-      window.location.reload();
-    }
-    );
+      this.produtoService.deleteImagensProduto(img.id!).subscribe(response => {
+        window.location.reload();
+      });
   }
   backProdutos() {
     this.router.navigate(['produtos/editar', this.produto.id]);

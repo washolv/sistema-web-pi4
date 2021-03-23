@@ -18,6 +18,7 @@ import { AuthGuard } from 'src/app/services/auth.guard';
 import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSelectModule,
     NgbModule,
+    MatTabsModule
   ],
   declarations: [
     ProdutoComponent,
