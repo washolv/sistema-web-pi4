@@ -15,6 +15,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   imports: [
@@ -23,7 +26,11 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     FormsModule,
     MatProgressSpinnerModule,
     NgbModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxPaginationModule,
+    MDBBootstrapModule.forRoot(),
+    MDBBootstrapModule,
+    CurrencyMaskModule,
   ],
   providers: [NgbRatingConfig,
     { provide:  DEFAULT_CURRENCY_CODE,

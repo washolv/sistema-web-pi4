@@ -42,6 +42,7 @@
   height: 35px;
   color: #444444;
 }
+
 .custom-lbl-filter {
   width: auto;
   height: 35px;
@@ -57,5 +58,15 @@ ngb-rating {
   font-weight: bold;
   font-size: 18px;
 }
-
+.banner-home{
+  width: 100%;
+  position: relative;
+  margin:0;
+  padding: 0;
+}
+.custom-cart{
+ width: 25px;
+ position: absolute;
+ margin: auto;
+}
 

@@ -15,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModulesPro, MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
@@ -38,6 +38,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
+    MDBBootstrapModulesPro.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),

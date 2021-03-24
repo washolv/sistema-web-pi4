@@ -30,6 +30,7 @@
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "jquery.js": "0.0.2-security",
+    "ng-uikit-pro-standard": "^1.0.0",
     "ng2-currency-mask": "^9.0.2",
     "ngx-bootstrap": "^6.2.0",
     "ngx-pagination": "^5.0.0",
