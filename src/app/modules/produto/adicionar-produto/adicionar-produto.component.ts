@@ -30,6 +30,7 @@ export class AdicionarProdutoComponent implements OnInit {
       { id: 1, name: 'Cama' },
       { id: 2, name: 'Mesa' },
       { id: 3, name: 'Banho' },
+      { id: 4, name: 'Decoração'}
   ];
 
   }
@@ -39,8 +40,7 @@ export class AdicionarProdutoComponent implements OnInit {
 
   public addProduto() {
     this.formProduto.value.qtdEstrelas=this.currentRate;
-    if (this.formProduto.value) {
-      console.log(this.formProduto.value)
+    if (this.formProduto.value.status) {
       this.formProduto.value.status = 1;
     } else {
       this.formProduto.value.status = 0;

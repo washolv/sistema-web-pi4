@@ -26,7 +26,7 @@ export class EditarProdutoComponent implements OnInit {
   public formProduto: FormGroup;
   public id: number = 0;
   public idImagem: any;
-  public currentRate: number=0;
+  public currentRate: number = 0;
   public categoria: any;
   mageProduto: any;
   imageToShow: SafeResourceUrl[] = [];
@@ -42,10 +42,10 @@ export class EditarProdutoComponent implements OnInit {
     });
     this.produtoService.getProdutoById(this.id).subscribe(response => {
       this.produto = response
-      this.currentRate= <number> this.produto.qtdEstrelas;
+      this.currentRate = <number>this.produto.qtdEstrelas;
       this.formProduto = this.createForm(this.produto);
     })
-    this.produtoService.getImagensProduto(this.id)  .subscribe(response => {
+    this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
       response.forEach(element =>
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
@@ -55,7 +55,8 @@ export class EditarProdutoComponent implements OnInit {
       { id: 1, name: 'Cama' },
       { id: 2, name: 'Mesa' },
       { id: 3, name: 'Banho' },
-  ];
+      { id: 4, name: 'Decoração'}
+    ];
 
   }
 
@@ -114,7 +115,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   public editarProduto(p: Produto) {
-    p.qtdEstrelas=this.currentRate;
+    p.qtdEstrelas = this.currentRate;
     console.log(this.formProduto.value)
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {
@@ -124,16 +125,16 @@ export class EditarProdutoComponent implements OnInit {
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
         if (response) {
-          this.toastr.success("Produto alterado com sucesso", "Ok",{
+          this.toastr.success("Produto alterado com sucesso", "Ok", {
             timeOut: 3000, positionClass: 'toast-top-center',
-            });
+          });
         }
       },
-      err => {
-        this.toastr.error("Error ao alterar produto", "Falha" ,{
-        timeOut: 3000, positionClass: 'toast-top-center',
+        err => {
+          this.toastr.error("Error ao alterar produto", "Falha", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
         });
-      });
     }
   }
 
