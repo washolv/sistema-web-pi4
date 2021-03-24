@@ -28,10 +28,13 @@
     "angular-bootstrap-md": "^11.0.0",
     "angular-ui-carousel": "^0.1.10",
     "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "jquery.js": "0.0.2-security",
     "ng2-currency-mask": "^9.0.2",
     "ngx-bootstrap": "^6.2.0",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.2.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

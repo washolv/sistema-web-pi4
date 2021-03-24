@@ -16,6 +16,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
     LoginModule,
     SharedModule,
     RouterModule.forChild(routes),
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
