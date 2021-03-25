@@ -59,8 +59,8 @@ export class EditarImagensProdutoComponent implements OnInit {
     this.novasImagems.length = null;
   }
   processFile(event: any) {
-    this.files = event.target.files;
-    for (let file of this.files) {
+    for (let file of event.target.files) {
+      this.files.push(file);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = event => {
