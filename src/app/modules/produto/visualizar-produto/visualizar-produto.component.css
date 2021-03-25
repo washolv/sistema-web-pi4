@@ -9,6 +9,7 @@ html{
 .custom-image{
   border-radius: 10px;
   height: auto;
+  cursor: zoom-in;
 }
 ngb-rating {
   font-size: 35px;
