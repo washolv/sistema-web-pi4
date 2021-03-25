@@ -20,7 +20,12 @@ export class Imagem{
   imagem?: File;
   id?: number;
   caminho?: string;
-  imagemPrincipal?: boolean;
+  favorita?: boolean;
+}
+
+export class AdicionarImagem{
+  imagemProduto?: any;
+  favorita?:boolean=false;
 }
 
 

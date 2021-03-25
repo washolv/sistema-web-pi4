@@ -42,7 +42,7 @@ export class EditarImagensProdutoComponent implements OnInit {
     for (const file of this.files) {
       this.imagensUpload.append('file', file);
     }
-    this.produtoService.postFotoProduto(this.imagensUpload, this.produto.id!).subscribe(response => {
+    this.produtoService.postFotoProduto(this.imagensUpload, this.produto.id!, 1).subscribe(response => {
       this.toastr.success("Imagens adicionadas com sucesso", "Ok",{
         timeOut: 3000, positionClass: 'toast-top-center',
         });

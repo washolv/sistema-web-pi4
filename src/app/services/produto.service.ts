@@ -30,8 +30,11 @@ export class ProdutoService {
   public getProdutoById(id: number): Observable<Produto> {
     return this.http.get<Produto>(`${this.apiUrl}/produtos/${id}`);
   }
-  public getProdutoByDescricao(search: string): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos/${search}`);
+  public getProdutoByDescricao(search: string, habilitado=true): Observable<Produto[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({habilitado: habilitado.toString()}),
+  };
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos/${search}`,httpOptions);
   }
   public getImagensProduto(id: number): Observable<Imagem[]> {
     return this.http.get<Imagem[]>(`${this.apiUrl}/imagens/produto/${id}`);
@@ -42,8 +45,11 @@ export class ProdutoService {
   public postProduto(produto: Produto): Observable<Produto> {
     return this.http.post<Produto>(`${this.apiUrl}/produtos`, produto);
   }
-  public postFotoProduto(imagens: FormData, id: number): Observable<FormData> {
-    return this.http.post<FormData>(`${this.urlImage}/produto/${id}`, imagens);
+  public postFotoProduto(imagens: FormData, id: number, imagemFavorita: number): Observable<FormData> {
+    const httpOptions = {
+      headers: new HttpHeaders({favorita: imagemFavorita.toString()}),
+  };
+    return this.http.post<FormData>(`${this.urlImage}/produto/${id}`, imagens,httpOptions);
   }
   public deleteProduto(id: number): Observable<Produto> {
     return this.http.delete<Produto>(`${this.apiUrl}/produtos/${id}`);

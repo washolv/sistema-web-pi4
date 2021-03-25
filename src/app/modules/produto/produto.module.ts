@@ -19,6 +19,8 @@ import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const routes: Routes = [
@@ -44,7 +46,10 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSelectModule,
     NgbModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   declarations: [
     ProdutoComponent,

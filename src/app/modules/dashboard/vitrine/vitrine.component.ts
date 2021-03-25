@@ -22,15 +22,15 @@ export class VitrineComponent implements OnInit {
   public loading = false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
-  public currentRate=1;
+  public currentRate = 1;
 
-  constructor(private config: NgbRatingConfig,private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
-    this.config.max=5;
+  constructor(private config: NgbRatingConfig, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+    this.config.max = 5;
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
       .subscribe(search => {
-        this.produtoService.getProdutoByDescricao(search)
+        this.produtoService.getProdutoByDescricao(search, false)
           .subscribe((response: Produto[]) => {
             this.produtos = response;
             this.produtos.forEach(produto => {

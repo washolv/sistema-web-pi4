@@ -18,9 +18,12 @@
  border: solid 1px;
  width: auto;
  border-radius: 10px;
- height: 15vw;
+ height: auto;
 }
 
+.custom-trash{
+  size: 80%
+}
 @media screen and (max-width:768px) {
   .img-fluid{
     border: solid 1px;
