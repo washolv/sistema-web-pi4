@@ -31,9 +31,9 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
 
   processFile(event: any) {
-    this.files = event.target.files;
 
-    for (let file of this.files) {
+    for (let file of event.target.files) {
+      this.files.push(file);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = event => {
@@ -49,6 +49,12 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     this.habilitado = index;
   }
   addProduto() {
+    if(this.files.length<1){
+      this.toastr.warning("O Produto deve conter ao menos uma Imagem", "Falha", {
+        timeOut: 2000, positionClass: 'toast-top-center',
+      });
+      return;
+    }
     if(this.files.length<1){
       this.toastr.warning("O Produto deve conter ao menos uma Imagem", "Falha", {
         timeOut: 2000, positionClass: 'toast-top-center',
