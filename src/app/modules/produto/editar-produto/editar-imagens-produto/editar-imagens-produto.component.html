@@ -26,10 +26,10 @@
                 <img [src]="img.imageToShow" class="img-fluid mb-3" style="width: 300px;">
                 <div class="row">
                   <button class="btn custom-btn mr-0">
-                    <img src="../../../assets/Icon material-delete.svg" (click)="deleteImageBanco(i)" class="btn-icon-add"
+                    <img src="../../../assets/Icon material-delete.svg" (click)="deleteImageBanco(img)" class="btn-icon-add"
                       alt="add">
                   </button>
-                    <button mat-icon-button >
+                    <button mat-icon-button (click)="toggleSelected(img)">
                       <mat-icon
                         *ngIf="img.imagemPrincipal"
                         aria-label="Example icon-button with a heart icon">

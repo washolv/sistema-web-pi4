@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AlertService } from 'src/app/modules/shared/modal-alerta/alert.service';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { AdicionarImagem, Imagem, Produto } from '../../models/Produto';
+import { AdicionarImagem, Produto } from '../../models/Produto';
 
 @Component({
   selector: 'app-adicionar-imagens-produto',
@@ -27,6 +27,7 @@ export class AdicionarImagensProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   processFile(event: any) {
@@ -43,14 +44,17 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
   }
   public toggleSelected(img: AdicionarImagem, index: number) {
-
     this.preVisualizacao[this.habilitado].favorita = false;
     img.favorita = true;
     this.habilitado = index;
-
-    console.log(this.habilitado)
   }
   addProduto() {
+    if(this.files.length<1){
+      this.toastr.warning("O Produto deve conter ao menos uma Imagem", "Falha", {
+        timeOut: 2000, positionClass: 'toast-top-center',
+      });
+      return;
+    }
     this.produtoService.postProduto(this.produto).subscribe((response: any) => {
       if (response) {
         this.produtoRetorno = response;
@@ -89,7 +93,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
       this.habilitado=this.habilitado-1;
     }
     let listaImagens = new Array()
-    let imgs = this.preVisualizacao.filter((a: any) => a !== img);
     this.preVisualizacao = this.preVisualizacao.filter((a: any) => a !== img);
     for (const file of this.files) {
       if (this.files[i] != file) {
