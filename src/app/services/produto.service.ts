@@ -19,22 +19,22 @@ export class ProdutoService {
     const httpOptions = {
       headers: new HttpHeaders({habilitado: 'false'}),
   };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`, { observe: 'response', ...httpOptions });
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
   }
   public getProdutosHabilitados(): Observable<HttpResponse<Produto[]>> {
     const httpOptions = {
       headers: new HttpHeaders({habilitado: 'true'}),
   };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos`, { observe: 'response', ...httpOptions });
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
   }
   public getProdutoById(id: number): Observable<Produto> {
-    return this.http.get<Produto>(`${this.apiUrl}/produtos/${id}`);
+    return this.http.get<Produto>(`${this.apiUrl}/produtos/find/${id}`);
   }
   public getProdutoByDescricao(search: string, habilitado=true): Observable<Produto[]> {
     const httpOptions = {
       headers: new HttpHeaders({habilitado: habilitado.toString()}),
   };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/produtos/${search}`,httpOptions);
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/${search}`,httpOptions);
   }
   public getImagensProduto(id: number): Observable<Imagem[]> {
     return this.http.get<Imagem[]>(`${this.apiUrl}/imagens/produto/${id}`);

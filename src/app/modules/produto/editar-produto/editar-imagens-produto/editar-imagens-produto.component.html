@@ -23,12 +23,24 @@
           <div class="row">
             <ng-container *ngFor="let img of imageToShow; let i=index">
               <div class="col-lg-3">
-                <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
+                <img [src]="img.imageToShow" class="img-fluid mb-3" style="width: 300px;">
                 <div class="row">
                   <button class="btn custom-btn mr-0">
                     <img src="../../../assets/Icon material-delete.svg" (click)="deleteImageBanco(i)" class="btn-icon-add"
                       alt="add">
                   </button>
+                    <button mat-icon-button >
+                      <mat-icon
+                        *ngIf="img.imagemPrincipal"
+                        aria-label="Example icon-button with a heart icon">
+                        favorite
+                      </mat-icon>
+                      <mat-icon
+                        *ngIf="!img.imagemPrincipal"
+                        aria-label="Example icon-button with a heart icon">
+                        favorite_border
+                      </mat-icon>
+                    </button>
                 </div>
               </div>
             </ng-container>

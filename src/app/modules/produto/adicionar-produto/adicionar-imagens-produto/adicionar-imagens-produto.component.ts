@@ -46,7 +46,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
 
     this.preVisualizacao[this.habilitado].favorita = false;
     img.favorita = true;
-    console.log(this.habilitado)
     this.habilitado = index;
 
     console.log(this.habilitado)
@@ -91,7 +90,6 @@ export class AdicionarImagensProdutoComponent implements OnInit {
     }
     let listaImagens = new Array()
     let imgs = this.preVisualizacao.filter((a: any) => a !== img);
-    console.log(imgs);
     this.preVisualizacao = this.preVisualizacao.filter((a: any) => a !== img);
     for (const file of this.files) {
       if (this.files[i] != file) {

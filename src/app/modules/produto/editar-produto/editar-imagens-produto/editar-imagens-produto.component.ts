@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  ToastrService } from 'ngx-toastr';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { Produto } from '../../models/Produto';
+import { Imagem, Produto } from '../../models/Produto';
 
 @Component({
   selector: 'app-editar-imagens-produto',
@@ -11,7 +11,7 @@ import { Produto } from '../../models/Produto';
   styleUrls: ['./editar-imagens-produto.component.css']
 })
 export class EditarImagensProdutoComponent implements OnInit {
-  public imageToShow: any = new Array();
+  public imageToShow: Imagem[] = new Array();
   public imagens: any;
   public produto: Produto = new Produto;
   public files: any = new Array();
@@ -28,8 +28,16 @@ export class EditarImagensProdutoComponent implements OnInit {
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
-      response.forEach(element =>
-        this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+      response.forEach(element =>{
+        const t=this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)
+        let img=new Imagem();
+        img.id=element.id;
+        img.imagem=element.imagem;
+        img.imageToShow=t;
+        img.caminho=element.caminho;
+        img.imagemPrincipal=element.imagemPrincipal;
+        this.imageToShow.push(img);
+      }
       )
     })
     console.log(this.imageToShow);

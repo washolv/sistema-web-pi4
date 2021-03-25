@@ -30,7 +30,7 @@ export class VitrineComponent implements OnInit {
       debounceTime(1000),
       distinctUntilChanged())
       .subscribe(search => {
-        this.produtoService.getProdutoByDescricao(search, false)
+        this.produtoService.getProdutoByDescricao(search, true)
           .subscribe((response: Produto[]) => {
             this.produtos = response;
             this.produtos.forEach(produto => {

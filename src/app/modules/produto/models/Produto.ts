@@ -18,9 +18,10 @@ export class Produto {
 
 export class Imagem{
   imagem?: File;
+  imageToShow?:SafeResourceUrl;
   id?: number;
   caminho?: string;
-  favorita?: boolean;
+  imagemPrincipal?: boolean;
 }
 
 export class AdicionarImagem{
