@@ -23,6 +23,7 @@ export class AdicionarProdutoComponent implements OnInit {
   public categoria:any;
   public categoriaNome: string="";
   public color: ThemePalette = 'primary';
+  public formValid: boolean=true;
   constructor(private config: NgbRatingConfig,private fb: FormBuilder, public router: Router) {
     this.formProduto = this.createForm(this.produto);
     this.config.max=5;

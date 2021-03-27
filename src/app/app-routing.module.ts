@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ClienteComponent } from './modules/cliente/cliente.component';
-import { FuncionarioComponent } from './modules/funcionario/funcionario.component';
+import { FuncionarioComponent } from './modules/funcionario/funcionario/funcionario.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
-import { ProdutoComponent } from './modules/produto/produto.component';
-import { AdicionarProdutoComponent } from './modules/produto/adicionar-produto/adicionar-produto.component';
-import { EditarProdutoComponent } from './modules/produto/editar-produto/editar-produto.component';
 import { LoginComponent } from './modules/login/login/login.component';
 import { CriarContaComponent } from './modules/login/criar-conta/criar-conta.component';
-import { AuthGuard } from './services/auth.guard';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 
 const routes: Routes = [
@@ -32,14 +26,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
   },
   {
-    path: 'clientes', component: MainNavComponent, children: [
-      { path: '', component: ClienteComponent, canActivate: [AuthGuard] }
-    ]
+    path: 'clientes', component: MainNavComponent,
+    loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule)
   },
   {
-    path: 'funcionarios', component: MainNavComponent, children: [
-      { path: '', component: FuncionarioComponent, canActivate: [AuthGuard] }
-    ]
+    path: 'funcionarios', component: MainNavComponent,
+    loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule)
   }
 ];
 
