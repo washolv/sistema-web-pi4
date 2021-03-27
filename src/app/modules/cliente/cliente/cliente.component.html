@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+        Listagem de Clientes
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="col-12 col-sm-12 col-md-12">
+
+    <!--INPUT FILTRAGEM DE clienteS-->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
+      <div class="row d-flex justify-content-center">
+        <input class="ml-0 col-lg-4 custom-input-search" type="text" placeholder="Pesquise"
+          (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
+        <label class="ml-2 custom-lbl-filter">
+          <button class="custon-btn-filter">
+          </button>
+        </label>
+      </div>
+      <!--FIM INPUT FILTRAGEM DE clienteS-->
+
+      <!--BOTAO ADICIONAR cliente-->
+      <button class="btn btn-add mb-3" type="button" (click)="adicionarcliente()">
+        <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
+      </button>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+      <table class="table custom-table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes| paginate: {id: 'listing_pagination',
+                 itemsPerPage: 10,
+                 currentPage: this.page,
+                 totalItems: totalRegistros};let i=index ">
+            <td>{{cliente.nome}}</td>
+            <td>{{cliente.cpf}}</td>
+            <td>{{cliente.status}}</td>
+            <td>
+              <mat-slide-toggle [(ngModel)]="cliente.status" (change)="habilitarCliente(cliente)" [color]="color"
+                class="align-middle"></mat-slide-toggle>
+            </td>
+            <td>
+              <button class="btn">
+                <img src="../../../assets/botao-editar.svg" (click)="editarCliente(cliente)" class="btn-icon-add"
+                  alt="add">
+              </button>
+            </td>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-lg-8  "></div>
+        <pagination-controls id="listing_pagination"  maxlength='5' previousLabel="Anterior"   nextLabel="próximo"
+          (pageChange)="page = $event">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
