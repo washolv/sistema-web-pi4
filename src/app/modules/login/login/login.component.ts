@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { AuthenticatedUser } from './models/AuthenticatedUser';
 import { User } from './models/User';
 
 @Component({
@@ -19,6 +20,8 @@ export class LoginComponent implements OnInit {
   public block = true;
   public loginForm: FormGroup;
   public floating = true;
+  public usuarioAutenticado: AuthenticatedUser = new AuthenticatedUser();
+
   constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {
     this.floating = true;
     this.loginForm = this.fb.group({
@@ -32,14 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-      console.log(this.loginForm.value)
-      this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
-        this.router.navigate(['']);
-        console.log("LOGIN EFETUADO")
-      }, HttpErrorResponse =>{
-        console.log(HttpErrorResponse)
-      });
-
+    this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
+      this.router.navigate(['']);
+      this.usuarioAutenticado = response;
+      window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
+    }, HttpErrorResponse => {
+      console.log(HttpErrorResponse)
+    });
   }
 
 }

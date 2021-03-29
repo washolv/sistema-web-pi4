@@ -21,7 +21,6 @@ const routes: Routes = [
     path: 'dashboard', component: MainNavComponent, children: [
       { path: '', component: DashboardComponent },
     ]
-
   },
   {
     path: 'produtos', component: MainNavComponent,
