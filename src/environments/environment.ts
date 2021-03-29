@@ -4,7 +4,10 @@
 
 export const environment = {
   baseAPIUrl: 'http://localhost:8080',
-  production: false
+  production: false,
+  clientId:'my-angular-app',
+  clientSecret:'@321',
+  obterTokenUrl: '/oauth/token'
 };
 
 /*

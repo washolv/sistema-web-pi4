@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { promises } from 'node:dns';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../modules/login/login/models/User';
 
@@ -8,35 +10,32 @@ import { User } from '../modules/login/login/models/User';
   providedIn: 'root'
 })
 export class LoginService {
+  private currentUserSubject!: BehaviorSubject<User>;
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
   apiUrl = environment.baseAPIUrl;
+  clienteId = environment.clientId;
+  clienteSecret= environment.clientSecret;
+  tokenUrl= this.apiUrl+environment.obterTokenUrl;
 
- /* public login(user: User){
-    this.http.post<User>(`${this.apiUrl}/cliente/${user.email}`, user).subscribe(response =>{
-      const result=response;
-      if(result){
-        window.localStorage.setItem('currentUser', JSON.stringify(result))
-        return true;
-      }
-      return false;
-    });
-  }*/
-
-  public login(user: User) {
-    return new Promise((resolve) => {
-      window.localStorage.setItem('currentUser', 'teste')
-      resolve(true);
-      return true;
-    })
+  public login(username: string, password: string): Observable<any>{
+    const  httpParams=new HttpParams()
+                          .set('username', username)
+                          .set('password', password)
+                          .set('grant_type', 'password');
+    const headers={
+      'Authorization':'Basic ' + btoa(`${this.clienteId}:${this.clienteSecret}`),
+      'Content-Type':'application/x-www-form-urlencoded'
+    }
+    return this.http.post(this.tokenUrl, httpParams.toString(), {headers});
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-}
-  public criarConta(user: any){
-    return new Promise((resolve) =>{
-        resolve(true);
+    localStorage.removeItem('access_token');
+  }
+  public criarConta(user: any) {
+    return new Promise((resolve) => {
+      resolve(true);
     })
   }
 }

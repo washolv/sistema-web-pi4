@@ -6,6 +6,7 @@ import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { LoginComponent } from './modules/login/login/login.component';
 import { CriarContaComponent } from './modules/login/criar-conta/criar-conta.component';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -20,10 +21,12 @@ const routes: Routes = [
     path: 'dashboard', component: MainNavComponent, children: [
       { path: '', component: DashboardComponent },
     ]
+
   },
   {
     path: 'produtos', component: MainNavComponent,
-    loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
+    loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'clientes', component: MainNavComponent,
