@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { ProdutoComponent } from './produto.component';
+import { ProdutoComponent } from './produto/produto.component';
 import { ModalExcluirProdutoComponent } from './modals/modal-excluir-produto/modal-excluir-produto.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
