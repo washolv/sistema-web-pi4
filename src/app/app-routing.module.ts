@@ -29,11 +29,19 @@ const routes: Routes = [
   },
   {
     path: 'clientes', component: MainNavComponent,
-    loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule)
+    loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule),
+    canActivate:[AuthGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    }
   },
   {
     path: 'funcionarios', component: MainNavComponent,
-    loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule)
+    loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule),
+    canActivate:[AuthGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    }
   }
 ];
 
