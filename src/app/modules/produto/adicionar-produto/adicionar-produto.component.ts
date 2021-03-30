@@ -62,21 +62,21 @@ export class AdicionarProdutoComponent implements OnInit {
   public createForm(produto: Produto): FormGroup {
     return this.fb.group({
       qtdEstrelas: new FormControl(produto.qtdEstrelas),
-      nome: new FormControl(produto.nome, Validators.compose([
+      nome: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(280),
       ])),
-      descricao: new FormControl(produto.descricao,
+      descricao: new FormControl('',
         Validators.compose([
           Validators.required,
             Validators.minLength(3),
           Validators.maxLength(1000)
         ])),
-      quantidadeEstoque: new FormControl(produto.quantidadeEstoque, Validators.compose([
+      quantidadeEstoque: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      preco: new FormControl(produto.preco, Validators.compose([
+      preco: new FormControl('', Validators.compose([
         Validators.required,
       ])),
       categoria: new FormControl('',

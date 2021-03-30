@@ -1,3 +1,77 @@
-<p>
-  adicionar-funcionario works!
-</p>
+<div class="container-fluid">
+  <div class="col-12">
+    <div class="row">
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+        Novo Funcionário
+      </div>
+    </div>
+    <hr>
+    <button class="mt-3 mb-4 btn btn-warning" type="submit" (click)="backPage()">Produtos</button>
+    <form [formGroup]="formFuncionario">
+      <div class="form-row mt-4">
+        <div class="col-lg-3 col-sm-12 mb-12">
+          <label for="validationDefault01">Nome</label>
+          <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
+          <ng-container *ngIf="f.nome.errors">
+            <p class="custom-invalid" *ngIf="f.nome.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
+        </ng-container>
+        </div>
+        <div class="col-lg-3 col-sm-12 mb-12">
+          <label for="validationDefault02">CPF</label>
+          <input type="text" class="form-control" name="cpf" placeholder="000.000.000-00" formControlName="cpf"
+            required>
+            <ng-container *ngIf="f.cpf.errors">
+              <p class="custom-invalid" *ngIf="f.cpf.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <div class="col-lg-3 col-sm-12">
+          <label class="custom-lbl" for="validationDefaultUsername">Cargo</label>
+          <div class="input-group">
+            <input type="text" class="form-control" pattern="[0-9]*" name="Cargo" placeholder="Cargo" c
+              aria-describedby="inputGroupPrepend2" formControlName="cargo" required>
+          </div>
+          <ng-container *ngIf="f.preco.errors">
+            <p class="custom-invalid" *ngIf="f.preco.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
+        </ng-container>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <label class="custom-lbl" for="validationDefaultUsername">Data de Nascimento</label>
+          <div class="input-group">
+            <input type="date" class="form-control" name="dataNascimento" pattern="[0-9]*"
+            placeholder="Qtd. em estoque" formControlName="dataNascimento" required>
+          </div>
+          <ng-container *ngIf="f.quantidadeEstoque.errors">
+            <p class="custom-invalid" *ngIf="(f.quantidadeEstoque.errors.required) && !formValid" style="color:red">* Campo obrigatório</p>
+        </ng-container>
+        </div>
+        <div class="mt-4 col-lg-3 col-sm-12 ">
+          <div class="input-group">
+            <mat-slide-toggle formControlName="status" [color]="color" class="align-middle">Habilitar Produto
+            </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-2 col-md-5 col-sm-12 mt-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Cargo</mat-label>
+            <mat-select formControlName="cargo">
+              <mat-option *ngFor="let item of cargos" [value]="item.nome">
+                {{item.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <ng-container *ngIf="f.cargo.errors">
+            <p class="custom-invalid" *ngIf="f.cargo.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
+        </ng-container>
+        </div>
+      </div>
+      <hr>
+    </form>
+    <button class="mt-3 btn btn-dark" (click)="addFuncionario()" type="submit">Finalizar Cadastro</button>
+  </div>
+</div>

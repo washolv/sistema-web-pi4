@@ -4,4 +4,8 @@ export class Funcionario {
   cpf?: string;
   cargo?: string;
   status?: number;
+  dataNascimento?: Date;
+  rua?:Date;
+  cep?: string;
+  numero?:string;
 }

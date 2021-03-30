@@ -36,7 +36,7 @@ export class FuncionarioComponent implements OnInit {
     this.router.navigate(['/funcionarios/editar', f.id]);
   }
   public adicionarFuncionario(){
-    this.router.navigate(['/clientes/adicionar']);
+    this.router.navigate(['/funcionarios/adicionar']);
   }
 
 }
