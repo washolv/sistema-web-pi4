@@ -12,10 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: '', component: AuthenticationComponent,
-    children: [
-      { path: '', component: LoginComponent },
-      { path: 'cadastro', component: CriarContaComponent },
-    ]
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
   },
   {
     path: 'dashboard', component: MainNavComponent, children: [
@@ -33,7 +30,7 @@ const routes: Routes = [
   {
     path: 'clientes', component: MainNavComponent,
     loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule),
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
@@ -41,7 +38,7 @@ const routes: Routes = [
   {
     path: 'funcionarios', component: MainNavComponent,
     loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule),
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }

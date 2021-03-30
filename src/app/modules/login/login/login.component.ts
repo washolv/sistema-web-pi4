@@ -19,37 +19,47 @@ export class LoginComponent implements OnInit {
   public usuario: User = new User;
   public outline = 'true';
   public rounded = 'true';
-  public username: string = '';
-  public password: string = '';
   public block = true;
   public loginForm: FormGroup;
+  public formValid=true;
   public floating = true;
   public usuarioAutenticado: AuthenticatedUser = new AuthenticatedUser();
 
   constructor(private toastr: ToastrService, private fb: FormBuilder, private router: Router, private loginService: LoginService, private roleGuardService: RoleGuardService) {
     this.floating = true;
     this.loginForm = this.fb.group({
-      password: new FormControl(this.password),
-      username: new FormControl(this.username),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+      ])),
+      username: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])),
     });
   }
+  get f() { return this.loginForm.controls; }
 
   ngOnInit() {
 
   }
 
   onSubmit() {
-    this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
-      if(response){
-        this.router.navigate(['']);
-        this.usuarioAutenticado = response;
-        window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
-      }
-    }, HttpErrorResponse => {
-      this.toastr.error("Usuário ou senha inválida", "Erro", {
-        timeOut: 3000, positionClass: 'toast-top-center',
+    if(this.loginForm.valid){
+      this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
+        if(response){
+          this.router.navigate(['']);
+          this.usuarioAutenticado = response;
+          window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
+        }
+      }, HttpErrorResponse => {
+        this.toastr.error("Usuário ou senha inválida", "Erro", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
       });
-    });
+    }else{
+      this.formValid=false;
+    }
   }
 
 }
