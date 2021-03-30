@@ -4,4 +4,5 @@ export class AuthenticatedUser {
   jti?: string;
   scope?: string;
   token_type?:string;
+  roles?: string[];
 }

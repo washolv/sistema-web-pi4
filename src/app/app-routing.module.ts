@@ -25,7 +25,10 @@ const routes: Routes = [
   {
     path: 'produtos', component: MainNavComponent,
     loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    }
   },
   {
     path: 'clientes', component: MainNavComponent,

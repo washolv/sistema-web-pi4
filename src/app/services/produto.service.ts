@@ -61,8 +61,7 @@ export class ProdutoService {
     return this.http.delete<Produto>(`${this.apiUrl}/produtos/${id}`);
   }
   public editarProduto(produto: Produto): Observable<Produto> {
-    const t = this.http.put<Produto>(`${this.apiUrl}/produtos`, produto);
-    return t;
+    return this.http.put<Produto>(`${this.apiUrl}/produtos`, produto);
   }
   public uploadImage(imagens: FormData): Observable<Object> {
     return this.http.post(`${this.urlImage}`, imagens);

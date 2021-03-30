@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: 'visualizar/:id', component: VisualizarProdutoComponent },
   { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent },
   { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent }
-
 ];
 @NgModule({
   imports: [

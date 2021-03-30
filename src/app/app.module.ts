@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MDBBootstrapModulesPro, MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { JwtInterceptor } from './modules/shared/helpers/JwtInterceptor';
+import { ErrorInterceptor } from './modules/shared/helpers/error.interceptor';
 
 
 const routes: Routes = [
@@ -44,6 +46,10 @@ const routes: Routes = [
     ModalModule.forRoot(),
     MatProgressSpinnerModule,
 
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
