@@ -1,2 +1,6 @@
-
-<app-vitrine></app-vitrine>
+<ng-container *ngIf="userRole==='ROLE_ADMIN' || userRole==='ROLE_ESTOQUISTA'">
+  <app-dashboard-funcionario></app-dashboard-funcionario>
+</ng-container>
+<ng-container *ngIf="userRole!=='ROLE_ADMIN' && userRole!=='ROLE_ESTOQUISTA'">
+  <app-vitrine></app-vitrine>
+</ng-container>

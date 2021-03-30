@@ -9,9 +9,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item"><a class="nav-link" routerLink="/produtos">Produtos</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/clientes">Clientes</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/funcionarios">Funcionarios</a></li>
+        <ng-container *ngIf="userRole==='ROLE_ADMIN' || userRole==='ROLE_ESTOQUISTA'">
+          <li class="nav-item"><a class="nav-link" routerLink="/produtos">Produtos</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/clientes">Clientes</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/funcionarios">Funcionarios</a></li>
+        </ng-container>
       </ul>
     </div>
 </nav>

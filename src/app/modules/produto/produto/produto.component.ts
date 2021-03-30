@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { ModalExcluirProdutoComponent } from '../modals/modal-excluir-produto/modal-excluir-produto.component';
@@ -50,6 +50,7 @@ export class ProdutoComponent implements OnInit {
       });
   }
   ngOnInit() {
+    console.log('****************')
     this.produtoService.getProdutos()
       .subscribe((response: HttpResponse<Produto[]>) => {
         this.produtos = <Produto[]> response.body;

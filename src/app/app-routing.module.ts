@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule),
     canActivate: [AuthGuard],
     data: {
-      expectedRole: 'ROLE_ADMIN'
+      expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
   },
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule),
     canActivate:[AuthGuard],
     data: {
-      expectedRole: 'ROLE_ADMIN'
+      expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
   },
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule),
     canActivate:[AuthGuard],
     data: {
-      expectedRole: 'ROLE_ADMIN'
+      expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
   }
 ];

@@ -18,6 +18,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { DashboardFuncionarioComponent } from './dashboard-funcionario/dashboard-funcionario.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     { provide:  DEFAULT_CURRENCY_CODE,
       useValue: 'BRL'}
   ],
-  declarations: [DashboardComponent, VitrineComponent],
+  declarations: [DashboardComponent, VitrineComponent, DashboardFuncionarioComponent],
   exports: [
     DashboardComponent,
     VitrineComponent
