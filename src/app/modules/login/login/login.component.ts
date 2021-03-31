@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         if(response){
           this.router.navigate(['']);
           this.usuarioAutenticado = response;
+          console.log(response)
           window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
         }
       }, HttpErrorResponse => {

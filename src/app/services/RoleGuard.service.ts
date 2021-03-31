@@ -25,6 +25,7 @@ export class RoleGuardService {
   public getUserRole(){
     let userRole;
     const user = <TokenDecoded>this.decodeJWT();
+    console.log(user);
     if(user){
       userRole = user.authorities![0];
     }else{
