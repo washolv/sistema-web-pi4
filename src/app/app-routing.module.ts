@@ -7,6 +7,7 @@ import { LoginComponent } from './modules/login/login/login.component';
 import { CriarContaComponent } from './modules/login/criar-conta/criar-conta.component';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 import { AuthGuard } from './services/auth.guard';
+import { AdminGuard } from './services/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -30,10 +31,7 @@ const routes: Routes = [
   {
     path: 'clientes', component: MainNavComponent,
     loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule),
-    canActivate: [AuthGuard],
-    data: {
-      expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
-    }
+    canActivate: [AdminGuard],
   },
   {
     path: 'funcionarios', component: MainNavComponent,

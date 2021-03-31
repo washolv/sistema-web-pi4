@@ -17,19 +17,20 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthGuard } from 'src/app/services/auth.guard';
 import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminGuard } from 'src/app/services/admin.guard';
 
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
   { path: 'editar/:id', component: EditarProdutoComponent },
-  { path: 'adicionar', component: AdicionarProdutoComponent },
+  { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AdminGuard],},
   { path: 'visualizar/:id', component: VisualizarProdutoComponent },
-  { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent },
-  { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent }
+  { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent, canActivate: [AdminGuard]},
+  { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent, canActivate: [AdminGuard]}
 ];
 @NgModule({
   imports: [

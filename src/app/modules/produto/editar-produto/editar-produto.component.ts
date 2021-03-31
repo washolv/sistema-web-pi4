@@ -14,6 +14,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalAlertaComponent } from '../../shared/modal-alerta/modal-alerta.component';
 import { AlertService } from '../../shared/modal-alerta/alert.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
 @Component({
   selector: 'app-editar-produto',
@@ -32,18 +33,19 @@ export class EditarProdutoComponent implements OnInit {
   imageToShow: SafeResourceUrl[] = [];
   imagens: Imagem[] = [];
   bsModalRef: BsModalRef = new BsModalRef;
-
-  constructor(private config: NgbRatingConfig, private toastr: ToastrService, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  public userRole;
+  constructor(private roleGuardService: RoleGuardService, private config: NgbRatingConfig, private toastr: ToastrService, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.config.max = 5;
-    this.formProduto = this.createForm(this.produto);
+    this.userRole=this.roleGuardService.getUserRole();
+    this.formProduto = this.testeForm(this.produto);
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
     this.produtoService.getProdutoById(this.id).subscribe(response => {
       this.produto = response
       this.currentRate = <number>this.produto.qtdEstrelas;
-      this.formProduto = this.createForm(this.produto);
+      this.formProduto = this.testeForm(this.produto);
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
@@ -89,29 +91,36 @@ export class EditarProdutoComponent implements OnInit {
     var file = new File([blob], dataURI.fileName);
 
   }
-  public createForm(produto: Produto): FormGroup {
+  public testeForm(produto: Produto): FormGroup{
+      if(this.userRole=="ROLE_ADMIN"){
+        return this.createForm(produto, false);
+      }else{
+        return this.createForm(produto, true);
+      }
+  }
+  public createForm(produto: Produto, isAdmin: boolean=false): FormGroup {
     return this.fb.group({
       id: new FormControl(produto.id),
-      nome: new FormControl(produto.nome, Validators.compose([
+      nome: new FormControl({value: produto.nome, disabled: isAdmin}, Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(280)
       ])),
-      descricao: new FormControl(produto.descricao,
+      descricao: new FormControl({value: produto.descricao, disabled: isAdmin},
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(1000)
         ])),
-      quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
-      preco: new FormControl(produto.preco, Validators.compose([
+      quantidadeEstoque: new FormControl({value: produto.quantidadeEstoque, disabled: false}),
+      preco: new FormControl({value: produto.preco, disabled: isAdmin}, Validators.compose([
         Validators.required,
       ])),
-      categoria: new FormControl(produto.categoria,
+      categoria: new FormControl({value: produto.categoria, disabled: isAdmin},
         Validators.compose([
           Validators.required,
         ])),
-      status: new FormControl(produto.status),
+      status: new FormControl({value: produto.status, disabled: isAdmin}),
     });
   }
 

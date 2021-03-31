@@ -13,12 +13,7 @@ export class MainNavComponent implements OnInit {
   public userRole;
 
   constructor(private router: Router, private roleGuardService: RoleGuardService) {
-    const user = <TokenDecoded>this.roleGuardService.decodeJWT();
-    if(user){
-      this.userRole = user.authorities![0];
-    }else{
-      this.userRole = '';
-    }
+    this.userRole=roleGuardService.getUserRole();
   }
 
   ngOnInit() {

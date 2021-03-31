@@ -82,7 +82,7 @@
               </mdb-carousel-item>
             </ng-container>
           </mdb-carousel>
-          <button (click)="editarImagens()" class="  btn mt-2 btn-dark">Editar Imagens</button>
+          <button (click)="editarImagens()" [disabled]="userRole!='ROLE_ADMIN'"   class="  btn mt-2 btn-dark">Editar Imagens</button>
         </div>
       </div>
     </div>
