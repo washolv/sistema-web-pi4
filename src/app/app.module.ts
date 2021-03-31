@@ -19,6 +19,8 @@ import { MDBBootstrapModulesPro, MDBSpinningPreloader } from 'ng-uikit-pro-stand
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { JwtInterceptor } from './modules/shared/helpers/JwtInterceptor';
 import { ErrorInterceptor } from './modules/shared/helpers/error.interceptor';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 const routes: Routes = [
@@ -45,7 +47,7 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     MatProgressSpinnerModule,
-
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -3,9 +3,14 @@ export class Funcionario {
   nome?: string;
   cpf?: string;
   cargo?: string;
-  status?: number;
+  status?: boolean;
   dataNascimento?: Date;
-  rua?:Date;
+  endereco?:Endereco;
+  telefone?: string;
+}
+export class Endereco {
   cep?: string;
-  numero?:string;
+  logradouro?:string;
+  cidade?:string;
+  uf?:string;
 }

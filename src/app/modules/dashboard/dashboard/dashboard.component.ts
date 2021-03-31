@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
-import { TokenDecoded } from '../login/login/models/TokenDecoded';
+import { TokenDecoded } from '../../login/login/models/TokenDecoded';
 
 @Component({
   selector: 'app-dashboard',
