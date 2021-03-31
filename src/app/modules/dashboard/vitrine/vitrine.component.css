@@ -70,3 +70,6 @@ ngb-rating {
  margin: auto;
 }
 
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
