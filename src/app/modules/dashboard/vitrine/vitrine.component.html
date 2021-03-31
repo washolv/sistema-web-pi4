@@ -1,37 +1,37 @@
 <ul class="nav nav-tabs nav-fill justify-content-center navbar-expand-lg navbar-light bg-light">
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown" >
     <a class="nav-link dropdown-toggle" href="#" id="navbarCama" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Cama
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarCama">
-      <a class="dropdown-item" href="#">Jogo de Cama/Jogo de Lençol</a>
-      <a class="dropdown-item" href="#">Edredom</a>
-      <a class="dropdown-item" href="#">Colcha</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo de Cama')">Jogo de Cama/Jogo de Lençol</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Edredom')">Edredom</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Colcha')">Colcha</a>
     </div>
   </li>
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown" >
     <a class="nav-link dropdown-toggle" href="#" id="navbarMesa" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Mesa
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarMesa">
-      <a class="dropdown-item" href="#">Toalha de Mesa</a>
-      <a class="dropdown-item" href="#">Guardanapo</a>
-      <a class="dropdown-item" href="#">Jogo Americano</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Mesa')">Toalha de Mesa</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Guardanapo')">Guardanapo</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo Americano')">Jogo Americano</a>
     </div>
   </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarBanho" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
+  <li class="nav-item dropdown" >
+    <a class="nav-link dropdown-toggle" id="navbarBanho" role="button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
       Banho
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarBanho">
-      <a class="dropdown-item" href="#">Toalha de Banho</a>
-      <a class="dropdown-item" href="#">Toalha de Rosto</a>
-      <a class="dropdown-item" href="#">Toalha Banhão</a>
-      <a class="dropdown-item" href="#">Jogo de Banho</a>
-      <a class="dropdown-item" href="#">Roupão</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Banho')">Toalha de Banho</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Rosto')">Toalha de Rosto</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha Banhão')">Toalha Banhão</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo de Banho')">Jogo de Banho</a>
+      <a class="dropdown-item" (click)="filtrarPorSubCategoria('Roupão')">Roupão</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -52,35 +52,37 @@
       <a class="dropdown-item" href="#">Promoção 1</a>
     </div>
   </li>
+
+
 </ul>
 
-  <div class="row banner-home mt-5">
-    <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-      <mdb-carousel-item>
-        <div class="view w-100">
-          <img class="d-block w-100 custom-image"
-            src="../../../../assets/banners/banner1_frete_especial_desktop_1920x480px.jpg" alt="First slide">
-          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-        </div>
-      </mdb-carousel-item>
-      <mdb-carousel-item>
-        <div class="view w-100">
-          <img class="d-block w-100 custom-image"
-            src="../../../../assets/banners/banner_principal_campanha_mega_bazar_1920x480px.gif" alt="Second slide">
-          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-        </div>
-      </mdb-carousel-item>
-      <mdb-carousel-item>
-        <div class="view w-100">
-          <img class="d-block w-100 custom-image"
-            src="../../../../assets/banners/banner_principal_produto_mega_bazar_3_desktop_1920x480px_3.jpg"
-            alt="Thirst slide">
-          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-        </div>
-      </mdb-carousel-item>
-    </mdb-carousel>
-  </div>
-  <div class="row banner-home" style="background-color: black;">a</div>
+<div class="row banner-home mt-5">
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100 custom-image"
+          src="../../../../assets/banners/banner1_frete_especial_desktop_1920x480px.jpg" alt="First slide">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100 custom-image"
+          src="../../../../assets/banners/banner_principal_campanha_mega_bazar_1920x480px.gif" alt="Second slide">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100 custom-image"
+          src="../../../../assets/banners/banner_principal_produto_mega_bazar_3_desktop_1920x480px_3.jpg"
+          alt="Thirst slide">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
+</div>
+<div class="row banner-home" style="background-color: black;">a</div>
 
 <div class="container-fluid mt-5">
   <div class="row d-flex justify-content-center mt-3 mb-5">
