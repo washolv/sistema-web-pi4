@@ -23,9 +23,15 @@ export class ProdutoService {
   }
   public getProdutosHabilitados(): Observable<HttpResponse<Produto[]>> {
     const httpOptions = {
-      headers: new HttpHeaders({ habilitado: 'true' }),
+      headers: new HttpHeaders({ habilitado: 'true'}),
     };
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
+  }
+  public getProdutosHabilitadosPorCategoria(categoria: string): Observable<HttpResponse<Produto[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({ habilitado: 'true', categoria: categoria  }),
+    };
+    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/categoria`, { observe: 'response', ...httpOptions });
   }
   public getProdutoById(id: number): Observable<Produto> {
     return this.http.get<Produto>(`${this.apiUrl}/produtos/find/${id}`);
