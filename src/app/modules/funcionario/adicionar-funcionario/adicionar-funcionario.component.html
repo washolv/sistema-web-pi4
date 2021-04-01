@@ -31,7 +31,7 @@
       <div class="form-row mt-2">
         <div class="col-lg-3 col-sm-12">
           <label for="example-date-input">* Data de Nascimento</label>
-            <input class="form-control" formControlName="dataNascimento" type="date" [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento.errors }">
+            <input class="form-control" formControlName="dataNascimento" type="date" [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento  .errors }">
           <div *ngIf="!formValid && f.dataNascimento.errors" class="invalid-feedback">
             <div *ngIf="f.dataNascimento.errors.required">* Campo obrigatório</div>
           </div>
