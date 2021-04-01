@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { TokenDecoded } from '../../login/login/models/TokenDecoded';
 
@@ -12,7 +13,7 @@ import { TokenDecoded } from '../../login/login/models/TokenDecoded';
 export class MainNavComponent implements OnInit {
   public userRole;
 
-  constructor(private router: Router, private roleGuardService: RoleGuardService) {
+  constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
     this.userRole=roleGuardService.getUserRole();
   }
 
@@ -20,6 +21,10 @@ export class MainNavComponent implements OnInit {
   }
   dashboard() {
     this.router.navigate([``]);
+  }
+  public logout(){
+    this.loginService.logout();
+
   }
 
 }

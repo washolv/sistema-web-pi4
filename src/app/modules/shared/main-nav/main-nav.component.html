@@ -22,12 +22,17 @@
           Minha Conta
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Configurações</a>
-          <a class="dropdown-item" href="#">Sair</a>
+          <ng-container *ngIf="userRole">
+            <a class="dropdown-item" href="#">Configurações</a>
+            <a class="dropdown-item" (click)="logout()">Sair</a>
+          </ng-container>
+          <ng-container *ngIf="!userRole">
+            <a class="dropdown-item" routerLink='/login'>Entrar</a>
+            <a class="dropdown-item" (click)="logout()">Cadastre-se</a>
+          </ng-container>
         </div>
       </li>
     </ul>
   </div>
 </nav>
-
 <router-outlet></router-outlet>

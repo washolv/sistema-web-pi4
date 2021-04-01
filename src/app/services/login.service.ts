@@ -35,6 +35,7 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('access_token');
+    window.location.reload();
   }
   public criarConta(user: any) {
     return new Promise((resolve) => {
