@@ -42,7 +42,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
-    MDBBootstrapModulesPro.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
