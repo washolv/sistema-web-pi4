@@ -7,7 +7,7 @@
     </div>
     <hr>
     <button class="mt-3 mb-4 btn btn-warning" type="submit" (click)="backPage()">Produtos</button>
-    <form [formGroup]="formFuncionario" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formFuncionario" >
       <div class="form-row mt-4">
         <div class="col-lg-3 col-sm-12 mb-12">
           <label for="validationDefault01">* Nome</label>
@@ -22,7 +22,7 @@
           <label for="validationDefault02">* CPF</label>
           <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
             class="form-control cpf-mask" required [ngClass]="{ 'is-invalid': !formValid && f.cpf.errors }"
-            maxlength="14" minlength="14">
+            maxlength="14">
           <div *ngIf="!formValid && f.cpf.errors" class="invalid-feedback">
             <div *ngIf="f.cpf.errors.required">* Campo obrigatório</div>
             <div *ngIf="f.cpf.errors.minlength">* Preencha o CPF completo</div>
@@ -41,7 +41,7 @@
         </div>
         <div class="col-lg-3 col-sm-12">
           <label for="example-date-input">* Telefone</label>
-          <input class="form-control" prefix="+55" mask="(000) 0-0000-0000" formControlName="telefone"
+          <input class="form-control" prefix="+55" mask="(00) 00000-0000" formControlName="telefone"
             placeholder="(00)00000-0000" type="tel" [ngClass]="{ 'is-invalid': !formValid && f.telefone.errors }">
           <div *ngIf="!formValid && f.telefone.errors" class="invalid-feedback">
             <div *ngIf="f.telefone.errors.required">* Campo obrigatório</div>
@@ -62,19 +62,19 @@
           </div>
         </div>
         <div class="col-lg-3 col-sm-12 mb-12">
-          <label for="password">* Senha</label>
-          <input formControlName="password" [ngClass]="{ 'is-invalid': !formValid && f.password.errors }"
-            name="password" class="form-control text-muted" required placeholder="Senha" type="password" required>
-          <div *ngIf="!formValid && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.password.errors.invalid">* Campo deve conter no mínimo 3 caracteres</div>
+          <label for="senha">* Senha</label>
+          <input formControlName="senha" [ngClass]="{ 'is-invalid': !formValid && f.senha.errors }"
+            name="senha" class="form-control text-muted" required placeholder="Senha" type="senha" required>
+          <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
+            <div *ngIf="f.senha.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.senha.errors.invalid">* Campo deve conter no mínimo 3 caracteres</div>
           </div>
         </div>
       </div>
 
       <div class="form-row mt-2">
         <div class="col-lg-2 col-md-5 col-sm-12 mt-3">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" >
             <mat-label>Cargo</mat-label>
             <mat-select formControlName="cargo">
               <mat-option *ngFor="let item of cargos" [value]="item.nome">

@@ -7,7 +7,7 @@ export class Funcionario {
   dataNascimento?: Date;
   endereco?:Endereco;
   email?: string;
-  password?: string;
+  senha?: string;
   telefone?: string;
 }
 export class Endereco {

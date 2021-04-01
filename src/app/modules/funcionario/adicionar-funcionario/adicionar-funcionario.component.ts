@@ -22,9 +22,9 @@ export class AdicionarFuncionarioComponent implements OnInit {
   public funcionario: Funcionario = new Funcionario()
   public endereco: Endereco = new Endereco()
   public color: ThemePalette = 'primary';
-  public localidade:string='';
-  public uf:string='';
-  public logradouro:string='';
+  public localidade: string = '';
+  public uf: string = '';
+  public logradouro: string = '';
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
   constructor(private toastr: ToastrService, private funcionarioService: FuncionarioService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formFuncionario = this.createFormFuncionario();
@@ -71,19 +71,34 @@ export class AdicionarFuncionarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
         ])),
-      password: new FormControl('',
+      senha: new FormControl('',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
         ])),
       logradouro: new FormControl(this.logradouro, Validators.required),
       telefone: new FormControl('', Validators.required),
-      uf: new FormControl({ value: this.uf, disabled: true }, Validators.required),
-      localidade: new FormControl({ value: this.localidade, disabled: true }, Validators.required),
+      uf: new FormControl('', Validators.required),
+      localidade: new FormControl('', Validators.required),
     });
   }
   public addFuncionario() {
     if (this.formFuncionario.valid) {
+      this.endereco.cep = this.formFuncionario.value.cep;
+      this.endereco.cidade = this.formFuncionario.value.localidade;
+      this.endereco.logradouro = this.formFuncionario.value.logradouro;
+      this.endereco.uf = this.formFuncionario.value.uf;
+      this.funcionario.telefone = this.formFuncionario.value.telefone;
+      this.funcionario.cpf = this.formFuncionario.value.cpf;
+      this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
+      this.funcionario.nome = this.formFuncionario.value.nome;
+      this.funcionario.telefone = this.formFuncionario.value.telefone;
+      this.funcionario.status = this.formFuncionario.value.status;
+      this.funcionario.email = this.formFuncionario.value.email;
+      this.funcionario.senha = this.formFuncionario.value.senha;
+      this.funcionario.endereco = this.endereco;
+      this.funcionario.cargo = this.formFuncionario.value.cargo;
+
       this.funcionarioService.postFuncionario(this.funcionario).subscribe(res => {
         this.toastr.success("Funcionário adicionado com sucesso", "OK", {
           timeOut: 3000, positionClass: 'toast-top-center',
@@ -99,39 +114,13 @@ export class AdicionarFuncionarioComponent implements OnInit {
   public backPage() {
     this.router.navigate(['/funcionarios'])
   }
-  onSubmit() {
-    if (this.formFuncionario.valid) {
-      this.endereco.cep = this.formFuncionario.value.cep;
-      this.endereco.cidade = this.formFuncionario.value.localidade;
-      this.endereco.logradouro = this.formFuncionario.value.logradouro;
-      this.endereco.uf = this.formFuncionario.value.uf;
-      this.funcionario.telefone = this.formFuncionario.value.telefone;
-      this.funcionario.cpf = this.formFuncionario.value.cpf;
-      this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
-      this.funcionario.nome = this.formFuncionario.value.nome;
-      this.funcionario.telefone = this.formFuncionario.value.telefone;
-      this.funcionario.status = this.formFuncionario.value.status;
-      this.funcionario.email = this.formFuncionario.value.email;
-      this.funcionario.password = this.formFuncionario.value.password;
-      this.funcionario.endereco = this.endereco;
-      console.log(this.funcionario)
-      return;
-    }
-    this.formValid = false;
-
-  }
-
-
 
   public buscarCep() {
     if (this.formFuncionario.value.cep) {
       this.buscarCepService.buscar(this.formFuncionario.value.cep).subscribe(res => {
-       this.formFuncionario.controls['logradouro'].setValue(res.logradouro);
-       this.formFuncionario.controls['uf'].setValue(res.uf);
-       this.formFuncionario.controls['localidade'].setValue(res.localidade);
-        //this.logradouro = res.logradouro;
-        this.uf = res.uf;
-        this.localidade = res.localidade;
+        this.formFuncionario.controls['logradouro'].setValue(res.logradouro);
+        this.formFuncionario.controls['uf'].setValue(res.uf);
+        this.formFuncionario.controls['localidade'].setValue(res.localidade);
         this.cepValido = true;
       })
     }

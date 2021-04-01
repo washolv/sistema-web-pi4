@@ -16,14 +16,15 @@ export class FuncionarioService {
     return this.http.put<Funcionario>(`${this.apiUrl}/funcionarios`, funcionario);
   }
   public postFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    return this.http.put<Funcionario>(`${this.apiUrl}/funcionarios`, funcionario);
+    console.log(funcionario)
+    return this.http.post<Funcionario>(`${this.apiUrl}/funcionarios`, funcionario);
   }
   public buscarFuncionarioPorNome(nome: string): Observable<Funcionario[]> {
     return this.http.get<Funcionario[]>(`${this.apiUrl}/funcionarios/${nome}`);
   }
   //FALTA A IRRESPONSAVEL DA DEBORA FAZER
   public buscarFuncionarioPorId(id: number): Observable<Funcionario> {
-    return this.http.get<Funcionario>(`${this.apiUrl}/Funcionario/${id}`);
+    return this.http.get<Funcionario>(`${this.apiUrl}/funcionarios/find/${id}`);
   }
   public buscarFuncionarios(): Observable<Funcionario[]> {
     return this.http.get<Funcionario[]>(`${this.apiUrl}/funcionarios`);

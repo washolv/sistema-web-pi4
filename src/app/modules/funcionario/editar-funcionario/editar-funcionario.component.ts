@@ -24,10 +24,12 @@ export class EditarFuncionarioComponent implements OnInit {
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
   constructor(private toastr: ToastrService, private funcionarioService: FuncionarioService, private fb: FormBuilder,
     private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
+    this.formFuncionario = this.createFormFuncionario(this.funcionario);
     funcionarioService.buscarFuncionarioPorId(1).subscribe(res => {
+      console.log(res)
       this.funcionario = res;
+      this.formFuncionario = this.createFormFuncionario(this.funcionario);
     })
-    this.formFuncionario = this.createFormFuncionario();
   }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class EditarFuncionarioComponent implements OnInit {
 
   get f() { return this.formFuncionario.controls; }
 
-  public createFormFuncionario(): FormGroup {
+  public createFormFuncionario(funcionario: Funcionario): FormGroup {
     return this.fb.group({
       nome: new FormControl(this.funcionario.nome, Validators.compose([
         Validators.required,
@@ -66,7 +68,7 @@ export class EditarFuncionarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
         ])),
-      password: new FormControl(this.funcionario.password,
+      senha: new FormControl(this.funcionario.senha,
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -78,8 +80,9 @@ export class EditarFuncionarioComponent implements OnInit {
     });
   }
   public addFuncionario() {
+    console.log(this.formFuncionario.value)
     if (this.formFuncionario.valid) {
-      this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
+      this.funcionarioService.editarFuncionario(this.formFuncionario.value).subscribe(res => {
         this.toastr.success("Funcionário editado com sucesso", "OK", {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
