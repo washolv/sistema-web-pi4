@@ -9,7 +9,6 @@
   <hr>
 
   <div class="col-12 col-sm-12 col-md-12">
-
     <!--INPUT FILTRAGEM DE funcionarioS-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <div class="row d-flex justify-content-center">
@@ -33,6 +32,8 @@
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Cargo</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
@@ -43,6 +44,8 @@
                  totalItems: totalRegistros};let i=index ">
             <td>{{funcionario.nome}}</td>
             <td>{{funcionario.cpf}}</td>
+            <td>{{funcionario.telefone}}</td>
+            <td>{{funcionario.cargo}}</td>
             <td>{{funcionario.status}}</td>
             <td>
               <mat-slide-toggle [(ngModel)]="funcionario.status" (change)="habilitarFuncionario(funcionario)" [color]="color"

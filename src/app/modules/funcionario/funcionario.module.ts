@@ -19,6 +19,8 @@ import { DatepickerModule, WavesModule } from 'ng-uikit-pro-standard'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminGuard } from 'src/app/services/admin.guard';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 const routes: Routes = [
@@ -48,7 +50,10 @@ const routes: Routes = [
     MatNativeDateModule,
     WavesModule,
     MatFormFieldModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatProgressSpinnerModule,
+    NgxMaskModule.forRoot(),
+    NgxMaskModule.forChild()
   ],
   declarations: [FuncionarioComponent, EditarFuncionarioComponent, AdicionarFuncionarioComponent],
   providers: [

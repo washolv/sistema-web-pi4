@@ -6,6 +6,8 @@ export class Funcionario {
   status?: boolean;
   dataNascimento?: Date;
   endereco?:Endereco;
+  email?: string;
+  password?: string;
   telefone?: string;
 }
 export class Endereco {
