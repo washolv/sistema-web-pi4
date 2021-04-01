@@ -22,6 +22,9 @@ export class AdicionarFuncionarioComponent implements OnInit {
   public funcionario: Funcionario = new Funcionario()
   public endereco: Endereco = new Endereco()
   public color: ThemePalette = 'primary';
+  public localidade:string='';
+  public uf:string='';
+  public logradouro:string='';
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
   constructor(private toastr: ToastrService, private funcionarioService: FuncionarioService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formFuncionario = this.createFormFuncionario();
@@ -49,9 +52,6 @@ export class AdicionarFuncionarioComponent implements OnInit {
       cpf: new FormControl('',
         Validators.compose([
           Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('/^-?(0|[1-9]\d*)?$/')
         ])),
       cargo: new FormControl('', Validators.compose([
         Validators.required,
@@ -76,10 +76,10 @@ export class AdicionarFuncionarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(3),
         ])),
-      logradouro: new FormControl('', Validators.required),
+      logradouro: new FormControl(this.logradouro, Validators.required),
       telefone: new FormControl('', Validators.required),
-      uf: new FormControl({ value: '', disabled: true }, Validators.required),
-      localidade: new FormControl({ value: '', disabled: true }, Validators.required),
+      uf: new FormControl({ value: this.uf, disabled: true }, Validators.required),
+      localidade: new FormControl({ value: this.localidade, disabled: true }, Validators.required),
     });
   }
   public addFuncionario() {
@@ -114,6 +114,7 @@ export class AdicionarFuncionarioComponent implements OnInit {
       this.funcionario.email = this.formFuncionario.value.email;
       this.funcionario.password = this.formFuncionario.value.password;
       this.funcionario.endereco = this.endereco;
+      console.log(this.funcionario)
       return;
     }
     this.formValid = false;
@@ -125,9 +126,12 @@ export class AdicionarFuncionarioComponent implements OnInit {
   public buscarCep() {
     if (this.formFuncionario.value.cep) {
       this.buscarCepService.buscar(this.formFuncionario.value.cep).subscribe(res => {
-        this.formFuncionario.value.logradouro = res.logradouro;
-        this.formFuncionario.value.uf = res.uf;
-        this.formFuncionario.value.localidade = res.localidade;
+       this.formFuncionario.controls['logradouro'].setValue(res.logradouro);
+       this.formFuncionario.controls['uf'].setValue(res.uf);
+       this.formFuncionario.controls['localidade'].setValue(res.localidade);
+        //this.logradouro = res.logradouro;
+        this.uf = res.uf;
+        this.localidade = res.localidade;
         this.cepValido = true;
       })
     }

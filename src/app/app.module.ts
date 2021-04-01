@@ -47,7 +47,9 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     MatProgressSpinnerModule,
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: true
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

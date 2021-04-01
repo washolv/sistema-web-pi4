@@ -52,8 +52,7 @@ const routes: Routes = [
     MatFormFieldModule,
     CurrencyMaskModule,
     MatProgressSpinnerModule,
-    NgxMaskModule.forRoot(),
-    NgxMaskModule.forChild()
+    NgxMaskModule.forChild(),
   ],
   declarations: [FuncionarioComponent, EditarFuncionarioComponent, AdicionarFuncionarioComponent],
   providers: [
