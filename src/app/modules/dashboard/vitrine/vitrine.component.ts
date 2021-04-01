@@ -101,7 +101,7 @@ export class VitrineComponent implements OnInit {
     this.loading = true;
     pipe(first())
     {
-      this.router.navigate(['/produtos/visualizar', id]);
+      this.router.navigate(['/dashboard/detalhes', id]);
     }
   }
 }

@@ -13,9 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
   },
   {
-    path: 'dashboard', component: MainNavComponent, children: [
-      { path: '', component: DashboardComponent },
-    ]
+    path: 'dashboard', component: MainNavComponent,
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
     path: 'produtos', component: MainNavComponent,

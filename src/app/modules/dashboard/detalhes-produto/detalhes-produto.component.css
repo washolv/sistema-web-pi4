@@ -1,0 +1,18 @@
+html{
+  background-color: azure;
+}
+.custom-text-size24{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.custom-image{
+  border-radius: 10px;
+  height: auto;
+  cursor: zoom-in;
+}
+ngb-rating {
+  font-size: 35px;
+  color: #FFC300;
+  border:none;
+}

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: '', component: ProdutoComponent },
   { path: 'editar/:id', component: EditarProdutoComponent },
   { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AdminGuard],},
-  { path: 'visualizar/:id', component: VisualizarProdutoComponent },
+  { path: 'visualizar/:id', component: VisualizarProdutoComponent},
   { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent, canActivate: [AdminGuard]},
   { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent, canActivate: [AdminGuard]}
 ];
