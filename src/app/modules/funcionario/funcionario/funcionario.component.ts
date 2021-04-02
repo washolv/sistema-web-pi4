@@ -3,6 +3,7 @@ import { ThemePalette } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Funcionario } from '../models/Funcionario';
@@ -25,6 +26,17 @@ export class FuncionarioComponent implements OnInit {
   constructor(private roleGuardService: RoleGuardService, private spinner: NgxSpinnerService,private funcionarioService: FuncionarioService, private router: Router) {
     this.userRole=this.roleGuardService.getUserRole();
     this.isAdmin=this.userRole=='ROLE_ADMIN'
+    this.searchFilter.pipe(
+      debounceTime(1000),
+      distinctUntilChanged())
+      .subscribe(search => {
+        this.funcionarioService.buscarFuncionarioPorNome(search)
+          .subscribe((response: Funcionario[]) => {
+            if (response) {
+              this.funcionarios = response;
+            }
+          });
+      });
    }
 
   ngOnInit() {
