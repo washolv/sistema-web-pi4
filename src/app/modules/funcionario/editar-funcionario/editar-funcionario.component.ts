@@ -106,27 +106,35 @@ export class EditarFuncionarioComponent implements OnInit {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
       })
+    }else{
+      this.formValid=false;
     }
   }
   public backPage() {
     this.router.navigate(['/funcionarios'])
   }
-  onSubmit() {
-    if (!this.formFuncionario.valid) {
-      this.formValid = false;
-    }
-  }
-
 
 
   public buscarCep() {
-    if (this.formFuncionario.value.cep) {
+    if (!this.f.cep.errors) {
       this.buscarCepService.buscar(this.formFuncionario.value.cep).subscribe(res => {
-        this.formFuncionario.value.logradouro = res.logradouro;
-        this.formFuncionario.value.uf = res.uf;
-        this.formFuncionario.value.localidade = res.localidade;
-        this.cepValido = true;
+        if(!res.erro){
+            this.formFuncionario.value.logradouro = res.logradouro;
+          this.formFuncionario.value.uf = res.uf;
+          this.formFuncionario.value.localidade = res.localidade;
+          this.cepValido = true;
+          console.log(this.formFuncionario.value)
+        }else{
+          this.toastr.error("CEP não encontrado", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }
+
       })
+    }else{
+      this.toastr.error("CEP inválido ", "Erro", {
+        timeOut: 3000, positionClass: 'toast-top-center',
+      });
     }
   }
 }

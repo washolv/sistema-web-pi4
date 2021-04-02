@@ -94,7 +94,7 @@
           </div>
           <div *ngIf="!formValid && f.cep.errors" class="invalid-feedback">
             <div *ngIf="f.cep.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.cep.errors.invalid">* CEP inválido</div>
+            <div *ngIf="f.cep.errors.minlength">* CEP inválido</div>
           </div>
         </div>
       </div>
