@@ -75,7 +75,7 @@ export class VisualizarProdutoComponent implements OnInit {
     }
   }
   backProdutos() {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['/produtos']);
   }
 
 }

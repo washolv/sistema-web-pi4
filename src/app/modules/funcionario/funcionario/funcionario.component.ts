@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Funcionario } from '../models/Funcionario';
 
 @Component({
@@ -19,7 +20,12 @@ export class FuncionarioComponent implements OnInit {
   totalRegistros: number = 0;
   page: number = 1
   teste: boolean = false;
-  constructor(private spinner: NgxSpinnerService,private funcionarioService: FuncionarioService, private router: Router) { }
+  userRole:string;
+  isAdmin: boolean;
+  constructor(private roleGuardService: RoleGuardService, private spinner: NgxSpinnerService,private funcionarioService: FuncionarioService, private router: Router) {
+    this.userRole=this.roleGuardService.getUserRole();
+    this.isAdmin=this.userRole=='ROLE_ADMIN'
+   }
 
   ngOnInit() {
      /** spinner starts on init */
