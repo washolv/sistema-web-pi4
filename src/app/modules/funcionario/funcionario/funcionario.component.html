@@ -31,8 +31,8 @@
         <thead>
           <tr>
             <th scope="col">Nome</th>
-            <th scope="col">CPF</th>
-            <th scope="col">Telefone</th>
+            <th scope="col" *ngIf="isAdmin">CPF</th>
+            <th scope="col" *ngIf="isAdmin">Telefone</th>
             <th scope="col">Cargo</th>
             <th scope="col">Status</th>
           </tr>
@@ -43,8 +43,8 @@
                  currentPage: this.page,
                  totalItems: totalRegistros};let i=index ">
             <td>{{funcionario.nome}}</td>
-            <td>{{funcionario.cpf! | mask: '000.000.000-00'}}</td>
-            <td>{{funcionario.telefone! | mask: '(00)00000-0000'}}</td>
+            <td *ngIf="isAdmin">{{funcionario.cpf! | mask: '000.000.000-00'}}</td>
+            <td *ngIf="isAdmin">{{funcionario.telefone! | mask: '(00)00000-0000'}}</td>
             <td>{{funcionario.cargo}}</td>
             <td>
               <mat-slide-toggle [(ngModel)]="funcionario.status" [disabled]="!isAdmin" (change)="habilitarFuncionario(funcionario)" [color]="color"
