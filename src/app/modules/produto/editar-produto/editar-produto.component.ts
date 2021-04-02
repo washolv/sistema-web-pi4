@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,6 +41,7 @@ export class EditarProdutoComponent implements OnInit {
       this.produto = response
       this.currentRate = <number>this.produto.qtdEstrelas;
       this.formProduto = this.testeForm(this.produto);
+      console.log(this.formProduto.value)
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;

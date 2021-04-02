@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AccordionModule, AnimatedCardsModule, AutoCompleterModule, AutoFormatModule, CharCounterModule, ChartSimpleModule, ChipsModule, DatepickerModule, FileInputModule, IconsModule, LightBoxModule, MDBBootstrapModulePro, MDBBootstrapModulesPro, PreloadersModule, RangeModule, ScrollSpyModule, SelectModule, SidenavModule, SmoothscrollModule, StepperModule, StickyContentModule, TabsModule, TimePickerModule, ToastModule } from 'ng-uikit-pro-standard'
+import { MainNavLoginComponent } from './main-nav-login/main-nav-login.component';
 
 @NgModule({
   imports: [

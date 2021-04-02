@@ -1,3 +1,59 @@
-<p>
-  criar-conta works!
-</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="custom-icon-title"><img src="../../../../assets/Icon awesome-user-alt.svg"></div>
+    <div class="custom-title">Cadastre-se</div>
+  </div>
+  <div class="row d-flex justify-content-center mt-4">
+    <div class="custom-sub-title">já tem um cadastro? Entrar</div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <form>
+      <div class="form-row mt-5">
+        <label for="email">* e-mail</label>
+        <input formControlName="email" name="email" class="form-control" required placeholder="email@email.com"
+          type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      </div>
+      <div class="form-row mt-2">
+        <label for="senha">* senha</label>
+        <input formControlName="senha" name="senha" class="form-control text-muted" required placeholder="senha"
+          type="senha" required>
+      </div>
+      <div class="form-row mt-2">
+        <label for="example-date-input">* telefone</label>
+        <input class="form-control" prefix="+55" mask="(00) 00000-0000" formControlName="telefone"
+          placeholder="(00)00000-0000" type="tel">
+      </div>
+      <div class="form-row mt-2">
+        <label for="validationDefault02">* CPF</label>
+        <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
+          class="form-control cpf-mask" required maxlength="14">
+      </div>
+      <div class="form-row mt-2">
+        <label for="validationDefault01">* nome</label>
+        <input type="text" class="form-control" minlength="5" name="nome" placeholder="seu nome e sobrenome"
+          formControlName="nome" required>
+      </div>
+      <div class="form-row mt-2">
+        <label for="validationDefault01">* sexo</label>
+      </div>
+      <div class="form-row">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <label class="form-check-label" for="inlineRadio1">Masculino</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <label class="form-check-label" for="inlineRadio2">Feminino</label>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <label for="validationDefault01">* data de nascimento</label>
+        <input class="form-control" formControlName="dataNascimento" type="date">
+      </div>
+
+      <div class="row d-flex justify-content-center mt-3 mb-6">
+        <button class="btn btn-danger" >Criar seu cadastro</button>
+      </div>
+    </form>
+  </div>
+</div>

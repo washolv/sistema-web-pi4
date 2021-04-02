@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit() {
-
+  cadastrar(){
+    this.router.navigate(['/criar-conta']);
   }
 
   login(){

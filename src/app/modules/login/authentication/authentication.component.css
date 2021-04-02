@@ -1,0 +1,7 @@
+.login-body{
+  width: 60%;
+  height: 95%;
+  float: left;
+  background-image: url("../../../../assets/banners/banner-login.png");
+  background-repeat: no-repeat;
+ }

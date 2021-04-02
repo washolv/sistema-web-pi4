@@ -11,7 +11,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const routes = [
   { path: 'autenticacao', component: AuthenticationComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'criar-conta', component: CriarContaComponent }
 ]
 @NgModule({
   imports: [
