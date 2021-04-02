@@ -45,12 +45,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+
+  }
+
+  login(){
     if(this.loginForm.valid){
       this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
         if(response){
           this.router.navigate(['']);
           this.usuarioAutenticado = response;
-          console.log(response)
           window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
         }
       }, HttpErrorResponse => {
@@ -59,6 +62,7 @@ export class LoginComponent implements OnInit {
         });
       });
     }else{
+      console.log(this.loginForm.value)
       this.formValid=false;
     }
   }

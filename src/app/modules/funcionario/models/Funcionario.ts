@@ -11,6 +11,7 @@ export class Funcionario {
   telefone?: string;
 }
 export class Endereco {
+  id?: number;
   cep?: string;
   logradouro?:string;
   cidade?:string;

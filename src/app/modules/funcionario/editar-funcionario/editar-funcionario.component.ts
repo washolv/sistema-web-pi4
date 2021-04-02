@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMyOptions } from 'ng-uikit-pro-standard';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
@@ -21,13 +21,17 @@ export class EditarFuncionarioComponent implements OnInit {
   public funcionario: Funcionario = new Funcionario()
   public endereco: Endereco = new Endereco()
   public color: ThemePalette = 'primary';
+  public id=0;
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
-  constructor(private toastr: ToastrService, private funcionarioService: FuncionarioService, private fb: FormBuilder,
+  constructor(private toastr: ToastrService, private route: ActivatedRoute, private funcionarioService: FuncionarioService, private fb: FormBuilder,
     private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
+      this.route.params.subscribe(parametros => {
+        this.id = parametros['id'];
+      });
     this.formFuncionario = this.createFormFuncionario(this.funcionario);
-    funcionarioService.buscarFuncionarioPorId(1).subscribe(res => {
-      console.log(res)
+    funcionarioService.buscarFuncionarioPorId(this.id).subscribe(res => {
       this.funcionario = res;
+      console.log(this.funcionario)
       this.formFuncionario = this.createFormFuncionario(this.funcionario);
     })
   }
@@ -47,8 +51,6 @@ export class EditarFuncionarioComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('/^-?(0|[1-9]\d*)?$/')
         ])),
       cargo: new FormControl(this.funcionario.cargo, Validators.compose([
         Validators.required,
@@ -79,10 +81,23 @@ export class EditarFuncionarioComponent implements OnInit {
       localidade: new FormControl(this.funcionario.endereco?.cidade, Validators.required),
     });
   }
-  public addFuncionario() {
-    console.log(this.formFuncionario.value)
+  public salvarFuncionario() {
     if (this.formFuncionario.valid) {
-      this.funcionarioService.editarFuncionario(this.formFuncionario.value).subscribe(res => {
+      this.endereco.id=this.funcionario.endereco!.id;
+      this.endereco.cep = this.formFuncionario.value.cep;
+      this.endereco.cidade = this.formFuncionario.value.localidade;
+      this.endereco.logradouro = this.formFuncionario.value.logradouro;
+      this.endereco.uf = this.formFuncionario.value.uf;
+      this.funcionario.telefone = this.formFuncionario.value.telefone;
+      this.funcionario.cpf = this.formFuncionario.value.cpf;
+      this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
+      this.funcionario.nome = this.formFuncionario.value.nome;
+      this.funcionario.telefone = this.formFuncionario.value.telefone;
+      this.funcionario.status = this.formFuncionario.value.status;
+      this.funcionario.email = this.formFuncionario.value.email;
+      this.funcionario.endereco = this.endereco;
+      this.funcionario.cargo = this.formFuncionario.value.cargo;
+      this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
         this.toastr.success("Funcionário editado com sucesso", "OK", {
           timeOut: 3000, positionClass: 'toast-top-center',
         });

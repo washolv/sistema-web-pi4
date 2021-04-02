@@ -1,27 +1,28 @@
 <div class="container-fluid">
   <div class="row col-lg-12">
-
     <div class="col-lg-6">
       <h2 class="text-center">Entrar</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" >
         <div class="form-group">
           <label for="username">* E-mail</label>
-          <input class="form-control" type="email" name="username" id="username" placeholder="exemplo@exemplo.com.br" formControlName="username" required />
-          <ng-container *ngIf="f.username.errors">
-              <p class="custom-invalid" *ngIf="f.username.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
-              <p class="custom-invalid" *ngIf="f.username.errors.email && !formValid" style="color:red">* E-mail inválido</p>
-          </ng-container>
+          <input class="form-control" type="email" name="username" id="username" placeholder="exemplo@exemplo.com.br" formControlName="username"
+          [ngClass]="{ 'is-invalid': !formValid && f.username.errors }" required/>
+          <div *ngIf="!formValid && f.username.errors" class="invalid-feedback" >
+            <div *ngIf="f.username.errors.required">* Campo usuário é obrigatório</div>
+            <div *ngIf="f.username.errors.email">* Endereço de e-mail inválido</div>
+          </div>
         </div>
         <div class="form-group">
           <label>* Senha</label>
-          <input class="form-control" type="password" name="password" id="password" placeholder="*******"formControlName="password"
-            required />
-            <ng-container *ngIf="f.password.errors">
-              <p class="custom-invalid" *ngIf="f.password.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
-          </ng-container>
+          <input class="form-control" type="password" name="password"  id="password" placeholder="Senha"formControlName="password"
+            required [ngClass]="{ 'is-invalid': !formValid && f.password.errors }"/>
+          <div *ngIf="!formValid && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">* Campo senha é obrigatório</div>
+            <div *ngIf="f.password.errors.minlength">* Campo senha deve conter ao menos 3 caracteres</div>
+          </div>
         </div>
         <div class="row mx-auto">
-          <button type="submit" class="btn btn-primary btn-block col-lg-4"
+          <button type="submit" (click)="login()" class="btn btn-primary btn-block col-lg-4"
             >Entrar</button>
           <button type="button" class="btn btn-link btn-block col-lg-4">Criar
             conta</button>

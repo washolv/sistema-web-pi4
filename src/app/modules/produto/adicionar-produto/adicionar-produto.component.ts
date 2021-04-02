@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../models/Produto';
-import {ThemePalette} from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -18,31 +18,29 @@ export class AdicionarProdutoComponent implements OnInit {
   public images = [];
   public imageData: any;
   public formProduto: FormGroup;
-  public currentRate=1;
+  public currentRate = 1;
   public isChecked: boolean = false;
-  public categoria:any;
-  public categoriaNome: string="";
+  public categoria: any;
+  public categoriaNome: string = "";
   public color: ThemePalette = 'primary';
-  public formValid=true;
-  constructor(private config: NgbRatingConfig,private fb: FormBuilder, public router: Router) {
+  public formValid = true;
+  constructor(private config: NgbRatingConfig, private fb: FormBuilder, public router: Router) {
     this.formProduto = this.createForm(this.produto);
-    this.config.max=5;
+    this.config.max = 5;
     this.categoria = [
       { id: 1, name: 'Cama' },
       { id: 2, name: 'Mesa' },
       { id: 3, name: 'Banho' },
-      { id: 4, name: 'Decoração'}
-  ];
+      { id: 4, name: 'Decoração' }
+    ];
 
   }
 
   ngOnInit() {
   }
 
-
   public addProduto() {
-    if(this.formProduto.valid){
-      this.formProduto.value.qtdEstrelas=this.currentRate;
+     this.formProduto.value.qtdEstrelas = this.currentRate;
       if (this.formProduto.value.status) {
         this.formProduto.value.status = 1;
       } else {
@@ -51,10 +49,7 @@ export class AdicionarProdutoComponent implements OnInit {
       this.router.navigateByUrl('/produtos/adicionar/imagens', {
         state: { produto: this.formProduto.value }
       })
-    }else{
-      console.log(this.f.nome)
-      this.formValid=false;
-    }
+
 
   }
   get f() { return this.formProduto.controls; }
@@ -70,7 +65,7 @@ export class AdicionarProdutoComponent implements OnInit {
       descricao: new FormControl('',
         Validators.compose([
           Validators.required,
-            Validators.minLength(3),
+          Validators.minLength(3),
           Validators.maxLength(1000)
         ])),
       quantidadeEstoque: new FormControl('', Validators.compose([
@@ -89,6 +84,9 @@ export class AdicionarProdutoComponent implements OnInit {
 
   backProdutos() {
     this.router.navigate(['produtos']);
+  }
+  changeStatus() {
+    this.formProduto.value.status = !this.formProduto.value.status;
   }
 
 

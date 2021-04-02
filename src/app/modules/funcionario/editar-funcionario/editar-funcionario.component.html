@@ -2,12 +2,12 @@
   <div class="col-12">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
-        Novo Funcionário
+        Editar Funcionário
       </div>
     </div>
     <hr>
     <button class="mt-3 mb-4 btn btn-warning" type="submit" (click)="backPage()">Produtos</button>
-    <form [formGroup]="formFuncionario" >
+    <form [formGroup]="formFuncionario">
       <div class="form-row mt-4">
         <div class="col-lg-3 col-sm-12 mb-12">
           <label for="validationDefault01">* Nome</label>
@@ -65,7 +65,7 @@
 
       <div class="form-row mt-2">
         <div class="col-lg-2 col-md-5 col-sm-12 mt-3">
-          <mat-form-field appearance="fill" >
+          <mat-form-field appearance="fill">
             <mat-label>Cargo</mat-label>
             <mat-select formControlName="cargo">
               <mat-option *ngFor="let item of cargos" [value]="item.nome">
@@ -74,6 +74,13 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div class="col-lg-2 col-md-5 col-sm-12 mt-2">
+          <p class="mr-1">Habilitar Funcionario</p>
+          <div class="row mx-auto">
+            <mat-slide-toggle formControlName="status" [color]="color" class="align-middle"></mat-slide-toggle>
+          </div>
+        </div>
+
       </div>
 
       <div class="form-row mt-2">
@@ -81,8 +88,7 @@
           <label class="control-label" for="CEP">* CEP</label>
           <input id="cep" name="cep" mask="00000-000" formControlName="cep"
             [ngClass]="{ 'is-invalid': !formValid && f.cep.errors }" placeholder="Apenas números"
-            class="form-control cep-mask" required type="search" minlength="8" maxlength="9"
-            pattern="[0-9]+$">
+            class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
           <div class="row mt-2 col-lg-12">
             <button type="button" class="btn btn-primary" (click)="buscarCep()">Pesquisar</button>
           </div>
@@ -93,39 +99,39 @@
         </div>
       </div>
 
-        <!--DADOS DO ENDEREÇO-->
-        <div class="form-row mt-2">
-          <div class="col-lg-3 col-sm-12 mb-12">
-            <label for="logradouro">Logradouro</label>
-            <input type="text" class="form-control" minlength="3" name="logradouro" placeholder="logradouro"
-              formControlName="logradouro" [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" required>
-            <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
-              <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-12 mb-12">
-            <label for="validationDefault01">Cidade</label>
-            <input type="text" class="form-control" minlength="3" editable="true" name="localidade"
-              placeholder="localidade" formControlName="localidade"
-              [ngClass]="{ 'is-invalid': !formValid && f.localidade.errors }" required>
-            <div *ngIf="!formValid && f.localidade.errors" class="invalid-feedback">
-              <div *ngIf="f.localidade.errors.required">* Campo obrigatório</div>
-            </div>
+      <!--DADOS DO ENDEREÇO-->
+      <div class="form-row mt-2">
+        <div class="col-lg-3 col-sm-12 mb-12">
+          <label for="logradouro">Logradouro</label>
+          <input type="text" class="form-control" minlength="3" name="logradouro" placeholder="logradouro"
+            formControlName="logradouro" [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" required>
+          <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
+            <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
           </div>
         </div>
+        <div class="col-lg-3 col-sm-12 mb-12">
+          <label for="validationDefault01">Cidade</label>
+          <input type="text" class="form-control" minlength="3" editable="true" name="localidade"
+            placeholder="localidade" formControlName="localidade"
+            [ngClass]="{ 'is-invalid': !formValid && f.localidade.errors }" required>
+          <div *ngIf="!formValid && f.localidade.errors" class="invalid-feedback">
+            <div *ngIf="f.localidade.errors.required">* Campo obrigatório</div>
+          </div>
+        </div>
+      </div>
 
-        <div class="form-row mt-2">
-          <div class="col-lg-3 col-sm-12 mb-12">
-            <label for="validationDefault01">UF</label>
-            <input type="text" class="form-control" minlength="2" editable="true" name="uf" placeholder="uf"
-              formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }" required>
-              <div *ngIf="!formValid && f.uf.errors" class="invalid-feedback">
-              <div *ngIf="f.uf.errors.required">* Campo obrigatório</div>
-            </div>
+      <div class="form-row mt-2">
+        <div class="col-lg-3 col-sm-12 mb-12">
+          <label for="validationDefault01">UF</label>
+          <input type="text" class="form-control" minlength="2" editable="true" name="uf" placeholder="uf"
+            formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }" required>
+          <div *ngIf="!formValid && f.uf.errors" class="invalid-feedback">
+            <div *ngIf="f.uf.errors.required">* Campo obrigatório</div>
           </div>
         </div>
+      </div>
       <hr>
-      <button class="mt-3 btn btn-dark" (click)="addFuncionario()" >Salvar Alterações</button>
+      <button class="mt-3 btn btn-dark" (click)="salvarFuncionario()">Salvar Alterações</button>
     </form>
   </div>
 </div>

@@ -29,7 +29,7 @@
         <div class="col-lg-3 col-sm-12">
           <label class="custom-lbl" for="validationDefaultUsername">Preço</label>
           <div class="input-group">
-            <input type="text" class="form-control" pattern="[0-9]*" name="Preço" placeholder="Preço" currencyMask
+            <input type="text" class="form-control" pattern="[0-9]*" name="preco" placeholder="Preço" currencyMask
               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
               aria-describedby="inputGroupPrepend2" formControlName="preco" required>
           </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="mt-4 col-lg-3 col-sm-12 ">
           <div class="input-group">
-            <mat-slide-toggle formControlName="status" [color]="color" class="align-middle">Habilitar Produto
+            <mat-slide-toggle formControlName="status" (click)="changeStatus()" [color]="color" class="align-middle">Habilitar Produto
             </mat-slide-toggle>
           </div>
         </div>
