@@ -16,6 +16,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
             }else if([403].indexOf(err.status) !== -1){
               this.router.navigate(['']);
+            }else{
+              this.authenticationService.logout();
             }
             const error = err.error.message || err.statusText;
             return throwError(error);

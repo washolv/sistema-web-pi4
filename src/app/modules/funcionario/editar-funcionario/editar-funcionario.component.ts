@@ -97,6 +97,7 @@ export class EditarFuncionarioComponent implements OnInit {
       this.funcionario.email = this.formFuncionario.value.email;
       this.funcionario.endereco = this.endereco;
       this.funcionario.cargo = this.formFuncionario.value.cargo;
+      console.log(this.funcionario)
       this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
         this.toastr.success("Funcionário editado com sucesso", "OK", {
           timeOut: 3000, positionClass: 'toast-top-center',
