@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     if (route.data.expectedRole.length) {
       if (user != null) {
         for (let i = 0; i < route.data.expectedRole.length; i++) {
-          if (user.authorities![0] === route.data.expectedRole[i]) {
+          if (user.aud === route.data.expectedRole[i]) {
             return true;
           }
         }
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       }
     }
     if (user != null) {
-      if (user.authorities![0] === route.data.expectedRole) {
+      if (user.aud === route.data.expectedRole) {
         return true;
       } else {
         this.router.navigate(['']);

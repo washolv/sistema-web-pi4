@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, observable, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthenticatedUser } from '../modules/login/login/models/AuthenticatedUser';
 import { User } from '../modules/login/login/models/User';
@@ -18,11 +18,18 @@ export class LoginService {
   clienteId = environment.clientId;
   clienteSecret = environment.clientSecret;
 
-  public login(username: string, password: string) {
-    let usuario = { username: username, password: password }
-    let r= this.http.post<HttpResponse<any>>(`${this.apiUrl}/login`, usuario);
-    console.log(r)
-    return r;
+  public login(email: string, senha: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Accept-Language': '1',
+      }),
+
+    };
+    return this.http.post<HttpResponse<any>>(`${this.apiUrl}/login`, { username: email, password: senha }, { observe: 'response' as 'body' })
+      .pipe(tap((resp: HttpResponse<any>) => {
+        return resp;
+      }));
 
   }
 

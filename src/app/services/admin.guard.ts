@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
       const user = <TokenDecoded> this.roleGuardService.decodeJWT();
       if (user != null) {
-        if (user.authorities![0] === "ROLE_ADMIN") {
+        if (user.aud === "ROLE_ADMIN") {
           return true;
         } else {
           this.router.navigate(['']);

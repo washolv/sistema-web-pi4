@@ -26,9 +26,9 @@ export class RoleGuardService {
     let userRole;
     const user = <TokenDecoded>this.decodeJWT();
     if(user){
-      userRole = user.authorities![0];
+      userRole = user.aud;
     }else{
-      userRole = '';
+      return userRole="";
     }
     return userRole;
   }

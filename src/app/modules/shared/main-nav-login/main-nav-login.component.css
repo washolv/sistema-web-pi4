@@ -1,13 +1,13 @@
 .navbar{
   font-weight: bold;
-  background-color: #8E88DF
+  background-color: #F1F1F1
 }
 .nav-link{
   font-weight: bold;
 }
 
 .custom-drop{
-  background-color: #8E88DF;
+  background-color: #F1F1F1  ;
   width: 250px;
 
 }
@@ -17,5 +17,5 @@
   width: 250px;
 }
 .img-fluid{
-  width: 10%;
+  width: 40%;
 }

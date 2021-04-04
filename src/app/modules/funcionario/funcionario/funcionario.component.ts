@@ -21,7 +21,7 @@ export class FuncionarioComponent implements OnInit {
   totalRegistros: number = 0;
   page: number = 1
   teste: boolean = false;
-  userRole:string;
+  userRole?:string;
   isAdmin: boolean;
   constructor(private roleGuardService: RoleGuardService, private spinner: NgxSpinnerService,private funcionarioService: FuncionarioService, private router: Router) {
     this.userRole=this.roleGuardService.getUserRole();

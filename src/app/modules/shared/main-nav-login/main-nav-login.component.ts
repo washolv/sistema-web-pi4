@@ -9,7 +9,7 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
   styleUrls: ['./main-nav-login.component.css']
 })
 export class MainNavLoginComponent implements OnInit {
-  userRole: string;
+  public userRole?: string='';
 
   constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
     this.userRole=roleGuardService.getUserRole();

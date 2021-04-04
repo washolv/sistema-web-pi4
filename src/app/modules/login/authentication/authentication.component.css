@@ -1,7 +1,15 @@
 .login-body{
   width: 60%;
-  height: 95%;
+  height: 100%;
   float: left;
   background-image: url("../../../../assets/banners/banner-login.png");
   background-repeat: no-repeat;
+ }
+
+
+ @media (max-width: 1366px)   {
+  .login-body{
+    width: 0%;
+    visibility: collapse
+}
  }

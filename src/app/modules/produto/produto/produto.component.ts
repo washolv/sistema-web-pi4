@@ -21,7 +21,7 @@ export class ProdutoComponent implements OnInit {
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
   color: ThemePalette = 'primary';
-  userRole:string;
+  userRole?:string;
   totalRegistros: number=0;
   page: number=1
   teste: boolean=false;
@@ -39,6 +39,7 @@ export class ProdutoComponent implements OnInit {
           });
       });
       this.userRole=this.roleGuardService.getUserRole();
+      console.log(this.userRole)
       this.isAdmin=this.userRole=='ROLE_ADMIN';
   }
 

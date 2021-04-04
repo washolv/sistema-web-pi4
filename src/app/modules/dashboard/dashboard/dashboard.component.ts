@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     const user = <TokenDecoded>this.roleGuardService.decodeJWT();
     console.log(user)
     if(user){
-      this.userRole = user.authorities![0];
+      this.userRole = user.aud;
     }else{
       this.userRole = '';
     }
