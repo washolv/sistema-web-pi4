@@ -16,20 +16,14 @@
       <li class="nav-item" *ngIf="userRole==='ROLE_ADMIN'"><a class="nav-link"  routerLink="/clientes">Clientes</a></li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      <li class="nav-item  dropdown">
+        <a class="custom-link nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Minha Conta
+          Olá, faça seu login <br>   ou cadastre-se
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <ng-container *ngIf="userRole">
-            <a class="dropdown-item" href="#">Configurações</a>
-            <a class="dropdown-item" (click)="logout()">Sair</a>
-          </ng-container>
-          <ng-container *ngIf="!userRole">
-            <a class="dropdown-item" routerLink='/login'>Entrar</a>
-            <a class="dropdown-item" (click)="logout()">Cadastre-se</a>
-          </ng-container>
+        <div class="custom-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item custom-item" routerLink='/login'>Entrar</a>
+            <a class="dropdown-item" routerLink='/criar-conta'>Cliente novo? Cadastre-se</a>
         </div>
       </li>
     </ul>

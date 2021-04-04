@@ -50,13 +50,10 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.loginForm.valid){
-      this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
-        if(response){
-          this.router.navigate(['']);
-          this.usuarioAutenticado = response;
-          window.localStorage.setItem('access_token', this.usuarioAutenticado.access_token!);
-        }
+      this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe((response: any) => {
+       console.log(response.HttpHeaders )
       }, HttpErrorResponse => {
+        console.log(HttpErrorResponse)
         this.toastr.error("Usuário ou senha inválida", "Erro", {
           timeOut: 3000, positionClass: 'toast-top-center',
         });

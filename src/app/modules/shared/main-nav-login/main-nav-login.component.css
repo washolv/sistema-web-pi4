@@ -6,3 +6,16 @@
   font-weight: bold;
 }
 
+.custom-drop{
+  background-color: #8E88DF;
+  width: 250px;
+
+}
+
+.custom-item{
+  font-weight: bold;
+  width: 250px;
+}
+.img-fluid{
+  width: 10%;
+}

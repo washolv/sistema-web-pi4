@@ -7,7 +7,6 @@ export const environment = {
   production: false,
   clientId:'my-angular-app',
   clientSecret:'@321',
-  obterTokenUrl: '/oauth/token'
 };
 
 /*

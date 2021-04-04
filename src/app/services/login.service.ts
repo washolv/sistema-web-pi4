@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,20 +17,13 @@ export class LoginService {
   apiUrl = environment.baseAPIUrl;
   clienteId = environment.clientId;
   clienteSecret = environment.clientSecret;
-  tokenUrl = this.apiUrl + environment.obterTokenUrl;
 
-  public login(username: string, password: string): Observable<AuthenticatedUser> {
-    const httpParams = new HttpParams()
-      .set('username', username)
-      .set('password', password)
-      .set('grant_type', 'password');
+  public login(username: string, password: string) {
+    let usuario = { username: username, password: password }
+    let r= this.http.post<HttpResponse<any>>(`${this.apiUrl}/login`, usuario);
+    console.log(r)
+    return r;
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Basic ' + btoa(`${this.clienteId}:${this.clienteSecret}`), 'Content-Type': 'application/x-www-form-urlencoded'
-      }),
-    };
-    return this.http.post(this.tokenUrl, httpParams.toString(), httpOptions);
   }
 
   logout() {
