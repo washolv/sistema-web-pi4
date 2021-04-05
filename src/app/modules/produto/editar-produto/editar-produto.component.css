@@ -28,3 +28,6 @@ ngb-rating {
   color: #FFC300;
   border:none;
 }
+.form-control{
+  border: none;
+}
