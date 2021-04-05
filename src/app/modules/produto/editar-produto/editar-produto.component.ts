@@ -10,6 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertService } from '../../shared/modal-alerta/alert.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
+import { isForOfStatement } from 'typescript';
 
 @Component({
   selector: 'app-editar-produto',
@@ -115,18 +116,27 @@ export class EditarProdutoComponent implements OnInit {
           Validators.required,
         ])),
       status: new FormControl({value: produto.status, disabled: isAdmin}),
+      qtdEstrelas: new FormControl('')
     });
   }
 
-  public editarProduto(p: Produto) {
-    p.qtdEstrelas = this.currentRate;
+  public editarProduto() {
+    this.formProduto.value.qtdEstrelas = this.currentRate;
+    let produto: Produto=new Produto();
+    if(this.userRole=='ROLE_ADMIN'){
+      produto=this.formProduto.value;
+    }else if(this.userRole=='ROLE_ESTOQUISTA'){
+        produto=this.produto
+        produto.quantidadeEstoque=this.formProduto.value.quantidadeEstoque
+    }
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {
         this.formProduto.value.status = 1;
       } else {
         this.formProduto.value.status = 0;
       }
-      this.produtoService.editarProduto(p).subscribe((response: any) => {
+      console.log(this.formProduto.value)
+      this.produtoService.editarProduto(produto).subscribe((response: any) => {
         if (response) {
           this.toastr.success("Produto alterado com sucesso", "Ok", {
             timeOut: 3000, positionClass: 'toast-top-center',
