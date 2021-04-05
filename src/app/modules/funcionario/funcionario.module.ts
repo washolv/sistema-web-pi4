@@ -19,8 +19,10 @@ import { DatepickerModule, WavesModule } from 'ng-uikit-pro-standard'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminGuard } from 'src/app/services/admin.guard';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {NgxMaskModule} from 'ngx-mask';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxMaskModule } from 'ngx-mask';
+import { ModalModule, TooltipModule, PopoverModule, ButtonsModule } from 'angular-bootstrap-md'
+import { ModalAlterarSenhaComponent } from './editar-funcionario/modals/modal-alterar-senha/modal-alterar-senha.component';
 
 
 const routes: Routes = [
@@ -44,6 +46,10 @@ const routes: Routes = [
     NgbModule,
     MatTabsModule,
     MatButtonModule,
+    ModalModule,
+    TooltipModule,
+    PopoverModule,
+    ButtonsModule,
     MatButtonModule,
     MatIconModule,
     DatepickerModule,
@@ -54,7 +60,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     NgxMaskModule.forChild(),
   ],
-  declarations: [FuncionarioComponent, EditarFuncionarioComponent, AdicionarFuncionarioComponent],
+  declarations: [FuncionarioComponent, EditarFuncionarioComponent, AdicionarFuncionarioComponent, ModalAlterarSenhaComponent],
   providers: [
   ], bootstrap: [AdicionarFuncionarioComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

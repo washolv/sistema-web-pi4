@@ -1,0 +1,22 @@
+<div class="modal-body">
+  <div class="modal-header">
+    <div class="modal-title mx-auto">Alterar Senha</div>
+    <button (click)="close()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="formSenha">
+      <input class="rounded" formControlName="senha" type="password" required name="senha" id="senha"
+        [ngClass]="{'is-invalid': !formValid && f.senha.errors}">
+      <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
+        <div *ngIf="f.senha.errors.required">* Campo obrigatório</div>
+        <div *ngIf="f.senha.errors.minlength">* Senha inválida</div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="confirmar()" class="btn btn-dark mx-auto">Confirmar</button>
+  </div>
+</div>

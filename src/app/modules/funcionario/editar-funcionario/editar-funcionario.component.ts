@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMyOptions } from 'ng-uikit-pro-standard';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { Endereco, Funcionario } from '../models/Funcionario';
+import { ModalAlterarSenhaComponent } from './modals/modal-alterar-senha/modal-alterar-senha.component';
 
 @Component({
   selector: 'app-editar-funcionario',
@@ -23,7 +25,7 @@ export class EditarFuncionarioComponent implements OnInit {
   public color: ThemePalette = 'primary';
   public id = 0;
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
-  constructor(private toastr: ToastrService, private route: ActivatedRoute, private funcionarioService: FuncionarioService, private fb: FormBuilder,
+  constructor(private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private funcionarioService: FuncionarioService, private fb: FormBuilder,
     private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
@@ -103,7 +105,31 @@ export class EditarFuncionarioComponent implements OnInit {
     this.router.navigate(['/funcionarios'])
   }
 
-
+  alterarSenha(){
+    const dialogRef = this.dialog.open(ModalAlterarSenhaComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur',
+      data: {
+        funcionario: this.funcionario
+      }
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.funcionario=response;
+        console.log(response)
+        this.funcionarioService.editarFuncionario(this.funcionario).subscribe(response=>{
+          this.toastr.success("Senha alterada com sucesso", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        },err=>{
+          this.toastr.error("Falha ao alterar senha", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
   public buscarCep() {
     if (!this.f.cep.errors) {
       this.buscarCepService.buscar(this.formFuncionario.value.cep).subscribe(res => {
