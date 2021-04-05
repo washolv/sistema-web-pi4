@@ -82,7 +82,6 @@ export class EditarFuncionarioComponent implements OnInit {
   }
   public salvarFuncionario() {
     if (this.formFuncionario.valid) {
-
       this.funcionario.nome = this.formFuncionario.value.nome;
       this.funcionario.status = this.formFuncionario.value.status;
       this.funcionario.cargo = this.formFuncionario.value.cargo;
