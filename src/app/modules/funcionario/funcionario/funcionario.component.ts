@@ -24,11 +24,6 @@ export class FuncionarioComponent implements OnInit {
   ngOnInit() {
   }
   public habilitarFuncionario(f: Funcionario,) {
-    if (f.status) {
-      f.status = 1;
-    } else {
-      f.status = 0;
-    }
     this.funcionarioService.editarFuncionario(f).subscribe((response: any) => {
     });
   }

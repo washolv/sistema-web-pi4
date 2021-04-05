@@ -15,7 +15,6 @@ export class Produto {
 
 }
 
-
 export class Imagem{
   imagem?: File;
   imageToShow?:SafeResourceUrl;

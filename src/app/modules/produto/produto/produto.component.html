@@ -50,7 +50,7 @@
             <td>{{produto.qtdEstrelas}}</td>
             <td>{{produto.quantidadeEstoque}}</td>
             <td>
-              <mat-slide-toggle [(ngModel)]="produto.status" (change)="habilitarProduto(produto)" [color]="color"
+              <mat-slide-toggle [(ngModel)]="produto.status" [disabled]="!isAdmin" (change)="habilitarProduto(produto)" [color]="color"
                 class="align-middle"></mat-slide-toggle>
             </td>
             <td>

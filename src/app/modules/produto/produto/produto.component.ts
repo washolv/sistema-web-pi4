@@ -9,6 +9,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { LOCALE_ID } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { HttpResponse } from '@angular/common/http';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
 @Component({
   selector: 'app-produto',
@@ -20,12 +21,12 @@ export class ProdutoComponent implements OnInit {
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
   color: ThemePalette = 'primary';
-
+  userRole:string;
   totalRegistros: number=0;
   page: number=1
   teste: boolean=false;
-
-  constructor(private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
+  isAdmin=false;
+  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
@@ -37,17 +38,20 @@ export class ProdutoComponent implements OnInit {
             }
           });
       });
+      this.userRole=this.roleGuardService.getUserRole();
+      this.isAdmin=this.userRole=='ROLE_ADMIN';
   }
 
   public habilitarProduto(p: Produto) {
+    if(this.userRole=='ROLE_ADMIN'){
       if (p.status) {
         p.status = 1;
       } else {
         p.status = 0;
       }
       this.produtoService.editarProduto(p).subscribe((response: any) => {
-          console.log(response);
       });
+    }
   }
   ngOnInit() {
     console.log('****************')

@@ -1,17 +1,12 @@
-import { PathLocationStrategy } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { element } from 'protractor';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { GenericValidators } from '../../shared/validators/generic-validators';
 import { Imagem, Produto } from '../models/Produto';
 import { ThemePalette } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ModalAlertaComponent } from '../../shared/modal-alerta/modal-alerta.component';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertService } from '../../shared/modal-alerta/alert.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';

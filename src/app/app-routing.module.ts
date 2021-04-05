@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FuncionarioComponent } from './modules/funcionario/funcionario/funcionario.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
-import { LoginComponent } from './modules/login/login/login.component';
-import { CriarContaComponent } from './modules/login/criar-conta/criar-conta.component';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/admin.guard';
+import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

@@ -15,12 +15,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditarFuncionarioComponent } from './editar-funcionario/editar-funcionario.component';
 import { AdicionarFuncionarioComponent } from './adicionar-funcionario/adicionar-funcionario.component';
 import { FuncionarioComponent } from './funcionario/funcionario.component';
+import { DatepickerModule, WavesModule } from 'ng-uikit-pro-standard'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AdminGuard } from 'src/app/services/admin.guard';
 
 
 const routes: Routes = [
   { path: '', component: FuncionarioComponent },
-  { path: 'editar/:id', component: EditarFuncionarioComponent },
-  { path: 'adicionar', component: AdicionarFuncionarioComponent },
+  { path: 'editar/:id', component: EditarFuncionarioComponent, canActivate: [AdminGuard] },
+  { path: 'adicionar', component: AdicionarFuncionarioComponent, canActivate: [AdminGuard] },
 ];
 @NgModule({
   imports: [
@@ -40,8 +44,15 @@ const routes: Routes = [
     MatButtonModule,
     MatButtonModule,
     MatIconModule,
+    DatepickerModule,
+    MatNativeDateModule,
+    WavesModule,
+    MatFormFieldModule,
+    CurrencyMaskModule
   ],
   declarations: [FuncionarioComponent, EditarFuncionarioComponent, AdicionarFuncionarioComponent],
-   schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  providers: [
+  ], bootstrap: [AdicionarFuncionarioComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FuncionarioModule { }
