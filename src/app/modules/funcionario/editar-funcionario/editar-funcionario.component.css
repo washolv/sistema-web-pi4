@@ -12,7 +12,9 @@
   opacity: 0.6;
   border: none;
 }
-
+.form-control{
+  border: none;
+}
 ngb-rating {
   font-size: 35px;
   color: #FFC300;

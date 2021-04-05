@@ -20,7 +20,7 @@
         </div>
         <div class="col-lg-3 col-sm-12 mb-12">
           <label for="validationDefault02">* CPF</label>
-          <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
+          <input type="text" name="cpf" placeholder="000.000.00-00 "  mask="000.000.000-00" formControlName="cpf"
             class="form-control cpf-mask" required [ngClass]="{ 'is-invalid': !formValid && f.cpf.errors }"
             maxlength="14">
           <div *ngIf="!formValid && f.cpf.errors" class="invalid-feedback">
@@ -33,7 +33,7 @@
       <div class="form-row mt-2">
         <div class="col-lg-3 col-sm-12">
           <label for="example-date-input">* Data de Nascimento</label>
-          <input class="form-control" value="{{funcionario.dataNascimento | date: 'yyyy-MM-dd'}}" type="date"
+          <input class="form-control" formControlName="dataNascimento" value="{{funcionario.dataNascimento | date: 'yyyy-MM-dd'}}" type="date"
             [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento.errors}">
           <div *ngIf="!formValid && f.dataNascimento.errors" class="invalid-feedback" mask='00/00/0000'>
             <div *ngIf="f.dataNascimento.errors.required">* Campo obrigatório</div>
@@ -89,9 +89,6 @@
           <input id="cep" name="cep" mask="00000-000" formControlName="cep"
             [ngClass]="{ 'is-invalid': !formValid && f.cep.errors }" placeholder="Apenas números"
             class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
-          <div class="row mt-2 col-lg-12">
-            <button type="button" class="btn btn-primary" (click)="buscarCep()">Pesquisar</button>
-          </div>
           <div *ngIf="!formValid && f.cep.errors" class="invalid-feedback">
             <div *ngIf="f.cep.errors.required">* Campo obrigatório</div>
             <div *ngIf="f.cep.errors.minlength">* CEP inválido</div>
