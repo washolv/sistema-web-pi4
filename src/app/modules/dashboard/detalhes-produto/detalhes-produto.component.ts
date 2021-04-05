@@ -35,7 +35,6 @@ export class DetalhesProdutoComponent implements OnInit {
 
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
-      console.log(response);
       response.forEach(element =>
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
@@ -49,7 +48,6 @@ export class DetalhesProdutoComponent implements OnInit {
 
   public createForm(produto: Produto): FormGroup {
     const status = produto.status == 1;
-    console.log(status);
     if (status) {
       return this.fb.group({
         id: new FormControl(produto.id),

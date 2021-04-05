@@ -39,7 +39,6 @@ export class ProdutoComponent implements OnInit {
           });
       });
       this.userRole=this.roleGuardService.getUserRole();
-      console.log(this.userRole)
       this.isAdmin=this.userRole=='ROLE_ADMIN';
   }
 
@@ -55,12 +54,10 @@ export class ProdutoComponent implements OnInit {
     }
   }
   ngOnInit() {
-    console.log('****************')
     this.produtoService.getProdutos()
       .subscribe((response: HttpResponse<Produto[]>) => {
         this.produtos = <Produto[]> response.body;
         this.totalRegistros=this.produtos.length;
-        console.log(this.totalRegistros);
       }, err => {
         console.log(err);
       });

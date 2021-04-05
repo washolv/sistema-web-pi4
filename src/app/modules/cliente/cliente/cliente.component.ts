@@ -40,7 +40,6 @@ export class ClienteComponent implements OnInit {
       c.status = 0;
     }
     this.clienteService.editarCliente(c).subscribe((response: any) => {
-      console.log(response);
     });
   }
   public editarCliente(c: Cliente){

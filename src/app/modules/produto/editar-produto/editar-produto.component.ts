@@ -41,7 +41,6 @@ export class EditarProdutoComponent implements OnInit {
       this.produto = response
       this.currentRate = <number>this.produto.qtdEstrelas;
       this.formProduto = this.testeForm(this.produto);
-      console.log(this.formProduto.value)
     })
     this.produtoService.getImagensProduto(this.id).subscribe(response => {
       this.imagens = response;
@@ -77,7 +76,6 @@ export class EditarProdutoComponent implements OnInit {
   }
   editarImagens() {
     if (this.formProduto.valid) {
-      console.log(this.formProduto.valid)
       this.router.navigate([`/produtos/editar/imagens`, this.formProduto.value.id]);
     }
   }
@@ -122,7 +120,6 @@ export class EditarProdutoComponent implements OnInit {
 
   public editarProduto(p: Produto) {
     p.qtdEstrelas = this.currentRate;
-    console.log(this.formProduto.value)
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {
         this.formProduto.value.status = 1;

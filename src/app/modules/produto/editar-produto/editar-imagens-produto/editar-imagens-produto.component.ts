@@ -68,7 +68,6 @@ export class EditarImagensProdutoComponent implements OnInit {
         this.novasImagems.push(reader.result)
       }
     }
-    console.log(this.novasImagems);
   }
   deleteImage(url: any, i: number): void {
     this.novasImagems = this.novasImagems.filter((a: any) => a !== url);

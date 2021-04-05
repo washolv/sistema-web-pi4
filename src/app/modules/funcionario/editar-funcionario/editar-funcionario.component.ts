@@ -31,7 +31,6 @@ export class EditarFuncionarioComponent implements OnInit {
     this.formFuncionario = this.createFormFuncionario(this.funcionario);
     funcionarioService.buscarFuncionarioPorId(this.id).subscribe(res => {
       this.funcionario = res;
-      console.log(this.funcionario)
       this.formFuncionario = this.createFormFuncionario(this.funcionario);
     })
   }
@@ -97,7 +96,6 @@ export class EditarFuncionarioComponent implements OnInit {
       this.funcionario.email = this.formFuncionario.value.email;
       this.funcionario.endereco = this.endereco;
       this.funcionario.cargo = this.formFuncionario.value.cargo;
-      console.log(this.funcionario)
       this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
         this.toastr.success("Funcionário editado com sucesso", "OK", {
           timeOut: 3000, positionClass: 'toast-top-center',
@@ -124,7 +122,6 @@ export class EditarFuncionarioComponent implements OnInit {
           this.formFuncionario.value.uf = res.uf;
           this.formFuncionario.value.localidade = res.localidade;
           this.cepValido = true;
-          console.log(this.formFuncionario.value)
         }else{
           this.toastr.error("CEP não encontrado", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',

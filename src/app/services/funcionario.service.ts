@@ -16,7 +16,6 @@ export class FuncionarioService {
     return this.http.put<Funcionario>(`${this.apiUrl}/funcionarios`, funcionario);
   }
   public postFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    console.log(funcionario)
     return this.http.post<Funcionario>(`${this.apiUrl}/funcionarios`, funcionario);
   }
   public buscarFuncionarioPorNome(nome: string): Observable<Funcionario[]> {

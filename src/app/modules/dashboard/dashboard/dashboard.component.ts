@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private roleGuardService: RoleGuardService) {
     const user = <TokenDecoded>this.roleGuardService.decodeJWT();
-    console.log(user)
     if(user){
       this.userRole = user.aud;
     }else{

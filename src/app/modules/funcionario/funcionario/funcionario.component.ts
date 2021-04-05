@@ -44,7 +44,6 @@ export class FuncionarioComponent implements OnInit {
      this.spinner.show();
 
     this.funcionarioService.buscarFuncionarios().subscribe(response=>{
-      console.log(response)
       this.funcionarios=response;
     })
   }

@@ -51,23 +51,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      /* this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe((response: any) => {
-         console.log(response['headers'].keys());
-         console.log(response['headers'].get('expires'));
-       }, err=>{
-         this.toastr.error("Usuário ou senha inválida", "Erro", {
-           timeOut: 3000, positionClass: 'toast-top-center',
-         });
-       }
-       );*/
       this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(resp => {
-        const token=resp.headers.get('Authorization')?.replace('Bearer', '');
-        window.localStorage.setItem('access_token', token!)
-        this.router.navigate(['/dashboard'])
+        if(resp){
+          const token=resp.headers.get('Authorization')?.replace('Bearer', '');
+          window.localStorage.setItem('access_token', token!)
+          this.router.navigate(['/dashboard'])
+        }
+      },err=>{
+        this.toastr.error("Login ou senha inválida", "Erro", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
       }
       );
     } else {
-      console.log(this.loginForm.value)
       this.formValid = false;
     }
   }
