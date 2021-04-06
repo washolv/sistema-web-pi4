@@ -49,23 +49,31 @@
             <td>{{produto.qtdEstrelas}}</td>
             <td>{{produto.quantidadeEstoque}}</td>
             <td>
-              <mat-slide-toggle [(ngModel)]="produto.status" [disabled]="!isAdmin" (change)="habilitarProduto(produto)" [color]="color"
-                class="align-middle"></mat-slide-toggle>
+              <mat-slide-toggle [(ngModel)]="produto.status" [disabled]="!isAdmin" (change)="habilitarProduto(produto)"
+                [color]="color" class="align-middle"></mat-slide-toggle>
             </td>
             <td>
               <button class="btn">
                 <img src="../../../assets/lupa.svg" (click)="visualizar(produto)" class="btn-icon-add" alt="add">
               </button>
-              <button class="btn">
-                <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
-                  alt="add">
-              </button>
+              <div *ngIf="isAdmin">
+                <button class="btn">
+                  <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
+                    alt="add">
+                </button>
+              </div>
+              <div *ngIf="!isAdmin">
+                <button (click)="adicionarEstoque(produto)" class="btn">
+                  <img src="../../../assets/plus-circle.svg" class="btn-icon-add"
+                    alt="Alterar estoque" title="Alterar estoque">
+                </button>
+              </div>
             </td>
         </tbody>
       </table>
       <div class="row">
         <div class="col-lg-8  "></div>
-        <pagination-controls id="listing_pagination"  maxlength='5' previousLabel="Anterior"   nextLabel="próximo"
+        <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
           (pageChange)="page = $event">
         </pagination-controls>
       </div>

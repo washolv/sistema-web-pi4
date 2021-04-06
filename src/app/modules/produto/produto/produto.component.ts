@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AdicionarEstoqueComponent } from './../modals/adicionar-estoque/adicionar-estoque.component';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -10,6 +12,7 @@ import { LOCALE_ID } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { HttpResponse } from '@angular/common/http';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-produto',
@@ -17,6 +20,7 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
   styleUrls: ['./produto.component.css']
 })
 export class ProdutoComponent implements OnInit {
+  public modalRef: BsModalRef | undefined;
   public produtos: Produto[] = [];
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
@@ -26,7 +30,13 @@ export class ProdutoComponent implements OnInit {
   page: number=1
   teste: boolean=false;
   isAdmin=false;
-  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
+
+  openModal(template: TemplateRef<any>, produto: Produto) {
+    this.modalRef = this.modalService.show(template);
+
+  }
+
+  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService, private modalService: BsModalService, private toastr: ToastrService) {
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
@@ -98,6 +108,35 @@ export class ProdutoComponent implements OnInit {
   visualizar(produto: Produto) {
     this.router.navigate([`/produtos/visualizar`, produto.id]);
   }
+
+  atualizarEstoque(produto: Produto) {
+    //this.router.navigate([`/produtos/editar`, produto.id]);
+  }
+
+  adicionarEstoque(produto: Produto) {
+    const dialogRef = this.dialog.open(AdicionarEstoqueComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur',
+      data: {
+        produto: produto
+      }
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.produtoService.editarProduto(response).subscribe(response => {
+          this.toastr.success("Quantidade atualizada com sucesso!", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }, err => {
+          this.toastr.error("Falha ao alterar estoque", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+
 }
 
 
