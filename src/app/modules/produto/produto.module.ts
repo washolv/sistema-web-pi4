@@ -27,7 +27,7 @@ import { AdminGuard } from 'src/app/services/admin.guard';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent },
-  { path: 'editar/:id', component: EditarProdutoComponent },
+  { path: 'editar/:id', component: EditarProdutoComponent,canActivate: [AdminGuard] },
   { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AdminGuard],},
   { path: 'visualizar/:id', component: VisualizarProdutoComponent},
   { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent, canActivate: [AdminGuard]},

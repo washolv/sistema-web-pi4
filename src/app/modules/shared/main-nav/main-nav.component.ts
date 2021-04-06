@@ -12,9 +12,10 @@ import { TokenDecoded } from '../../login/login/models/TokenDecoded';
 
 export class MainNavComponent implements OnInit {
   public userRole;
-
+  public user;
   constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
     this.userRole=roleGuardService.getUserRole();
+    this.user=roleGuardService.decodeJWT();
   }
 
   ngOnInit() {
