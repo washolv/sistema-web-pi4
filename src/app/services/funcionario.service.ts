@@ -35,9 +35,9 @@ export class FuncionarioService {
   }
   public cpfNaoCadastrado(cpf: string): boolean {
     const httpOptions = {
-      headers: new HttpHeaders({ 'cpf': cpf })
+      headers: new HttpHeaders({'cpf': cpf })
     };
-     this.http.get<Funcionario>(`${this.apiUrl}/usuarios`, httpOptions).subscribe(response =>{
+     this.http.get<Funcionario>(`${this.apiUrl}/funcionarios/cpf`, httpOptions).subscribe(response =>{
       if(!response){
         return false;
       }
