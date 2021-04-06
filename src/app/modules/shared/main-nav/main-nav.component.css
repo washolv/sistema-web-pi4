@@ -2,23 +2,40 @@
   font-weight: bold;
   background-color: #F1F1F1
 }
-.nav-link{
-  font-weight: bold;
-}
 
 .custom-drop{
   background-color: #F1F1F1     ;
   width: 250px;
-
 }
 
 .custom-item{
   font-weight: bold;
   width: 250px;
 }
-
+@media screen and (max-width:768px) {
+  .img-fluid{
+    display: none;
+  }
+  .navbar{
+    width: 100%;
+  }
+}
 .navbar-brand{
   width: 40%;
+}
+.nav-link{
+  color: black;
+  font-size: 15px;
+}
+.navbar-nav > .active > a {
+  color: aqua;
+  background-color: chartreuse;
+}
+.nav-item > a:hover {
+  color: #0C3758;
+}
+.nome{
+  font-weight: bold;
 }
 
 .custom-cart{
