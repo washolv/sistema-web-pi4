@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -10,6 +10,7 @@ import { LOCALE_ID } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { HttpResponse } from '@angular/common/http';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-produto',
@@ -17,6 +18,7 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
   styleUrls: ['./produto.component.css']
 })
 export class ProdutoComponent implements OnInit {
+  public modalRef: BsModalRef | undefined;
   public produtos: Produto[] = [];
   public filtroPesquisa: string = "";
   searchFilter = new Subject<string>();
@@ -26,7 +28,13 @@ export class ProdutoComponent implements OnInit {
   page: number=1
   teste: boolean=false;
   isAdmin=false;
-  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService) {
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+
+  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService, private modalService: BsModalService) {
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
@@ -98,6 +106,7 @@ export class ProdutoComponent implements OnInit {
   visualizar(produto: Produto) {
     this.router.navigate([`/produtos/visualizar`, produto.id]);
   }
+
 }
 
 
