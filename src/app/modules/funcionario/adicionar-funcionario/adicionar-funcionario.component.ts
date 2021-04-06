@@ -118,6 +118,8 @@ export class AdicionarFuncionarioComponent implements OnInit {
           });
         }
       })
+    }else{
+      this.formValid=false;
     }
   }
   public backPage() {
