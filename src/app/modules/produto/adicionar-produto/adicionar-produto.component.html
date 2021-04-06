@@ -13,15 +13,17 @@
           <label for="validationDefault01">Nome</label>
           <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
           <ng-container *ngIf="f.nome.errors">
-            <p class="custom-invalid" *ngIf="f.nome.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
-        </ng-container>
+            <p class="custom-invalid" *ngIf="f.nome.errors.required && !formValid" style="color:red">* Campo obrigatório
+            </p>
+          </ng-container>
         </div>
         <div class="col-lg-3 col-sm-12 mb-12">
           <label for="validationDefault02">Descricao</label>
           <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
             required>
-            <ng-container *ngIf="f.descricao.errors">
-              <p class="custom-invalid" *ngIf="f.descricao.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
+          <ng-container *ngIf="f.descricao.errors">
+            <p class="custom-invalid" *ngIf="f.descricao.errors.required && !formValid" style="color:red">* Campo
+              obrigatório</p>
           </ng-container>
         </div>
       </div>
@@ -34,22 +36,25 @@
               aria-describedby="inputGroupPrepend2" formControlName="preco" required>
           </div>
           <ng-container *ngIf="f.preco.errors">
-            <p class="custom-invalid" *ngIf="f.preco.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
-        </ng-container>
+            <p class="custom-invalid" *ngIf="f.preco.errors.required && !formValid" style="color:red">* Campo
+              obrigatório</p>
+          </ng-container>
         </div>
         <div class="col-lg-3 col-sm-12">
           <label class="custom-lbl" for="validationDefaultUsername">Qtd. Estoque</label>
           <div class="input-group">
             <input type="number" class="form-control" name="quantidadeEstoque" pattern="[0-9]*"
-            placeholder="Qtd. em estoque" formControlName="quantidadeEstoque" required>
+              placeholder="Qtd. em estoque" formControlName="quantidadeEstoque" required>
           </div>
           <ng-container *ngIf="f.quantidadeEstoque.errors">
-            <p class="custom-invalid" *ngIf="(f.quantidadeEstoque.errors.required) && !formValid" style="color:red">* Campo obrigatório</p>
-        </ng-container>
+            <p class="custom-invalid" *ngIf="(f.quantidadeEstoque.errors.required) && !formValid" style="color:red">*
+              Campo obrigatório</p>
+          </ng-container>
         </div>
         <div class="mt-4 col-lg-3 col-sm-12 ">
           <div class="input-group">
-            <mat-slide-toggle formControlName="status" (click)="changeStatus()" [color]="color" class="align-middle">Habilitar Produto
+            <mat-slide-toggle formControlName="status" (click)="changeStatus()" [color]="color" class="align-middle">
+              Habilitar Produto
             </mat-slide-toggle>
           </div>
         </div>
@@ -66,8 +71,9 @@
             </mat-select>
           </mat-form-field>
           <ng-container *ngIf="f.categoria.errors">
-            <p class="custom-invalid" *ngIf="f.categoria.errors.required && !formValid" style="color:red">* Campo obrigatório</p>
-        </ng-container>
+            <p class="custom-invalid" *ngIf="f.categoria.errors.required && !formValid" style="color:red">* Campo
+              obrigatório</p>
+          </ng-container>
         </div>
       </div>
 

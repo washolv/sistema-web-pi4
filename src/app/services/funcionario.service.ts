@@ -21,11 +21,29 @@ export class FuncionarioService {
   public buscarFuncionarioPorNome(nome: string): Observable<Funcionario[]> {
     return this.http.get<Funcionario[]>(`${this.apiUrl}/funcionarios/${nome}`);
   }
-  public buscarPorEmail(email: string): Observable<Funcionario> {
+  public emailNaoCadastrado(email: string): boolean {
     const httpOptions = {
       headers: new HttpHeaders({ 'email': email })
     };
-    return this.http.get<Funcionario>(`${this.apiUrl}/usuarios`, httpOptions);
+     this.http.get<Funcionario>(`${this.apiUrl}/usuarios`, httpOptions).subscribe(response =>{
+      if(!response){
+        return true;
+      }
+      return false;
+    });
+    return false;
+  }
+  public cpfNaoCadastrado(cpf: string): boolean {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'cpf': cpf })
+    };
+     this.http.get<Funcionario>(`${this.apiUrl}/usuarios`, httpOptions).subscribe(response =>{
+      if(!response){
+        return false;
+      }
+      return false;
+    });
+    return false;
   }
   //FALTA A IRRESPONSAVEL DA DEBORA FAZER
   public buscarFuncionarioPorId(id: number): Observable<Funcionario> {

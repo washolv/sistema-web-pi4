@@ -85,8 +85,8 @@ export class AdicionarFuncionarioComponent implements OnInit {
 
   public addFuncionario() {
     if (this.formFuncionario.valid) {
-      this.funcionarioService.buscarPorEmail(this.formFuncionario.value.email).subscribe(response => {
-        if (!response) {
+      if (this.funcionarioService.emailNaoCadastrado(this.formFuncionario.value.email)) {
+        if (this.funcionarioService.cpfNaoCadastrado(this.formFuncionario.value.cpf)) {
           this.endereco.cep = this.formFuncionario.value.cep;
           this.endereco.cidade = this.formFuncionario.value.localidade;
           this.endereco.logradouro = this.formFuncionario.value.logradouro;
@@ -113,13 +113,17 @@ export class AdicionarFuncionarioComponent implements OnInit {
             });
           })
         } else {
-          this.toastr.error("e-mail já cadastrado", "Erro", {
+          this.toastr.error("CPF já cadastrado", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         }
-      })
-    }else{
-      this.formValid=false;
+      } else {
+        this.toastr.error("e-mail já cadastrado", "Erro", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
+      }
+    } else {
+      this.formValid = false;
     }
   }
   public backPage() {
