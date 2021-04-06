@@ -47,7 +47,7 @@
             <td *ngIf="isAdmin">{{funcionario.telefone! | mask: '(00)00000-0000'}}</td>
             <td>{{funcionario.cargo}}</td>
             <td>
-              <mat-slide-toggle [(ngModel)]="funcionario.status" [disabled]="!isAdmin" (change)="habilitarFuncionario(funcionario)" [color]="color"
+              <mat-slide-toggle [(ngModel)]="funcionario.usuario!.active" [disabled]="!isAdmin" (change)="habilitarFuncionario(funcionario)" [color]="color"
                 class="align-middle"></mat-slide-toggle>
             </td>
             <td>

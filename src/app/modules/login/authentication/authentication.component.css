@@ -1,15 +1,15 @@
+
 .login-body{
-  width: 60%;
-  height: 100%;
+  width: 55%;
+  height: 93%;
   float: left;
-  background-image: url("../../../../assets/banners/banner-login.png");
+  background-image: url("../../../../assets/logos/Grupo 1.png");
   background-repeat: no-repeat;
  }
 
 
- @media (max-width: 1366px)   {
+ @media (max-width: 768px)   {
   .login-body{
-    width: 0%;
-    visibility: collapse
-}
+    display: none;
+  }
  }
