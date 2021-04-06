@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AdicionarEstoqueComponent } from './../modals/adicionar-estoque/adicionar-estoque.component';
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
@@ -29,12 +31,12 @@ export class ProdutoComponent implements OnInit {
   teste: boolean=false;
   isAdmin=false;
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, produto: Produto) {
     this.modalRef = this.modalService.show(template);
+
   }
 
-
-  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService, private modalService: BsModalService) {
+  constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService, private modalService: BsModalService, private toastr: ToastrService) {
     this.searchFilter.pipe(
       debounceTime(1000),
       distinctUntilChanged())
@@ -105,6 +107,34 @@ export class ProdutoComponent implements OnInit {
   }
   visualizar(produto: Produto) {
     this.router.navigate([`/produtos/visualizar`, produto.id]);
+  }
+
+  atualizarEstoque(produto: Produto) {
+    //this.router.navigate([`/produtos/editar`, produto.id]);
+  }
+
+  adicionarEstoque(produto: Produto) {
+    const dialogRef = this.dialog.open(AdicionarEstoqueComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur',
+      data: {
+        produto: produto
+      }
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.produtoService.editarProduto(response).subscribe(response => {
+          this.toastr.success("Quantidade atualizada com sucesso!", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }, err => {
+          this.toastr.error("Falha ao alterar estoque", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
 }

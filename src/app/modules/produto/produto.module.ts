@@ -1,3 +1,4 @@
+import { AdicionarEstoqueComponent } from './modals/adicionar-estoque/adicionar-estoque.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProdutoComponent } from './produto/produto.component';
@@ -58,7 +59,8 @@ const routes: Routes = [
     AdicionarProdutoComponent,
     VisualizarProdutoComponent,
     AdicionarImagensProdutoComponent,
-    EditarImagensProdutoComponent
+    EditarImagensProdutoComponent,
+    AdicionarEstoqueComponent
   ],
   exports: [
     RouterModule,
