@@ -84,18 +84,34 @@ export class EditarFuncionarioComponent implements OnInit {
   }
   public salvarFuncionario() {
     if (this.formFuncionario.valid) {
-      this.funcionario.nome = this.formFuncionario.value.nome;
-      this.funcionario.status = this.formFuncionario.value.status;
-      this.funcionario.cargo = this.formFuncionario.value.cargo;
+      this.funcionarioService.emailNaoCadastrado(this.formFuncionario.value.email).subscribe(response => {
+        if (!response) {
+          this.funcionarioService.cpfNaoCadastrado(this.formFuncionario.value.cpf).subscribe(r => {
+            if (!r) {
+              this.funcionario.nome = this.formFuncionario.value.nome;
+              this.funcionario.status = this.formFuncionario.value.status;
+              this.funcionario.cargo = this.formFuncionario.value.cargo;
 
-      this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
-        this.toastr.success("Funcionário editado com sucesso", "OK", {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
-      }, err => {
-        this.toastr.error(err, "Erro", {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
+              this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
+                this.toastr.success("Funcionário editado com sucesso", "OK", {
+                  timeOut: 3000, positionClass: 'toast-top-center',
+                });
+              }, err => {
+                this.toastr.error(err, "Erro", {
+                  timeOut: 3000, positionClass: 'toast-top-center',
+                });
+              })
+            }else{
+              this.toastr.error("CPF já cadastrado", "Erro", {
+                timeOut: 3000, positionClass: 'toast-top-center',
+              });
+            }
+          })
+        } else {
+          this.toastr.error("E-mail já cadastrado", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }
       })
     } else {
       this.formValid = false;
@@ -105,7 +121,7 @@ export class EditarFuncionarioComponent implements OnInit {
     this.router.navigate(['/funcionarios'])
   }
 
-  alterarSenha(){
+  alterarSenha() {
     const dialogRef = this.dialog.open(ModalAlterarSenhaComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {
@@ -114,13 +130,12 @@ export class EditarFuncionarioComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        this.funcionario=response;
-        console.log(response)
-        this.funcionarioService.editarFuncionario(this.funcionario).subscribe(response=>{
+        this.funcionario = response;
+        this.funcionarioService.editarFuncionario(this.funcionario).subscribe(response => {
           this.toastr.success("Senha alterada com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
-        },err=>{
+        }, err => {
           this.toastr.error("Falha ao alterar senha", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
