@@ -22,6 +22,7 @@ import { ErrorInterceptor } from './modules/shared/helpers/error.interceptor';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgxMaskModule } from 'ngx-mask';
 import { MainNavLoginComponent } from './modules/shared/main-nav-login/main-nav-login.component';
+import { CheckoutModule } from './modules/checkout/checkout.module';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
     HttpClientModule,
     ProdutoModule,
     LoginModule,
+    CheckoutModule,
     SharedModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),

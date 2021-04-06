@@ -5,6 +5,7 @@ import { AuthenticationComponent } from './modules/login/authentication/authenti
 import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/admin.guard';
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
+import { ClienteGuard } from './services/cliente.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -36,6 +37,14 @@ const routes: Routes = [
     data: {
       expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
+  },
+  {
+    path: 'compras', component: MainNavComponent,
+    loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
+    //canActivate: [ClienteGuard],
+   /* data: {
+      expectedRole: ['ROLE_CLIENTE']
+    }*/
   }
 ];
 
