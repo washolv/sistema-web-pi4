@@ -82,32 +82,41 @@ export class AdicionarFuncionarioComponent implements OnInit {
       localidade: new FormControl('', Validators.required),
     });
   }
+
   public addFuncionario() {
     if (this.formFuncionario.valid) {
-      this.endereco.cep = this.formFuncionario.value.cep;
-      this.endereco.cidade = this.formFuncionario.value.localidade;
-      this.endereco.logradouro = this.formFuncionario.value.logradouro;
-      this.endereco.uf = this.formFuncionario.value.uf;
-      this.funcionario.telefone = this.formFuncionario.value.telefone;
-      this.funcionario.cpf = this.formFuncionario.value.cpf;
-      this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
-      this.funcionario.nome = this.formFuncionario.value.nome;
-      this.funcionario.telefone = this.formFuncionario.value.telefone;
-      this.funcionario.status = this.formFuncionario.value.status;
-      this.funcionario.email = this.formFuncionario.value.email;
-      this.funcionario.senha = this.formFuncionario.value.senha;
-      this.funcionario.endereco = this.endereco;
-      this.funcionario.cargo = this.formFuncionario.value.cargo;
+      this.funcionarioService.buscarPorEmail(this.formFuncionario.value.email).subscribe(response => {
+        if (!response) {
+          this.endereco.cep = this.formFuncionario.value.cep;
+          this.endereco.cidade = this.formFuncionario.value.localidade;
+          this.endereco.logradouro = this.formFuncionario.value.logradouro;
+          this.endereco.uf = this.formFuncionario.value.uf;
+          this.funcionario.telefone = this.formFuncionario.value.telefone;
+          this.funcionario.cpf = this.formFuncionario.value.cpf;
+          this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
+          this.funcionario.nome = this.formFuncionario.value.nome;
+          this.funcionario.telefone = this.formFuncionario.value.telefone;
+          this.funcionario.status = this.formFuncionario.value.status;
+          this.funcionario.email = this.formFuncionario.value.email;
+          this.funcionario.senha = this.formFuncionario.value.senha;
+          this.funcionario.endereco = this.endereco;
+          this.funcionario.cargo = this.formFuncionario.value.cargo;
 
-      this.funcionarioService.postFuncionario(this.funcionario).subscribe(res => {
-        this.toastr.success("Funcionário adicionado com sucesso", "OK", {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
-        this.limparCampos();
-      }, err => {
-        this.toastr.error(err, "Erro", {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
+          this.funcionarioService.postFuncionario(this.funcionario).subscribe(res => {
+            this.toastr.success("Funcionário adicionado com sucesso", "OK", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+            this.limparCampos();
+          }, err => {
+            this.toastr.error(err, "Erro", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+          })
+        } else {
+          this.toastr.error("e-mail já cadastrado", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }
       })
     }
   }

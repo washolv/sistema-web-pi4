@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,6 +20,12 @@ export class FuncionarioService {
   }
   public buscarFuncionarioPorNome(nome: string): Observable<Funcionario[]> {
     return this.http.get<Funcionario[]>(`${this.apiUrl}/funcionarios/${nome}`);
+  }
+  public buscarPorEmail(email: string): Observable<Funcionario> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'email': email })
+    };
+    return this.http.get<Funcionario>(`${this.apiUrl}/usuarios`, httpOptions);
   }
   //FALTA A IRRESPONSAVEL DA DEBORA FAZER
   public buscarFuncionarioPorId(id: number): Observable<Funcionario> {

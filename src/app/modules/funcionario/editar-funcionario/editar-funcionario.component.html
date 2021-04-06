@@ -58,7 +58,7 @@
       </div>
 
       <div class="form-row mt-2">
-        <div class="col-lg-6 col-md-5 col-sm-12 mt-3">
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-3">
           <mat-form-field appearance="fill">
             <mat-label>Cargo</mat-label>
             <mat-select formControlName="cargo">
@@ -68,7 +68,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 col-md-5 col-sm-12 mt-2">
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-2">
           <p class="mr-1">Habilitar Funcionario</p>
           <div class="row mx-auto">
             <mat-slide-toggle formControlName="status" [color]="color" class="align-middle"></mat-slide-toggle>
@@ -81,7 +81,7 @@
       </div>
       <!--DADOS DO ENDEREÇO-->
       <div class="form-row mt-2">
-        <div class="col-lg-6 col-sm-12 mb-12">
+        <div class="col-lg-6 col-sm-12 col-md-12">
           <label class="control-label" for="CEP">* CEP</label>
           <input id="cep" name="cep" mask="00000-000" formControlName="cep"
             [ngClass]="{ 'is-invalid': !formValid && f.cep.errors }" placeholder="Apenas números"
@@ -91,7 +91,7 @@
             <div *ngIf="f.cep.errors.minlength">* CEP inválido</div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12 mb-12">
+        <div class="col-lg-6 col-sm-12 col-md-12">
           <label for="logradouro">Logradouro</label>
           <input type="text" class="form-control" minlength="3" name="logradouro" placeholder="logradouro"
             formControlName="logradouro" [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" required>
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div class="form-row mt-2">
-        <div class="col-lg-6 col-sm-12 mb-12">
+        <div class="col-lg-6 col-sm-12 col-md-12">
           <label for="validationDefault01">Cidade</label>
           <input type="text" class="form-control" minlength="3" editable="true" name="localidade"
             placeholder="localidade" formControlName="localidade"
@@ -110,7 +110,7 @@
             <div *ngIf="f.localidade.errors.required">* Campo obrigatório</div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12 mb-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
           <label for="validationDefault01">UF</label>
           <input type="text" class="form-control" minlength="2" editable="true" name="uf" placeholder="uf"
             formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }" required>
@@ -126,8 +126,8 @@
       </div>
 
       <div class="form-row mt-2">
-        <div class="col-lg-12"><label for="email">* E-mail</label></div>
-        <div class="col-lg-6 col-sm-12">
+        <div class="col-lg-12 col-md-12"><label for="email">* E-mail</label></div>
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-2">
           <input formControlName="email" [ngClass]="{ 'is-invalid': !formValid && f.email.errors }" name="email"
             class="form-control" required placeholder="email@email.com" type="email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
@@ -136,7 +136,7 @@
             <div *ngIf="f.email.errors.invalid">* E-mail inválido</div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12">
+        <div class="col-lg-6 col-sm-12 mt-2">
           <button type="submit" (click)="alterarSenha()" class="btn btn-dark">Alterar senha</button>
         </div>
       </div>
