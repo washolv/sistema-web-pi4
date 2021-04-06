@@ -17,10 +17,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <ng-container *ngIf="!userRole">
-            Olá, faça seu login <br> ou cadastre-se
+            Olá, faça seu login <br>
+             ou cadastre-se
           </ng-container>
           <ng-container *ngIf="userRole">
-            Minha conta <br>
+            Bem-Vindo(a) {{user.nome}}
           </ng-container>
         </a>
         <div class="custom-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

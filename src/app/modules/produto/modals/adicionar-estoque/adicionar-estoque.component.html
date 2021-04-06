@@ -6,10 +6,10 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="qtdEstoque">
-    <label>Quantidade de entrada: </label>
-    <input type="number" formControlName="estoque">
+    <label>Qtd de entrada: </label>
+    <input type="number" class="form-control" formControlName="estoque">
   </form>
 </div>
 <div class="modal-footer">
-  <button (click)="confirmar()" type="button" class="btn btn-primary">Confirmar</button>
+  <button (click)="confirmar()" type="button" class="btn btn-dark">Confirmar</button>
 </div>

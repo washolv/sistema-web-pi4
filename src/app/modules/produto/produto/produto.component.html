@@ -56,18 +56,14 @@
               <button class="btn">
                 <img src="../../../assets/lupa.svg" (click)="visualizar(produto)" class="btn-icon-add" alt="add">
               </button>
-              <div *ngIf="isAdmin">
-                <button class="btn">
-                  <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
-                    alt="add">
-                </button>
-              </div>
-              <div *ngIf="!isAdmin">
-                <button (click)="adicionarEstoque(produto)" class="btn">
-                  <img src="../../../assets/plus-circle.svg" class="btn-icon-add"
-                    alt="Alterar estoque" title="Alterar estoque">
-                </button>
-              </div>
+              <button *ngIf="isAdmin" class="btn">
+                <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
+                  alt="add">
+              </button>
+              <button *ngIf="!isAdmin" (click)="adicionarEstoque(produto)" class="btn">
+                <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="Alterar estoque"
+                  title="Alterar estoque">
+              </button>
             </td>
         </tbody>
       </table>

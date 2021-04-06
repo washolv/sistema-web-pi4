@@ -10,8 +10,8 @@
     </div>
     <hr>
     <form [formGroup]="formProduto">
-      <div class="form-row mt-4">
-        <div class="col-lg-3 col-sm-12 mb-12">
+      <div class="form-row mt-3 mb-3">
+        <div class="col-lg-3 col-sm-12">
           <label for="validationDefault01">Nome</label>
           <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
           <ng-container *ngIf="f.nome.errors">
@@ -19,7 +19,7 @@
             </p>
           </ng-container>
         </div>
-        <div class="col-lg-3 col-sm-12 mb-12">
+        <div class="col-lg-3 col-sm-12">
           <label for="validationDefault02">Descricao</label>
           <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
             required>
@@ -29,7 +29,7 @@
           </ng-container>
         </div>
       </div>
-      <div class="form-row mt-2">
+      <div class="form-row mt-3 mb-3">
         <div class="col-lg-3 col-sm-12">
           <label class="custom-lbl" for="validationDefaultUsername">Preço</label>
           <div class="input-group">
@@ -42,7 +42,8 @@
               obrigatório</p>
           </ng-container>
         </div>
-        <div class="col-lg-3 col-sm-12">
+        <div class="col-lg-3 col-sm-12 ">
+          <label for="validationDefault01">Qtd. Estoque</label>
           <div class="input-group">
             <input type="number" class="form-control" name="quantidadeEstoque" pattern="[0-9]*"
               placeholder="Qtd. em estoque" formControlName="quantidadeEstoque" required>
@@ -53,7 +54,7 @@
           </ng-container>
         </div>
       </div>
-      <div class="form-row mt-2">
+      <div class="form-row mt-3 mb-3">
         <div class="mt-4 col-lg-3 col-sm-12 ">
           <label class="custom-lbl" for="validationDefaultUsername"> Habilitar Produto</label>
           <div class="input-group">
@@ -63,8 +64,8 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-2 col-md-5 col-sm-12 mt-3">
+      <div class="row mt-3 mb-3">
+        <div class="col-lg-2 col-md-5 col-sm-12">
           <mat-form-field appearance="fill">
             <mat-label>Categoria</mat-label>
             <mat-select formControlName="categoria">
