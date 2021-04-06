@@ -26,8 +26,8 @@
         <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
       </button>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
-      <table class="table custom-table">
+    <div class="custom-table-container col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
+      <table class=" table custom-table">
         <thead>
           <tr>
             <th scope="col">Produto</th>
@@ -67,11 +67,13 @@
             </td>
         </tbody>
       </table>
-      <div class="row">
-        <div class="col-lg-8  "></div>
-        <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
-          (pageChange)="page = $event">
-        </pagination-controls>
+      <div class="row custom-pagination">
+        <div class="col-lg-8 "></div>
+        <div class="custom-table-container">
+          <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
+            (pageChange)="page = $event">
+          </pagination-controls>
+        </div>
       </div>
     </div>
   </div>

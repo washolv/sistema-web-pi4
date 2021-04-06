@@ -31,10 +31,6 @@ export class ProdutoComponent implements OnInit {
   teste: boolean=false;
   isAdmin=false;
 
-  openModal(template: TemplateRef<any>, produto: Produto) {
-    this.modalRef = this.modalService.show(template);
-
-  }
 
   constructor(private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, public produtoService: ProdutoService, private modalService: BsModalService, private toastr: ToastrService) {
     this.searchFilter.pipe(
@@ -107,10 +103,6 @@ export class ProdutoComponent implements OnInit {
   }
   visualizar(produto: Produto) {
     this.router.navigate([`/produtos/visualizar`, produto.id]);
-  }
-
-  atualizarEstoque(produto: Produto) {
-    //this.router.navigate([`/produtos/editar`, produto.id]);
   }
 
   adicionarEstoque(produto: Produto) {
