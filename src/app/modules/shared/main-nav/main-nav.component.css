@@ -7,7 +7,9 @@
   background-color: #F1F1F1     ;
   width: 250px;
 }
-
+.img-fluid{
+  width: 40%;
+}
 .custom-item{
   font-weight: bold;
   width: 250px;
@@ -19,9 +21,6 @@
   .navbar{
     width: 100%;
   }
-}
-.navbar-brand{
-  width: 40%;
 }
 .nav-link{
   color: black;
