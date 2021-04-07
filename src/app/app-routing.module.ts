@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/admin.guard';
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { ClienteGuard } from './services/cliente.guard';
+import { MainNavComponent } from './modules/shared/main-nav/main-nav/main-nav.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

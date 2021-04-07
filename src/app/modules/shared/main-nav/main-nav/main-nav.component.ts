@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
-import { TokenDecoded } from '../../login/login/models/TokenDecoded';
 
 @Component({
   selector: 'app-main-nav',
