@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { Router } from '@angular/router';
-import { IMyOptions } from 'ng-uikit-pro-standard';
 import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
-import { Cliente, Endereco } from '../../cliente/models/Cliente';
+import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 
 @Component({
   selector: 'app-criar-conta',
@@ -19,7 +18,7 @@ export class CriarContaComponent implements OnInit {
   formCliente: FormGroup;
   public cepValido = false;
   public cliente: Cliente = new Cliente()
-  public endereco: Endereco = new Endereco()
+  public endereco: EnderecoCliente = new EnderecoCliente()
   public color: ThemePalette = 'primary';
   public localidade: string = '';
   public uf: string = '';
@@ -28,16 +27,13 @@ export class CriarContaComponent implements OnInit {
   constructor(private toastr: ToastrService, private clienteService: ClienteService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formCliente = this.createFormCliente();
   }
-  public myDatePickerOptions: IMyOptions = {
-    // Your options
-  };
 
   ngOnInit() {
   }
 
   limparCampos() {
     this.cliente = new Cliente;
-    this.endereco = new Endereco;
+    this.endereco = new EnderecoCliente;
     this.formCliente = this.createFormCliente();
     this.formValid = true;
   }
@@ -55,6 +51,10 @@ export class CriarContaComponent implements OnInit {
         Validators.compose([
           Validators.required,
         ])),
+      telefone: new FormControl('',
+        Validators.compose([
+          Validators.required,
+        ])),
       dataNascimento: new FormControl('',
         Validators.compose([
           Validators.required,
@@ -64,10 +64,9 @@ export class CriarContaComponent implements OnInit {
           Validators.required,
           Validators.email,
         ])),
-      cep: new FormControl('',
+      sexo: new FormControl('',
         Validators.compose([
           Validators.required,
-          Validators.minLength(8),
         ])),
       senha: new FormControl('',
         Validators.compose([
@@ -75,16 +74,9 @@ export class CriarContaComponent implements OnInit {
           Validators.minLength(3),
         ]))});
   }
-    /*  logradouro: new FormControl(this.logradouro, Validators.required),
-      telefone: new FormControl('', Validators.required),
-      uf: new FormControl('', Validators.required),
-      localidade: new FormControl('', Validators.required),
-    });*/
-
-
-//Fazendo push
 
   public addCliente() {
+    console.log(this.formCliente.value)
     if (this.formCliente.valid) {
       this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
         if (!response) {

@@ -10,7 +10,7 @@
     <form [formGroup]="loginForm " class="col-lg-12">
       <div class="form-row mt-5">
         <label for="email">* e-mail</label>
-        <input formControlName="username" name="username" class="form-control"  placeholder="email@email.com"
+        <input formControlName="username" name="username" class="form-control" autofocus  placeholder="email@email.com"
         [ngClass]="{ 'is-invalid': !formValid && f.username.errors }" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
          <div class="invalid-feedback" *ngIf="!formValid && f.username.errors">
             <div *ngIf="f.username.errors.required">* Campo obrigatório</div>

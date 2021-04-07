@@ -7,14 +7,14 @@ export class Cliente {
   cpf?: string;
   sexo?: string;
   dataNascimento?: Date;
-  endereco?: Endereco;
+  endereco?: EnderecoCliente[];
 }
 
-export class Endereco {
+export class EnderecoCliente {
   id?: number;
   cep?: string;
   logradouro?:string;
   cidade?:string;
   uf?:string;
-  t?: string;
+  descricao?: string;
 }
