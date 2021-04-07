@@ -1,13 +1,14 @@
+import { Usuario } from "../../funcionario/models/Funcionario";
+
 export class Cliente {
   id?: number;
   nome?: string;
-  email?: string;
-  senha?: string;
   telefone?: string;
   cpf?: string;
   sexo?: string;
   dataNascimento?: Date;
   endereco?: EnderecoCliente[];
+  usuario?: Usuario;
 }
 
 export class EnderecoCliente {

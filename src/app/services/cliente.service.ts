@@ -39,6 +39,6 @@ export class ClienteService {
     const httpOptions = {
       headers: new HttpHeaders({'cpf': cpf })
     };
-     return this.http.get<Cliente>(`${this.apiUrl}/funcionarios/cpf`, httpOptions)
+     return this.http.get<Cliente>(`${this.apiUrl}/clientes/cpf`, httpOptions)
   };
 }

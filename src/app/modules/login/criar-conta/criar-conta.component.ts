@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
+import { Usuario } from '../../funcionario/models/Funcionario';
 
 @Component({
   selector: 'app-criar-conta',
@@ -82,23 +83,31 @@ export class CriarContaComponent implements OnInit {
         if (!response) {
           this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
             if (!r) {
+
+              let usuario: Usuario=new Usuario();
+              usuario.username=this.formCliente.value.usuario;
+              usuario.password=this.formCliente.value.password;
+              usuario.active=true;
+
               this.cliente.telefone = this.formCliente.value.telefone;
               this.cliente.cpf = this.formCliente.value.cpf;
               this.cliente.dataNascimento = this.formCliente.value.dataNascimento;
               this.cliente.nome = this.formCliente.value.nome;
-              this.cliente.email = this.formCliente.value.email;
-              this.cliente.senha = this.formCliente.value.senha;
+              this.cliente.usuario = this.formCliente.value.email;
               this.cliente.sexo = this.formCliente.value.sexo;
+              this.cliente.usuario=usuario;
 
               this.clienteService.salvarCliente(this.cliente).subscribe(res => {
                 this.toastr.success("Cliente adicionado com sucesso", "OK", {
                   timeOut: 3000, positionClass: 'toast-top-center',
                 });
                 this.limparCampos();
+
               }, err => {
                 this.toastr.error(err, "Erro", {
                   timeOut: 3000, positionClass: 'toast-top-center',
                 });
+
               })
             }else{
               this.toastr.error("CPF já cadastrado", "Erro", {
