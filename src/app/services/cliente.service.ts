@@ -19,8 +19,8 @@ export class ClienteService {
   public buscarClientes(): Observable<Cliente[]>{
     return this.http.get<Cliente[]>(`${this.apiUrl}/clientes`);
   }
-  public salvarCliente(cliente: Cliente): Observable<Cliente[]> {
-    return this.http.post<Cliente[]>(`${this.apiUrl}/clientes`, cliente);
+  public salvarCliente(cliente: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(`${this.apiUrl}/clientes`, cliente);
   }
   public editarCliente(cliente: Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${this.apiUrl}/clientes`, cliente.nome);
@@ -29,14 +29,14 @@ export class ClienteService {
     return this.http.delete<Cliente>(`${this.apiUrl}/clientes/${id}`);
   }
 
-  public emailNaoCadastrado(email: string):Observable<any>{
+  public emailNaoCadastrado(email: string)/*:Observable<any>*/{
     const httpOptions = {
       headers: new HttpHeaders({'email': email })
     };
      return this.http.get<Cliente>(`${this.apiUrl}/usuarios`, httpOptions);
   }
-  public cpfNaoCadastrado(cpf: string):Observable<any> {
-    const httpOptions = {
+  public cpfNaoCadastrado(cpf: string)/*:Observable<any>*/ {
+   const httpOptions = {
       headers: new HttpHeaders({'cpf': cpf })
     };
      return this.http.get<Cliente>(`${this.apiUrl}/clientes/cpf`, httpOptions)

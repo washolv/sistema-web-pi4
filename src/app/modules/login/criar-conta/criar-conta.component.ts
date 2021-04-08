@@ -27,6 +27,8 @@ export class CriarContaComponent implements OnInit {
 
   constructor(private toastr: ToastrService, private clienteService: ClienteService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formCliente = this.createFormCliente();
+    let endereco: EnderecoCliente=new EnderecoCliente();
+    this.cliente.enderecos=[];
   }
 
   ngOnInit() {
@@ -79,24 +81,23 @@ export class CriarContaComponent implements OnInit {
   public addCliente() {
     console.log(this.formCliente.value)
     if (this.formCliente.valid) {
-      this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
-        if (!response) {
-          this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
-            if (!r) {
+     // this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
+      //  if (!response) {
+        // this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
+           // if (!r) {
 
               let usuario: Usuario=new Usuario();
-              usuario.username=this.formCliente.value.usuario;
-              usuario.password=this.formCliente.value.password;
+              usuario.username=this.formCliente.value.email;
+              usuario.password=this.formCliente.value.senha;
               usuario.active=true;
-
+              console.log(usuario)
               this.cliente.telefone = this.formCliente.value.telefone;
               this.cliente.cpf = this.formCliente.value.cpf;
               this.cliente.dataNascimento = this.formCliente.value.dataNascimento;
               this.cliente.nome = this.formCliente.value.nome;
-              this.cliente.usuario = this.formCliente.value.email;
               this.cliente.sexo = this.formCliente.value.sexo;
               this.cliente.usuario=usuario;
-
+              console.log(this.cliente)
               this.clienteService.salvarCliente(this.cliente).subscribe(res => {
                 this.toastr.success("Cliente adicionado com sucesso", "OK", {
                   timeOut: 3000, positionClass: 'toast-top-center',
@@ -109,19 +110,20 @@ export class CriarContaComponent implements OnInit {
                 });
 
               })
-            }else{
+           /* }else{
               this.toastr.error("CPF já cadastrado", "Erro", {
                 timeOut: 3000, positionClass: 'toast-top-center',
               });
-            }
-          })
-        } else {
+            }*/
+       //   })
+        }
+       /* else {
           this.toastr.error("e-mail já cadastrado", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         }
-      })
-    } else {
+     // })
+    }*/ else {
       this.formValid = false;
     }
   }
