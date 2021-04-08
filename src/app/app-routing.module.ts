@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
 import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/admin.guard';
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
+import { ClienteGuard } from './services/cliente.guard';
+import { MainNavComponent } from './modules/shared/main-nav/main-nav/main-nav.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -30,12 +31,24 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
+    path: 'configuracoes', component: MainNavComponent,
+    loadChildren: () => import('./modules/configuracao/configuracao.module').then(m => m.ConfiguracaoModule),
+  },
+  {
     path: 'funcionarios', component: MainNavComponent,
     loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule),
     canActivate: [AuthGuard],
     data: {
       expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
     }
+  },
+  {
+    path: 'compras', component: MainNavComponent,
+    loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
+    //canActivate: [ClienteGuard],
+   /* data: {
+      expectedRole: ['ROLE_CLIENTE']
+    }*/
   }
 ];
 

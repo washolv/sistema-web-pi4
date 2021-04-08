@@ -8,7 +8,7 @@
 
   <div class="modal-body">
     <form [formGroup]="formSenha">
-      <input class="rounded" formControlName="senha" type="password" required name="senha" id="senha"
+      <input class="form-control" formControlName="senha" type="password" required name="senha" id="senha"
         [ngClass]="{'is-invalid': !formValid && f.senha.errors}">
       <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
         <div *ngIf="f.senha.errors.required">* Campo obrigatório</div>

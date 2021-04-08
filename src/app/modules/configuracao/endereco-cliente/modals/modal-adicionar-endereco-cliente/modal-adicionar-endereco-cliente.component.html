@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+      Novo Endereço
+    </div>
+  </div>
+  <form [formGroup]="enderecoForm">
+    <div class="form-row mt-2 mb-2">
+      <div class="col-lg-12 col-sm-12 mb-12">
+        <label class="control-label" for="CEP">* CEP</label>
+        <input id="cep" name="cep" mask="00000-000" formControlName="cep"
+          [ngClass]="{ 'is-invalid': !formValid && f.cep.errors }" placeholder="Apenas números"
+          class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
+        <div class="row mt-2 col-lg-12">
+          <button type="button" class="btn btn-dark" (click)="buscarCep()">Pesquisar</button>
+        </div>
+        <div *ngIf="!formValid && f.cep.errors" class="invalid-feedback">
+          <div *ngIf="f.cep.errors.required">* Campo obrigatório</div>
+          <div *ngIf="f.cep.errors.invalid">* CEP inválido</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mt-2 mb-2">
+      <div class="col-lg-5 col-sm-12">
+        <label class="control-label" for="logradouro">* Logradouro</label>
+        <input id="logradouro" name="logradouro" formControlName="logradouro"
+          [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" placeholder="Ex: Rua , Avenida"
+          class="form-control cep-mask" required type="search" pattern="[0-9]+$">
+        <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
+          <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-sm-12">
+        <label class="control-label" for="cidade">* Cidade</label>
+        <input id="cidade" name="cidade" formControlName="cidade"
+          [ngClass]="{ 'is-invalid': !formValid && f.cidade.errors }" placeholder="Sua cidade"
+          class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
+        <div *ngIf="!formValid && f.cidade.errors" class="invalid-feedback">
+          <div *ngIf="f.cidade.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-12">
+        <label class="control-label" for="numero">* Número</label>
+        <input id="numero" type="number" name="numero" formControlName="numero"
+          [ngClass]="{ 'is-invalid': !formValid && f.numero.errors }" placeholder="N°" class="form-control" required
+          pattern="[0-9]+$">
+        <div *ngIf="!formValid && f.numero.errors" class="invalid-feedback">
+          <div *ngIf="f.numero.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mt-2 mb-2">
+      <div class="col-lg-2 col-sm-12">
+        <label class="control-label" for="uf">* UF</label>
+        <input id="uf" name="uf" formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }"
+          class="form-control" required placeholder="UF">
+        <div *ngIf="!formValid && f.uf.errors" class="invalid-feedback">
+          <div *ngIf="f.uf.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+      <div class="col-lg-10 col-sm-12">
+        <label class="control-label" for="uf">* Bairro</label>
+        <input id="bairro" name="bairro" formControlName="bairro"
+          [ngClass]="{ 'is-invalid': !formValid && f.bairro.errors }" class="form-control" placeholder="Seu bairro"
+          required>
+        <div *ngIf="!formValid && f.bairro.errors" class="invalid-feedback">
+          <div *ngIf="f.bairro.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mt-2 mb-2">
+      <div class="col-lg-12 col-sm-12">
+        <label class="control-label" for="uf">* Complemento</label>
+        <input id="complemento" name="complemento" formControlName="complemento"
+          [ngClass]="{ 'is-invalid': !formValid && f.complemento.errors }" class="form-control" placeholder="Ex: Casa, Trabalho"
+          required>
+        <div *ngIf="!formValid && f.complemento.errors" class="invalid-feedback">
+          <div *ngIf="f.complemento.errors.required">* Campo obrigatório</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button  class="btn btn-dark" (click)="addEndereco()">Confirmar</button>
+    </div>
+  </form>
+</div>

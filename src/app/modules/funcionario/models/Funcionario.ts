@@ -1,14 +1,14 @@
+import { UsuarioService } from "src/app/services/usuario.service";
+
 export class Funcionario {
   id?: number;
   nome?: string;
   cpf?: string;
   cargo?: string;
-  status?: boolean;
   dataNascimento?: Date;
   endereco?:Endereco;
-  email?: string;
-  senha?: string;
   telefone?: string;
+  usuario?: Usuario;
 }
 export class Endereco {
   id?: number;
@@ -17,3 +17,11 @@ export class Endereco {
   cidade?:string;
   uf?:string;
 }
+
+export class Usuario{
+   id?:number;
+   username?:string;
+   password?: string;
+   active?: boolean;
+}
+

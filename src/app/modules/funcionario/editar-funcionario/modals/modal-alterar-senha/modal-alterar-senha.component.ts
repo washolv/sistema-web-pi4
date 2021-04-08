@@ -37,7 +37,7 @@ export class ModalAlterarSenhaComponent implements OnInit {
   }
   confirmar(){
     if(this.formSenha.valid){
-      this.funcionario.senha=this.formSenha.value.senha;
+      this.funcionario.usuario!.password=this.formSenha.value.senha;
       this.closeX();
     }else{
       this.formValid=false;

@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoModule } from './modules/produto/produto.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainNavComponent } from './modules/shared/main-nav/main-nav.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { LoginModule } from './modules/login/login.module';
 import { AuthenticationComponent } from './modules/login/authentication/authentication.component';
@@ -15,13 +14,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MDBBootstrapModulesPro, MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { JwtInterceptor } from './modules/shared/helpers/JwtInterceptor';
 import { ErrorInterceptor } from './modules/shared/helpers/error.interceptor';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgxMaskModule } from 'ngx-mask';
 import { MainNavLoginComponent } from './modules/shared/main-nav-login/main-nav-login.component';
+import { CheckoutModule } from './modules/checkout/checkout.module';
+import { MainNavFuncionarioComponent } from './modules/shared/main-nav/main-nav-funcionario/main-nav-funcionario.component';
+import { MainNavClienteComponent } from './modules/shared/main-nav/main-nav-cliente/main-nav-cliente.component';
+import { MainNavComponent } from './modules/shared/main-nav/main-nav/main-nav.component';
+import { ConfiguracaoModule } from './modules/configuracao/configuracao.module';
 
 
 const routes: Routes = [
@@ -31,8 +33,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MainNavComponent,
-    MainNavLoginComponent,
     AuthenticationComponent,
+    MainNavLoginComponent,
+    MainNavFuncionarioComponent,
+    MainNavClienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,12 +45,14 @@ const routes: Routes = [
     HttpClientModule,
     ProdutoModule,
     LoginModule,
+    CheckoutModule,
     SharedModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
+    ConfiguracaoModule,
     MatProgressSpinnerModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true

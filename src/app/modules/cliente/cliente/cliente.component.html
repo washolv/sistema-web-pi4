@@ -7,6 +7,7 @@
     </div>
   </div>
   <hr>
+  <app-adicionar-endereco></app-adicionar-endereco>
 
   <div class="row col-12 col-sm-12 col-md-12">
     <!--INPUT FILTRAGEM DE clienteS-->
@@ -15,7 +16,7 @@
         <input class="ml-0 col-lg-4 col-md-6 col sm-6 custom-input-search" type="text" placeholder="Pesquise"
           (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
         <label class="ml-1 custom-lbl-filter">
-          <button class="custon-btn-filter">
+          <button class=" btn custon-btn-filter">
           </button>
         </label>
       </div>
@@ -32,7 +33,9 @@
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
-            <th scope="col">Status</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Data de Nascimento</th>
+
           </tr>
         </thead>
         <tbody>
@@ -42,11 +45,8 @@
                  totalItems: totalRegistros};let i=index ">
             <td>{{cliente.nome}}</td>
             <td>{{cliente.cpf}}</td>
-            <td>{{cliente.status}}</td>
-            <td>
-              <mat-slide-toggle [(ngModel)]="cliente.status" (change)="habilitarCliente(cliente)" [color]="color"
-                class="align-middle"></mat-slide-toggle>
-            </td>
+            <td>{{cliente.telefone}}</td>
+            <td>{{cliente.dataNascimento}}</td>
             <td>
               <button class="btn">
                 <img src="../../../assets/botao-editar.svg" (click)="editarCliente(cliente)" class="btn-icon-add"

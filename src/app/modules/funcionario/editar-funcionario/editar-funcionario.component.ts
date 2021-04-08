@@ -8,7 +8,7 @@ import { IMyOptions } from 'ng-uikit-pro-standard';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
-import { Endereco, Funcionario } from '../models/Funcionario';
+import { Endereco, Funcionario, Usuario } from '../models/Funcionario';
 import { ModalAlterarSenhaComponent } from './modals/modal-alterar-senha/modal-alterar-senha.component';
 
 @Component({
@@ -18,10 +18,11 @@ import { ModalAlterarSenhaComponent } from './modals/modal-alterar-senha/modal-a
 })
 export class EditarFuncionarioComponent implements OnInit {
   formValid: boolean = true;
-  formFuncionario: FormGroup;
+  public formFuncionario!: FormGroup;
   public cepValido = false;
   public funcionario: Funcionario = new Funcionario()
   public endereco: Endereco = new Endereco()
+  private usuario: Usuario=new Usuario;
   public color: ThemePalette = 'primary';
   public id = 0;
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
@@ -60,8 +61,8 @@ export class EditarFuncionarioComponent implements OnInit {
         Validators.compose([
           Validators.required,
         ])),
-      status: new FormControl(this.funcionario.status),
-      email: new FormControl({ value: this.funcionario.email, disabled: true },
+      status: new FormControl(this.funcionario.usuario?.active),
+      email: new FormControl({ value: this.funcionario.usuario?.username, disabled: true },
         Validators.compose([
           Validators.required,
           Validators.email,
@@ -71,7 +72,7 @@ export class EditarFuncionarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
         ])),
-      senha: new FormControl(this.funcionario.senha,
+      senha: new FormControl(this.funcionario.usuario?.password,
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -84,34 +85,18 @@ export class EditarFuncionarioComponent implements OnInit {
   }
   public salvarFuncionario() {
     if (this.formFuncionario.valid) {
-      this.funcionarioService.emailNaoCadastrado(this.formFuncionario.value.email).subscribe(response => {
-        if (!response) {
-          this.funcionarioService.cpfNaoCadastrado(this.formFuncionario.value.cpf).subscribe(r => {
-            if (!r) {
-              this.funcionario.nome = this.formFuncionario.value.nome;
-              this.funcionario.status = this.formFuncionario.value.status;
-              this.funcionario.cargo = this.formFuncionario.value.cargo;
+      this.funcionario.nome = this.formFuncionario.value.nome;
+      this.funcionario.usuario!.active = this.formFuncionario.value.status;
+      this.funcionario.cargo = this.formFuncionario.value.cargo;
 
-              this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
-                this.toastr.success("Funcionário editado com sucesso", "OK", {
-                  timeOut: 3000, positionClass: 'toast-top-center',
-                });
-              }, err => {
-                this.toastr.error(err, "Erro", {
-                  timeOut: 3000, positionClass: 'toast-top-center',
-                });
-              })
-            }else{
-              this.toastr.error("CPF já cadastrado", "Erro", {
-                timeOut: 3000, positionClass: 'toast-top-center',
-              });
-            }
-          })
-        } else {
-          this.toastr.error("E-mail já cadastrado", "Erro", {
-            timeOut: 3000, positionClass: 'toast-top-center',
-          });
-        }
+      this.funcionarioService.editarFuncionario(this.funcionario).subscribe(res => {
+        this.toastr.success("Funcionário editado com sucesso", "OK", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
+      }, err => {
+        this.toastr.error(err, "Erro", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
       })
     } else {
       this.formValid = false;
@@ -131,6 +116,7 @@ export class EditarFuncionarioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.funcionario = response;
+        console.log(this.funcionario)
         this.funcionarioService.editarFuncionario(this.funcionario).subscribe(response => {
           this.toastr.success("Senha alterada com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',

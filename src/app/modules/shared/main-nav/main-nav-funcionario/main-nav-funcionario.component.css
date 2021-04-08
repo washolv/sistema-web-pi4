@@ -1,0 +1,33 @@
+.navbar{
+  font-weight: bold;
+  background-color: #F1F1F1
+}
+
+.custom-drop{
+  background-color: #F1F1F1     ;
+  width: 250px;
+}
+.img-test{
+  width: 40%;
+}
+.custom-item{
+  font-weight: bold;
+  width: 250px;
+}
+@media screen and (max-width:768px) {
+  .img-fluid{
+    display: none;
+  }
+}
+.nav-link{
+  color: black;
+  font-size: 15px;
+}
+
+.nav-item > a:hover {
+  color: #0C3758;
+}
+.nome{
+  font-weight: bold;
+}
+

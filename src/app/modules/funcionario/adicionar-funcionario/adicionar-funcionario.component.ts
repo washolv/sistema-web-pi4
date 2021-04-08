@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { FormValidations } from '../../shared/validators/formValidators';
-import { Endereco, Funcionario } from '../models/Funcionario';
+import { Endereco, Funcionario, Usuario } from '../models/Funcionario';
 
 @Component({
   selector: 'app-adicionar-funcionario',
@@ -25,9 +25,11 @@ export class AdicionarFuncionarioComponent implements OnInit {
   public localidade: string = '';
   public uf: string = '';
   public logradouro: string = '';
+  public usuario: Usuario;
   cargos = [{ id: 1, nome: 'Administrador' }, { id: 2, nome: 'Estoquista' }];
   constructor(private toastr: ToastrService, private funcionarioService: FuncionarioService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formFuncionario = this.createFormFuncionario();
+    this.usuario=new Usuario
   }
   public myDatePickerOptions: IMyOptions = {
     // Your options
@@ -38,6 +40,7 @@ export class AdicionarFuncionarioComponent implements OnInit {
   limparCampos() {
     this.funcionario = new Funcionario;
     this.endereco = new Endereco;
+    this.usuario=new Usuario
     this.formFuncionario = this.createFormFuncionario();
     this.formValid = true;
   }
@@ -98,10 +101,11 @@ export class AdicionarFuncionarioComponent implements OnInit {
               this.funcionario.dataNascimento = this.formFuncionario.value.dataNascimento;
               this.funcionario.nome = this.formFuncionario.value.nome;
               this.funcionario.telefone = this.formFuncionario.value.telefone;
-              this.funcionario.status = this.formFuncionario.value.status;
-              this.funcionario.email = this.formFuncionario.value.email;
-              this.funcionario.senha = this.formFuncionario.value.senha;
+              this.usuario.username = this.formFuncionario.value.email;
+              this.usuario.active = true;
+              this.usuario.password = this.formFuncionario.value.senha;
               this.funcionario.endereco = this.endereco;
+              this.funcionario.usuario=this.usuario;
               this.funcionario.cargo = this.formFuncionario.value.cargo;
 
               this.funcionarioService.postFuncionario(this.funcionario).subscribe(res => {

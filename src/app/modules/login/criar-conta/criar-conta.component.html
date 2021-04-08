@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="custom-icon-title"><img src="../../../../assets/Icon awesome-user-alt.svg"></div>
     <div class="custom-title">Cadastre-se</div>
   </div>
   <div class="row d-flex justify-content-center mt-4">
-    <div class="custom-sub-title">já tem um cadastro? Entrar</div>
+    <div class="row custom-sub-title">já tem um cadastro? <div routerLink='/login'><a>Entrar</a></div>
   </div>
-  <div class="row d-flex justify-content-center">
-    <form>
+  <div class="row col-lg-12 d-flex justify-content-center">
+    <form class="col-lg-12" [formGroup]="formCliente">
       <div class="form-row mt-5">
         <label for="email">* e-mail</label>
         <input formControlName="email" name="email" class="form-control" required placeholder="email@email.com"
@@ -38,11 +38,11 @@
       </div>
       <div class="form-row">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio1" value="Masculino">
           <label class="form-check-label" for="inlineRadio1">Masculino</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio2" value="Feminino">
           <label class="form-check-label" for="inlineRadio2">Feminino</label>
         </div>
       </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="row d-flex justify-content-center mt-3 mb-6">
-        <button class="btn btn-danger" >Criar seu cadastro</button>
+        <button class="submit btn btn-danger" (click)="addCliente()">Criar seu cadastro</button>
       </div>
     </form>
   </div>

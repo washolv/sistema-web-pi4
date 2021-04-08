@@ -34,11 +34,6 @@ export class ClienteComponent implements OnInit {
   }
 
   public habilitarCliente(c: Cliente) {
-    if (c.status) {
-      c.status = 1;
-    } else {
-      c.status = 0;
-    }
     this.clienteService.editarCliente(c).subscribe((response: any) => {
     });
   }
