@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente, EnderecoCliente } from 'src/app/modules/cliente/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { ModalAdicionarEnderecoClienteComponent } from '../modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import { ModalEditarEnderecoClienteComponent } from '../modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
 
@@ -18,9 +19,14 @@ export class EnderecoClienteComponent implements OnInit {
   totalRegistros: number = 0;
   page: number = 1;
   color: ThemePalette = 'primary';
+  public id: number=0;
 
-  constructor(private toastr: ToastrService, private dialog: MatDialog, private router: Router, private clienteService: ClienteService) {
-
+  constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, private clienteService: ClienteService) {
+      const user=this.roleGuardService.decodeJWT();
+      this.id=user.id;
+      this.clienteService.buscarCliente(this.id).subscribe(resp =>{
+        this.cliente=resp;
+      })
   }
 
   ngOnInit() {
@@ -52,7 +58,7 @@ export class EnderecoClienteComponent implements OnInit {
         console.log(resp)
       });
   }
-  editarEndereco(endereco: any){
+  editarEndereco(endereco: EnderecoCliente){
     const dialogRef = this.dialog.open(ModalEditarEnderecoClienteComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {
@@ -64,11 +70,11 @@ export class EnderecoClienteComponent implements OnInit {
         let endereco = response;
         console.log(endereco)
         this.clienteService.editarEndereco(endereco).subscribe(response => {
-          this.toastr.success("Senha alterada com sucesso", "OK", {
+          this.toastr.success("Endereço alterado com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         }, err => {
-          this.toastr.error("Falha ao alterar senha", "Erro", {
+          this.toastr.error("Falha ao alterar endereço", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         })

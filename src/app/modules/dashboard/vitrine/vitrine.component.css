@@ -13,6 +13,7 @@
   justify-content: center;
   display: grid;
 }
+
 .custon-btn-filter{
   background-image: url('/assets/botao-de-menu.svg');
   background-repeat: no-repeat;
@@ -78,4 +79,13 @@ ngb-rating {
   width: 100%;
   margin: auto 5px auto 0px;
   padding: 8px 0;
+}
+@media screen and (max-width:768px) {
+  .carousel {
+    display: none;
+  }
+  .banner-home{
+    display: none;
+  }
+
 }

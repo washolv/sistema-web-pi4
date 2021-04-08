@@ -1,8 +1,11 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+  <div class="modal-header">
+    <div class="modal-title">
       Novo Endereço
     </div>
+    <button type="button" class="close" (click)="closeX()" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <form [formGroup]="enderecoForm">
     <div class="form-row mt-2 mb-2">
@@ -72,15 +75,15 @@
       <div class="col-lg-12 col-sm-12">
         <label class="control-label" for="uf">* Complemento</label>
         <input id="complemento" name="complemento" formControlName="complemento"
-          [ngClass]="{ 'is-invalid': !formValid && f.complemento.errors }" class="form-control" placeholder="Ex: Casa, Trabalho"
-          required>
+          [ngClass]="{ 'is-invalid': !formValid && f.complemento.errors }" class="form-control"
+          placeholder="Ex: Casa, Trabalho" required>
         <div *ngIf="!formValid && f.complemento.errors" class="invalid-feedback">
           <div *ngIf="f.complemento.errors.required">* Campo obrigatório</div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button  class="btn btn-dark" (click)="addEndereco()">Confirmar</button>
+      <button class="btn btn-dark" (click)="addEndereco()">Confirmar</button>
     </div>
   </form>
 </div>

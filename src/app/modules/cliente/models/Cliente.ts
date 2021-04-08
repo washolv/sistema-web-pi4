@@ -17,7 +17,6 @@ export class EnderecoCliente {
   logradouro?:string;
   cidade?:string;
   uf?:string;
-  descricao?: string;
   status?: boolean;
   nomeDestinatario?: boolean;
   bairro?: boolean;

@@ -22,6 +22,7 @@
               <th scope="col">Logradouro</th>
               <th scope="col">CEP</th>
               <th scope="col">Cidade</th>
+              <th scope="col">Numero</th>
               <th scope="col">UF</th>
               <th scope="col">Complemento</th>
               <th scope="col">Status</th>
@@ -35,8 +36,9 @@
               <td>{{endereco.logradouro!}}</td>
               <td>{{endereco.cep}}</td>
               <td>{{endereco.cidade }}</td>
+              <td>{{endereco.numero }}</td>
               <td>{{endereco.uf}}</td>
-              <td>{{endereco?.complemento}}</td>
+              <td>{{endereco.complemento}}</td>
               <td>
                 <mat-slide-toggle (change)="habilitarEndereco(endereco)" [color]="color" class="align-middle">
                 </mat-slide-toggle>

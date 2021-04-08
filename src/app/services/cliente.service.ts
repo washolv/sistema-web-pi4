@@ -13,8 +13,8 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
 
-  public buscarCliente(id: number): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${this.apiUrl}/clientes/${id}`);
+  public buscarCliente(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.apiUrl}/clientes/${id}`);
   }
   public buscarClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrl}/clientes`);

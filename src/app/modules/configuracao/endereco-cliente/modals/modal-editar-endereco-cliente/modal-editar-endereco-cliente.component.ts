@@ -18,6 +18,9 @@ export class ModalEditarEnderecoClienteComponent implements OnInit {
   public cliente: Cliente=new Cliente()
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,private buscarCepService: ConsultaCepService,
    private clienteService: ClienteService,public dialogRef: MatDialogRef<ModalEditarEnderecoClienteComponent>) {
+     if(this.data.endereco){
+       this.endereco=this.data.endereco;
+     }
     this.enderecoForm = this.createForm();
   }
 

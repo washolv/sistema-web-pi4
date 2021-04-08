@@ -14,18 +14,28 @@
   font-weight: bold;
   width: 250px;
 }
+.cesta-compras{
+  width: 50%;
+}
+@media screen and (max-width:1000px) {
+  .img-fluid{
+    display: none;
+  }
+  .cesta-compras{
+    position: relative;
+    width: 20%;
+  }
+}
 @media screen and (max-width:768px) {
   .img-fluid{
     display: none;
   }
   .cesta-compras{
     position: relative;
-    width: 10%;
+    width: 30%;
   }
 }
-.cesta-compras{
-  width: 20%;
-}
+
 .nav-link{
   color: black;
   font-size: 15px;

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cliente, EnderecoCliente } from 'src/app/modules/cliente/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
 @Component({
   selector: 'app-modal-adicionar-endereco-cliente',
@@ -14,8 +15,9 @@ export class ModalAdicionarEnderecoClienteComponent implements OnInit {
   public formValid = true;
   public enderecoForm: FormGroup;
   public cepValido = true;
-  public cliente: Cliente=new Cliente()
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,private buscarCepService: ConsultaCepService, private clienteService: ClienteService,public dialogRef: MatDialogRef<ModalAdicionarEnderecoClienteComponent>) {
+  public cliente: Cliente=new Cliente();
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,private buscarCepService: ConsultaCepService,
+   private clienteService: ClienteService,public dialogRef: MatDialogRef<ModalAdicionarEnderecoClienteComponent>) {
     this.enderecoForm = this.createForm();
   }
 
