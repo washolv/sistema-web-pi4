@@ -92,3 +92,7 @@ ngb-rating {
   color: #444444;
   font-weight: bold;
 }
+
+.dropdown-item {
+  font-weight: bold;
+}
