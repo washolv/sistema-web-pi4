@@ -70,12 +70,9 @@ ngb-rating {
  margin: auto;
 }
 
-.dropdown:hover>.dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu>a {
-  text-align: center;
+.tab-content {
+  column-count: 3;
+  text-align: justify;
   width: 100%;
   margin: auto 5px auto 0px;
   padding: 8px 0;
@@ -89,10 +86,6 @@ ngb-rating {
 }
 
 .texto-menu {
-  color: #444444;
-  font-weight: bold;
-}
-
-.dropdown-item {
+  color: #000000;
   font-weight: bold;
 }
