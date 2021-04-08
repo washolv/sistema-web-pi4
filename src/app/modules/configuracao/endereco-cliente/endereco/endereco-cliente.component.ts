@@ -34,11 +34,11 @@ export class EnderecoClienteComponent implements OnInit {
         let endereco = response;
         console.log(endereco)
         this.clienteService.adicionarEndereco(this.cliente.id!,endereco).subscribe(response => {
-          this.toastr.success("Senha alterada com sucesso", "OK", {
+          this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         }, err => {
-          this.toastr.error("Falha ao alterar senha", "Erro", {
+          this.toastr.error("Falha cadastrar endereço", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         })

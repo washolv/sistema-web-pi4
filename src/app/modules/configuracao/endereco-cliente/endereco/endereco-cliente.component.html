@@ -11,20 +11,20 @@
   <div class="row col-12 col-sm-12 col-md-12">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <button class="btn btn-add mb-3" type="button" (click)="adicionarEndereco()">
-        <img src="../../../../assets/Icon awesome-user-plus.svg" class="btn-icon-add" alt="Adicionar Funcionário"
+        <img src="../../../../../assets/Icon material-add-location.svg" class="btn-icon-add" alt="Adicionar Funcionário"
           title="Adicionar Funcionário">
       </button>
     </div>
-
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
       <table class="table custom-table" *ngIf="cliente && cliente.enderecos">
           <thead>
             <tr>
-              <th scope="col">Rua</th>
-              <th scope="col">CEP</th>
               <th scope="col">Logradouro</th>
+              <th scope="col">CEP</th>
               <th scope="col">Cidade</th>
               <th scope="col">UF</th>
+              <th scope="col">Complemento</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +36,7 @@
               <td>{{endereco.cep}}</td>
               <td>{{endereco.cidade }}</td>
               <td>{{endereco.uf}}</td>
-              <td>{{endereco?.descricao}}</td>
+              <td>{{endereco?.complemento}}</td>
               <td>
                 <mat-slide-toggle (change)="habilitarEndereco(endereco)" [color]="color" class="align-middle">
                 </mat-slide-toggle>
@@ -51,7 +51,7 @@
           </tbody>
       </table>
       <div class="row">
-        <div class="col-lg-8  "></div>
+        <div class="col-lg-8"></div>
         <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
           (pageChange)="page = $event">
         </pagination-controls>

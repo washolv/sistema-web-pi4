@@ -19,4 +19,8 @@ export class EnderecoCliente {
   uf?:string;
   descricao?: string;
   status?: boolean;
+  nomeDestinatario?: boolean;
+  bairro?: boolean;
+  complemento?: string;
+  numero?: number;
 }
