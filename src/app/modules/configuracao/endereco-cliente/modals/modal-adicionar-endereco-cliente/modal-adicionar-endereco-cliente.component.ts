@@ -30,18 +30,17 @@ export class ModalAdicionarEnderecoClienteComponent implements OnInit {
   createForm() {
     return this.fb.group({
       cep: new FormControl('', Validators.required),
-      logradouro: new FormControl({value:'', disabled: true}, Validators.required),
+      logradouro: new FormControl('', Validators.required),
       numero: new FormControl('', Validators.required),
-      cidade: new FormControl({value:'', disabled: true}, Validators.required),
-      uf: new FormControl({value:'', disabled: true}, Validators.required),
+      cidade: new FormControl('', Validators.required),
+      uf: new FormControl('', Validators.required),
       complemento: new FormControl('', Validators.required),
-      bairro: new FormControl({value:'', disabled: true}, Validators.required)
+      bairro: new FormControl('', Validators.required)
     })
   }
   public buscarCep() {
     if (!this.f.cep.errors) {
       this.buscarCepService.buscar(this.enderecoForm.value.cep).subscribe(res => {
-        console.log(res)
         this.enderecoForm.controls['logradouro'].setValue(res.logradouro);
         this.enderecoForm.controls['uf'].setValue(res.uf);
         this.enderecoForm.controls['cidade'].setValue(res.localidade);
@@ -52,7 +51,7 @@ export class ModalAdicionarEnderecoClienteComponent implements OnInit {
   }
 
   close(endereco: EnderecoCliente){
-    this.dialogRef.close(endereco);
+     this.dialogRef.close(endereco);
   }
   closeX(){
     this.dialogRef.close();

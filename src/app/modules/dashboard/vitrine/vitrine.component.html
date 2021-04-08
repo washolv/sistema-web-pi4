@@ -1,7 +1,6 @@
-<!--
 <ul class="nav nav-tabs nav-fill justify-content-center navbar-expand-lg navbar-light bg-light">
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle cor-texto-menu" href="#nav-cama" id="navbar-cama" role="button" data-toggle="dropdown"
+    <a class="nav-link dropdown-toggle" href="#" id="navbarCama" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Cama
     </a>
@@ -12,7 +11,7 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle cor-texto-menu" href="#" id="navbarMesa" role="button" data-toggle="dropdown"
+    <a class="nav-link dropdown-toggle" href="#" id="navbarMesa" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Mesa
     </a>
@@ -23,8 +22,8 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle cor-texto-menu" id="navbarBanho" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" id="navbarBanho" role="button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
       Banho
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarBanho">
@@ -36,8 +35,8 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle cor-texto-menu" href="#" id="navbarDecoracao" role="button"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDecoracao" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Decoração
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDecoracao">
@@ -45,7 +44,7 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle cor-texto-menu" href="#" id="navbarPromocao" role="button" data-toggle="dropdown"
+    <a class="nav-link dropdown-toggle" href="#" id="navbarPromocao" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Promoção
     </a>
@@ -54,50 +53,6 @@
     </div>
   </li>
 </ul>
--->
-
-
-<nav class="nav justify-content-center navbar-expand-lg navbar-light bg-light">
-  <div class="nav nav-tabs dropdown" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link texto-menu" id="nav-cama-tab" data-toggle="tab" href="#nav-cama" role="tab"
-      aria-controls="nav-cama" aria-selected="false">CAMA</a>
-    <a class="nav-item nav-link texto-menu" id="nav-mesa-tab" data-toggle="tab" href="#nav-mesa" role="tab"
-      aria-controls="nav-mesa" aria-selected="false">MESA</a>
-    <a class="nav-item nav-link texto-menu" id="nav-banho-tab" data-toggle="tab" href="#nav-banho" role="tab"
-      aria-controls="nav-banho" aria-selected="false">BANHO</a>
-    <a class="nav-item nav-link texto-menu" id="nav-decoracao-tab" data-toggle="tab" href="#nav-decoracao" role="tab"
-      aria-controls="nav-decoracao" aria-selected="false">DECORAÇÃO</a>
-    <a class="nav-item nav-link texto-menu" id="nav-promocao-tab" data-toggle="tab" href="#nav-promocao" role="tab"
-      aria-controls="nav-promocao" aria-selected="false">PROMOÇÃO</a>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade" id="nav-cama" role="tabpanel" aria-labelledby="nav-cama-tab">
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo de Cama')">Jogo de Cama/Jogo de Lençol</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Edredom')">Edredom</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Colcha')">Colcha</a>
-  </div>
-  <div class="tab-pane fade" id="nav-mesa" role="tabpanel" aria-labelledby="nav-mesa-tab">
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Mesa')">Toalha de Mesa</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Guardanapo')">Guardanapo</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo Americano')">Jogo Americano</a>
-  </div>
-  <div class="tab-pane fade" id="nav-banho" role="tabpanel" aria-labelledby="nav-banho-tab">
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Banho')">Toalha de Banho</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha de Rosto')">Toalha de Rosto</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Toalha Banhão')">Toalha Banhão</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Jogo de Banho')">Jogo de Banho</a>
-    <a class="dropdown-item" (click)="filtrarPorSubCategoria('Roupão')">Roupão</a>
-  </div>
-  <div class="tab-pane fade" id="nav-decoracao" role="tabpanel" aria-labelledby="nav-decoracao-tab">
-    <a class="dropdown-item" href="#">Tapete Sala</a>
-  </div>
-  <div class="tab-pane fade" id="nav-promocao" role="tabpanel" aria-labelledby="nav-promocao-tab">
-    <a class="dropdown-item" href="#">Promoção 1</a>
-    <a class="dropdown-item" href="#">Promoção 2</a>
-    <a class="dropdown-item" href="#">Promoção 3</a>
-  </div>
-</div>
 
 <div class="row banner-home mt-5">
   <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">

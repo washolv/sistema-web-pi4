@@ -72,6 +72,9 @@ export class DetalhesProdutoComponent implements OnInit {
       });
     }
   }
+  adicionarCarrinho(){
+
+  }
   backProdutos() {
     this.router.navigate(['dashboard']);
   }

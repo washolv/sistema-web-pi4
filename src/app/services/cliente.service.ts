@@ -14,7 +14,7 @@ export class ClienteService {
 
 
   public buscarCliente(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.apiUrl}/clientes/${id}`);
+    return this.http.get<Cliente>(`${this.apiUrl}/clientes/find/${id}`);
   }
   public buscarClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrl}/clientes`);
@@ -33,8 +33,11 @@ export class ClienteService {
   public adicionarEndereco(idCliente: number, endereco: EnderecoCliente): Observable<EnderecoCliente> {
     return this.http.post<EnderecoCliente>(`${this.apiUrl}/enderecos/cliente/${idCliente}`, endereco);
   }
-  public editarEndereco(endereco: EnderecoCliente): Observable<EnderecoCliente> {
-    return this.http.put<EnderecoCliente>(`${this.apiUrl}/enderecos`, endereco);
+  public editarEndereco(id:number,endereco: EnderecoCliente): Observable<EnderecoCliente> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'id': id.toString() })
+    };
+    return this.http.put<EnderecoCliente>(`${this.apiUrl}/enderecos`, endereco, httpOptions);
   }
   public buscarEnderecos(idCliente: number): Observable<EnderecoCliente[]> {
     return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/cliente/${idCliente}`);

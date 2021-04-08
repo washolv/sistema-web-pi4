@@ -33,6 +33,7 @@ const routes: Routes = [
   {
     path: 'configuracoes', component: MainNavComponent,
     loadChildren: () => import('./modules/configuracao/configuracao.module').then(m => m.ConfiguracaoModule),
+    canActivate:[ClienteGuard]
   },
   {
     path: 'funcionarios', component: MainNavComponent,

@@ -16,20 +16,22 @@ import { ModalEditarEnderecoClienteComponent } from '../modals/modal-editar-ende
 })
 export class EnderecoClienteComponent implements OnInit {
   public cliente: Cliente=new Cliente();
+  public enderecos: EnderecoCliente[]=[];
   totalRegistros: number = 0;
   page: number = 1;
   color: ThemePalette = 'primary';
   public id: number=0;
 
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, private clienteService: ClienteService) {
-      const user=this.roleGuardService.decodeJWT();
-      this.id=user.id;
-      this.clienteService.buscarCliente(this.id).subscribe(resp =>{
-        this.cliente=resp;
-      })
+
   }
 
   ngOnInit() {
+    const user=this.roleGuardService.decodeJWT();
+      this.id=user.Id;
+      this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
+        this.enderecos=resp;
+      })
   }
   adicionarEndereco(){
     const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
@@ -38,11 +40,11 @@ export class EnderecoClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         let endereco = response;
-        console.log(endereco)
-        this.clienteService.adicionarEndereco(this.cliente.id!,endereco).subscribe(response => {
+        this.clienteService.adicionarEndereco(this.id,endereco).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
+          this.ngOnInit();
         }, err => {
           this.toastr.error("Falha cadastrar endereço", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
@@ -54,8 +56,7 @@ export class EnderecoClienteComponent implements OnInit {
     });
   }
   habilitarEndereco(endereco: any){
-      this.clienteService.editarEndereco(endereco).subscribe(resp=>{
-        console.log(resp)
+      this.clienteService.editarEndereco(this.id,endereco).subscribe(resp=>{
       });
   }
   editarEndereco(endereco: EnderecoCliente){
@@ -68,8 +69,8 @@ export class EnderecoClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         let endereco = response;
-        console.log(endereco)
-        this.clienteService.editarEndereco(endereco).subscribe(response => {
+        endereco.id
+        this.clienteService.editarEndereco(this.id,endereco).subscribe(response => {
           this.toastr.success("Endereço alterado com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });

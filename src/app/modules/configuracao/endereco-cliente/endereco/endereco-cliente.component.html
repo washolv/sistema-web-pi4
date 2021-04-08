@@ -16,7 +16,7 @@
       </button>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
-      <table class="table custom-table" *ngIf="cliente && cliente.enderecos">
+      <table class="table custom-table" *ngIf="enderecos">
           <thead>
             <tr>
               <th scope="col">Logradouro</th>
@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let endereco of cliente.enderecos | paginate: {id: 'listing_pagination',
+            <tr *ngFor="let endereco of enderecos | paginate: {id: 'listing_pagination',
                  itemsPerPage: 10,
                  currentPage: this.page,
                  totalItems: totalRegistros};let i=index ">

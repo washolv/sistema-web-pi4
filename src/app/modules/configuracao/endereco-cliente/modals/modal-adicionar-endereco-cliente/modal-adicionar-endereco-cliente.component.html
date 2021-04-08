@@ -28,7 +28,7 @@
         <label class="control-label" for="logradouro">* Logradouro</label>
         <input id="logradouro" name="logradouro" formControlName="logradouro"
           [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" placeholder="Ex: Rua , Avenida"
-          class="form-control cep-mask" required type="search" pattern="[0-9]+$">
+          class="form-control" required type="search">
         <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
           <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
         </div>
@@ -37,7 +37,7 @@
         <label class="control-label" for="cidade">* Cidade</label>
         <input id="cidade" name="cidade" formControlName="cidade"
           [ngClass]="{ 'is-invalid': !formValid && f.cidade.errors }" placeholder="Sua cidade"
-          class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
+          class="form-control" required type="search">
         <div *ngIf="!formValid && f.cidade.errors" class="invalid-feedback">
           <div *ngIf="f.cidade.errors.required">* Campo obrigatório</div>
         </div>
