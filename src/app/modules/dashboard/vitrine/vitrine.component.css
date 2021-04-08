@@ -43,6 +43,14 @@
   height: 35px;
   color: #444444;
 }
+@media (max-width: 768px)   {
+  .banner-home{
+    display: none;
+  }
+  .custom-image{
+    display: none;
+  }
+ }
 
 .custom-lbl-filter {
   width: auto;
@@ -87,6 +95,10 @@ ngb-rating {
   width: 100%;
   margin: auto 5px auto 0px;
   padding: 8px 0;
+}
+.custom-image{
+  margin: 0;
+  width: 100%;
 }
 
 .menu {

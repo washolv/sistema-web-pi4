@@ -40,7 +40,7 @@
               <td>{{endereco.uf}}</td>
               <td>{{endereco.complemento}}</td>
               <td>
-                <mat-slide-toggle (change)="habilitarEndereco(endereco)" [color]="color" class="align-middle">
+                <mat-slide-toggle [(ngModel)]="endereco.status" (change)="habilitarEndereco(endereco)" [color]="color" class="align-middle">
                 </mat-slide-toggle>
               </td>
               <td>

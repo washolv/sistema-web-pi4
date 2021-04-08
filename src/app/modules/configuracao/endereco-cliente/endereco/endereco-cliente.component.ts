@@ -21,7 +21,7 @@ export class EnderecoClienteComponent implements OnInit {
   page: number = 1;
   color: ThemePalette = 'primary';
   public id: number=0;
-
+  public statusAddress=false;
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, private clienteService: ClienteService) {
 
   }
@@ -55,11 +55,14 @@ export class EnderecoClienteComponent implements OnInit {
       console.log(err);
     });
   }
-  habilitarEndereco(endereco: any){
+  habilitarEndereco(endereco: EnderecoCliente){
       this.clienteService.editarEndereco(this.id,endereco).subscribe(resp=>{
+        console.log(resp)
       });
   }
   editarEndereco(endereco: EnderecoCliente){
+    console.log('*****')
+    console.log(endereco)
     const dialogRef = this.dialog.open(ModalEditarEnderecoClienteComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {
@@ -68,12 +71,13 @@ export class EnderecoClienteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        let endereco = response;
-        endereco.id
-        this.clienteService.editarEndereco(this.id,endereco).subscribe(response => {
+        response.id=endereco.id;
+
+        this.clienteService.editarEndereco(this.id,response).subscribe(response => {
           this.toastr.success("Endereço alterado com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
+          this.ngOnInit();
         }, err => {
           this.toastr.error("Falha ao alterar endereço", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
