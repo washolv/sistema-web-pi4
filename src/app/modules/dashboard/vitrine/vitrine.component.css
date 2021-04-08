@@ -70,23 +70,26 @@ ngb-rating {
  margin: auto;
 }
 
-.tab-content {
+.nav {
+  align-content: center;
+  background-color: #f1f1f1;
+}
+
+.nav-link {
+  color: #000000;
+  font-weight: bold;
+}
+
+.tab-pane {
   column-count: 3;
   text-align: justify;
   width: 100%;
   margin: auto 5px auto 0px;
   padding: 8px 0;
-  background-color: #f1f1f1;
-  
 }
 
 .menu {
   text-align: center;
   width: 100%;
   background-color: #f1f1f1;
-}
-
-.texto-menu {
-  color: #000000;
-  font-weight: bold;
 }
