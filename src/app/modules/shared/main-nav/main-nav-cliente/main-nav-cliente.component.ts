@@ -19,6 +19,9 @@ export class MainNavClienteComponent implements OnInit {
 
   ngOnInit() {
   }
+  configuracoes(){
+    this.router.navigate(['/configuracoes']);
+  }
   dashboard() {
     this.router.navigate([``]);
   }

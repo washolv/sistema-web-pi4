@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Cliente } from '../modules/cliente/models/Cliente';
+import { Cliente, EnderecoCliente } from '../modules/cliente/models/Cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -13,32 +13,46 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
 
-  public buscarCliente(id: number): Observable<Cliente[]>{
+  public buscarCliente(id: number): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrl}/clientes/${id}`);
   }
-  public buscarClientes(): Observable<Cliente[]>{
+  public buscarClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrl}/clientes`);
   }
   public salvarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(`${this.apiUrl}/clientes`, cliente);
   }
-  public editarCliente(cliente: Cliente): Observable<Cliente>{
+  public editarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.apiUrl}/clientes`, cliente.nome);
   }
   public deleteCliente(id?: number): Observable<Cliente> {
     return this.http.delete<Cliente>(`${this.apiUrl}/clientes/${id}`);
   }
 
-  public emailNaoCadastrado(email: string)/*:Observable<any>*/{
+  //CRUD DE ENDEREÇOS DO CLIENTE
+  public adicionarEndereco(idCliente: number, endereco: EnderecoCliente): Observable<EnderecoCliente> {
+    return this.http.post<EnderecoCliente>(`${this.apiUrl}/enderecos/cliente/${idCliente}`, endereco);
+  }
+  public editarEndereco(endereco: EnderecoCliente): Observable<EnderecoCliente> {
+    return this.http.put<EnderecoCliente>(`${this.apiUrl}/enderecos`, endereco);
+  }
+  public buscarEnderecos(idCliente: number): Observable<EnderecoCliente[]> {
+    return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/cliente/${idCliente}`);
+  }
+  public buscarEndereco(idEndereco: number): Observable<EnderecoCliente[]> {
+    return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/${idEndereco}`);
+  }
+
+  public emailNaoCadastrado(email: string)/*:Observable<any>*/ {
     const httpOptions = {
-      headers: new HttpHeaders({'email': email })
+      headers: new HttpHeaders({ 'email': email })
     };
-     return this.http.get<Cliente>(`${this.apiUrl}/usuarios`, httpOptions);
+    return this.http.get<Cliente>(`${this.apiUrl}/usuarios`, httpOptions);
   }
   public cpfNaoCadastrado(cpf: string)/*:Observable<any>*/ {
-   const httpOptions = {
-      headers: new HttpHeaders({'cpf': cpf })
+    const httpOptions = {
+      headers: new HttpHeaders({ 'cpf': cpf })
     };
-     return this.http.get<Cliente>(`${this.apiUrl}/clientes/cpf`, httpOptions)
+    return this.http.get<Cliente>(`${this.apiUrl}/clientes/cpf`, httpOptions)
   };
 }

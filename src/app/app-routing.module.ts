@@ -31,6 +31,10 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
+    path: 'configuracoes', component: MainNavComponent,
+    loadChildren: () => import('./modules/configuracao/configuracao.module').then(m => m.ConfiguracaoModule),
+  },
+  {
     path: 'funcionarios', component: MainNavComponent,
     loadChildren: () => import('./modules/funcionario/funcionario.module').then(m => m.FuncionarioModule),
     canActivate: [AuthGuard],

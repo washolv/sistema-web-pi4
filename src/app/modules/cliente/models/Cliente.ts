@@ -7,7 +7,7 @@ export class Cliente {
   cpf?: string;
   sexo?: string;
   dataNascimento?: Date;
-  enderecos?: EnderecoCliente[];
+  enderecos?: EnderecoCliente[]=[];
   usuario?: Usuario;
 }
 
@@ -18,4 +18,5 @@ export class EnderecoCliente {
   cidade?:string;
   uf?:string;
   descricao?: string;
+  status?: boolean;
 }
