@@ -14,15 +14,15 @@
         [ngClass]="{ 'is-invalid': !formValid && f.username.errors }" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
          <div class="invalid-feedback" *ngIf="!formValid && f.username.errors">
             <div *ngIf="f.username.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.username.errors.minlength">* username inválido</div>
+            <div *ngIf="f.username.errors.email">* E-mail inválido</div>
           </div>
       </div>
       <div class="form-row mt-2">
         <label for="password">* senha</label>
         <input formControlName="password" name="senha" class="form-control text-muted" required placeholder="senha"
-          type="senha"[ngClass]="{ 'is-invalid': !formValid && f.password.errors }" required>
+          type="password"[ngClass]="{ 'is-invalid': !formValid && f.password.errors }" required>
           <div *ngIf="!formValid && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required"><p>sadasdas</p></div>
+            <div *ngIf="f.password.errors.required">* Campo obrigatório</div>
             <div *ngIf="f.password.errors.minlength">* Senha inválida</div>
           </div>
       </div>
