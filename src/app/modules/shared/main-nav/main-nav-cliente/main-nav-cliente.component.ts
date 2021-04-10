@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
@@ -12,20 +13,27 @@ export class MainNavClienteComponent implements OnInit {
 
   public userRole;
   public user;
-  constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
-    this.userRole=roleGuardService.getUserRole();
-    this.user=roleGuardService.decodeJWT();
+  public qtdCarrinho: number = 0;
+  constructor(private cartService: CartService, private loginService: LoginService, private router: Router, private roleGuardService: RoleGuardService) {
+    this.userRole = roleGuardService.getUserRole();
+    this.user = roleGuardService.decodeJWT();
   }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes) {
+      this.qtdCarrinho = this.cartService.qtdCarrinho();
+    }
   }
-  configuracoes(){
+  ngOnInit() {
+    this.qtdCarrinho = this.cartService.qtdCarrinho();
+  }
+  configuracoes() {
     this.router.navigate(['/configuracoes']);
   }
   dashboard() {
     this.router.navigate([``]);
   }
-  public logout(){
+  public logout() {
     this.loginService.logout();
 
   }

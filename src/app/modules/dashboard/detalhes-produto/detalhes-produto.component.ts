@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from 'src/app/services/cart.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 
@@ -20,7 +21,7 @@ export class DetalhesProdutoComponent implements OnInit {
   public currentRate: number=0;
   imagens: any;
   cont: number = 0;
-  constructor(private config: NgbRatingConfig, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private cartService: CartService, private config: NgbRatingConfig, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
     this.config.max = 5;
     this.formProduto = this.createForm(this.produto);
@@ -73,7 +74,8 @@ export class DetalhesProdutoComponent implements OnInit {
     }
   }
   adicionarCarrinho(){
-
+      this.cartService.adicionarProduto(this.produto);
+      window.location.reload();
   }
   backProdutos() {
     this.router.navigate(['dashboard']);

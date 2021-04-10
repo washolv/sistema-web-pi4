@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
@@ -10,7 +11,7 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 })
 export class MainNavLoginComponent implements OnInit {
   public userRole?: string='';
-
+  public qtdCarrinho: number=0;
   constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
     this.userRole=roleGuardService.getUserRole();
   }
