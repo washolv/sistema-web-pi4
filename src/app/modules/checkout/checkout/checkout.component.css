@@ -44,6 +44,9 @@
   border-radius: 5px;
   height: 200px;
 }
+.mini{
+  display: none;
+}
 .table{
   margin: 10px;
 }
@@ -51,8 +54,14 @@
   .col{
     width: 50%;
   }
+  .mini{
+    display: block;
+  }
   .table{
     margin: 4px;
+  }
+  .custom-col{
+    display: none;
   }
   .custom-image{
     width: 100%;

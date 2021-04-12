@@ -8,19 +8,22 @@
         <tr>
           <th scope="col">Produto</th>
           <th scope="col">Descrição</th>
-          <th scope="col">Qtd.</th>
-          <th scope="col">Subtotal</th>
+          <th class="custom-col" scope="col">Qtd.</th>
+          <th class="custom-col" scope="col">Subtotal</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let produto of produtosCarrinho">
           <td *ngIf="produto.imageToShow"><img class="custom-image" [src]="produto.imageToShow[0]" alt="First slide">
           </td>
-          <td>{{produto.nome}}</td>
-          <td><input type="number" [value]="qtdProdutos" class="form-control"><a
+          <td>{{produto.nome}}
+            <span class="mini"><input type="number" [value]="qtdProdutos" class="subtotal form-control">
+              {{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</span>
+          </td>
+          <td class="custom-col"><input type="number" [value]="qtdProdutos" class="form-control"><a
               href="http://localhost:4200/#/carrinho"><span class="link" (click)="remover(produto)">Remover</span></a>
           </td>
-          <td class="subtotal">{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</td>
+          <td class="custom-col subtotal">{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</td>
       </tbody>
     </table>
     <div class="col-lg-12">
