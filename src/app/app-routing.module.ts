@@ -44,7 +44,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'compras', component: MainNavComponent,
+    path: 'carrinho', component: MainNavComponent,
     loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
     //canActivate: [ClienteGuard],
    /* data: {

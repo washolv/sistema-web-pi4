@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { Produto } from '../produto/models/Produto';
 
 const routes=[
   {path: '', component: CheckoutComponent}
@@ -13,4 +15,6 @@ const routes=[
   ],
   declarations: [CheckoutComponent]
 })
-export class CheckoutModule { }
+export class CheckoutModule{
+
+}

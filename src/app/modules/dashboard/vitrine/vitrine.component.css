@@ -89,6 +89,11 @@ ngb-rating {
   font-weight: bold;
 }
 
+.btn-info{
+  position: relative;
+  margin-top: auto;
+}
+
 .tab-pane {
   column-count: 3;
   text-align: justify;

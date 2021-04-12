@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { Produto } from '../modules/produto/models/Produto';
 import { ProdutoService } from './produto.service';
@@ -11,7 +12,7 @@ export class CartService {
 
   apiUrl = environment.baseAPIUrl;
 
-  constructor(private http: HttpClient, private produtoService: ProdutoService) { }
+  constructor(private http: HttpClient, private produtoService: ProdutoService, private sanitizer: DomSanitizer) { }
 
   public buscarProdutos() {
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
@@ -20,6 +21,13 @@ export class CartService {
       let listaId: number[] = JSON.parse(produtosCarrinhoJson);
       listaId.forEach(x => {
         this.produtoService.getProdutoById(x).subscribe(resp => {
+          this.produtoService.getImagensProduto(resp.id!).subscribe(response => {
+            resp.imagens = response;
+            response.forEach(element => {
+              resp.imageToShow = new Array()
+              resp.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+            })
+          })
           produtosCarrinho.push(resp);
         })
       });
