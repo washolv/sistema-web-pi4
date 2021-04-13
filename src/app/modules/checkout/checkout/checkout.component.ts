@@ -13,14 +13,8 @@ export class CheckoutComponent implements OnInit {
   public produtosCarrinho!: Produto[];
   public qtdProdutos: number=1;
   public subTotal: number=0;
-  public isMobileResolution: boolean;
 
   constructor(private router: Router, private cartService: CartService){
-    if (window.innerWidth <= 768) {
-      this.isMobileResolution = true;
-    } else {
-      this.isMobileResolution = false;
-    }
   }
 
   ngOnInit(){
@@ -29,5 +23,9 @@ export class CheckoutComponent implements OnInit {
   remover(produto: Produto){
       this.cartService.removerProduto(produto);
       window.location.reload();
+  }
+
+  endereco(){
+    this.router.navigate(['/carrinho/endereco-entrega']);
   }
 }

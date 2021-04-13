@@ -21,9 +21,11 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ModalEditarEnderecoClienteComponent } from './endereco-cliente/modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
 import { ModalAdicionarEnderecoClienteComponent } from './endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
+import { EnderecoEntregaComponent } from '../checkout/endereco-entrega/endereco-entrega.component';
 
 const routes = [
-  { path: '', component: ConfiguracaoComponent }
+  { path: '', component: ConfiguracaoComponent },
+  { path: 'enderecos', component: EnderecoClienteComponent }
 ]
 @NgModule({
   imports: [

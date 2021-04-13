@@ -11,5 +11,7 @@ export class ConfiguracaoComponent implements OnInit {
 
   ngOnInit() {
   }
+  compras(){
 
+  }
 }

@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="custom-form-box">
+      <div class="custom-form-box" >
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">
             Resumo do Pedido
@@ -82,12 +82,12 @@
           </div>
         </div>
         <div class="col-lg-12 text-center mt-3">
-          <button type="button" class="btn btn-primary col-lg-8">Prosseguir </button>
+          <button type="button" class="btn btn-primary col-lg-4" (click)="endereco()">Prosseguir </button>
         </div>
       </div>
     </div>
     <div class="col-12 col-lg-12" *ngIf="!produtosCarrinho || produtosCarrinho.length==0">
-      <div class="custom-form-box-empty text-center bg-light">
+      <div class="custom-form-box-empty text-center">
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">
             Seu Carrinho de compras está vazio.

@@ -3,6 +3,7 @@ import { Usuario } from "../../funcionario/models/Funcionario";
 export class Cliente {
   id?: number;
   nome?: string;
+  sobrenome?:string;
   telefone?: string;
   cpf?: string;
   sexo?: string;

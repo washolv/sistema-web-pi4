@@ -48,7 +48,11 @@ export class CriarContaComponent implements OnInit {
     return this.fb.group({
       nome: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
+      ])),
+      sobrenome: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
       ])),
       cpf: new FormControl('',
         Validators.compose([
