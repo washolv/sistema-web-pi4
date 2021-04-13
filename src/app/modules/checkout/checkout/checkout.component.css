@@ -6,11 +6,11 @@
   width: 20%;
   max-width: 300px;
 }
-.thead{
-  border-radius: 50%;
+.custom-table{
   background-color: #0C3758;
-  color: white;
+  border: none;
 }
+
 .subtotal{
   font-weight: bold;
 }
@@ -28,8 +28,8 @@
   font-size: 15px;
   margin-right: 10px;
 }
-.form-control{
-  width: 30%;
+.group-rem{
+  width: 60%;
 }
 .link{
   color: black;
@@ -44,6 +44,12 @@
   border-radius: 5px;
   height: 200px;
 }
+.bordas-cart{
+  border: 1px solid #E6E6E6;
+}
+.rem-carrinho{
+  color: black;
+}
 .mini{
   display: none;
 }
@@ -54,17 +60,20 @@
   .col{
     width: 50%;
   }
+  .group-rem{
+    margin-left: 4px;
+    width: 100%;
+  }
   .mini{
     display: block;
   }
   .table{
     margin: 4px;
   }
-  .custom-col{
-    display: none;
-  }
   .custom-image{
     width: 100%;
   }
 
  }
+
+
