@@ -3,7 +3,7 @@
     <div class="custom-title">Carrinho de Compras</div>
   </div>
   <div class="row d-flex justify-content-center">
-    <div class="col-12 col-lg-12">
+    <div class="col-12 col-lg-12" *ngIf="produtosCarrinho && produtosCarrinho.length>0">
       <div class="boxcart col-12 pb-3 col-md-12 px-0">
         <div class="bordas-cart">
           <div class="row text-white px-2 mx-0 border-bottom custom-table">
@@ -41,14 +41,15 @@
                 <div class="col-6 col-lg-3 py-2 py-lg-0 px-0 px-lg-2">
                   <div class="row group-rem">
                     <div class="col-12 d-flex align-items-center">
-                      <div class="input-group float-left spinner mr-4">
-                        <input type="number" class="form-control">
+                      <div class="input-group float-left  mr-4">
+                        <input type="number" value="1" name="quantity" min="1" class="number form-control">
                       </div>
                       <a type="button" href="http://localhost:4200/#/carrinho" (click)="remover(produto)"
                         class="rem-carrinho">Remover</a>
                     </div>
                   </div>
                 </div>
+
                 <div class="col-6 col-lg-4 pl-0">
                   <div class="row ">
                     <div class="col-12 col-lg-6 mt-2 mt-lg-0 text-right font-weight-bold">
@@ -59,8 +60,8 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
-    </div>
       <div class="custom-form-box">
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">
@@ -83,6 +84,26 @@
         <div class="col-lg-12 text-center mt-3">
           <button type="button" class="btn btn-primary col-lg-8">Prosseguir </button>
         </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-12" *ngIf="!produtosCarrinho || produtosCarrinho.length==0">
+      <div class="custom-form-box-empty text-center bg-light">
+        <div class="col-lg-12 mt-2">
+          <div class="custom-text-size1 ml-2">
+            Seu Carrinho de compras está vazio.
+          </div>
+          <hr>
+        </div>
+        <div class="col-lg-12 custom-text-size4 mt-2 ml-2">Insira já produtos ao seu Carrinho.</div>
+        <div class="col-lg-12">
+          <div class="custom-text-size4 mt-2 ml-2"> Navegue pelas categorias ou utilize a busca do site, ao encontrar os
+            produtos desejados, clique no botão comprar.
+          </div>
+          <div class="col-lg-12 text-center mt-3">
+            <button type="button" class="btn btn-primary col-lg-4" routerLink='/dashboard'>Continuar Comprando </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
