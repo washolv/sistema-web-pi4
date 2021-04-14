@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfiguracaoComponent } from './configuracao/configuracao.component';
 import { RouterModule } from '@angular/router';
-import { EnderecoClienteComponent } from './endereco-cliente/endereco/endereco-cliente.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -19,9 +18,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { ModalEditarEnderecoClienteComponent } from './endereco-cliente/modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
-import { ModalAdicionarEnderecoClienteComponent } from './endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
-import { EnderecoEntregaComponent } from '../checkout/endereco-entrega/endereco-entrega.component';
+import { ModalEditarEnderecoClienteComponent } from './cliente/endereco-cliente/modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
+import { ModalAdicionarEnderecoClienteComponent } from './cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
+import { EnderecoClienteComponent } from './cliente/endereco-cliente/endereco/endereco-cliente.component';
 
 const routes = [
   { path: '', component: ConfiguracaoComponent },

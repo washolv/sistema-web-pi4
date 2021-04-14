@@ -40,17 +40,15 @@ export class AdicionarProdutoComponent implements OnInit {
   }
 
   public addProduto() {
-     this.formProduto.value.qtdEstrelas = this.currentRate;
-      if (this.formProduto.value.status) {
-        this.formProduto.value.status = 1;
-      } else {
-        this.formProduto.value.status = 0;
-      }
+     this.formProduto.value.qtdEstrelas = 0;
+     this.formProduto.value.status = 1;
+     if(this.formProduto.valid){
       this.router.navigateByUrl('/produtos/adicionar/imagens', {
         state: { produto: this.formProduto.value }
       })
-
-
+     }else{
+       this.formValid=false;
+     }
   }
   get f() { return this.formProduto.controls; }
 

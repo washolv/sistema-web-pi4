@@ -111,3 +111,8 @@ ngb-rating {
   width: 100%;
   background-color: #f1f1f1;
 }
+
+.btn-primary{
+  color: #F1F1F1;
+  background-color: #0C3750;
+}

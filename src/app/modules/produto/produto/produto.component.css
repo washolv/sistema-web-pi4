@@ -35,9 +35,9 @@
   background-position: 50% 50%;
   width: 50px;
   height: 35px;
-  border: 1px solid #a09be9;
+  border: 1px solid #F1F1F1;
   border-radius: 5px;
-  background-color: #a09be9;
+  background-color: #F1F1F1;
   outline: none;
 }
 .custom-text-size24{
@@ -45,6 +45,11 @@
   font-weight: bold;
 }
 
-
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #F1F1F1;
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #0C3750;
+}
 
 
