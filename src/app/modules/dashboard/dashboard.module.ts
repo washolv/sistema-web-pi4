@@ -1,5 +1,5 @@
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import localePt from '@angular/common/locales/pt';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'detalhes/:id', component: DetalhesProdutoComponent}
 ];
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   imports: [
@@ -46,8 +48,8 @@ const routes: Routes = [
   ],
   providers: [NgbRatingConfig,
     {
-      provide: DEFAULT_CURRENCY_CODE,
-      useValue: 'BRL'
+      provide: LOCALE_ID,
+      useValue: "pt"
     }
   ],
   declarations: [DashboardComponent, VitrineComponent, DashboardFuncionarioComponent, DetalhesProdutoComponent],

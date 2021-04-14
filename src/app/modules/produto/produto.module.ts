@@ -1,6 +1,6 @@
 import { AdicionarEstoqueComponent } from './modals/adicionar-estoque/adicionar-estoque.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, CurrencyPipe, registerLocaleData } from '@angular/common';
 import { ProdutoComponent } from './produto/produto.component';
 import { ModalExcluirProdutoComponent } from './modals/modal-excluir-produto/modal-excluir-produto.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminGuard } from 'src/app/services/admin.guard';
+import localePt from '@angular/common/locales/pt';
 
 
 const routes: Routes = [
@@ -33,6 +34,8 @@ const routes: Routes = [
   { path: 'adicionar/imagens', component: AdicionarImagensProdutoComponent, canActivate: [AdminGuard]},
   { path: 'editar/imagens/:id', component: EditarImagensProdutoComponent, canActivate: [AdminGuard]}
 ];
+registerLocaleData(localePt, 'pt');
+
 @NgModule({
   imports: [
     CommonModule,
@@ -67,7 +70,10 @@ const routes: Routes = [
   ],
   providers: [NgbRatingConfig,
     CurrencyPipe,
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    {
+      provide: LOCALE_ID,
+      useValue: "pt"
+    }
   ],
   entryComponents: [
     ModalExcluirProdutoComponent,
