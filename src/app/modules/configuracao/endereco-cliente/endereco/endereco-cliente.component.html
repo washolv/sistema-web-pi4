@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="row col-lg-12 col-md-12">
-    <div class="row">
+  <div class="row col-lg-12 col-md-12 mt-4">
+    <div class="row mx-auto">
       <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
         Meus endereços de entrega
       </div>
@@ -8,55 +8,54 @@
   </div>
   <hr>
 
-  <div class="row col-12 col-sm-12 col-md-12">
+  <div class="row col-12 col-sm-12 col-md-12 justify-content-center">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <button class="btn btn-add mb-3" type="button" (click)="adicionarEndereco()">
-        <img src="../../../../../assets/Icon material-add-location.svg" class="btn-icon-add" alt="Adicionar Funcionário"
+        <img src="../../../../../assets/Icon material-add-location.svg" class="btn-icon-add" alt="Adicionar endereço"
           title="Adicionar Funcionário">
       </button>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
-      <table class="table custom-table" *ngIf="enderecos">
-          <thead>
-            <tr>
-              <th scope="col">Logradouro</th>
-              <th scope="col">CEP</th>
-              <th scope="col">Cidade</th>
-              <th scope="col">Numero</th>
-              <th scope="col">UF</th>
-              <th scope="col">Complemento</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let endereco of enderecos | paginate: {id: 'listing_pagination',
-                 itemsPerPage: 10,
-                 currentPage: this.page,
-                 totalItems: totalRegistros};let i=index ">
-              <td>{{endereco.logradouro!}}</td>
-              <td>{{endereco.cep}}</td>
-              <td>{{endereco.cidade }}</td>
-              <td>{{endereco.numero }}</td>
-              <td>{{endereco.uf}}</td>
-              <td>{{endereco.complemento}}</td>
-              <td>
-                <mat-slide-toggle [(ngModel)]="endereco.status" (change)="habilitarEndereco(endereco)" [color]="color" class="align-middle">
-                </mat-slide-toggle>
-              </td>
-              <td>
-                <button class="btn">
-                  <img src="../../../assets/botao-editar.svg" (click)="editarEndereco(endereco)" class="btn-icon-add"
-                    alt="add">
-                </button>
-              </td>
-            </tr>
-          </tbody>
-      </table>
-      <div class="row">
-        <div class="col-lg-8"></div>
-        <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
-          (pageChange)="page = $event">
-        </pagination-controls>
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
+      <div class="col-xl-4 col-lg-4 col-md-6 d-flex flex-wrap mt-3" *ngFor="let endereco of enderecos">
+        <div class="card w-100 border-dark">
+          <div class="card-body">
+            <div class="row justify-content-between">
+                <h3 class="card-title ml-3">
+                  {{endereco.complemento}}</h3>
+                  <p class="mr-3">
+                <mat-slide-toggle [(ngModel)]="endereco.status" (change)="habilitarEndereco(endereco)" [color]="color"
+                    class="align-middle"></mat-slide-toggle></p>
+            </div>
+            <hr>
+            <p class="card-text m-0"></p>
+            <p class="card-text m-0"></p>
+            <p class="card-text m-0">{{endereco.logradouro}}, {{endereco.numero}}</p>
+            <p class="card-text m-0">{{endereco.bairro}} - {{endereco.cidade}} - {{endereco.uf}}</p>
+            <p class="card-text m-0">CEP: {{endereco.cep}}</p>
+          </div>
+          <div class="card-footer border-dark" *ngIf="!endereco.principal">
+            <div class="row">
+              <div class="col-6 text-left"><a (click)="editarEndereco(endereco)" class="text-secondary" data-toggle="modal"><i
+                    class="fa fa-edit m-1"></i>Editar</a></div>
+            </div>
+            <div class="col-12 p-0 text-center">
+              <a (click)="enderecoPrincipal(endereco)" class="btn btn-dark btn-block mt-2 btn-dark" *ngIf="!endereco.principal">
+                <i class="fa fa-check mr-2"></i>Selecionar
+              </a>
+            </div>
+          </div>
+          <div class="card-footer border-dark" *ngIf="endereco.principal">
+            <div class="row">
+              <div class="col-6 text-left"><a (click)="editarEndereco(endereco)" class="text-secondary" data-toggle="modal"><i
+                    class="fa fa-edit m-1"></i>Editar</a></div>
+            </div>
+            <div class="col-12 p-0 text-center">
+              <a class="btn btn-dark btn-block mt-2 btn-dark" *ngIf="endereco.principal">
+                <i class="fa fa-check mr-2"></i>Endereço Principal
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -55,14 +55,17 @@ export class EnderecoClienteComponent implements OnInit {
       console.log(err);
     });
   }
+  enderecoPrincipal(endereco: EnderecoCliente){
+    endereco.principal=true;
+    this.clienteService.editarEndereco(this.id,endereco).subscribe(resp=>{
+      this.ngOnInit();
+    });
+  }
   habilitarEndereco(endereco: EnderecoCliente){
       this.clienteService.editarEndereco(this.id,endereco).subscribe(resp=>{
-        console.log(resp)
       });
   }
   editarEndereco(endereco: EnderecoCliente){
-    console.log('*****')
-    console.log(endereco)
     const dialogRef = this.dialog.open(ModalEditarEnderecoClienteComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {

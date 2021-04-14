@@ -24,4 +24,5 @@ export class EnderecoCliente {
   bairro?: boolean;
   complemento?: string;
   numero?: number;
+  principal?: boolean;
 }
