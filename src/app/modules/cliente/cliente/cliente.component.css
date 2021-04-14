@@ -51,3 +51,60 @@
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: #0C3750;
 }
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #F1F1F1;
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #0C3750;
+}
+
+
+::ng-deep  .custom-table-container .ngx-pagination {
+  padding: 0;
+  font-size: 13px;
+  color: #F1F1F1;
+}
+
+::ng-deep .custom-table-container .ngx-pagination a:hover {
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+::ng-deep .custom-table-container .ngx-pagination .current {
+  background: #0C3750;
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+::ng-deep .custom-table-container .ngx-pagination a:hover {
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+::ng-deep .ngx-pagination .pagination-previous,
+.ngx-pagination .pagination-previous.disabled,
+.ngx-pagination .pagination-previous.disabled:hover,
+.ngx-pagination .pagination-next,
+.ngx-pagination .pagination-next.disabled,
+.ngx-pagination .pagination-next.disabled:hover {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+::ng-deep .ngx-pagination .pagination-next::after,
+.ngx-pagination .pagination-next.disabled::after,
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-previous::before,
+.ngx-pagination .pagination-previous.disabled::before,
+.ngx-pagination .pagination-previous a::before {
+    content: "" !important;
+}
+
+::ng-deep .ngx-pagination a:hover,
+.ngx-pagination button:hover {
+    background: none !important;
+}
+

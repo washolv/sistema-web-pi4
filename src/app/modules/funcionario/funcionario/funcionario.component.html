@@ -58,11 +58,13 @@
             </td>
         </tbody>
       </table>
-      <div class="row">
-        <div class="col-lg-8  "></div>
-        <pagination-controls id="listing_pagination"  maxlength='5' previousLabel="Anterior"   nextLabel="próximo"
-          (pageChange)="page = $event">
-        </pagination-controls>
+      <div class="row custom-pagination">
+        <div class="col-lg-8 "></div>
+        <div class="custom-table-container">
+          <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
+            (pageChange)="page = $event">
+          </pagination-controls>
+        </div>
       </div>
     </div>
   </div>
