@@ -1,11 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Funcionario, Endereco, Usuario } from 'src/app/modules/funcionario/models/Funcionario';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ModalAlterarSenhaComponent } from '../../../funcionario/editar-funcionario/modals/modal-alterar-senha/modal-alterar-senha.component';
+import { Usuario } from '../../../funcionario/models/Funcionario';
+import { Cliente } from '../../../cliente/models/Cliente';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
+import { TokenDecoded } from 'src/app/modules/login/login/models/TokenDecoded';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -14,56 +19,115 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class EditarClienteComponent implements OnInit {
   formValid: boolean = true;
-  public formFuncionario!: FormGroup;
+  public formCliente!: FormGroup;
   public cepValido = false;
-  public funcionario: Funcionario = new Funcionario()
-  public endereco: Endereco = new Endereco()
-  private usuario: Usuario=new Usuario;
-  public id = 0;
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private clienteService: ClienteService) { }
+  public cliente: Cliente = new Cliente()
+  private usuario: Usuario = new Usuario;
+  public color: ThemePalette = 'primary';
+  public id? : number;
+  constructor(private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private clienteService: ClienteService, private fb: FormBuilder,
+   public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService) {
+    let user = this.roleGuardService.getUser();
+    console.log(user)
+    this.id = user.Id;
+
+    this.formCliente = this.createFormCliente(this.cliente);
+    clienteService.buscarCliente(this.id!).subscribe(res => {
+      this.cliente = res;
+      console.log(res)
+      this.formCliente = this.createFormCliente(this.cliente);
+    })
+  }
 
   ngOnInit() {
   }
-  get f() { return this.formFuncionario.controls; }
 
-  public createFormFuncionario(funcionario: Funcionario): FormGroup {
+  get f() { return this.formCliente.controls; }
+
+  public createFormCliente(cliente: Cliente): FormGroup {
     return this.fb.group({
-      nome: new FormControl(this.funcionario.nome, Validators.compose([
+      nome: new FormControl(this.cliente.nome, Validators.compose([
         Validators.required,
         Validators.minLength(5),
       ])),
-      cpf: new FormControl({ value: this.funcionario.cpf, disabled: true },
+      sobrenome: new FormControl(this.cliente.sobrenome, Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+      ])),
+      cpf: new FormControl({ value: this.cliente.cpf, disabled: true },
         Validators.compose([
           Validators.required,
           Validators.minLength(11),
         ])),
-      cargo: new FormControl(this.funcionario.cargo, Validators.compose([
-        Validators.required,
-      ])),
-      dataNascimento: new FormControl({ value: this.funcionario.dataNascimento, disabled: true },
+        sexo: new FormControl({ value: this.cliente.sexo, disabled: true },
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(11),
+          ])),
+          email: new FormControl( this.cliente.usuario?.username,
+            Validators.compose([
+              Validators.required,
+              Validators.email,
+            ])),
+      dataNascimento: new FormControl({ value: this.cliente.dataNascimento, disabled: true },
         Validators.compose([
           Validators.required,
         ])),
-      status: new FormControl(this.funcionario.usuario?.active),
-      email: new FormControl({ value: this.funcionario.usuario?.username, disabled: true },
-        Validators.compose([
-          Validators.required,
-          Validators.email,
-        ])),
-      cep: new FormControl({ value: this.funcionario.endereco?.cep, disabled: true },
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-        ])),
-      senha: new FormControl(this.funcionario.usuario?.password,
+      senha: new FormControl(this.cliente.usuario?.password,
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
         ])),
-      logradouro: new FormControl({ value: this.funcionario.endereco?.logradouro, disabled: true }, Validators.required),
-      telefone: new FormControl({ value: this.funcionario.telefone, disabled: true }, Validators.required),
-      uf: new FormControl({ value: this.funcionario.endereco?.uf, disabled: true }, Validators.required),
-      localidade: new FormControl({ value: this.funcionario.endereco?.cidade, disabled: true }, Validators.required),
+      telefone: new FormControl({ value: this.cliente.telefone, disabled: true }, Validators.required),
+    });
+  }
+  public salvarCliente() {
+    if (this.formCliente.valid) {
+      this.cliente.nome = this.formCliente.value.nome;
+      this.cliente.sobrenome = this.formCliente.value.sobrenome;
+
+      this.clienteService.editarCliente(this.cliente).subscribe(res => {
+        this.toastr.success("Cliente editado com sucesso", "OK", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
+      }, err => {
+        this.toastr.error(err, "Erro", {
+          timeOut: 3000, positionClass: 'toast-top-center',
+        });
+      })
+    } else {
+      this.formValid = false;
+    }
+  }
+  public backPage() {
+    this.router.navigate(['/clientes'])
+  }
+
+  alterarSenha() {
+    const dialogRef = this.dialog.open(ModalAlterarSenhaComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur',
+      data: {
+        cliente: this.cliente
+      }
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.cliente = response;
+        console.log(this.cliente)
+        this.clienteService.editarCliente(this.cliente).subscribe(response => {
+          this.toastr.success("Senha alterada com sucesso", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        }, err => {
+          this.toastr.error("Falha ao alterar senha", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
     });
   }
 }
+
+

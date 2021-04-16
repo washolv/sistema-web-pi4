@@ -13,13 +13,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
 
+
 const routes: Routes = [
   { path: '', component: ClienteComponent },
-  { path: 'editar/:id', component: EditarClienteComponent },
+
 ];
 @NgModule({
   imports: [
@@ -44,7 +45,7 @@ const routes: Routes = [
   ],
   declarations: [
     ClienteComponent,
-    EditarClienteComponent,
+
 
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

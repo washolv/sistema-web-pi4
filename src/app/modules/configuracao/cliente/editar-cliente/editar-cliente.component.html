@@ -4,16 +4,15 @@
       <button class="mt-3 mb-4 btn btn-dark" type="submit" (click)="backPage()">Voltar</button>
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-4">
-      Editar Funcionário
+      Editar dados cadastrais
     </div>
   </div>
-  <form [formGroup]="formFuncionario">
+  <form [formGroup]="formCliente">
     <div class="col-lg-6">
       <hr>
       <div class="row col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size18 font-bold mt-3">
-        Informações do Funcionário
+        Informações Cliente
       </div>
-      <!--DADOS DO ENDEREÇO-->
       <div class="form-row mt-4">
         <div class="col-lg-6 col-sm-12 mb-12">
           <label for="validationDefault01">* Nome</label>
@@ -25,6 +24,16 @@
           </div>
         </div>
         <div class="col-lg-6 col-sm-12 mb-12">
+          <label for="validationDefault01">* Sobrenome</label>
+          <input type="text" class="form-control" minlength="5" name="sobrenome" placeholder="Sobrenome" formControlName="sobrenome"
+            [ngClass]="{ 'is-invalid': !formValid && f.sobrenome.errors }" required>
+          <div *ngIf="!formValid && f.sobrenome.errors" class="invalid-feedback">
+            <div *ngIf="f.sobrenome.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.sobrenome.errors.minlength">* O Campo deve conter ao menos 5 caracateres</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12 mb-12">
           <label for="validationDefault02">* CPF</label>
           <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
             class="form-control cpf-mask" required [ngClass]="{ 'is-invalid': !formValid && f.cpf.errors }"
@@ -34,18 +43,28 @@
             <div *ngIf="f.cpf.errors.minlength">* Preencha o CPF completo</div>
           </div>
         </div>
+        <div class="col-lg-6 col-sm-12 mb-12">
+          <label for="validationDefault01">* Sexo</label>
+          <input type="text" class="form-control" minlength="5" name="sexo" placeholder="Sexo" formControlName="sexo"
+            [ngClass]="{ 'is-invalid': !formValid && f.sexo.errors }" required>
+          <div *ngIf="!formValid && f.sexo.errors" class="invalid-feedback">
+            <div *ngIf="f.sexo.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.sexo.errors.minlength">* O Campo deve conter ao menos 5 caracateres</div>
+          </div>
+        </div>
       </div>
 
       <div class="form-row mt-2">
         <div class="col-lg-6 col-sm-12">
           <label for="example-date-input">* Data de Nascimento</label>
           <input class="form-control" formControlName="dataNascimento"
-            value="{{funcionario.dataNascimento | date: 'yyyy-MM-dd'}}" type="date"
+            value="{{cliente.dataNascimento | date: 'yyyy-MM-dd'}}" type="date"
             [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento.errors}">
           <div *ngIf="!formValid && f.dataNascimento.errors" class="invalid-feedback" mask='00/00/0000'>
             <div *ngIf="f.dataNascimento.errors.required">* Campo obrigatório</div>
           </div>
         </div>
+      </div>
         <div class="col-lg-6 col-sm-12">
           <label for="example-date-input">* Telefone</label>
           <input class="form-control" prefix="+55" mask="(00) 00000-0000" formControlName="telefone"
@@ -55,70 +74,7 @@
             <div *ngIf="f.telefone.errors.minlength">* Preencha o número de Telefone completo</div>
           </div>
         </div>
-      </div>
 
-      <div class="form-row mt-2">
-        <div class="col-lg-6 col-md-12 col-sm-12 mt-3">
-          <mat-form-field appearance="fill">
-            <mat-label>Cargo</mat-label>
-            <mat-select formControlName="cargo">
-              <mat-option *ngFor="let item of cargos" [value]="item.nome">
-                {{item.nome}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 mt-2">
-          <p class="mr-1">Habilitar Funcionario</p>
-          <div class="row mx-auto">
-            <mat-slide-toggle formControlName="status" [color]="color" class="align-middle"></mat-slide-toggle>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size18 font-bold mt-3">
-        Dados do Endereço
-      </div>
-      <!--DADOS DO ENDEREÇO-->
-      <div class="form-row mt-2">
-        <div class="col-lg-6 col-sm-12 col-md-12">
-          <label class="control-label" for="CEP">* CEP</label>
-          <input id="cep" name="cep" mask="00000-000" formControlName="cep"
-            [ngClass]="{ 'is-invalid': !formValid && f.cep.errors }" placeholder="Apenas números"
-            class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$">
-          <div *ngIf="!formValid && f.cep.errors" class="invalid-feedback">
-            <div *ngIf="f.cep.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.cep.errors.minlength">* CEP inválido</div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-12 col-md-12">
-          <label for="logradouro">Logradouro</label>
-          <input type="text" class="form-control" minlength="3" name="logradouro" placeholder="logradouro"
-            formControlName="logradouro" [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" required>
-          <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
-            <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
-          </div>
-        </div>
-      </div>
-      <div class="form-row mt-2">
-        <div class="col-lg-6 col-sm-12 col-md-12">
-          <label for="validationDefault01">Cidade</label>
-          <input type="text" class="form-control" minlength="3" editable="true" name="localidade"
-            placeholder="localidade" formControlName="localidade"
-            [ngClass]="{ 'is-invalid': !formValid && f.localidade.errors }" required>
-          <div *ngIf="!formValid && f.localidade.errors" class="invalid-feedback">
-            <div *ngIf="f.localidade.errors.required">* Campo obrigatório</div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
-          <label for="validationDefault01">UF</label>
-          <input type="text" class="form-control" minlength="2" editable="true" name="uf" placeholder="uf"
-            formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }" required>
-          <div *ngIf="!formValid && f.uf.errors" class="invalid-feedback">
-            <div *ngIf="f.uf.errors.required">* Campo obrigatório</div>
-          </div>
-        </div>
-      </div>
 
       <hr>
       <div class="row col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size18 font-bold mt-3">
@@ -140,7 +96,7 @@
           <button type="submit" (click)="alterarSenha()" class="btn btn-dark">Alterar senha</button>
         </div>
       </div>
-      <button class="mt-3 btn btn-dark" (click)="salvarFuncionario()">Salvar Alterações</button>
+      <button class="mt-3 btn btn-dark" (click)="salvarCliente()">Salvar Alterações</button>
     </div>
   </form>
 </div>

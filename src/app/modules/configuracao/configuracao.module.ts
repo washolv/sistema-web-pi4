@@ -21,10 +21,14 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ModalEditarEnderecoClienteComponent } from './cliente/endereco-cliente/modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
 import { ModalAdicionarEnderecoClienteComponent } from './cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import { EnderecoClienteComponent } from './cliente/endereco-cliente/endereco/endereco-cliente.component';
+import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { AdminGuard } from 'src/app/services/admin.guard';
+
 
 const routes = [
   { path: '', component: ConfiguracaoComponent },
-  { path: 'enderecos', component: EnderecoClienteComponent }
+  { path: 'enderecos', component: EnderecoClienteComponent },
+  { path: 'meus-dados/:id', component: EditarClienteComponent }
 ]
 @NgModule({
   imports: [
@@ -59,6 +63,7 @@ const routes = [
   declarations: [
     ConfiguracaoComponent,
     EnderecoClienteComponent,
+    EditarClienteComponent,
     ModalEditarEnderecoClienteComponent,
     ModalAdicionarEnderecoClienteComponent], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

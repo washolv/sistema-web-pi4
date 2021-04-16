@@ -22,6 +22,15 @@ export class RoleGuardService {
     }
   }
 
+  public getUser():TokenDecoded {
+    let userRole = new TokenDecoded;
+    const user = <TokenDecoded>this.decodeJWT();
+    if (user) {
+      userRole = user;
+    }
+    return userRole;
+  }
+
   public getUserRole(){
     let userRole;
     const user = <TokenDecoded>this.decodeJWT();
