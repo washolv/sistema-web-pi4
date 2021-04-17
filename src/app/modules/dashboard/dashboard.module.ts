@@ -7,7 +7,7 @@ import { NgbModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { DashboardFuncionarioComponent } from './dashboard-funcionario/dashboard-funcionario.component';
+import { DashboardFuncionarioComponent } from './dashboard-funcionario/funcionario/dashboard-funcionario.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VitrineComponent } from './vitrine/vitrine.component';
 import { DetalhesProdutoComponent } from './detalhes-produto/detalhes-produto.component';
@@ -18,11 +18,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import localePt from '@angular/common/locales/pt';
+import { DashboardAdministradorComponent } from './dashboard-funcionario/dashboard-administrador/dashboard-administrador.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { GraficoVendasComponent } from './dashboard-funcionario/graficos/GraficoVendas/GraficoVendas.component';
+import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'vitrine', component: VitrineComponent },
-  { path: 'detalhes/:id', component: DetalhesProdutoComponent}
+  { path: 'detalhes/:id', component: DetalhesProdutoComponent }
 ];
 
 registerLocaleData(localePt, 'pt');
@@ -45,6 +49,7 @@ registerLocaleData(localePt, 'pt');
     MatButtonModule,
     MatButtonModule,
     MatIconModule,
+    NgApexchartsModule
   ],
   providers: [NgbRatingConfig,
     {
@@ -52,10 +57,16 @@ registerLocaleData(localePt, 'pt');
       useValue: "pt"
     }
   ],
-  declarations: [DashboardComponent, VitrineComponent, DashboardFuncionarioComponent, DetalhesProdutoComponent],
+  declarations: [DashboardComponent,
+    VitrineComponent,
+    DashboardFuncionarioComponent,
+    DetalhesProdutoComponent,
+    DashboardAdministradorComponent,
+    GraficoVendasComponent,
+    GraficoVendasCategoriaComponent],
   exports: [
     DashboardComponent,
-    VitrineComponent
+    VitrineComponent,
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardModule { }
