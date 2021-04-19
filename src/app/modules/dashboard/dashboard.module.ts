@@ -22,11 +22,8 @@ import { DashboardAdministradorComponent } from './dashboard-funcionario/dashboa
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { GraficoVendasComponent } from './dashboard-funcionario/graficos/GraficoVendas/GraficoVendas.component';
 import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
-<<<<<<< HEAD
 import { TabelaVendasComponent } from './dashboard-funcionario/dashboard-administrador/tabela-vendas/tabela-vendas.component';
-=======
 import { ToastrModule } from 'ngx-toastr';
->>>>>>> 60385dcdd4846ea8e14e8da79ffc5873c47564fb
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
