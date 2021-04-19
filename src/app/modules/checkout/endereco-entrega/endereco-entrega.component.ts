@@ -11,6 +11,7 @@ import { EnderecoCliente } from '../../cliente/models/Cliente';
 export class EnderecoEntregaComponent implements OnInit {
   public id: number=0;
   public enderecos: EnderecoCliente[]=[];
+  public endereco: EnderecoCliente=new EnderecoCliente;
   constructor(private roleGuardService: RoleGuardService, private clienteService: ClienteService) { }
 
   ngOnInit() {
@@ -18,7 +19,11 @@ export class EnderecoEntregaComponent implements OnInit {
     this.id=user.Id;
     this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
       this.enderecos=resp;
+      this.endereco=resp[0];
     })
+  }
+  enderecoEntrega(index: number){
+    this.endereco=this.enderecos[index];
   }
 
 }

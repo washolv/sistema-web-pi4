@@ -91,4 +91,7 @@ export class EnderecoClienteComponent implements OnInit {
       console.log(err);
     });
   }
+  backPage(){
+    this.router.navigate(['/configuracoes'])
+  }
 }

@@ -30,7 +30,6 @@ export class EditarClienteComponent implements OnInit {
   constructor(private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private clienteService: ClienteService, private fb: FormBuilder,
    public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService) {
     let user = this.roleGuardService.getUser();
-    console.log(user)
     this.id = user.Id;
 
     this.formCliente = this.createFormCliente(this.cliente);
