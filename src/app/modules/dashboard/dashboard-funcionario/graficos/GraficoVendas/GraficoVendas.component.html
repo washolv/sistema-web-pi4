@@ -1,6 +1,5 @@
-<div style="text-align:center">
-  <apx-chart baseChart *ngIf="chartOptions && chartOptions.chart" [series]="chartOptions.series"
-    [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"
-    [colors]="chartOptions.colors" [title]="chartOptions.title" [stroke]="chartOptions.stroke"
-    [grid]="chartOptions.ApexGrid"></apx-chart>
-</div>
+<div id="chart">
+<apx-chart baseChart *ngIf="chartOptions && chartOptions.chart" [series]="chartOptions.series"
+  [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis" [colors]="chartOptions.colors"
+  [title]="chartOptions.title" [stroke]="chartOptions.stroke" [grid]="chartOptions.ApexGrid"></apx-chart>
+  </div>

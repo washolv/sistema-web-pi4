@@ -14,7 +14,7 @@ export class GraficoVendasCategoriaComponent implements OnInit {
       series: [44, 55, 41, 17, 15],
       chart: {
       type: 'donut',
-      width: '60%',
+      width: '66%',
     },
     responsive: [{
       breakpoint: 480,

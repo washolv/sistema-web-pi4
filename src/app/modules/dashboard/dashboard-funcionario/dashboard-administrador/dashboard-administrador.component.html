@@ -1,69 +1,76 @@
 <div class="container-fluid">
-  <div class="row text-center">
-    <div class="col-lg-12 mt-5">
+  <div class="row">
+    <div class="row col-lg-12 mt-5 justify-content-center">
       <div class="custom-title">Relatório de Vendas</div>
     </div>
-  </div>
-  <div class="row mt-3 mb-3">
-    <div class="col-lg-5 col-md-5 col-sm-2 col-2 text-center">
-      <hr>
+    <div class="row col-lg-12 mt-3 mb-3">
+      <div class="col-lg-5 col-md-5 col-sm-2 col-2">
+        <hr>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-8 col-8 no-padding justify-content-center">
+        <button type="button" (click)="modalFilterDate()" class="custom-btn-date-filter mr-lg-2 mr-md-2">
+          {{selected?.chosenLabel ? selected?.chosenLabel : 'Hoje'}}
+        </button>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-2 col-2">
+        <hr>
+      </div>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-8 col-8 text-center no-padding">
-      <button type="button" (click)="modalFilterDate()" class="custom-btn-date-filter mr-lg-2 mr-md-2">
-        {{selected?.chosenLabel ? selected?.chosenLabel : 'Hoje'}}
-      </button>
-    </div>
-    <div class="col-lg-5 col-md-5 col-sm-2 col-2 text-center">
-      <hr>
-    </div>
-  </div>
-  <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2 mb-2">
-    <div class="row d-flex justify-content-center mt-5">
-      <div class="col-lg-2 col-md-12 col-sm-12 custom-form-box mx-auto mb-3 mt-3">
-        <div class="mt-5">
-          <div class="row">
-            <div class="custom-text-size30 mx-auto ">
-              10
+    <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
+      <div class="row justify-content-between mx-auto">
+        <div class="col-lg-2 custom-form-box mb-3 mt-3">
+          <div class="mt-5">
+            <div class="row">
+              <div class="custom-text-size30 mx-auto ">
+                10
+              </div>
+            </div>
+            <div class="row">
+              <div class="custom-text-size15 mx-auto">Total de Produtos Vendidos
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="custom-text-size15 mx-auto">Total de Produtos Vendidos
+        </div>
+        <div class="col-lg-2 col-sm-12 custom-form-box mb-3 mt-3">
+          <div class="mt-5 mx-auto">
+            <div class="row">
+              <div class="custom-text-size30 mx-auto">10
+              </div>
+            </div>
+            <div class="row">
+              <div class="custom-text-size15 mx-auto">Total de Vendas
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-12 custom-form-box mb-3 mt-3">
+          <div class="mt-5">
+            <div class="row">
+              <div class="custom-text-size30 mx-auto">10
+              </div>
+            </div>
+            <div class="row">
+              <div class="custom-text-size15 mx-auto">Novos Clientes
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-2 col-sm-12 custom-form-box mx-auto mb-3 mt-3">
-        <div class="mt-5 mx-auto">
-          <div class="row">
-            <div class="custom-text-size30 mx-auto">10
-            </div>
-          </div>
-          <div class="row">
-            <div class="custom-text-size15 mx-auto">Total de Vendas
-            </div>
-          </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
+      <div class="row">
+        <div class="col-lg-7">
+          <app-GraficoVendas></app-GraficoVendas>
         </div>
-      </div>
-      <div class="col-lg-2 col-sm-12 custom-form-box mx-auto mb-3 mt-3">
-        <div class="mt-5 mr-0">
-          <div class="row">
-            <div class="custom-text-size30 mx-auto">10
-            </div>
-          </div>
-          <div class="row">
-            <div class="custom-text-size15 mx-auto">Novos Cliente
-            </div>
-          </div>
+        <div class="col-lg-5">
+          <app-GraficoVendasCategoria></app-GraficoVendasCategoria>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row d-flex justify-content-between">
-    <div class="col-lg-7">
-      <app-GraficoVendas></app-GraficoVendas>
-    </div>
-    <div class="col-lg-5">
-      <app-GraficoVendasCategoria></app-GraficoVendasCategoria>
+    <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
+      <div class="row">
+        <!--<app-tabela-vendas></app-tabela-vendas>-->
+      </div>
     </div>
   </div>
 </div>

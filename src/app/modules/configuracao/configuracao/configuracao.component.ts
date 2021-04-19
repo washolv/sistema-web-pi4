@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
 @Component({
   selector: 'app-configuracao',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfiguracaoComponent implements OnInit {
 
-  constructor() { }
+  public id: number=0;
+  constructor(private roleGuardService: RoleGuardService) {
+    let user=this.roleGuardService.getUser();
+    this.id=<number>user.Id;
+  }
 
   ngOnInit() {
   }
