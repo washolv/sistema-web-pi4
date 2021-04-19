@@ -26,6 +26,7 @@ import { ConfiguracaoModule } from './modules/configuracao/configuracao.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
+
 const routes: Routes = [
   { path: '', component: AppComponent },
 ]

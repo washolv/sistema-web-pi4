@@ -172,13 +172,21 @@ ngb-rating {
 }
 
 .footer-dark .item.social {
+  padding:30px ;
+  opacity:0.75;
+  position: relative;
+  margin-top: auto;
   text-align:center;
+  display: inline;
+  padding: 0 30px 0 10px;
+
+
 }
 
 @media (max-width:991px) {
   .footer-dark .item.social {
     text-align:center;
-    margin-top:20px;
+    margin-top:50px;
   }
 }
 

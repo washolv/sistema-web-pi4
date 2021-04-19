@@ -22,6 +22,7 @@ import { DashboardAdministradorComponent } from './dashboard-funcionario/dashboa
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { GraficoVendasComponent } from './dashboard-funcionario/graficos/GraficoVendas/GraficoVendas.component';
 import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -49,6 +50,7 @@ registerLocaleData(localePt, 'pt');
     MatButtonModule,
     MatButtonModule,
     MatIconModule,
+    ToastrModule.forRoot(),
     NgApexchartsModule
   ],
   providers: [NgbRatingConfig,
