@@ -11,6 +11,8 @@ import { Usuario } from '../../../funcionario/models/Funcionario';
 import { Cliente } from '../../../cliente/models/Cliente';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { TokenDecoded } from 'src/app/modules/login/login/models/TokenDecoded';
+import { AlterarSenhaClienteComponent } from './alterar-senha-cliente/alterar-senha-cliente.component';
+
 
 @Component({
   selector: 'app-editar-cliente',
@@ -64,7 +66,7 @@ export class EditarClienteComponent implements OnInit {
             Validators.required,
             Validators.minLength(11),
           ])),
-          email: new FormControl( this.cliente.usuario?.username,
+          email: new FormControl( { value: this.cliente.usuario?.username, disabled: true },
             Validators.compose([
               Validators.required,
               Validators.email,
@@ -104,7 +106,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   alterarSenha() {
-    const dialogRef = this.dialog.open(ModalAlterarSenhaComponent, {
+    const dialogRef = this.dialog.open(AlterarSenhaClienteComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
       data: {
         cliente: this.cliente

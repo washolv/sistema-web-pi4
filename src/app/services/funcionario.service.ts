@@ -33,7 +33,7 @@ export class FuncionarioService {
     };
      return this.http.get<Funcionario>(`${this.apiUrl}/funcionarios/cpf`, httpOptions)
   };
-  //FALTA A IRRESPONSAVEL DA DEBORA FAZER
+
   public buscarFuncionarioPorId(id: number): Observable<Funcionario> {
     return this.http.get<Funcionario>(`${this.apiUrl}/funcionarios/find/${id}`);
   }

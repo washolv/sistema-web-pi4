@@ -19,4 +19,5 @@ export class ConfiguracaoComponent implements OnInit {
   compras(){
 
   }
+
 }
