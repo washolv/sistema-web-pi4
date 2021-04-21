@@ -17,5 +17,34 @@
   background-color: #F1F1F1;
   border: 3px solid #E6E6E6;
   border-radius: 5px;
-  height: 200px;
+  height: 200p
+  x;
+}
+.btn-primary{
+  background-color: #0C3758;
+}
+
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+
+::ng-deep .col-lg-6 .mat-button{
+  color: #0C3758;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #F1F1F1;
+}
+::ng-deep .row  .mat-form-field{
+  margin: 0px;
+  color: #0C3758;
+  /*background-color: antiquewhite;*/
 }

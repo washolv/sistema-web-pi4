@@ -34,6 +34,22 @@ export class CartService {
     }
     return produtosCarrinho;
   }
+  public valorTotal(produtos: Produto[]):number{
+    let soma=0;
+    produtos.forEach(x=>{
+      if(x && x.preco)
+      soma=soma+x.preco;
+    })
+    return soma;
+  }
+  public qtdProdutos(produtos: Produto[]):number{
+    let soma=0;
+    produtos.forEach(x=>{
+      if(x && x.preco)
+      soma=soma+x.preco;
+    })
+    return soma;
+  }
   public adicionarProduto(produto: Produto) {
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {

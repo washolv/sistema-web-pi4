@@ -29,8 +29,7 @@
         </a>
         <div class="custom-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <ng-container *ngIf="userRole">
-            <a class="dropdown-item" href="#">Meus Pedidos</a>
-            <a class="dropdown-item" (click)="configuracoes()">Configurações</a>
+            <a class="dropdown-item" (click)="configuracoes()">Minha Conta</a>
             <a class="dropdown-item" (click)="logout()">Sair</a>
           </ng-container>
           <ng-container *ngIf="!userRole">

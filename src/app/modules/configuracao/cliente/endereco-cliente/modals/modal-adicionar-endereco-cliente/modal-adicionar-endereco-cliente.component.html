@@ -28,7 +28,7 @@
         <label class="control-label" for="logradouro">* Logradouro</label>
         <input id="logradouro" name="logradouro" formControlName="logradouro"
           [ngClass]="{ 'is-invalid': !formValid && f.logradouro.errors }" placeholder="Ex: Rua , Avenida"
-          class="form-control" required type="search">
+          class="form-control" required type="search" [readOnly]="true">
         <div *ngIf="!formValid && f.logradouro.errors" class="invalid-feedback">
           <div *ngIf="f.logradouro.errors.required">* Campo obrigatório</div>
         </div>
@@ -37,7 +37,7 @@
         <label class="control-label" for="cidade">* Cidade</label>
         <input id="cidade" name="cidade" formControlName="cidade"
           [ngClass]="{ 'is-invalid': !formValid && f.cidade.errors }" placeholder="Sua cidade"
-          class="form-control" required type="search">
+          class="form-control" required type="search" [readOnly]="true">
         <div *ngIf="!formValid && f.cidade.errors" class="invalid-feedback">
           <div *ngIf="f.cidade.errors.required">* Campo obrigatório</div>
         </div>
@@ -56,7 +56,7 @@
       <div class="col-lg-2 col-sm-12">
         <label class="control-label" for="uf">* UF</label>
         <input id="uf" name="uf" formControlName="uf" [ngClass]="{ 'is-invalid': !formValid && f.uf.errors }"
-          class="form-control" required placeholder="UF">
+          class="form-control" required placeholder="UF" [readOnly]="true">
         <div *ngIf="!formValid && f.uf.errors" class="invalid-feedback">
           <div *ngIf="f.uf.errors.required">* Campo obrigatório</div>
         </div>
@@ -65,7 +65,7 @@
         <label class="control-label" for="uf">* Bairro</label>
         <input id="bairro" name="bairro" formControlName="bairro"
           [ngClass]="{ 'is-invalid': !formValid && f.bairro.errors }" class="form-control" placeholder="Seu bairro"
-          required>
+          required [readOnly]="true">
         <div *ngIf="!formValid && f.bairro.errors" class="invalid-feedback">
           <div *ngIf="f.bairro.errors.required">* Campo obrigatório</div>
         </div>

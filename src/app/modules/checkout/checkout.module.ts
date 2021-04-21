@@ -9,10 +9,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import {MatSelectModule} from '@angular/material/select';
+import { ClienteGuard } from 'src/app/services/cliente.guard';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes: Routes = [
   { path: '', component: CheckoutComponent },
-  { path: 'endereco-entrega', component: EnderecoEntregaComponent }
+  { path: 'endereco-entrega', component: EnderecoEntregaComponent, canActivate: [ClienteGuard] }
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   declarations: [CheckoutComponent, EnderecoEntregaComponent],
   exports: [

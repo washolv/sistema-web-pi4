@@ -13,12 +13,13 @@ export class CheckoutComponent implements OnInit {
   public produtosCarrinho!: Produto[];
   public qtdProdutos: number=1;
   public subTotal: number=0;
-
+  public valorTotal:number=0;
   constructor(private router: Router, private cartService: CartService){
   }
 
   ngOnInit(){
     this.produtosCarrinho=this.cartService.buscarProdutos();
+    this.valorTotal=this.cartService.valorTotal(this.produtosCarrinho);
   }
   remover(produto: Produto){
       this.cartService.removerProduto(produto);

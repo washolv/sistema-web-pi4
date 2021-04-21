@@ -22,7 +22,8 @@ export class EnderecoClienteComponent implements OnInit {
   color: ThemePalette = 'primary';
   public id: number=0;
   public statusAddress=false;
-  constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog, private router: Router, private clienteService: ClienteService) {
+  constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
+     private router: Router, private clienteService: ClienteService) {
 
   }
 
@@ -58,6 +59,9 @@ export class EnderecoClienteComponent implements OnInit {
   enderecoPrincipal(endereco: EnderecoCliente){
     endereco.principal=true;
     this.clienteService.editarEndereco(this.id,endereco).subscribe(resp=>{
+      this.toastr.success("Novo endereço Principal", "OK", {
+        timeOut: 3000, positionClass: 'toast-top-center',
+      });
       this.ngOnInit();
     });
   }
