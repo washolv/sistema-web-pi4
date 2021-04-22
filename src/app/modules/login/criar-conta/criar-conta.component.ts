@@ -99,6 +99,7 @@ export class CriarContaComponent implements OnInit {
               this.cliente.cpf = this.formCliente.value.cpf;
               this.cliente.dataNascimento = this.formCliente.value.dataNascimento;
               this.cliente.nome = this.formCliente.value.nome;
+              this.cliente.sobrenome=this.formCliente.value.sobrenome;
               this.cliente.sexo = this.formCliente.value.sexo;
               this.cliente.usuario=usuario;
               console.log(this.cliente)
