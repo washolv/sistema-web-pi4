@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalFilterDateComponent } from './modal-filter-date/modal-filter-date.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
   ],
   declarations: [
-    ModalAlertaComponent,ModalFilterDateComponent
+    ModalAlertaComponent,ModalFilterDateComponent,
+    LoadingComponent
   ], exports: [
     ModalAlertaComponent
   ], entryComponents: [

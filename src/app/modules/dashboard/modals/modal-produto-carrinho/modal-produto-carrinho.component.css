@@ -1,0 +1,10 @@
+.custom-title{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btn-dark{
+  min-height: 40px;
+  max-height: 40px;
+  background-color: #0C3750 ;
+}

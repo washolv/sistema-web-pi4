@@ -13,5 +13,6 @@ export class Venda {
 export class DetalhesVenda {
   id?: number;
   subtotal?: number;
+  quantidade?:number=1;
   produto?: Produto;
 }

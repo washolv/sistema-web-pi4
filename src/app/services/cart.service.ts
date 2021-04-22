@@ -14,39 +14,41 @@ export class CartService {
 
   constructor(private http: HttpClient, private produtoService: ProdutoService, private sanitizer: DomSanitizer) { }
 
-  public buscarProdutos() {
+  public buscarProdutos(): Produto[] {
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
-    let produtosCarrinho: Produto[] = new Array();
+    let produtosCarrinho: Produto[] = [];
     if (produtosCarrinhoJson) {
       let listaId: number[] = JSON.parse(produtosCarrinhoJson);
       listaId.forEach(x => {
-        this.produtoService.getProdutoById(x).subscribe(resp => {
-          this.produtoService.getImagensProduto(resp.id!).subscribe(response => {
-            resp.imagens = response;
+        this.produtoService.getProdutoById(x).subscribe(produto => {
+          this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
+            produto.imagens = response;
             response.forEach(element => {
-              resp.imageToShow = new Array()
-              resp.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+              produto.imageToShow = [];
+              produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
             })
           })
-          produtosCarrinho.push(resp);
+          produtosCarrinho.push(produto);
         })
       });
     }
+    console.log('****')
+    console.log(produtosCarrinho)
     return produtosCarrinho;
   }
-  public valorTotal(produtos: Produto[]):number{
-    let soma=0;
-    produtos.forEach(x=>{
-      if(x && x.preco)
-      soma=soma+x.preco;
+  public valorTotal(produtos: Produto[]): number {
+    let soma = 0;
+    produtos.forEach(x => {
+      if (x && x.preco)
+        soma = soma + x.preco;
     })
     return soma;
   }
-  public qtdProdutos(produtos: Produto[]):number{
-    let soma=0;
-    produtos.forEach(x=>{
-      if(x && x.preco)
-      soma=soma+x.preco;
+  public qtdProdutos(produtos: Produto[]): number {
+    let soma = 0;
+    produtos.forEach(x => {
+      if (x && x.preco)
+        soma = soma + x.preco;
     })
     return soma;
   }

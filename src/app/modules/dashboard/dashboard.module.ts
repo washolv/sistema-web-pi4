@@ -24,11 +24,13 @@ import { GraficoVendasComponent } from './dashboard-funcionario/graficos/Grafico
 import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
 import { TabelaVendasComponent } from './dashboard-funcionario/dashboard-administrador/tabela-vendas/tabela-vendas.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ModalProdutoCarrinhoComponent } from './modals/modal-produto-carrinho/modal-produto-carrinho.component';
+import { MainNavComponent } from '../shared/main-nav/main-nav/main-nav.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'vitrine', component: VitrineComponent },
-  { path: 'detalhes/:id', component: DetalhesProdutoComponent }
+  { path: 'detalhes/:id', component: DetalhesProdutoComponent },
 ];
 
 registerLocaleData(localePt, 'pt');
@@ -67,7 +69,8 @@ registerLocaleData(localePt, 'pt');
     DashboardAdministradorComponent,
     GraficoVendasComponent,
     GraficoVendasCategoriaComponent,
-    TabelaVendasComponent
+    TabelaVendasComponent,
+    ModalProdutoCarrinhoComponent
   ],
   exports: [
     DashboardComponent,

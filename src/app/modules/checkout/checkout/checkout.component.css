@@ -68,6 +68,21 @@
 .table{
   margin: 10px;
 }
+.btn-plus-minus{
+  width: 20px;
+}
+.input-add{
+  border: 1px solid;
+  border-radius: 50%;
+}
+.input-group .custom-number{
+  border-radius: 50%;
+  max-width: 40px;
+  min-width: 40px;
+}
+input[readonly] {
+  background-color: white;
+}
 @media (max-width: 768px)   {
   .col{
     width: 50%;

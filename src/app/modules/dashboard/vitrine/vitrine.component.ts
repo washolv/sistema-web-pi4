@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -7,6 +8,7 @@ import { pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-vitrine',
@@ -25,7 +27,8 @@ export class VitrineComponent implements OnInit {
   public filtroPesquisa: string = "";
   public currentRate = 1;
 
-  constructor(private config: NgbRatingConfig, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+  constructor(private config: NgbRatingConfig, private dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+
     this.config.max = 5;
     this.searchFilter.pipe(
       debounceTime(1000),
@@ -39,8 +42,7 @@ export class VitrineComponent implements OnInit {
               this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
                 response.forEach(element =>
                   produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-                )
-              }
+                )}
               )
             });
           });
@@ -52,6 +54,11 @@ export class VitrineComponent implements OnInit {
   }
 
   filtrarPorCategoria(categoria?: string) {
+
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
+
     if (categoria == "") {
       this.produtoService.getProdutosHabilitados().subscribe((response: HttpResponse<Produto[]>) => {
         this.produtos = <Produto[]>response.body,
@@ -59,11 +66,12 @@ export class VitrineComponent implements OnInit {
             produto.imageToShow = [];
             this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
               response.forEach(element =>
-                produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
+                produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
               )
             }
             )
           });
+        dialogRef.close()
       });
     } else {
       this.produtoService.getProdutosHabilitadosPorCategoria(categoria!).subscribe((response: HttpResponse<Produto[]>) => {
