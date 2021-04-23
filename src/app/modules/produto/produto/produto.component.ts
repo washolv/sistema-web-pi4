@@ -13,6 +13,7 @@ import { ThemePalette } from '@angular/material/core';
 import { HttpResponse } from '@angular/common/http';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-produto',
@@ -60,10 +61,14 @@ export class ProdutoComponent implements OnInit {
     }
   }
   ngOnInit() {
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
     this.produtoService.getProdutos()
       .subscribe((response: HttpResponse<Produto[]>) => {
         this.produtos = <Produto[]> response.body;
         this.totalRegistros=this.produtos.length;
+        dialogRef.close();
       }, err => {
         console.log(err);
       });

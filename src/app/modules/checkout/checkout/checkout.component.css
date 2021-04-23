@@ -76,9 +76,9 @@
   border-radius: 50%;
 }
 .input-group .custom-number{
-  border-radius: 50%;
-  max-width: 40px;
-  min-width: 40px;
+  border-radius: 15%;
+  max-width: 60px;
+  min-width: 60px;
 }
 input[readonly] {
   background-color: white;

@@ -8,6 +8,7 @@ export class Venda {
   enderecoCliente?: EnderecoCliente;
   cliente?: Cliente;
   detalhesVenda?:DetalhesVenda[]=[];
+  quantidadeTotal?:number=0;
 }
 
 export class DetalhesVenda {

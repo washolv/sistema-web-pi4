@@ -12,6 +12,7 @@ import { Cliente } from '../../../cliente/models/Cliente';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { TokenDecoded } from 'src/app/modules/login/login/models/TokenDecoded';
 import { AlterarSenhaClienteComponent } from './alterar-senha-cliente/alterar-senha-cliente.component';
+import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
 
 
 @Component({
@@ -26,21 +27,24 @@ export class EditarClienteComponent implements OnInit {
   public cliente: Cliente = new Cliente()
   private usuario: Usuario = new Usuario;
   public color: ThemePalette = 'primary';
-  public id? : number;
+  public id?: number;
   constructor(private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private clienteService: ClienteService, private fb: FormBuilder,
-   public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService) {
+    public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService) {
     let user = this.roleGuardService.getUser();
     this.id = user.Id;
-
     this.formCliente = this.createFormCliente(this.cliente);
-    clienteService.buscarCliente(this.id!).subscribe(res => {
-      this.cliente = res;
-      console.log(res)
-      this.formCliente = this.createFormCliente(this.cliente);
-    })
   }
 
   ngOnInit() {
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
+    this.clienteService.buscarCliente(this.id!).subscribe(res => {
+      this.cliente = res;
+      console.log(res)
+      this.formCliente = this.createFormCliente(this.cliente);
+      dialogRef.close();
+    })
   }
 
   get f() { return this.formCliente.controls; }
@@ -60,16 +64,16 @@ export class EditarClienteComponent implements OnInit {
           Validators.required,
           Validators.minLength(11),
         ])),
-        sexo: new FormControl({ value: this.cliente.sexo, disabled: true },
-          Validators.compose([
-            Validators.required,
-            Validators.minLength(11),
-          ])),
-          email: new FormControl( { value: this.cliente.usuario?.username, disabled: true },
-            Validators.compose([
-              Validators.required,
-              Validators.email,
-            ])),
+      sexo: new FormControl({ value: this.cliente.sexo, disabled: true },
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(11),
+        ])),
+      email: new FormControl({ value: this.cliente.usuario?.username, disabled: true },
+        Validators.compose([
+          Validators.required,
+          Validators.email,
+        ])),
       dataNascimento: new FormControl({ value: this.cliente.dataNascimento, disabled: true },
         Validators.compose([
           Validators.required,

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
 import { ModalFilterDateComponent } from 'src/app/modules/shared/modal-filter-date/modal-filter-date.component';
 import { RelatorioVendasService } from 'src/app/services/relatorio-vendas.service';
 
@@ -19,15 +20,20 @@ export class DashboardAdministradorComponent implements OnInit {
     isCaseInsensitive: true
   };
   constructor(private dialog: MatDialog, private router: Router, private relatorioVendasService: RelatorioVendasService) {
+
     this.getInfoCharts();
   }
 
   getInfoCharts(){
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
     this.relatorioVendasService.getByCategory(moment().startOf('day'), moment().endOf('day')).subscribe(res =>{
       console.log(res);
     });
     this.relatorioVendasService.getByMonth(moment().startOf('day'), moment().endOf('day')).subscribe(res =>{
       console.log(res);
+      dialogRef.close();
     });
   }
 

@@ -11,6 +11,8 @@ import { AlertService } from '../../shared/modal-alerta/alert.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { isForOfStatement } from 'typescript';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-editar-produto',
@@ -30,11 +32,18 @@ export class EditarProdutoComponent implements OnInit {
   imagens: Imagem[] = [];
   bsModalRef: BsModalRef = new BsModalRef;
   public userRole;
-  constructor(private roleGuardService: RoleGuardService, private config: NgbRatingConfig, private toastr: ToastrService, private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private dialog: MatDialog, private roleGuardService: RoleGuardService, private config: NgbRatingConfig, private toastr: ToastrService,
+    private modalService: AlertService, toastrService: ToastrService, private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService) {
-    this.config.max = 5;
-    this.userRole=this.roleGuardService.getUserRole();
-    this.formProduto = this.testeForm(this.produto);
+      this.formProduto = this.testeForm(this.produto);
+      this.userRole = this.roleGuardService.getUserRole();
+      this.config.max = 5;
+  }
+
+  ngOnInit() {
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
@@ -48,17 +57,14 @@ export class EditarProdutoComponent implements OnInit {
       response.forEach(element =>
         this.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
       )
+      dialogRef.close();
     })
     this.categoria = [
       { id: 1, name: 'Cama' },
       { id: 2, name: 'Mesa' },
       { id: 3, name: 'Banho' },
-      { id: 4, name: 'Decoração'}
+      { id: 4, name: 'Decoração' }
     ];
-
-  }
-
-  ngOnInit() {
   }
 
 
@@ -86,48 +92,48 @@ export class EditarProdutoComponent implements OnInit {
     var file = new File([blob], dataURI.fileName);
 
   }
-  public testeForm(produto: Produto): FormGroup{
-      if(this.userRole=="ROLE_ADMIN"){
-        return this.createForm(produto, false);
-      }else{
-        return this.createForm(produto, true);
-      }
+  public testeForm(produto: Produto): FormGroup {
+    if (this.userRole == "ROLE_ADMIN") {
+      return this.createForm(produto, false);
+    } else {
+      return this.createForm(produto, true);
+    }
   }
-  public createForm(produto: Produto, isAdmin: boolean=false): FormGroup {
+  public createForm(produto: Produto, isAdmin: boolean = false): FormGroup {
     return this.fb.group({
       id: new FormControl(produto.id),
-      nome: new FormControl({value: produto.nome, disabled: isAdmin}, Validators.compose([
+      nome: new FormControl(produto.nome, Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(280)
       ])),
-      descricao: new FormControl({value: produto.descricao, disabled: isAdmin},
+      descricao: new FormControl(produto.descricao,
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(1000)
         ])),
-      quantidadeEstoque: new FormControl({value: produto.quantidadeEstoque, disabled: false}),
-      preco: new FormControl({value: produto.preco, disabled: isAdmin}, Validators.compose([
+      quantidadeEstoque: new FormControl(produto.quantidadeEstoque),
+      preco: new FormControl(produto.preco, Validators.compose([
         Validators.required,
       ])),
-      categoria: new FormControl({value: produto.categoria, disabled: isAdmin},
+      categoria: new FormControl(produto.categoria,
         Validators.compose([
           Validators.required,
         ])),
-      status: new FormControl({value: produto.status, disabled: isAdmin}),
+      status: new FormControl(produto.status),
       qtdEstrelas: new FormControl('')
     });
   }
 
   public editarProduto() {
     this.formProduto.value.qtdEstrelas = this.currentRate;
-    let produto: Produto=new Produto();
-    if(this.userRole=='ROLE_ADMIN'){
-      produto=this.formProduto.value;
-    }else if(this.userRole=='ROLE_ESTOQUISTA'){
-        produto=this.produto
-        produto.quantidadeEstoque=this.formProduto.value.quantidadeEstoque
+    let produto: Produto = new Produto();
+    if (this.userRole == 'ROLE_ADMIN') {
+      produto = this.formProduto.value;
+    } else if (this.userRole == 'ROLE_ESTOQUISTA') {
+      produto = this.produto
+      produto.quantidadeEstoque = this.formProduto.value.quantidadeEstoque
     }
     if (this.formProduto.valid) {
       if (this.formProduto.value.status) {

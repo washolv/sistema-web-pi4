@@ -17,13 +17,13 @@ export class ModalProdutoCarrinhoComponent implements OnInit {
 
   carrinho(){
     this.dialogRef.close();
-    this.cartService.adicionarProduto(this.data.produto);
+    this.cartService.adicionarProduto(this.data.produto.id, 1);
     this.router.navigate(['/carrinho']);
   }
 
   dashboard(){
     this.dialogRef.close();
-    this.cartService.adicionarProduto(this.data.produto);
+    this.cartService.adicionarProduto(this.data.produto.id, 1);
     this.router.navigate(['/dashboard']);
   }
 

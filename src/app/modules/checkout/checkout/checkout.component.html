@@ -3,7 +3,7 @@
     <div class="custom-title">Carrinho de Compras</div>
   </div>
   <div class="row d-flex justify-content-center">
-    <div class="col-12 col-lg-12" *ngIf="produtosCarrinho && produtosCarrinho.length>0">
+    <div class="col-12 col-lg-12" *ngIf="listaProdutosCarrinho && listaProdutosCarrinho.length">
       <div class="boxcart col-12 pb-3 col-md-12 px-0">
         <div class="bordas-cart">
           <div class="row text-white px-2 mx-0 border-bottom custom-table">
@@ -17,23 +17,23 @@
               <span>Qtd. </span>
             </div>
             <div class="col-2 py-1 px-0 text-right d-none d-md-block">
-              <span class="d-none d-lg-inline">Valor</span> <span>Unitário </span>
+              <span class="d-none d-lg-inline">Subtotal</span>
             </div>
           </div>
           <div class="row mx-0 custom-b">
-            <div class="col-12" *ngFor="let produto of produtosCarrinho;let i=index">
+            <div class="col-12" *ngFor="let detalhe of venda.detalhesVenda;let i=index">
               <div class="row py-3">
                 <div class="col-4 col-lg-1">
                   <div class="row">
-                    <div *ngIf="produto.imageToShow" class="col-11 pt-2">
-                      <img [src]="produto.imageToShow[0]" class="img-fluid">
+                    <div *ngIf="detalhe.produto!.imageToShow" class="col-11 pt-2">
+                      <img [src]="detalhe.produto!.imageToShow[0]" class="img-fluid">
                     </div>
                   </div>
                 </div>
                 <div class="col-8 col-lg-4">
                   <div class="row">
                     <div class="col-12"><a class="text-dark"
-                        href="http://localhost:4200/#/dashboard/detalhes/{{produto.id}}"><span>{{produto.nome}}</span></a>
+                        href="http://localhost:4200/#/dashboard/detalhes/{{detalhe.produto!.id}}"><span>{{detalhe.produto!.nome}}</span></a>
                     </div>
                   </div>
                 </div>
@@ -42,11 +42,11 @@
                   <div class="row group-rem">
                     <div class="col-12 d-flex align-items-center">
                       <div class="input-group float-left  mr-4">
-                        <button class="btn"><img class="btn-plus-minus" src="../../../../assets/plus.svg"></button>
-                        <input value="1" min="1" step="1" name="quantity" class="form-control custom-number" [readOnly]="true">
-                        <button class="btn"><img class="btn-plus-minus" src="../../../../assets/minus.svg"></button>
+                        <button class="btn" (click)="plus(i)"><img class="btn-plus-minus" src="../../../../assets/plus.svg"></button>
+                        <input [value]="detalhe.quantidade" min="1" step="1" name="quantity" class="form-control custom-number" [readOnly]="true">
+                        <button class="btn" (click)="minus(i)"><img class="btn-plus-minus" src="../../../../assets/minus.svg"></button>
                       </div>
-                      <a type="button" href="http://localhost:4200/#/carrinho" (click)="remover(produto)"
+                      <a type="button" href="http://localhost:4200/#/carrinho" (click)="remover(detalhe.produto!)"
                         class="rem-carrinho">Remover</a>
                     </div>
                   </div>
@@ -55,7 +55,7 @@
                 <div class="col-6 col-lg-4 pl-0">
                   <div class="row ">
                     <div class="col-12 col-lg-6 mt-2 mt-lg-0 text-right font-weight-bold">
-                      {{produto.preco | currency:'BRL':'symbol':'0.2-2'}}
+                      {{detalhe.subtotal | currency:'BRL':'symbol':'0.2-2'}}
                     </div>
                   </div>
                 </div>
@@ -74,13 +74,13 @@
         <div class="d-flex justify-content-between col-lg-12">
           <div class="custom-text-size2 mt-2 ml-2">Quantidade:
           </div>
-          <div class="custom-text-size3 mt-2">12
+          <div class="custom-text-size3 mt-2">{{venda.quantidadeTotal}}
           </div>
         </div>
         <div class="d-flex justify-content-between col-lg-12">
-          <div class="custom-text-size2 mt-3 ml-2">Subtotal:
+          <div class="custom-text-size2 mt-3 ml-2">Total:
           </div>
-          <div class="custom-text-size3 mt-2">{{valorTotal}}
+          <div class="custom-text-size3 mt-2">{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}
           </div>
         </div>
         <div class="col-lg-12 text-center mt-3">
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-lg-12" *ngIf="!produtosCarrinho || produtosCarrinho.length==0">
+    <div class="col-12 col-lg-12" *ngIf="!listaProdutosCarrinho.length">
       <div class="custom-form-box-empty text-center">
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">

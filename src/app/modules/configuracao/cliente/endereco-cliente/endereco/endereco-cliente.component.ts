@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente, EnderecoCliente } from 'src/app/modules/cliente/models/Cliente';
+import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { ModalAdicionarEnderecoClienteComponent } from '../modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
@@ -24,14 +25,17 @@ export class EnderecoClienteComponent implements OnInit {
   public statusAddress=false;
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
      private router: Router, private clienteService: ClienteService) {
-
   }
 
   ngOnInit() {
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
     const user=this.roleGuardService.decodeJWT();
       this.id=user.Id;
       this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
         this.enderecos=resp;
+        dialogRef.close();
       })
   }
   adicionarEndereco(){
