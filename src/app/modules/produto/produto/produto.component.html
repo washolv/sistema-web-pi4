@@ -23,7 +23,7 @@
 
       <!--BOTAO ADICIONAR PRODUTO-->
       <button class="btn btn-add mb-3" type="button" *ngIf="isAdmin" type="button" (click)="adicionarProduto()">
-        <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="add">
+        <img src="../../../assets/icons/plus-circle.svg" class="btn-icon-add" alt="add">
       </button>
     </div>
     <div class="custom-table-container col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mb-3">
@@ -54,14 +54,14 @@
             </td>
             <td>
               <button class="btn">
-                <img src="../../../assets/lupa.svg" (click)="visualizar(produto)" class="btn-icon-add" alt="add">
+                <img src="../../../assets/icons/lupa.svg" (click)="visualizar(produto)" class="btn-icon-add" alt="add">
               </button>
               <button *ngIf="isAdmin" class="btn">
-                <img src="../../../assets/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
+                <img src="../../../assets/icons/botao-editar.svg" (click)="editarProduto(produto)" class="btn-icon-add"
                   alt="add">
               </button>
               <button *ngIf="!isAdmin" (click)="adicionarEstoque(produto)" class="btn">
-                <img src="../../../assets/plus-circle.svg" class="btn-icon-add" alt="Alterar estoque"
+                <img src="../../../assets/icons/plus-circle.svg" class="btn-icon-add" alt="Alterar estoque"
                   title="Alterar estoque">
               </button>
             </td>

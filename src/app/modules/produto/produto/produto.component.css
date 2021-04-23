@@ -5,7 +5,7 @@
 
 }
 .custom-input-search {
-  background-image: url('/assets/search.svg');
+  background-image: url('/assets/icons/search.svg');
   background-repeat: no-repeat;
   background-position: 95% 50%;
   background-color: #FCFCFC;
@@ -30,7 +30,7 @@
 }
 
 .custon-btn-filter{
-  background-image: url('/assets/botao-de-menu.svg');
+  background-image: url('/assets/icons/botao-de-menu.svg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 50px;
