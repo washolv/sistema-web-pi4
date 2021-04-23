@@ -1,55 +1,9 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
-      Produto: {{produto.nome}}
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-lg-6 col-sm-12 col-md-12 mb-3">
-      <button class="mt-3 btn btn-dark" type="submit" (click)="backProdutos()">Produtos</button>
-      <form [formGroup]="formProduto">
-        <div class="form-row mt-4">
-          <div class="col-md-12 mb-12">
-            <label for="validationDefault01">Nome</label>
-            <input type="text" class="form-control" name="nome" placeholder="Nome" formControlName="nome" required>
-          </div>
-          <div class="col-lg-6 mb-12 mt-3 mb-3">
-            <label for="validationDefault02">Descricao</label>
-            <input type="text" class="form-control" name="Descricao" placeholder="Descricao" formControlName="descricao"
-              required>
-          </div>
-          <div class="col-lg-6 col-md-2 mt-3 mb-3">
-            <label for="validationDefault04">Categoria</label>
-            <div class="input-group">
-              <input type="text" class="form-control" name="categoria" placeholder="Categoria"
-                formControlName="categoria" required>
-            </div>
-          </div>
-        </div>
+  <button class="mt-3 btn" type="submit" (click)="backProdutos()"><img
+    src="../../../../assets/voltar.svg" alt="First slide"></button>
 
-        <div class="form-row mb-3">
-          <div class="col-lg-3 col-md-6">
-            <label for="validationDefaultUsername">Preço</label>
-            <input type="text" class="form-control" name="Preço" placeholder="Preço" currencyMask
-              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-              aria-describedby="inputGroupPrepend2" formControlName="preco" required>
-          </div>
-        </div>
-        <div class="form-row mb-3">
-          <div class="col-lg-6 col-md-6">
-            <button (click)="adicionarCarrinho()" class="mt-3 btn btn-success">Comprar</button>
-            </div>
-        </div>
-        <ngb-rating [(rate)]="produto.qtdEstrelas!" [readonly]=true maxlength=5></ngb-rating>
-        <hr>
-        <pre>Avaliação: <b>{{currentRate}}</b></pre>
-        <div class="form-row mt-4">
-
-        </div>
-      </form>
-    </div>
-    <div class="col-lg-4">
+  <div class="row mt-2 mb-2">
+    <div class="col-lg-6">
       <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
         <ng-container *ngFor="let img of imageToShow">
           <mdb-carousel-item>
@@ -61,5 +15,48 @@
         </ng-container>
       </mdb-carousel>
     </div>
+    <div class="col-lg-6 col-sm-12 col-md-12">
+      <form [formGroup]="formProduto">
+        <div class="form-row">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3">
+             {{produto.nome}}
+            </div>
+          </div>
+          <div class="col-lg-12 mb-12 mt-5 mb-4">
+            <label for="validationDefault02" class="font-weight-bold">Descrição:</label>
+            <div class="row col-lg-12 col-md-12 col-sm-12">
+              {{produto.descricao}}
+            </div>
+          </div>
+          <div class="col-lg-12 mt-2 mb-2"><ngb-rating [(rate)]="produto.qtdEstrelas!" [readonly]=true maxlength=5></ngb-rating></div>
+          <div class="col-lg-12 mt-2 mb-2"> <pre>Avaliação: {{currentRate}}</pre></div>
+
+          <div class="col-lg-12 col-md-2 mt-3 mb-3">
+            <label for="validationDefault04" class="font-weight-bold">Categoria:</label>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-6">
+              {{produto.categoria}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-3">
+          <div class="col-lg-6 col-md-6 custom-preco">
+            <p class="card-text custom-price">{{produto.preco | currency:'BRL':'symbol':'0.2-2'}}</p>
+            ou 12x
+            <br>
+            sem juros no cartão de crédito
+          </div>
+        </div>
+        <div class="form-row text-center b-2">
+          <div class="col-lg-12 col-md-12 mt-4 mb-4">
+            <button (click)="adicionarCarrinho()" class="mt-12 btn btn-success">Comprar</button>
+            </div>
+        </div>
+        <div class="form-row mt-4">
+        </div>
+      </form>
+    </div>
+    <hr>
   </div>
 </div>

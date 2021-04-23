@@ -19,3 +19,21 @@ ngb-rating {
 .form-control{
   border: none;
 }
+
+.custom-preco{
+color: rgb(45, 182, 159);
+}
+
+.btn-success{
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+}
+
+.card-text{
+  font-weight: bold;
+  font-size: 25px;
+}
+
