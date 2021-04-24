@@ -1,5 +1,5 @@
 .custom-title{
-  font-size: 25px;
+  font-size: 20px;
   color: black;
   font-weight: bold;
 }
@@ -47,4 +47,12 @@ section {
   margin: 0px;
   color: #0C3758;
   /*background-color: antiquewhite;*/
+}
+
+.custom-cadastro-cobranca{
+  padding-bottom: 40px;
+  border-radius: 5px;
+}
+.custom-button-cad{
+  margin-top: 70px;
 }

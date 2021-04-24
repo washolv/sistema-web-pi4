@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
-import { EnderecoCliente } from '../../cliente/models/Cliente';
+import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 
 @Component({
@@ -15,11 +15,15 @@ export class EnderecoEntregaComponent implements OnInit {
   public id: number=0;
   public enderecos: EnderecoCliente[]=[];
   public endereco: EnderecoCliente=new EnderecoCliente;
+  public cliente:Cliente=new Cliente();
   constructor(private toastr: ToastrService, private roleGuardService: RoleGuardService, private clienteService: ClienteService,private dialog: MatDialog) { }
 
   ngOnInit() {
     const user=this.roleGuardService.decodeJWT();
     this.id=user.Id;
+    this.clienteService.buscarCliente(this.id).subscribe(resp =>{
+      this.cliente=resp;
+    })
     this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
       this.enderecos=resp;
       this.endereco=resp[0];
@@ -30,12 +34,33 @@ export class EnderecoEntregaComponent implements OnInit {
   }
   adicionarEndereco(){
     const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
-      panelClass: 'custom-modais', backdropClass: 'blur',
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         let endereco = response;
         this.clienteService.adicionarEndereco(this.id,endereco).subscribe(response => {
+          this.toastr.success("Novo Endereço Cadastrado", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+          this.ngOnInit();
+        }, err => {
+          this.toastr.error("Falha cadastrar endereço", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+  adicionarEnderecoCobranca(){
+    const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.cliente.enderecoCobranca=response;
+        console.log(this.cliente);
+        this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });

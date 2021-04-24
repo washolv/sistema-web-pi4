@@ -1,8 +1,10 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { CartService } from 'src/app/services/cart.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
@@ -22,12 +24,14 @@ export class CheckoutComponent implements OnInit {
   public subTotal: number = 0;
   public valorTotal: number = 0;
   public venda: Venda = new Venda;
+  public teste=moment().startOf('day')
   public listaProdutosCarrinho: Carrinho[] = [];
   constructor(private dialog: MatDialog, private produtoService: ProdutoService, private router: Router, private cartService: CartService,
     private sanitizer: DomSanitizer) {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
+    console.log(this.teste);
     this.venda.valorTotal = 0;
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {
