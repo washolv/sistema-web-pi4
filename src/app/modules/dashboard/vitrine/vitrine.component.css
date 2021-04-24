@@ -73,6 +73,18 @@ ngb-rating {
   margin:0;
   padding: 0;
 }
+.televendas-home{
+  text-align: center;
+  width: 100%;
+  opacity:0.5;
+
+}
+
+.nomes-home{
+  margin: auto 3px auto 0px;
+  padding: 6px 0;
+}
+
 .custom-cart{
  width: 25px;
  position: absolute;
@@ -215,3 +227,4 @@ ngb-rating {
   font-size:13px;
   margin-bottom:0;
 }
+
