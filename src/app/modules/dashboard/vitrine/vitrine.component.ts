@@ -26,9 +26,8 @@ export class VitrineComponent implements OnInit {
   searchCategoria = new Subject<string>();
   public filtroPesquisa: string = "";
   public currentRate = 1;
-
+  slides: any = [[]];
   constructor(private config: NgbRatingConfig, private dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
-
     this.config.max = 5;
     this.searchFilter.pipe(
       debounceTime(1000),
@@ -41,8 +40,9 @@ export class VitrineComponent implements OnInit {
               produto.imageToShow = [];
               this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
                 response.forEach(element =>
-                  produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-                )}
+                  produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
+                )
+              }
               )
             });
           });
@@ -52,7 +52,14 @@ export class VitrineComponent implements OnInit {
   ngOnInit() {
     this.filtrarPorCategoria("");
   }
-
+  chunk(arr: any, chunkSize: number) {
+    console.log(this.produtos)
+    let R = [];
+    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+      R.push(arr.slice(i, i + chunkSize));
+    }
+    return R;
+  }
   filtrarPorCategoria(categoria?: string) {
 
     const dialogRef = this.dialog.open(LoadingComponent, {
@@ -68,10 +75,10 @@ export class VitrineComponent implements OnInit {
               response.forEach(element =>
                 produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
               )
-            }
-            )
+            })
           });
         dialogRef.close()
+        this.slides = this.chunk(this.produtos, 4);
       });
     } else {
       this.produtoService.getProdutosHabilitadosPorCategoria(categoria!).subscribe((response: HttpResponse<Produto[]>) => {

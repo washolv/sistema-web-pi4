@@ -83,6 +83,7 @@
 input[readonly] {
   background-color: white;
 }
+
 @media (max-width: 768px)   {
   .col{
     width: 50%;

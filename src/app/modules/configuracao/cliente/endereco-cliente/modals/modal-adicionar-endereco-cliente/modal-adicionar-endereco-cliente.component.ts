@@ -15,9 +15,9 @@ export class ModalAdicionarEnderecoClienteComponent implements OnInit {
   public formValid = true;
   public enderecoForm: FormGroup;
   public cepValido = true;
-  public cliente: Cliente=new Cliente();
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,private buscarCepService: ConsultaCepService,
-   private clienteService: ClienteService,public dialogRef: MatDialogRef<ModalAdicionarEnderecoClienteComponent>) {
+  public cliente: Cliente = new Cliente();
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private buscarCepService: ConsultaCepService,
+    private clienteService: ClienteService, public dialogRef: MatDialogRef<ModalAdicionarEnderecoClienteComponent>) {
     this.enderecoForm = this.createForm();
   }
 
@@ -50,17 +50,18 @@ export class ModalAdicionarEnderecoClienteComponent implements OnInit {
     }
   }
 
-  close(endereco: EnderecoCliente){
-     this.dialogRef.close(endereco);
+  close(endereco: EnderecoCliente) {
+    endereco.status = true;
+    this.dialogRef.close(endereco);
   }
-  closeX(){
+  closeX() {
     this.dialogRef.close();
   }
-  addEndereco(){
-    if(this.enderecoForm.valid){
+  addEndereco() {
+    if (this.enderecoForm.valid) {
       this.close(this.enderecoForm.value);
-    }else{
-      this.formValid=false;
+    } else {
+      this.formValid = false;
     }
   }
 

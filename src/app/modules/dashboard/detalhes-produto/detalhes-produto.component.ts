@@ -28,13 +28,13 @@ export class DetalhesProdutoComponent implements OnInit {
     private route: ActivatedRoute, private fb: FormBuilder,
     private produtoService: ProdutoService, private dialog: MatDialog) {
     this.formProduto = this.createForm(this.produto);
+    this.config.max = 5;
   }
 
   ngOnInit() {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-    this.config.max = 5;
     this.route.params.subscribe(parametros => {
       this.id = parametros['id'];
     });

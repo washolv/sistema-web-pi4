@@ -105,7 +105,7 @@ export class EditarClienteComponent implements OnInit {
     }
   }
   public backPage() {
-    this.router.navigate(['/clientes'])
+    this.router.navigate(['/configuracoes'])
   }
 
   alterarSenha() {

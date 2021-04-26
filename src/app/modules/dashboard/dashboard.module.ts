@@ -26,6 +26,7 @@ import { TabelaVendasComponent } from './dashboard-funcionario/dashboard-adminis
 import { ToastrModule } from 'ngx-toastr';
 import { ModalProdutoCarrinhoComponent } from './modals/modal-produto-carrinho/modal-produto-carrinho.component';
 import { MainNavComponent } from '../shared/main-nav/main-nav/main-nav.component';
+import { CarouselModule, MDBBootstrapModulePro, WavesModule } from 'ng-uikit-pro-standard'
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -54,7 +55,8 @@ registerLocaleData(localePt, 'pt');
     MatButtonModule,
     MatIconModule,
     ToastrModule.forRoot(),
-    NgApexchartsModule
+    NgApexchartsModule,
+    MDBBootstrapModulePro.forRoot()
   ],
   providers: [NgbRatingConfig,
     {
