@@ -70,8 +70,6 @@ export class CheckoutComponent implements OnInit {
     window.location.reload();
   }
 
-  getEstoque(){
-  }
   plus(index: number) {
     let qtd = <number>this.venda.detalhesVenda![index].quantidade;
     let subTotal = this.venda.detalhesVenda![index].subtotal!;

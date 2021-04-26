@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <div class="row col-lg-12">
     <div class="col-lg-2 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold">
-      <button class="mt-3 mb-4 btn" type="submit" (click)="backPage()"><img
-        src="../../../../assets/voltar.svg" alt="First slide"></button>    </div>
+      <button class="mt-3 btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"
+          alt="First slide"></button>
+    </div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-4">
       Editar dados cadastrais
     </div>
@@ -25,8 +26,8 @@
         </div>
         <div class="col-lg-6 col-sm-12 mb-12">
           <label for="validationDefault01">* Sobrenome</label>
-          <input type="text" class="form-control" minlength="5" name="sobrenome" placeholder="Sobrenome" formControlName="sobrenome"
-            [ngClass]="{ 'is-invalid': !formValid && f.sobrenome.errors }" required>
+          <input type="text" class="form-control" minlength="5" name="sobrenome" placeholder="Sobrenome"
+            formControlName="sobrenome" [ngClass]="{ 'is-invalid': !formValid && f.sobrenome.errors }" required>
           <div *ngIf="!formValid && f.sobrenome.errors" class="invalid-feedback">
             <div *ngIf="f.sobrenome.errors.required">* Campo obrigatório</div>
             <div *ngIf="f.sobrenome.errors.minlength">* O Campo deve conter ao menos 5 caracateres</div>

@@ -35,12 +35,8 @@
 .btn-dark {
   background-color: #0C3750;
 }
-
 .card-disabled{
-  background-color: #ccc;
-  opacity: 40%;
+  opacity: 60%;
 }
-.card-disabled .card-footer .btn{
-  background-color: rgb(133, 128, 128);
-}
+
 

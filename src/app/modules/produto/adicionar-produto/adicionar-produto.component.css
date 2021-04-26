@@ -18,7 +18,9 @@ ngb-rating {
   color: #FFC300;
   border:none;
 }
-
+.btn-dark{
+  background-color: #0C3758;
+}
 .custom-ng-select::ng-deep .ng-select-container {
   outline: none;
   -webkit-transition: .2s ease-in-out;

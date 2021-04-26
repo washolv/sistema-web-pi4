@@ -16,7 +16,9 @@
   opacity: 0.6;
   border: none;
 }
-
+.btn-dark{
+  background-color: #0C3758;
+}
 ngb-rating {
   font-size: 35px;
   color: #FFC300;

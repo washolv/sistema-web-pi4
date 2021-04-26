@@ -6,6 +6,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
+import { CartService } from 'src/app/services/cart.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 import { LoadingComponent } from '../../shared/loading/loading.component';
@@ -27,7 +28,7 @@ export class VitrineComponent implements OnInit {
   public filtroPesquisa: string = "";
   public currentRate = 1;
   slides: any = [[]];
-  constructor(private config: NgbRatingConfig, private dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
+  constructor(private cartService: CartService,private config: NgbRatingConfig, private dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer, private produtoService: ProdutoService) {
     this.config.max = 5;
     this.searchFilter.pipe(
       debounceTime(1000),
@@ -51,7 +52,9 @@ export class VitrineComponent implements OnInit {
 
   ngOnInit() {
     this.filtrarPorCategoria("");
+    let produtosCarrinhoJson = localStorage.getItem('carrinho');
   }
+
   chunk(arr: any, chunkSize: number) {
     console.log(this.produtos)
     let R = [];

@@ -1,6 +1,9 @@
 .bg-page {
   background-color: #E6E6E6;
 }
+.btn-dark{
+  background-color: #0C3758;
+}
 .custom-text-size24{
   font-size: 22px;
   font-weight: bold;

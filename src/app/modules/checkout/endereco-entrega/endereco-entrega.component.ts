@@ -5,6 +5,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -16,7 +17,8 @@ export class EnderecoEntregaComponent implements OnInit {
   public enderecos: EnderecoCliente[]=[];
   public endereco: EnderecoCliente=new EnderecoCliente;
   public cliente:Cliente=new Cliente();
-  constructor(private toastr: ToastrService, private roleGuardService: RoleGuardService, private clienteService: ClienteService,private dialog: MatDialog) { }
+  public isSmallScreen:boolean=false;
+  constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService, private clienteService: ClienteService,private dialog: MatDialog) { }
 
   ngOnInit() {
     const user=this.roleGuardService.decodeJWT();
@@ -32,9 +34,22 @@ export class EnderecoEntregaComponent implements OnInit {
   enderecoEntrega(index: number){
     this.endereco=this.enderecos[index];
   }
+
+  openModal(){
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
+    let dialogRef;
+    if(this.isSmallScreen){
+       dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+        height: '500px',width: '400px'
+      });
+    }else{
+      dialogRef= this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+      });
+    }
+    return dialogRef;
+  }
   adicionarEndereco(){
-    const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
-    });
+    const dialogRef=this.openModal();
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         let endereco = response;
@@ -54,8 +69,7 @@ export class EnderecoEntregaComponent implements OnInit {
     });
   }
   adicionarEnderecoCobranca(){
-    const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
-    });
+    const dialogRef=this.openModal();
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.cliente.enderecoCobranca=response;
