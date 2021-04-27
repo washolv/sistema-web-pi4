@@ -28,6 +28,11 @@ export class EnderecoCobrancaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.id=<number> this.roleGuardService.getUser().Id;
+      this.clienteService.buscarCliente(this.id).subscribe(response =>{
+        this.cliente=response;
+        this.endereco=<EnderecoCliente>response.enderecoCobranca;
+      });
   }
   editarEndereco(endereco: EnderecoCliente){
     const dialogRef = this.dialog.open(ModalEditarEnderecoClienteComponent, {

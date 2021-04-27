@@ -30,8 +30,8 @@ import { EnderecoCobrancaComponent } from './cliente/endereco-cobranca/endereco-
 const routes = [
   { path: '', component: ConfiguracaoComponent},
   { path: 'enderecos', component: EnderecoClienteComponent },
-  { path: 'meus-dados/:id', component: EditarClienteComponent},
-  { path: 'cobranca/:id', component: EnderecoCobrancaComponent}
+  { path: 'meus-dados', component: EditarClienteComponent},
+  { path: 'endereco-cobranca', component: EnderecoCobrancaComponent}
 ]
 @NgModule({
   imports: [
