@@ -11,7 +11,6 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { MatSelectModule } from '@angular/material/select';
 import { ClienteGuard } from 'src/app/services/cliente.guard';
 import { MatButtonModule } from '@angular/material/button';
-import { MainNavComponent } from '../shared/main-nav/main-nav/main-nav.component';
 
 const routes: Routes = [
   { path: '', component: CheckoutComponent },
@@ -30,7 +29,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   declarations: [CheckoutComponent, EnderecoEntregaComponent],
   exports: [

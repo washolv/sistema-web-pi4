@@ -22,7 +22,6 @@ import { ModalEditarEnderecoClienteComponent } from './cliente/endereco-cliente/
 import { ModalAdicionarEnderecoClienteComponent } from './cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import { EnderecoClienteComponent } from './cliente/endereco-cliente/endereco/endereco-cliente.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
-import { AdminGuard } from 'src/app/services/admin.guard';
 import { AlterarSenhaClienteComponent } from './cliente/editar-cliente/alterar-senha-cliente/alterar-senha-cliente.component';
 import { EnderecoCobrancaComponent } from './cliente/endereco-cobranca/endereco-cobranca.component';
 

@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,8 +24,10 @@ export class EnderecoCobrancaComponent implements OnInit {
   color: ThemePalette = 'primary';
   public id: number=0;
   public statusAddress=false;
+  public isSmallScreen = false;
+
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
-     private router: Router, private clienteService: ClienteService) {
+     private router: Router, private clienteService: ClienteService,private breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {
@@ -68,6 +71,40 @@ export class EnderecoCobrancaComponent implements OnInit {
       if (response) {
         let endereco = response;
         this.clienteService.adicionarEndereco(this.id,endereco).subscribe(response => {
+          this.toastr.success("Novo Endereço Cadastrado", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+          this.ngOnInit();
+        }, err => {
+          this.toastr.error("Falha cadastrar endereço", "Erro", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+  openModal() {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
+    let dialogRef;
+    if (this.isSmallScreen) {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+        height: '500px', width: '400px'
+      });
+    } else {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+      });
+    }
+    return dialogRef;
+  }
+  adicionarEnderecoCobranca() {
+    const dialogRef = this.openModal();
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.cliente.enderecoCobranca = response;
+        console.log(this.cliente);
+        this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });

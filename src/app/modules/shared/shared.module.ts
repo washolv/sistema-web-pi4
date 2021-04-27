@@ -64,9 +64,9 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   declarations: [
     ModalAlertaComponent,ModalFilterDateComponent,
-    LoadingComponent
+    LoadingComponent,
   ], exports: [
-    ModalAlertaComponent
+    ModalAlertaComponent,
   ], entryComponents: [
     ModalAlertaComponent
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA]

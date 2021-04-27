@@ -60,7 +60,7 @@
           <div class="card-body">
             <div class="row justify-content-between">
               <h3 class="card-title ml-3">
-                {{endereco.complemento}}</h3>
+                {{cliente.enderecoCobranca.complemento}}</h3>
               <p class="mr-3">
             </div>
             <hr>
@@ -74,17 +74,19 @@
           </div>
         </div>
       </div>
-      <div class="row col-lg-12 mt-3 mb-3 custom-cadastro-cobranca justify-content-center" *ngIf="!cliente.enderecoCobranca">
-        <div class="row custom-form-box-empty mb-3">
-          <div class="col-lg-12 mt-2">
-            <div class="custom-text-size1 ml-2">
-              Você ainda não possui um endereço de cobrança, insira já seu endereço e prossiga com a compra
+      <div *ngIf="!cliente.enderecoCobranca">
+        <div class="row col-lg-12 justify-content-center">
+          <div class="row custom-form-box-empty mb-3">
+            <div class="col-lg-12 mt-2">
+              <div class="custom-text-size1 ml-2">
+                Você ainda não possui um endereço de cobrança, insira já seu endereço e prossiga com a compra
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 mt-3">
-          <button mat-button class="col-lg-12" (click)="adicionarEnderecoCobranca()" color="primary">Novo endereço de
-            cobrança</button>
+          <div class="col-lg-6 mt-3">
+            <button mat-button class="col-lg-12" (click)="adicionarEnderecoCobranca()" color="primary">Novo endereço de
+              cobrança</button>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -45,8 +44,8 @@ const routes: Routes = [
   ],
   declarations: [
     ClienteComponent,
-
-
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: []
 })
 export class ClienteModule { }

@@ -18,7 +18,8 @@ export class EnderecoEntregaComponent implements OnInit {
   public endereco: EnderecoCliente=new EnderecoCliente;
   public cliente:Cliente=new Cliente();
   public isSmallScreen:boolean=false;
-  constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService, private clienteService: ClienteService,private dialog: MatDialog) { }
+  constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
+    private clienteService: ClienteService,private dialog: MatDialog) { }
 
   ngOnInit() {
     const user=this.roleGuardService.decodeJWT();
@@ -29,6 +30,7 @@ export class EnderecoEntregaComponent implements OnInit {
     this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
       this.enderecos=resp;
       this.endereco=resp[0];
+      console.log(resp)
     })
   }
   enderecoEntrega(index: number){
@@ -68,11 +70,11 @@ export class EnderecoEntregaComponent implements OnInit {
       console.log(err);
     });
   }
-  adicionarEnderecoCobranca(){
-    const dialogRef=this.openModal();
+  adicionarEnderecoCobranca() {
+    const dialogRef = this.openModal();
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        this.cliente.enderecoCobranca=response;
+        this.cliente.enderecoCobranca = response;
         console.log(this.cliente);
         this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
@@ -89,4 +91,5 @@ export class EnderecoEntregaComponent implements OnInit {
       console.log(err);
     });
   }
+
 }
