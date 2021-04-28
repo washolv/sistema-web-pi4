@@ -106,9 +106,8 @@ export class EnderecoEntregaComponent implements OnInit {
     this.venda.cliente=this.cliente;
     this.venda.enderecoCliente=this.endereco;
     this.venda.dataVenda=moment().toDate();
-    console.log(this.venda)
     this.vendaService.postVenda(this.venda).subscribe(resp=>{
-      console.log(resp);
+
     })
   }
 
