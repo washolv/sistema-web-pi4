@@ -101,5 +101,8 @@
         </div>
       </div>
     </div>
+    <div class="row col-lg-12 justify-content-center" *ngIf="endereco && cliente.enderecoCobranca">
+      <button class="btn btn-success col-lg-3" (click)="finalizarCompra()">Finalizar</button>
+    </div>
   </div>
 </div>

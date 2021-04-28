@@ -58,9 +58,9 @@ export class CheckoutComponent implements OnInit {
           let itemCarrinho: DetalhesVenda = new DetalhesVenda();
           itemCarrinho.produto = produto;
           itemCarrinho.quantidade = x.quantidade;
-          itemCarrinho.subtotal = produto.preco!*x.quantidade!;
+          itemCarrinho.subTotal = produto.preco!*x.quantidade!;
           this.venda.detalhesVenda?.push(itemCarrinho);
-          this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subtotal;
+          this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;
         })
       });
@@ -72,27 +72,26 @@ export class CheckoutComponent implements OnInit {
 
   plus(index: number) {
     let qtd = <number>this.venda.detalhesVenda![index].quantidade;
-    let subTotal = this.venda.detalhesVenda![index].subtotal!;
+    let subTotal = this.venda.detalhesVenda![index].subTotal!;
     let estoque = this.venda.detalhesVenda![index].produto!.quantidadeEstoque;
     if (qtd < estoque!) {
       let qtd = <number>this.venda.detalhesVenda![index].quantidade;
       let preco = this.venda.detalhesVenda![index].produto?.preco;
       this.venda.detalhesVenda![index].quantidade = qtd + 1;
-      this.venda.detalhesVenda![index].subtotal = (qtd + 1) * preco!;
+      this.venda.detalhesVenda![index].subTotal = (qtd + 1) * preco!;
       this.venda.quantidadeTotal! += 1;
       this.calculaTotal();
-
-      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd+1)
+      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd+1);
     }
   }
 
   minus(index: number) {
     let qtd = <number>this.venda.detalhesVenda![index].quantidade;
-    let subTotal = this.venda.detalhesVenda![index].subtotal!;
+    let subTotal = this.venda.detalhesVenda![index].subTotal!;
     if (qtd > 1) {
       let preco = this.venda.detalhesVenda![index].produto?.preco;
       this.venda.detalhesVenda![index].quantidade = qtd! - 1;
-      this.venda.detalhesVenda![index].subtotal = subTotal - preco!;
+      this.venda.detalhesVenda![index].subTotal = subTotal - preco!;
       this.venda.quantidadeTotal! -= 1;
       this.calculaTotal();
       this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd-1)
@@ -102,10 +101,12 @@ export class CheckoutComponent implements OnInit {
   calculaTotal() {
     this.venda.valorTotal = 0;
     this.venda.detalhesVenda!.forEach(sub => {
-      this.venda.valorTotal = sub.subtotal! + this.venda.valorTotal!;
+      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
     })
   }
   endereco() {
-    this.router.navigate(['/carrinho/endereco-entrega']);
+    this.router.navigateByUrl('/carrinho/endereco-entrega', {
+      state: { venda: this.venda }
+    })
   }
 }

@@ -6,6 +6,10 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { Venda } from '../models/Venda';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { VendaService } from 'src/app/services/venda.service';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -18,10 +22,18 @@ export class EnderecoEntregaComponent implements OnInit {
   public endereco: EnderecoCliente=new EnderecoCliente;
   public cliente:Cliente=new Cliente();
   public isSmallScreen:boolean=false;
+  public venda: Venda=new Venda();
+  public nav: any;
   constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
-    private clienteService: ClienteService,private dialog: MatDialog) { }
+    private clienteService: ClienteService,private dialog: MatDialog, private router: Router, private vendaService: VendaService) {
+      this.nav = this.router.getCurrentNavigation();
+      if(!this.nav){
+          router.navigate(['/carrinho']);
+      }
+    }
 
   ngOnInit() {
+    this.venda = this.nav.extras.state.venda;
     const user=this.roleGuardService.decodeJWT();
     this.id=user.Id;
     this.clienteService.buscarCliente(this.id).subscribe(resp =>{
@@ -30,7 +42,6 @@ export class EnderecoEntregaComponent implements OnInit {
     this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
       this.enderecos=resp;
       this.endereco=resp[0];
-      console.log(resp)
     })
   }
   enderecoEntrega(index: number){
@@ -90,6 +101,15 @@ export class EnderecoEntregaComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+  }
+  finalizarCompra(){
+    this.venda.cliente=this.cliente;
+    this.venda.enderecoCliente=this.endereco;
+    this.venda.dataVenda=moment().toDate();
+    console.log(this.venda)
+    this.vendaService.postVenda(this.venda).subscribe(resp=>{
+      console.log(resp);
+    })
   }
 
 }
