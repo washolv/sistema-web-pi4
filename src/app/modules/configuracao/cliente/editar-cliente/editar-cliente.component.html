@@ -17,20 +17,20 @@
       <div class="form-row mt-4">
         <div class="col-lg-6 col-sm-12 mb-12">
           <label for="validationDefault01">* Nome</label>
-          <input type="text" class="form-control" minlength="5" name="nome" placeholder="Nome" formControlName="nome"
+          <input type="text" class="form-control" minlength="3" name="nome" placeholder="Nome" formControlName="nome"
             [ngClass]="{ 'is-invalid': !formValid && f.nome.errors }" required>
           <div *ngIf="!formValid && f.nome.errors" class="invalid-feedback">
             <div *ngIf="f.nome.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.nome.errors.minlength">* O Campo deve conter ao menos 5 caracateres</div>
+            <div *ngIf="f.nome.errors.minlength">* O Campo deve conter ao menos 3 caracateres</div>
           </div>
         </div>
         <div class="col-lg-6 col-sm-12 mb-12">
           <label for="validationDefault01">* Sobrenome</label>
-          <input type="text" class="form-control" minlength="5" name="sobrenome" placeholder="Sobrenome"
+          <input type="text" class="form-control" minlength="3" name="sobrenome" placeholder="Sobrenome"
             formControlName="sobrenome" [ngClass]="{ 'is-invalid': !formValid && f.sobrenome.errors }" required>
           <div *ngIf="!formValid && f.sobrenome.errors" class="invalid-feedback">
             <div *ngIf="f.sobrenome.errors.required">* Campo obrigatório</div>
-            <div *ngIf="f.sobrenome.errors.minlength">* O Campo deve conter ao menos 5 caracateres</div>
+            <div *ngIf="f.sobrenome.errors.minlength">* O Campo deve conter ao menos 3 caracateres</div>
           </div>
         </div>
 

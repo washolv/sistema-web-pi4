@@ -52,11 +52,11 @@ export class EditarClienteComponent implements OnInit {
     return this.fb.group({
       nome: new FormControl(this.cliente.nome, Validators.compose([
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
       ])),
       sobrenome: new FormControl(this.cliente.sobrenome, Validators.compose([
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
       ])),
       cpf: new FormControl({ value: this.cliente.cpf, disabled: true },
         Validators.compose([
