@@ -3,60 +3,95 @@
     <div class="custom-icon-title"><img src="./assets/icons/user-alt.svg"></div>
     <div class="custom-title">Cadastre-se</div>
   </div>
-  <div class="row d-flex justify-content-center mt-4">
-    <div class="row custom-sub-title">já tem um cadastro? <div routerLink='/login'><a>Entrar</a></div>
-  </div>
-  <div class="row col-lg-12 d-flex justify-content-center">
-    <form class="col-lg-12" [formGroup]="formCliente">
-      <div class="form-row mt-5">
-        <label for="email">* e-mail</label>
-        <input formControlName="email" name="email" class="form-control" required placeholder="email@email.com"
-          type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-      </div>
-      <div class="form-row mt-2">
-        <label for="senha">* senha</label>
-        <input formControlName="senha" name="senha" class="form-control text-muted" required placeholder="senha"
-          type="senha" required>
-      </div>
-      <div class="form-row mt-2">
-        <label for="example-date-input">* telefone</label>
-        <input class="form-control" prefix="+55" mask="(00) 00000-0000" formControlName="telefone"
-          placeholder="(00)00000-0000" type="tel">
-      </div>
-      <div class="form-row mt-2">
-        <label for="validationDefault02">* CPF</label>
-        <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
-          class="form-control cpf-mask" required maxlength="14">
-      </div>
-      <div class="form-row mt-2">
-        <label for="validationDefault01">* nome</label>
-        <input type="text" class="form-control" minlength="5" name="nome" placeholder="seu nome"
-          formControlName="nome" required>
-        <label for="validationDefault01">* sobrenome</label>
-        <input type="text" class="form-control" minlength="5" name="sobrenome" placeholder="seu sobrenome"
-          formControlName="sobrenome" required>
-      </div>
-      <div class="form-row mt-2">
-        <label for="validationDefault01">* sexo</label>
-      </div>
-      <div class="form-row">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio1" value="Masculino">
-          <label class="form-check-label" for="inlineRadio1">Masculino</label>
+  <div class="row d-flex justify-content-center mt-2">
+    <div class="row custom-sub-title">já tem um cadastro? <div><a href="http://localhost:4200/#/login" style="color:#0C3758">Entrar</a></div>
+    </div>
+    <div class="row col-lg-12 d-flex justify-content-center">
+      <form class="col-lg-12" [formGroup]="formCliente">
+        <div class="form-row mt-2">
+          <label for="email">* e-mail</label>
+          <input formControlName="email" name="email" class="form-control" required placeholder="email@email.com"
+            type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [ngClass]="{ 'is-invalid': !formValid && f.email.errors }">
+          <div *ngIf="!formValid && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.email.errors.invalid">* E-mail inválido</div>
+          </div>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio2" value="Feminino">
-          <label class="form-check-label" for="inlineRadio2">Feminino</label>
+        <div class="form-row mt-2">
+          <label for="senha">* senha</label>
+          <input formControlName="senha" name="senha" class="form-control text-muted" required placeholder="senha"
+            type="senha" required [ngClass]="{ 'is-invalid': !formValid && f.senha.errors }">
+          <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
+            <div *ngIf="f.senha.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.senha.errors.invalid">* Campo deve conter no mínimo 3 caracteres</div>
+          </div>
         </div>
-      </div>
-      <div class="form-row mt-2">
-        <label for="validationDefault01">* data de nascimento</label>
-        <input class="form-control" formControlName="dataNascimento" type="date">
-      </div>
-
-      <div class="row d-flex justify-content-center mt-3 mb-6">
-        <button class="submit btn btn-danger" (click)="addCliente()">Criar seu cadastro</button>
-      </div>
-    </form>
+        <div class="form-row mt-2">
+          <label for="example-date-input">* telefone</label>
+          <input class="form-control" prefix="+55" mask="(00) 00000-0000" formControlName="telefone"
+            placeholder="(00)00000-0000" type="tel" [ngClass]="{ 'is-invalid': !formValid && f.telefone.errors }">
+          <div *ngIf="!formValid && f.telefone.errors" class="invalid-feedback">
+            <div *ngIf="f.telefone.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.telefone.errors.minlength">* Preencha o número de Telefone completo</div>
+          </div>
+        </div>
+        <div class="form-row mt-2">
+          <label for="validationDefault02">* CPF</label>
+          <input type="text" name="cpf" placeholder="000.000.00-00 " mask="000.000.000-00" formControlName="cpf"
+            class="form-control cpf-mask" required maxlength="14"
+            [ngClass]="{ 'is-invalid': !formValid && f.cpf.errors }">
+          <div *ngIf="!formValid && f.cpf.errors" class="invalid-feedback">
+            <div *ngIf="f.cpf.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.cpf.errors.minlength">* Preencha o CPF completo</div>
+          </div>
+        </div>
+        <div class="form-row mt-2">
+          <label for="validationDefault01">* nome</label>
+          <input type="text" class="form-control" minlength="3" name="nome" placeholder="seu nome"
+            formControlName="nome" required [ngClass]="{ 'is-invalid': !formValid && f.nome.errors }">
+          <div *ngIf="!formValid && f.nome.errors" class="invalid-feedback">
+            <div *ngIf="f.nome.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.nome.errors.minlength">* O Campo deve conter ao menos 3 caracateres</div>
+          </div>
+          <label for="validationDefault01">* sobrenome</label>
+          <input type="text" class="form-control" minlength="3" name="sobrenome" placeholder="seu sobrenome"
+            formControlName="sobrenome" required [ngClass]="{ 'is-invalid': !formValid && f.sobrenome.errors }">
+          <div *ngIf="!formValid && f.sobrenome.errors" class="invalid-feedback">
+            <div *ngIf="f.sobrenome.errors.required">* Campo obrigatório</div>
+            <div *ngIf="f.sobrenome.errors.minlength">* O Campo deve conter ao menos 3 caracateres</div>
+          </div>
+        </div>
+        <div class="form-row mt-2">
+          <label for="validationDefault01">* sexo</label>
+        </div>
+        <div class="form-row" [ngClass]="{ 'is-invalid': !formValid && f.sexo.errors }">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio1"
+              value="Masculino">
+            <label class="form-check-label" for="inlineRadio1">Masculino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="sexo" name="sexo" id="inlineRadio2"
+              value="Feminino">
+            <label class="form-check-label" for="inlineRadio2">Feminino</label>
+          </div>
+        </div>
+        <div *ngIf="!formValid && f.sexo.errors" class="invalid-feedback">
+          <div *ngIf="f.sexo.errors.required">* Campo obrigatório</div>
+        </div>
+        <div class="form-row mt-2">
+          <label for="validationDefault01">* data de nascimento</label>
+          <input class="form-control" formControlName="dataNascimento" type="date"
+            [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento  .errors }">
+          <div *ngIf="!formValid && f.dataNascimento.errors" class="invalid-feedback">
+            <div *ngIf="f.dataNascimento.errors.required">* Campo obrigatório</div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-3 mb-6">
+          <button class="submit btn btn-danger" (click)="addCliente()">Criar seu cadastro</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

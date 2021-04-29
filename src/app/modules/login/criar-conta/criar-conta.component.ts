@@ -84,11 +84,11 @@ export class CriarContaComponent implements OnInit {
 
   public addCliente() {
     if (this.formCliente.valid) {
-     // this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
-      //  if (!response) {
-        // this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
-           // if (!r) {
-
+      console.log('*********************');
+      this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
+        if (!response) {
+         this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
+            if (!r) {
               let usuario: Usuario=new Usuario();
               usuario.username=this.formCliente.value.email;
               usuario.password=this.formCliente.value.senha;
@@ -112,26 +112,28 @@ export class CriarContaComponent implements OnInit {
                 });
 
               })
-           /* }else{
+            }else{
               this.toastr.error("CPF já cadastrado", "Erro", {
                 timeOut: 3000, positionClass: 'toast-top-center',
               });
-            }*/
-       //   })
+            }
+          })
         }
-       /* else {
+        else {
           this.toastr.error("e-mail já cadastrado", "Erro", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
         }
-     // })
-    }*/ else {
+      })
+    } else {
       this.formValid = false;
     }
   }
   public backPage() {
     this.router.navigate(['/clientes'])
   }
+
+
 
 
 }

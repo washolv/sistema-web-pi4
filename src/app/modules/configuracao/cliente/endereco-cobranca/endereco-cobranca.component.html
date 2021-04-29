@@ -17,9 +17,6 @@
           <div class="row justify-content-between">
             <h3 class="card-title ml-3">
               {{endereco.complemento}}</h3>
-            <p class="mr-3">
-              <mat-slide-toggle [(ngModel)]="endereco.status" [color]="color" class="align-middle"></mat-slide-toggle>
-            </p>
           </div>
           <hr>
           <p class="card-text m-0"></p>
@@ -29,13 +26,9 @@
           <p class="card-text m-0">CEP: {{endereco.cep}}</p>
         </div>
         <div class="card-footer border-dark" *ngIf="!endereco.principal">
-          <div class="row">
-            <div class="col-6 text-left"><a (click)="editarEndereco(endereco)" class="text-secondary"
-                data-toggle="modal"><i class="fa fa-edit m-1"></i>Editar</a></div>
-          </div>
           <div class="col-12 p-0 text-center">
-            <a class="btn btn-dark btn-block mt-2 btn-dark" *ngIf="!endereco.principal">
-              <i class="fa fa-check mr-2"></i>Selecionar
+            <a class="btn btn-dark btn-block mt-2 btn-dark" (click)="editarEndereco(endereco)">
+              <i class="fa fa-check mr-2"></i>Editar Endereço
             </a>
           </div>
         </div>

@@ -26,4 +26,5 @@ export class EnderecoCliente {
   complemento?: string;
   numero?: number;
   principal?: boolean;
+  enderecoCobranca?: boolean;
 }

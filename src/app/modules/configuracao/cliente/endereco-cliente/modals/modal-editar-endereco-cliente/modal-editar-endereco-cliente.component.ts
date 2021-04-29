@@ -55,6 +55,7 @@ export class ModalEditarEnderecoClienteComponent implements OnInit {
 
   close(endereco: EnderecoCliente){
     endereco.status=this.data.endereco.status;
+    endereco.enderecoCobranca=this.data.endereco.enderecoCobranca;
     this.dialogRef.close(endereco);
   }
   closeX(){

@@ -8,6 +8,7 @@ import { Cliente, EnderecoCliente } from 'src/app/modules/cliente/models/Cliente
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { ModalAdicionarEnderecoClienteComponent } from '../endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
+import { ModalAdicionarEnderecoCobrancaComponent } from '../endereco-cliente/modals/modal-adicionar-endereco-cobranca/modal-adicionar-endereco-cobranca.component';
 import { ModalEditarEnderecoClienteComponent } from '../endereco-cliente/modals/modal-editar-endereco-cliente/modal-editar-endereco-cliente.component';
 
 @Component({
@@ -64,7 +65,7 @@ export class EnderecoCobrancaComponent implements OnInit {
     });
   }
   adicionarEndereco(){
-    const dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+    const dialogRef = this.dialog.open(ModalAdicionarEnderecoCobrancaComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur',
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -89,11 +90,11 @@ export class EnderecoCobrancaComponent implements OnInit {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
     let dialogRef;
     if (this.isSmallScreen) {
-      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoCobrancaComponent, {
         height: '500px', width: '400px'
       });
     } else {
-      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoCobrancaComponent, {
       });
     }
     return dialogRef;
