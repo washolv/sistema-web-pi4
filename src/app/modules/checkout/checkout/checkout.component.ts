@@ -31,7 +31,6 @@ export class CheckoutComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-    console.log(this.teste);
     this.venda.valorTotal = 0;
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {

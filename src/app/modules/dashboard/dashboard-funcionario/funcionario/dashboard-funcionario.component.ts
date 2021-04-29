@@ -14,7 +14,6 @@ export class DashboardFuncionarioComponent implements OnInit {
   public user;
   constructor(private loginService: LoginService,private router: Router, private roleGuardService: RoleGuardService) {
     this.userRole=roleGuardService.getUserRole();
-    console.log(this.userRole)
     this.user=roleGuardService.decodeJWT();
   }
 

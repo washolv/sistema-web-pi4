@@ -41,7 +41,6 @@ export class EditarClienteComponent implements OnInit {
     });
     this.clienteService.buscarCliente(this.id!).subscribe(res => {
       this.cliente = res;
-      console.log(res)
       this.formCliente = this.createFormCliente(this.cliente);
       dialogRef.close();
     })
@@ -118,7 +117,6 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.cliente = response;
-        console.log(this.cliente)
         this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Senha alterada com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',

@@ -30,7 +30,6 @@ export class CartService {
     } else {
       let produtoCarrinho: Carrinho[] = new Array();
       produtoCarrinho.push(new Carrinho(id, quantidade))
-      console.log(produtoCarrinho)
       localStorage.setItem('carrinho', JSON.stringify(produtoCarrinho));
     }
   }

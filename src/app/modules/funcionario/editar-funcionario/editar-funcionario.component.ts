@@ -116,7 +116,6 @@ export class EditarFuncionarioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.funcionario = response;
-        console.log(this.funcionario)
         this.funcionarioService.editarFuncionario(this.funcionario).subscribe(response => {
           this.toastr.success("Senha alterada com sucesso", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',

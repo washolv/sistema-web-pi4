@@ -103,7 +103,6 @@ export class EnderecoCobrancaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.cliente.enderecoCobranca = response;
-        console.log(this.cliente);
         this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',

@@ -56,7 +56,6 @@ export class VitrineComponent implements OnInit {
   }
 
   chunk(arr: any, chunkSize: number) {
-    console.log(this.produtos)
     let R = [];
     for (let i = 0, len = arr.length; i < len; i += chunkSize) {
       R.push(arr.slice(i, i + chunkSize));

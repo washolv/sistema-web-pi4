@@ -44,7 +44,6 @@ export class ModalEditarEnderecoClienteComponent implements OnInit {
   public buscarCep() {
     if (!this.f.cep.errors) {
       this.buscarCepService.buscar(this.enderecoForm.value.cep).subscribe(res => {
-        console.log(res)
         this.enderecoForm.controls['logradouro'].setValue(res.logradouro);
         this.enderecoForm.controls['uf'].setValue(res.uf);
         this.enderecoForm.controls['cidade'].setValue(res.localidade);

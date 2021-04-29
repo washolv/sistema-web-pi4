@@ -86,7 +86,6 @@ export class EnderecoEntregaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.cliente.enderecoCobranca = response;
-        console.log(this.cliente);
         this.clienteService.editarCliente(this.cliente).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
@@ -106,8 +105,9 @@ export class EnderecoEntregaComponent implements OnInit {
     this.venda.cliente=this.cliente;
     this.venda.enderecoCliente=this.endereco;
     this.venda.dataVenda=moment().toDate();
+    localStorage.removeItem('carrinho');
     this.vendaService.postVenda(this.venda).subscribe(resp=>{
-
+        this.toastr.success('Ok','Venda Cadastrada');
     })
   }
 

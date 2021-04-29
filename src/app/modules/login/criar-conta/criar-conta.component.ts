@@ -83,7 +83,6 @@ export class CriarContaComponent implements OnInit {
   }
 
   public addCliente() {
-    console.log(this.formCliente.value)
     if (this.formCliente.valid) {
      // this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
       //  if (!response) {
@@ -94,7 +93,6 @@ export class CriarContaComponent implements OnInit {
               usuario.username=this.formCliente.value.email;
               usuario.password=this.formCliente.value.senha;
               usuario.active=true;
-              console.log(usuario)
               this.cliente.telefone = this.formCliente.value.telefone;
               this.cliente.cpf = this.formCliente.value.cpf;
               this.cliente.dataNascimento = this.formCliente.value.dataNascimento;
@@ -102,7 +100,6 @@ export class CriarContaComponent implements OnInit {
               this.cliente.sobrenome=this.formCliente.value.sobrenome;
               this.cliente.sexo = this.formCliente.value.sexo;
               this.cliente.usuario=usuario;
-              console.log(this.cliente)
               this.clienteService.salvarCliente(this.cliente).subscribe(res => {
                 this.toastr.success("Cliente adicionado com sucesso", "OK", {
                   timeOut: 3000, positionClass: 'toast-top-center',

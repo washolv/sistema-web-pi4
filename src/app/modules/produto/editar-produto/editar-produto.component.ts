@@ -141,7 +141,6 @@ export class EditarProdutoComponent implements OnInit {
       } else {
         this.formProduto.value.status = 0;
       }
-      console.log(this.formProduto.value)
       this.produtoService.editarProduto(produto).subscribe((response: any) => {
         if (response) {
           this.toastr.success("Produto alterado com sucesso", "Ok", {
