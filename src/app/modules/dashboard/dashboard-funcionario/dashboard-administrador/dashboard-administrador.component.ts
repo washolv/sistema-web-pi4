@@ -28,10 +28,10 @@ export class DashboardAdministradorComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-    this.relatorioVendasService.getByCategory(moment().startOf('day'), moment().endOf('day')).subscribe(res =>{
+    this.relatorioVendasService.getByCategory(moment().startOf('day').toDate(), moment().endOf('day').toDate()).subscribe(res =>{
       console.log(res);
     });
-    this.relatorioVendasService.getByMonth(moment().startOf('day'), moment().endOf('day')).subscribe(res =>{
+    this.relatorioVendasService.getByMonth(moment().startOf('day').toDate(), moment().endOf('day').toDate()).subscribe(res =>{
       console.log(res);
       dialogRef.close();
     });

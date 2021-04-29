@@ -14,13 +14,13 @@ export class RelatorioVendasService {
   constructor(private http: HttpClient) {
   }
 
-  public getByCategory(inicialDate: Moment, endDate: Moment): Observable<VendidosCategoria[]>{
+  public getByCategory(inicialDate: Date, endDate: Date): Observable<VendidosCategoria[]>{
     const httpOptions = {
       headers: new HttpHeaders({ dataInicio: inicialDate.toString(),dataFim: endDate.toString() }),
     };
     return this.http.get<VendidosCategoria[]>(`${this.apiUrl}/vendas/categoriasPorcentagem`, httpOptions);
   }
-  public getByMonth(inicialDate: Moment, endDate: Moment): Observable<VendidosCategoria[]>{
+  public getByMonth(inicialDate: Date, endDate: Date): Observable<VendidosCategoria[]>{
     const httpOptions = {
       headers: new HttpHeaders({ dataInicio: inicialDate.toString(),dataFim: endDate.toString() }),
     };

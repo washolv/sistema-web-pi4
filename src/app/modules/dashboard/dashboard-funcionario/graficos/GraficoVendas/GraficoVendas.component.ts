@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
 
 @Component({
@@ -8,6 +8,9 @@ import * as ApexCharts from 'apexcharts';
 })
 export class GraficoVendasComponent implements OnInit {
   chartOptions: any;
+  @Input() data: []=[];
+  @Input() categories: []=[];
+
   constructor() {
 
   }
