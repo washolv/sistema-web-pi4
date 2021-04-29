@@ -24,13 +24,15 @@ import { EnderecoClienteComponent } from './cliente/endereco-cliente/endereco/en
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
 import { AlterarSenhaClienteComponent } from './cliente/editar-cliente/alterar-senha-cliente/alterar-senha-cliente.component';
 import { EnderecoCobrancaComponent } from './cliente/endereco-cobranca/endereco-cobranca.component';
+import { MeusPedidosComponent } from './cliente/meus-pedidos/meus-pedidos.component';
 
 
 const routes = [
-  { path: '', component: ConfiguracaoComponent},
+  { path: '', component: ConfiguracaoComponent },
   { path: 'enderecos', component: EnderecoClienteComponent },
-  { path: 'meus-dados', component: EditarClienteComponent},
-  { path: 'endereco-cobranca', component: EnderecoCobrancaComponent}
+  { path: 'meus-dados', component: EditarClienteComponent },
+  { path: 'endereco-cobranca', component: EnderecoCobrancaComponent },
+  { path: 'meus-pedidos', component: MeusPedidosComponent }
 ]
 @NgModule({
   imports: [
@@ -69,6 +71,7 @@ const routes = [
     AlterarSenhaClienteComponent,
     ModalEditarEnderecoClienteComponent,
     EnderecoCobrancaComponent,
+    MeusPedidosComponent,
     ModalAdicionarEnderecoClienteComponent], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ConfiguracaoModule { }
