@@ -18,15 +18,24 @@ export class CartService {
 
   public adicionarProduto(id:number, quantidade: number) {
     let produtosCarrinhoJson = localStorage.getItem('carrinho');
+
     if (produtosCarrinhoJson) {
-      this.removerProduto(id);
       produtosCarrinhoJson = localStorage.getItem('carrinho');
-      let produtosCarrinho = JSON.parse(produtosCarrinhoJson!);
-      produtosCarrinho.push(new Carrinho(id, quantidade))
+      let produtosCarrinho = <Carrinho[]> JSON.parse(produtosCarrinhoJson!);
+      let prodCarrinho = <Carrinho[]> produtosCarrinho.filter(x => x.id == id)
+      if(prodCarrinho[0] && prodCarrinho[0].id==id){
+        let produtos = <Carrinho[]> produtosCarrinho.filter(x => x.id != id)
+        prodCarrinho[0].quantidade=prodCarrinho[0].quantidade!+1;
+        produtos.push(prodCarrinho[0])
+        produtosCarrinhoJson = JSON.stringify(produtos);
 
-      produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
+        localStorage.setItem('carrinho', produtosCarrinhoJson!);
+      }else{
+        produtosCarrinho.push(new Carrinho(id, quantidade))
+        produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
+        localStorage.setItem('carrinho', produtosCarrinhoJson!);
+      }
 
-      localStorage.setItem('carrinho', produtosCarrinhoJson!);
     } else {
       let produtoCarrinho: Carrinho[] = new Array();
       produtoCarrinho.push(new Carrinho(id, quantidade))
@@ -38,7 +47,6 @@ export class CartService {
     if (produtosCarrinhoJson) {
       let produtosCarrinho = JSON.parse(produtosCarrinhoJson);
       const unique = produtosCarrinho.map((x: any) => x).filter((value: any, index: any, self: string | any[]) => self.indexOf(value) === index)
-
       return unique.length;
     }
     return 0;
@@ -48,9 +56,7 @@ export class CartService {
     if (produtosCarrinhoJson) {
       let produtosCarrinho = <Carrinho[]>JSON.parse(produtosCarrinhoJson);
       produtosCarrinho = produtosCarrinho.filter(x => x.id != id)
-
       produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
-
       localStorage.setItem('carrinho', produtosCarrinhoJson!);
     }
   }

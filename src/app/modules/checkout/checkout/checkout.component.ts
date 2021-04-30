@@ -86,6 +86,7 @@ export class CheckoutComponent implements OnInit {
 
   minus(index: number) {
     let qtd = <number>this.venda.detalhesVenda![index].quantidade;
+    console.log(qtd)
     let subTotal = this.venda.detalhesVenda![index].subTotal!;
     if (qtd > 1) {
       let preco = this.venda.detalhesVenda![index].produto?.preco;
@@ -93,6 +94,7 @@ export class CheckoutComponent implements OnInit {
       this.venda.detalhesVenda![index].subTotal = subTotal - preco!;
       this.venda.quantidadeTotal! -= 1;
       this.calculaTotal();
+      this.cartService.removerProduto(this.venda.detalhesVenda![index]!.produto!.id!);
       this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd-1)
     }
   }

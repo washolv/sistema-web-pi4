@@ -20,7 +20,6 @@ export class DashboardAdministradorComponent implements OnInit {
     isCaseInsensitive: true
   };
   constructor(private dialog: MatDialog, private router: Router, private relatorioVendasService: RelatorioVendasService) {
-
     this.getInfoCharts();
   }
 

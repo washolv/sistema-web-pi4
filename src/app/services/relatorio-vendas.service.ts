@@ -15,6 +15,8 @@ export class RelatorioVendasService {
   }
 
   public getByCategory(inicialDate: Date, endDate: Date): Observable<VendidosCategoria[]>{
+    console.log(inicialDate)
+    console.log(endDate)
     const httpOptions = {
       headers: new HttpHeaders({ dataInicio: inicialDate.toString(),dataFim: endDate.toString() }),
     };
