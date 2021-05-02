@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, ɵangular_packages_platform_browser_platform_browser_j } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { Carrinho } from '../modules/checkout/models/carrinho';
+import { Frete } from '../modules/checkout/models/Frete';
 import { Produto } from '../modules/produto/models/Produto';
+import { ConsultaCepService } from './consulta-cep.service';
 import { ProdutoService } from './produto.service';
 
 @Injectable({
@@ -59,6 +61,64 @@ export class CartService {
       produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
       localStorage.setItem('carrinho', produtosCarrinhoJson!);
     }
+  }
+
+  public calculaFrete(cep: string): Frete[]{
+    let fretes=new Array();
+    var res = cep.charAt(0);
+   switch(res){
+    case '0':
+      fretes.push('SEDEX',5.66)
+      fretes.push('LOGGI', 12.52)
+      fretes.push('TlgFast', 30.15)
+      break;
+    case '1':
+      fretes.push('SEDEX',10.99)
+      fretes.push('LOGGI', 20.22)
+      fretes.push('TlgFast', 30.15)
+      break;
+    case '2':
+      fretes.push('SEDEX',15.52)
+      fretes.push('LOGGI', 22.15)
+      fretes.push('TlgFast', 40.00)
+      break;
+    case '3':
+      fretes.push('SEDEX',8.99)
+      fretes.push('LOGGI', 12.85)
+      fretes.push('TlgFast', 26.10)
+      break;
+    case '4':
+      fretes.push('SEDEX',11.99)
+      fretes.push('LOGGI', 8.99)
+      fretes.push('TlgFast', 22.63)
+      break;
+    case '5':
+      fretes.push('SEDEX',10.99)
+      fretes.push('LOGGI', 20.22)
+      fretes.push('TlgFast', 30.15)
+      break;
+    case '6':
+      fretes.push('SEDEX',45.44)
+      fretes.push('LOGGI', 46.55)
+      fretes.push('TlgFast', 60.88)
+      break;
+    case '7':
+      fretes.push('SEDEX',25.89)
+      fretes.push('LOGGI', 20.00)
+      fretes.push('TlgFast', 30.85)
+      break;
+    case '8':
+      fretes.push('SEDEX',12.99)
+      fretes.push('LOGGI', 19.65)
+      fretes.push('TlgFast', 36.85)
+      break;
+    case '9':
+      fretes.push('SEDEX',10.23)
+      fretes.push('LOGGI', 14.66)
+      fretes.push('TlgFast', 29.52)
+      break;
+   }
+   return fretes;
   }
 
 }

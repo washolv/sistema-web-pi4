@@ -9,6 +9,8 @@ export class Venda {
   cliente?: Cliente;
   detalhesVenda?:DetalhesVenda[]=[];
   quantidadeTotal?:number=0;
+  pagamento?: string;
+  frete?: number;
 }
 
 export class DetalhesVenda {

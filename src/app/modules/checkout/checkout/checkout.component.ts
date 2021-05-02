@@ -6,10 +6,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CartService } from 'src/app/services/cart.service';
+import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
 import { LoadingComponent } from '../../shared/loading/loading.component';
 import { Carrinho } from '../models/carrinho';
+import { Frete } from '../models/Frete';
 import { DetalhesVenda, Venda } from '../models/Venda';
 
 @Component({
@@ -25,9 +27,10 @@ export class CheckoutComponent implements OnInit {
   public valorTotal: number = 0;
   public venda: Venda = new Venda;
   public teste=moment().startOf('day')
+  public frete: string='';
   public listaProdutosCarrinho: Carrinho[] = [];
   constructor(private dialog: MatDialog, private produtoService: ProdutoService, private router: Router, private cartService: CartService,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer, private  consultaCepService: ConsultaCepService) {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
@@ -104,6 +107,16 @@ export class CheckoutComponent implements OnInit {
     this.venda.detalhesVenda!.forEach(sub => {
       this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
     })
+  }
+  calculaFrete(){
+    this.consultaCepService.buscar(this.frete).subscribe(res =>{
+      if(res.erro){
+        console.log('CEP INVÁLIDO')
+      }else{
+        console.log(res)
+        console.log(this.cartService.calculaFrete(this.frete));
+      }
+    });
   }
   endereco() {
     this.router.navigateByUrl('/carrinho/endereco-entrega', {
