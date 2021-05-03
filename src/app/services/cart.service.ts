@@ -68,39 +68,39 @@ export class CartService {
     var res = cep.charAt(0);
    switch(res){
     case '0':
-      fretes.push('SEDEX',5.66)
-      fretes.push('LOGGI', 12.52)
-      fretes.push('TlgFast', 30.15)
+      fretes.push(new Frete ('SEDEX',5.66))
+      fretes.push(new Frete ('LOGGI', 12.52))
+      fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '1':
-      fretes.push('SEDEX',10.99)
-      fretes.push('LOGGI', 20.22)
-      fretes.push('TlgFast', 30.15)
+      fretes.push(new Frete ('SEDEX',10.99))
+      fretes.push(new Frete ('LOGGI', 20.22))
+      fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '2':
-      fretes.push('SEDEX',15.52)
-      fretes.push('LOGGI', 22.15)
-      fretes.push('TlgFast', 40.00)
+      fretes.push(new Frete ('SEDEX',15.52))
+      fretes.push(new Frete ('LOGGI', 22.15))
+      fretes.push(new Frete ('TlgFast', 40.00))
       break;
     case '3':
-      fretes.push('SEDEX',8.99)
-      fretes.push('LOGGI', 12.85)
-      fretes.push('TlgFast', 26.10)
+      fretes.push(new Frete ('SEDEX',8.99))
+      fretes.push(new Frete ('LOGGI', 12.85))
+      fretes.push(new Frete ('TlgFast', 26.10))
       break;
     case '4':
-      fretes.push('SEDEX',11.99)
-      fretes.push('LOGGI', 8.99)
-      fretes.push('TlgFast', 22.63)
+      fretes.push(new Frete ('SEDEX',11.99))
+      fretes.push(new Frete ('LOGGI', 8.99))
+      fretes.push(new Frete ('TlgFast', 22.63))
       break;
     case '5':
-      fretes.push('SEDEX',10.99)
-      fretes.push('LOGGI', 20.22)
-      fretes.push('TlgFast', 30.15)
+      fretes.push(new Frete ('SEDEX',10.99))
+      fretes.push(new Frete ('LOGGI', 20.22))
+      fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '6':
-      fretes.push('SEDEX',45.44)
-      fretes.push('LOGGI', 46.55)
-      fretes.push('TlgFast', 60.88)
+      fretes.push(new Frete ('SEDEX',45.44))
+      fretes.push(new Frete ('LOGGI', 46.55))
+      fretes.push(new Frete ('TlgFast', 60.88))
       break;
     case '7':
       fretes.push('SEDEX',25.89)

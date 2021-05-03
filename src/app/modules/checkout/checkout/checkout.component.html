@@ -41,9 +41,14 @@
                   <div class="row group-rem">
                     <div class="col-12 d-flex align-items-center">
                       <div class="input-group float-left  mr-4">
-                        <button class="btn" [class.disabled]="!(detalhe.quantidade! < detalhe.produto!.quantidadeEstoque!)"(click)="plus(i)"><img class="btn-plus-minus" src="../../../../assets/icons/plus.svg"></button>
-                        <input [value]="detalhe.quantidade" min="1" step="1" name="quantity" class="form-control custom-number" [readOnly]="true">
-                        <button class="btn" [class.disabled]="detalhe.quantidade! < 2" (click)="minus(i)"><img class="btn-plus-minus" src="../../../../assets/icons/minus.svg"></button>
+                        <button class="btn"
+                          [class.disabled]="!(detalhe.quantidade! < detalhe.produto!.quantidadeEstoque!)"
+                          (click)="plus(i)"><img class="btn-plus-minus"
+                            src="../../../../assets/icons/plus.svg"></button>
+                        <input [value]="detalhe.quantidade" min="1" step="1" name="quantity"
+                          class="form-control custom-number" [readOnly]="true">
+                        <button class="btn" [class.disabled]="detalhe.quantidade! < 2" (click)="minus(i)"><img
+                            class="btn-plus-minus" src="../../../../assets/icons/minus.svg"></button>
                       </div>
                       <a type="button" href="http://localhost:4200/#/carrinho" (click)="remover(detalhe.produto!)"
                         class="rem-carrinho">Remover</a>
@@ -63,17 +68,28 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm-12 mb-12">
-        <label class="control-label" for="CEP">* CEP</label>
-        <input id="cep" name="cep" mask="00000-000"
-           placeholder="Apenas números"
-          class="form-control cep-mask" required type="search" minlength="8" maxlength="9" pattern="[0-9]+$" [(ngModel)]="frete">
-        <div class="row mt-2 col-lg-12">
-          <button type="button" class="btn btn-primary"  (click)="calculaFrete()">Pesquisar</button>
+      <div class="row col-lg-3 col-sm-12 mb-12 mt-2 mb-3">
+        <div class="row col-lg-12">
+          <label class="control-label font-weight-bold" for="CEP">Calcule seu Frete</label>
         </div>
-
+        <div class="row col-lg-6 mr-1 mt-1 mb-3">
+          <input id="cep" name="cep" mask="00000-000" placeholder="Apenas números" class="form-control cep-mask"
+            required type="search" minlength="8" maxlength="9" pattern="[0-9]+$" [(ngModel)]="frete">
+        </div>
+        <div class="row col-lg-6 mt-1 mb-3">
+          <button type="button" class="btn btn-primary" (click)="calculaFrete()">Buscar</button>
+        </div>
       </div>
-      <div class="custom-form-box">
+      <div class="row col-lg-6 col-sm-12 mb-12 mt-2 mb-3">
+        <div class="row col-lg-12" *ngIf="cepValido">
+          <div class="form-check form-check-inline" *ngFor="let frete of fretes">
+            <input class="form-check-input" type="radio" name="frete" id="inlineRadio1" [value]="frete" [(ngModel)]="freteSelecionado" (ngModelChange)="calculaTotal()">
+            <label class="form-check-label font-weight-bold col-lg-2" for="inlineRadio1">{{frete.transportadora}}</label>
+            <label class="row form-check-label mt-5" for="inlineRadio1">Valor: {{frete.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="custom-form-box mb-5">
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">
             Resumo do Pedido
@@ -84,6 +100,12 @@
           <div class="custom-text-size2 mt-2 ml-2">Quantidade:
           </div>
           <div class="custom-text-size3 mt-2">{{venda.quantidadeTotal}}
+          </div>
+        </div>
+        <div class="d-flex justify-content-between col-lg-12" *ngIf="freteSelecionado">
+          <div class="custom-text-size2 mt-2 ml-2">Frete:
+          </div>
+          <div class="custom-text-size3 mt-2">{{freteSelecionado.valorFrete | currency:'BRL':'symbol':'0.2-2'}}
           </div>
         </div>
         <div class="d-flex justify-content-between col-lg-12">
@@ -97,7 +119,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-lg-12" *ngIf="!listaProdutosCarrinho.length">
+    <div class="col-12 col-lg-12 mb-5" *ngIf="!listaProdutosCarrinho.length">
       <div class="custom-form-box-empty text-center">
         <div class="col-lg-12 mt-2">
           <div class="custom-text-size1 ml-2">

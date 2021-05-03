@@ -28,7 +28,10 @@ export class CheckoutComponent implements OnInit {
   public venda: Venda = new Venda;
   public teste=moment().startOf('day')
   public frete: string='';
+  public cepValido=false;
+  public fretes: Frete[]=new Array();
   public listaProdutosCarrinho: Carrinho[] = [];
+  public freteSelecionado: Frete=new Frete('', 0);
   constructor(private dialog: MatDialog, private produtoService: ProdutoService, private router: Router, private cartService: CartService,
     private sanitizer: DomSanitizer, private  consultaCepService: ConsultaCepService) {
     const dialogRef = this.dialog.open(LoadingComponent, {
@@ -47,6 +50,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.venda.detalhesVenda = [];
   }
+
   buscarProdutos() {
     this.listaProdutosCarrinho.forEach(x => {
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {
@@ -105,7 +109,7 @@ export class CheckoutComponent implements OnInit {
   calculaTotal() {
     this.venda.valorTotal = 0;
     this.venda.detalhesVenda!.forEach(sub => {
-      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
+      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal! + this.freteSelecionado.valorFrete;
     })
   }
   calculaFrete(){
@@ -113,8 +117,9 @@ export class CheckoutComponent implements OnInit {
       if(res.erro){
         console.log('CEP INVÁLIDO')
       }else{
-        console.log(res)
-        console.log(this.cartService.calculaFrete(this.frete));
+        this.fretes=this.cartService.calculaFrete(this.frete);
+        this.cepValido=true;
+        console.log(this.fretes)
       }
     });
   }
