@@ -26,7 +26,6 @@ export class CheckoutComponent implements OnInit {
   public subTotal: number = 0;
   public valorTotal: number = 0;
   public venda: Venda = new Venda;
-  public teste=moment().startOf('day')
   public frete: string='';
   public cepValido=false;
   public fretes: Frete[]=new Array();
@@ -120,6 +119,7 @@ export class CheckoutComponent implements OnInit {
         this.fretes=this.cartService.calculaFrete(this.frete);
         this.cepValido=true;
         console.log(this.fretes)
+
       }
     });
   }

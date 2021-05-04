@@ -3,7 +3,9 @@
     <div class="col-lg-4">
       <div class="row col-lg-12">
         <div class="row col-lg-12 d-flex justify-content-center mt-4 mb-4">
-          <div class="custom-title"><img class="home-icon" src="./assets/icons/home.svg"><p>Endereço de Entrega</p></div>
+          <div class="custom-title"><img class="home-icon" src="./assets/icons/home.svg">
+            <p>Endereço de Entrega</p>
+          </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <hr>
@@ -61,7 +63,9 @@
     <div class="col-lg-4">
       <div class="row col-lg-12">
         <div class="row col-lg-12 d-flex justify-content-center mt-4 mb-4">
-          <div class="custom-title"><img class="card-icon" src="./assets/icons/credit-card.svg"><p>Endereço de Cobrança</p></div>
+          <div class="custom-title"><img class="card-icon" src="./assets/icons/credit-card.svg">
+            <p>Endereço de Cobrança</p>
+          </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <hr>
@@ -101,8 +105,91 @@
         </div>
       </div>
     </div>
-    <div class="row col-lg-12 justify-content-center" *ngIf="endereco && cliente.enderecoCobranca">
-      <button class="btn btn-success col-lg-3" (click)="finalizarCompra()">Finalizar</button>
+    <div class="col-lg-4">
+      <div class="row col-lg-12">
+        <div class="row col-lg-12 d-flex justify-content-center mt-4 mb-4">
+          <div class="custom-title"><img class="order-icon" src="./assets/icons/order.svg">
+            <p>Detalhes do Pedido</p>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <hr>
+        </div>
+      </div>
+      <div class="col-lg-12 mt-3 mb-3 text-center">
+        <div class="col-lg-12" *ngFor="let produto of venda.detalhesVenda;let i=index">
+          <div class="row">
+            <div class="col-lg-2">
+              <div class="row">
+                <div class="col-lg-12">
+                  <img [src]="produto.produto!.imageToShow[0]" class="img-fluid">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 mt-2">
+              <div class="col-12"><a class="text-dark"
+                  href="http://localhost:4200/#/dashboard/detalhes/{{produto.produto!.id}}">
+                  <p>{{produto.produto!.nome}}</p>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-2 mt-2">
+              <div class="row group-rem">
+                <div class="col-12 d-flex align-items-center">
+                  <p class="font-weight-bold mr-2">Qtd: </p>
+                  <p>{{produto.quantidade}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 mt-2">
+              <div class="row ">
+                <div class="col-12 col-lg-6 mt-2 mt-lg-0 text-right font-weight-bold">
+                  {{produto.subTotal | currency:'BRL':'symbol':'0.2-2'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="custom-form-box mb-5">
+            <div class="d-flex justify-content-between col-lg-12">
+              <div class="custom-text-size2 mt-2 ml-2">Quantidade:
+              </div>
+              <div class="custom-text-size3 mt-2">{{venda.quantidadeTotal}}
+              </div>
+            </div>
+            <div class="d-flex justify-content-between col-lg-12">
+              <div class="custom-text-size2 mt-2 ml-2">Frete:
+              </div>
+              <div class="custom-text-size3 mt-2">{{freteSelecionado.valorFrete | currency:'BRL':'symbol':'0.2-2'}}
+              </div>
+            </div>
+            <div class="d-flex justify-content-between col-lg-12">
+              <div class="custom-text-size2 mt-3 ml-2">Total:
+              </div>
+              <div class="custom-text-size3 mt-2">{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!cliente.enderecoCobranca">
+        <div class="row col-lg-12 justify-content-center">
+          <div class="col-lg-12 mt-2 text-center">
+            <div class="custom-text-size1 ml-2">
+              Você ainda não possui um endereço de cobrança
+            </div>
+          </div>
+          <div class="col-lg-5 mt-3">
+            <button mat-button class="col-lg-12" (click)="adicionarEnderecoCobranca()" color="primary">Novo endereço de
+              cobrança</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="row col-lg-4 justify-content-center" *ngIf="endereco && cliente.enderecoCobranca">
+      <button class="btn btn-success col-lg-3 text-center" (click)="finalizarCompra()">Próximo <img src="./assets/icons/next.svg" class="img-button"></button>
     </div>
   </div>
 </div>

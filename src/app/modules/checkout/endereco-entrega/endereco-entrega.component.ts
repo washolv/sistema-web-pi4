@@ -6,10 +6,14 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import { Venda } from '../models/Venda';
+import { DetalhesVenda, Venda } from '../models/Venda';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { VendaService } from 'src/app/services/venda.service';
+import { Frete } from '../models/Frete';
+import { Carrinho } from '../models/carrinho';
+import { ProdutoService } from 'src/app/services/produto.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -24,8 +28,17 @@ export class EnderecoEntregaComponent implements OnInit {
   public isSmallScreen:boolean=false;
   public venda: Venda=new Venda();
   public nav: any;
+  public qtdProdutos: number = 1;
+  public subTotal: number = 0;
+  public valorTotal: number = 0;
+  public frete: string='';
+  public cepValido=false;
+  public listaProdutosCarrinho: Carrinho[] = [];
+  public freteSelecionado: Frete=new Frete('', 0);
+
   constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
-    private clienteService: ClienteService,private dialog: MatDialog, private router: Router, private vendaService: VendaService) {
+    private clienteService: ClienteService, private sanitizer: DomSanitizer,private dialog: MatDialog, private router: Router,
+    private vendaService: VendaService,private produtoService: ProdutoService) {
       this.nav = this.router.getCurrentNavigation();
       if(!this.nav){
           router.navigate(['/carrinho']);
@@ -100,6 +113,33 @@ export class EnderecoEntregaComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+  }
+
+  buscarProdutos() {
+    this.listaProdutosCarrinho.forEach(x => {
+        this.produtoService.getProdutoById(x.id!).subscribe(produto => {
+          this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
+            produto.imagens = response;
+            response.forEach(element => {
+              produto.imageToShow = [];
+              produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
+            })
+          })
+          let itemCarrinho: DetalhesVenda = new DetalhesVenda();
+          itemCarrinho.produto = produto;
+          itemCarrinho.quantidade = x.quantidade;
+          itemCarrinho.subTotal = produto.preco!*x.quantidade!;
+          this.venda.detalhesVenda?.push(itemCarrinho);
+          this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
+          this.venda.quantidadeTotal! += x.quantidade!;
+        })
+      });
+  }
+  calculaTotal() {
+    this.venda.valorTotal = 0;
+    this.venda.detalhesVenda!.forEach(sub => {
+      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal! + this.freteSelecionado.valorFrete;
+    })
   }
   finalizarCompra(){
     this.venda.cliente=this.cliente;
