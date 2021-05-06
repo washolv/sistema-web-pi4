@@ -13,6 +13,11 @@
   padding: 3px!important;
   margin: 3px!important;
  }
+ ::ng-deep .mat-table {
+  min-width: 362px!important;
+  padding: 3px!important;
+  margin: 3px!important;
+ }
  span, p{overflow:hidden; white-space: nowrap;}
 
  .custom-form-box {

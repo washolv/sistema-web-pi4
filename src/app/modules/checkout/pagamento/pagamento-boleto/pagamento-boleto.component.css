@@ -7,10 +7,16 @@
   max-width: 170px;
   min-width: 170px;
   min-height: 80px;
+  border-radius: 0;
   border: none;
+  color: white;
 }
-.sc-cvbbAY{
-  margin: auto;
+.sub-tile{
   font-family: bold;
-  font-size: 20px;
+}
+.sc-iAyFgw{
+  margin-top: 10px;
+}
+.sc-cvbbA{
+  font-size: 34px;
 }
