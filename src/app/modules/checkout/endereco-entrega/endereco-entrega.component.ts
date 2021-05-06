@@ -5,7 +5,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DetalhesVenda, Venda } from '../models/Venda';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -14,6 +14,7 @@ import { Frete } from '../models/Frete';
 import { Carrinho } from '../models/carrinho';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -21,65 +22,81 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./endereco-entrega.component.css']
 })
 export class EnderecoEntregaComponent implements OnInit {
-  public id: number=0;
-  public enderecos: EnderecoCliente[]=[];
-  public endereco: EnderecoCliente=new EnderecoCliente;
-  public cliente:Cliente=new Cliente();
-  public isSmallScreen:boolean=false;
-  public venda: Venda=new Venda();
+  public id: number = 0;
+  public enderecos: EnderecoCliente[] = [];
+  public endereco: EnderecoCliente = new EnderecoCliente;
+  public cliente: Cliente = new Cliente();
+  public isSmallScreen: boolean = false;
+  public venda: Venda = new Venda();
   public nav: any;
   public qtdProdutos: number = 1;
   public subTotal: number = 0;
   public valorTotal: number = 0;
-  public frete: string='';
-  public cepValido=false;
+  public fretes: Frete[]=[];
+  public cepValido = false;
   public listaProdutosCarrinho: Carrinho[] = [];
-  public freteSelecionado: Frete=new Frete('', 0);
+  public freteSelecionado: Frete = new Frete('', 0);
 
   constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
-    private clienteService: ClienteService, private sanitizer: DomSanitizer,private dialog: MatDialog, private router: Router,
-    private vendaService: VendaService,private produtoService: ProdutoService) {
-      this.nav = this.router.getCurrentNavigation();
-      if(!this.nav){
-          router.navigate(['/carrinho']);
-      }
+    private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog, private router: Router,
+    private vendaService: VendaService, private produtoService: ProdutoService, private cartService: CartService) {
+    let produtos=localStorage.getItem('carrinho');
+    if(produtos){
+      this.listaProdutosCarrinho = JSON.parse(produtos);
+    }else{
+      this.router.navigate(['/carrinho'])
     }
 
-  ngOnInit() {
-    this.venda = this.nav.extras.state.venda;
-    const user=this.roleGuardService.decodeJWT();
-    this.id=user.Id;
-    this.clienteService.buscarCliente(this.id).subscribe(resp =>{
-      this.cliente=resp;
-    })
-    this.clienteService.buscarEnderecos(this.id).subscribe(resp =>{
-      this.enderecos=resp;
-      this.endereco=resp[0];
-    })
-  }
-  enderecoEntrega(index: number){
-    this.endereco=this.enderecos[index];
   }
 
-  openModal(){
+  ngOnInit() {
+    this.buscarProdutos();
+    this.calculaTotal();
+    let f=sessionStorage.getItem('frete');
+    if(f){
+      this.freteSelecionado=JSON.parse(f);
+    }
+    const user = this.roleGuardService.decodeJWT();
+    this.id = user.Id;
+    this.clienteService.buscarCliente(this.id).subscribe(resp => {
+      this.cliente = resp;
+    })
+    this.clienteService.buscarEnderecos(this.id).subscribe(resp => {
+      this.enderecos = resp;
+      this.endereco = resp[0];
+      this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
+    })
+  }
+  enderecoEntrega(index: number) {
+    this.endereco = this.enderecos[index];
+    this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
+    let f=this.fretes.find(x => x.transportadora ==this.freteSelecionado.transportadora);
+    if(f){
+      this.freteSelecionado=f;
+      this.selectfrete(this.freteSelecionado);
+    }
+  }
+
+
+  openModal() {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
     let dialogRef;
-    if(this.isSmallScreen){
-       dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
-        height: '500px',width: '400px'
+    if (this.isSmallScreen) {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+        height: '500px', width: '400px'
       });
-    }else{
-      dialogRef= this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
+    } else {
+      dialogRef = this.dialog.open(ModalAdicionarEnderecoClienteComponent, {
       });
     }
     return dialogRef;
   }
-  adicionarEndereco(){
-    const dialogRef=this.openModal();
+  adicionarEndereco() {
+    const dialogRef = this.openModal();
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         let endereco = response;
-        this.clienteService.adicionarEndereco(this.id,endereco).subscribe(response => {
+        this.clienteService.adicionarEndereco(this.id, endereco).subscribe(response => {
           this.toastr.success("Novo Endereço Cadastrado", "OK", {
             timeOut: 3000, positionClass: 'toast-top-center',
           });
@@ -116,7 +133,8 @@ export class EnderecoEntregaComponent implements OnInit {
   }
 
   buscarProdutos() {
-    this.listaProdutosCarrinho.forEach(x => {
+    if(this.listaProdutosCarrinho && this.listaProdutosCarrinho.length>0){
+      this.listaProdutosCarrinho.forEach(x => {
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {
           this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
             produto.imagens = response;
@@ -128,12 +146,15 @@ export class EnderecoEntregaComponent implements OnInit {
           let itemCarrinho: DetalhesVenda = new DetalhesVenda();
           itemCarrinho.produto = produto;
           itemCarrinho.quantidade = x.quantidade;
-          itemCarrinho.subTotal = produto.preco!*x.quantidade!;
+          itemCarrinho.subTotal = produto.preco! * x.quantidade!;
           this.venda.detalhesVenda?.push(itemCarrinho);
           this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;
+          console.log('**********')
         })
       });
+    }
+
   }
   calculaTotal() {
     this.venda.valorTotal = 0;
@@ -141,14 +162,13 @@ export class EnderecoEntregaComponent implements OnInit {
       this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal! + this.freteSelecionado.valorFrete;
     })
   }
-  finalizarCompra(){
-    this.venda.cliente=this.cliente;
-    this.venda.enderecoCliente=this.endereco;
-    this.venda.dataVenda=moment().toDate();
-    localStorage.removeItem('carrinho');
-    this.vendaService.postVenda(this.venda).subscribe(resp=>{
-        this.toastr.success('Ok','Venda Cadastrada');
-    })
+  finalizarCompra() {
+    this.router.navigate(['/carrinho/pagamento']);
+  }
+  selectfrete(event: any){
+    this.freteSelecionado=event;
+    this.freteSelecionado.check=true;
+    sessionStorage.setItem('frete', JSON.stringify(this.freteSelecionado));
   }
 
 }

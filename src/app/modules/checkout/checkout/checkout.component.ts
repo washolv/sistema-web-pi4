@@ -1,4 +1,5 @@
 import { ThrowStmt } from '@angular/compiler';
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,13 +27,14 @@ export class CheckoutComponent implements OnInit {
   public subTotal: number = 0;
   public valorTotal: number = 0;
   public venda: Venda = new Venda;
-  public frete: string='';
-  public cepValido=false;
-  public fretes: Frete[]=new Array();
+  public frete: string = '';
+  public cepValido = false;
+  public fretes: Frete[] = new Array();
   public listaProdutosCarrinho: Carrinho[] = [];
-  public freteSelecionado: Frete=new Frete('', 0);
+  public freteSelecionado: Frete = new Frete('', 0);
+  public freteSessao: any;
   constructor(private dialog: MatDialog, private produtoService: ProdutoService, private router: Router, private cartService: CartService,
-    private sanitizer: DomSanitizer, private  consultaCepService: ConsultaCepService) {
+    private sanitizer: DomSanitizer, private consultaCepService: ConsultaCepService) {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
@@ -52,23 +54,23 @@ export class CheckoutComponent implements OnInit {
 
   buscarProdutos() {
     this.listaProdutosCarrinho.forEach(x => {
-        this.produtoService.getProdutoById(x.id!).subscribe(produto => {
-          this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-            produto.imagens = response;
-            response.forEach(element => {
-              produto.imageToShow = [];
-              produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
-            })
+      this.produtoService.getProdutoById(x.id!).subscribe(produto => {
+        this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
+          produto.imagens = response;
+          response.forEach(element => {
+            produto.imageToShow = [];
+            produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
           })
-          let itemCarrinho: DetalhesVenda = new DetalhesVenda();
-          itemCarrinho.produto = produto;
-          itemCarrinho.quantidade = x.quantidade;
-          itemCarrinho.subTotal = produto.preco!*x.quantidade!;
-          this.venda.detalhesVenda?.push(itemCarrinho);
-          this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
-          this.venda.quantidadeTotal! += x.quantidade!;
         })
-      });
+        let itemCarrinho: DetalhesVenda = new DetalhesVenda();
+        itemCarrinho.produto = produto;
+        itemCarrinho.quantidade = x.quantidade;
+        itemCarrinho.subTotal = produto.preco! * x.quantidade!;
+        this.venda.detalhesVenda?.push(itemCarrinho);
+        this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
+        this.venda.quantidadeTotal! += x.quantidade!;
+      })
+    });
   }
   remover(produto: Produto) {
     this.cartService.removerProduto(produto.id!);
@@ -86,7 +88,7 @@ export class CheckoutComponent implements OnInit {
       this.venda.detalhesVenda![index].subTotal = (qtd + 1) * preco!;
       this.venda.quantidadeTotal! += 1;
       this.calculaTotal();
-      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd+1);
+      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd + 1);
     }
   }
 
@@ -101,7 +103,7 @@ export class CheckoutComponent implements OnInit {
       this.venda.quantidadeTotal! -= 1;
       this.calculaTotal();
       this.cartService.removerProduto(this.venda.detalhesVenda![index]!.produto!.id!);
-      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd-1)
+      this.cartService.adicionarProduto(this.venda.detalhesVenda![index]!.produto!.id!, qtd - 1)
     }
   }
 
@@ -111,21 +113,21 @@ export class CheckoutComponent implements OnInit {
       this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal! + this.freteSelecionado.valorFrete;
     })
   }
-  calculaFrete(){
-    this.consultaCepService.buscar(this.frete).subscribe(res =>{
-      if(res.erro){
+  calculaFrete() {
+    this.consultaCepService.buscar(this.frete).subscribe(res => {
+      if (res.erro) {
         console.log('CEP INVÁLIDO')
-      }else{
-        this.fretes=this.cartService.calculaFrete(this.frete);
-        this.cepValido=true;
-        console.log(this.fretes)
-
+      } else {
+        this.fretes = this.cartService.calculaFrete(this.frete);
+        this.cepValido = true;
       }
     });
   }
+  alterarFrete() {
+    this.freteSelecionado.cep = this.frete;
+    this.calculaTotal();
+  }
   endereco() {
-    this.router.navigateByUrl('/carrinho/endereco-entrega', {
-      state: { venda: this.venda }
-    })
+    this.router.navigate(['/carrinho/endereco-entrega']);
   }
 }

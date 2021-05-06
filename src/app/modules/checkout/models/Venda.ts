@@ -1,5 +1,6 @@
 import { Cliente, EnderecoCliente } from "../../cliente/models/Cliente";
 import { Produto } from "../../produto/models/Produto";
+import { Frete } from "./Frete";
 
 export class Venda {
   id?: number;
@@ -10,7 +11,7 @@ export class Venda {
   detalhesVenda?:DetalhesVenda[]=[];
   quantidadeTotal?:number=0;
   pagamento?: string;
-  frete?: number;
+  frete?: Frete;
 }
 
 export class DetalhesVenda {

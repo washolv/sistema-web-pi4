@@ -65,56 +65,66 @@ export class CartService {
 
   public calculaFrete(cep: string): Frete[]{
     let fretes=new Array();
-    var res = cep.charAt(0);
+    var res = cep.charAt(4);
    switch(res){
     case '0':
       fretes.push(new Frete ('SEDEX',5.66))
       fretes.push(new Frete ('LOGGI', 12.52))
+      fretes.push(new Frete ('PAC', 13.52))
       fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '1':
       fretes.push(new Frete ('SEDEX',10.99))
       fretes.push(new Frete ('LOGGI', 20.22))
+      fretes.push(new Frete ('PAC', 10.52))
       fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '2':
       fretes.push(new Frete ('SEDEX',15.52))
       fretes.push(new Frete ('LOGGI', 22.15))
+      fretes.push(new Frete ('PAC', 8.52))
       fretes.push(new Frete ('TlgFast', 40.00))
       break;
     case '3':
       fretes.push(new Frete ('SEDEX',8.99))
       fretes.push(new Frete ('LOGGI', 12.85))
+      fretes.push(new Frete ('PAC', 13.52))
       fretes.push(new Frete ('TlgFast', 26.10))
       break;
     case '4':
       fretes.push(new Frete ('SEDEX',11.99))
       fretes.push(new Frete ('LOGGI', 8.99))
+      fretes.push(new Frete ('PAC', 13.52))
       fretes.push(new Frete ('TlgFast', 22.63))
       break;
     case '5':
       fretes.push(new Frete ('SEDEX',10.99))
       fretes.push(new Frete ('LOGGI', 20.22))
+      fretes.push(new Frete ('PAC', 13.00))
       fretes.push(new Frete ('TlgFast', 30.15))
       break;
     case '6':
       fretes.push(new Frete ('SEDEX',45.44))
       fretes.push(new Frete ('LOGGI', 46.55))
+      fretes.push(new Frete ('PAC', 11.90))
       fretes.push(new Frete ('TlgFast', 60.88))
       break;
     case '7':
       fretes.push('SEDEX',25.89)
       fretes.push('LOGGI', 20.00)
       fretes.push('TlgFast', 30.85)
+      fretes.push(new Frete ('PAC', 8.59))
       break;
     case '8':
       fretes.push('SEDEX',12.99)
       fretes.push('LOGGI', 19.65)
+      fretes.push(new Frete ('PAC', 13.52))
       fretes.push('TlgFast', 36.85)
       break;
     case '9':
       fretes.push('SEDEX',10.23)
       fretes.push('LOGGI', 14.66)
+      fretes.push(new Frete ('PAC', 13.52))
       fretes.push('TlgFast', 29.52)
       break;
    }

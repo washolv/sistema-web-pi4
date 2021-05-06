@@ -83,7 +83,8 @@
       <div class="row col-lg-6 col-sm-12 mb-12 mt-2 mb-3">
         <div class="row col-lg-12" *ngIf="cepValido">
           <div class="form-check form-check-inline" *ngFor="let frete of fretes">
-            <input class="form-check-input" type="radio" name="frete" id="inlineRadio1" [value]="frete" [(ngModel)]="freteSelecionado" (ngModelChange)="calculaTotal()">
+            <input class="form-check-input" type="radio" name="frete" [id]="frete.transportadora"
+             [value]="frete" [(ngModel)]="freteSelecionado" (ngModelChange)="alterarFrete()">
             <label class="form-check-label font-weight-bold col-lg-2" for="inlineRadio1">{{frete.transportadora}}</label>
             <label class="row form-check-label mt-5" for="inlineRadio1">Valor: {{frete.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</label>
           </div>
@@ -115,7 +116,7 @@
           </div>
         </div>
         <div class="col-lg-12 text-center mt-3">
-          <button type="button" class="btn btn-primary col-lg-4" (click)="endereco()">Prosseguir </button>
+          <button type="button" class="btn btn-primary col-lg-4"  (click)="endereco()">Prosseguir </button>
         </div>
       </div>
     </div>
