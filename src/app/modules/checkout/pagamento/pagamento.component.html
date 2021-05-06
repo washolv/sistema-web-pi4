@@ -18,71 +18,10 @@
       <div class="col-lg-12 justify-content-center" *ngIf="cliente && cliente.enderecoCobranca">
         <mat-tab-group>
           <mat-tab label="Cartão de Crédito">
-            <div class="col-lg-12 mt-2 mb-2 font-weight-bold">
-              <h3>Aproveite até 10% de desconto* no pagamento à vista ou parcele em até 12x sem juros!</h3>
-            </div>
-            <div class="col-lg-12 mt-2 mb-2">
-              <p>O TlgNé aceita as bandeiras de cartão VISA, MasterCard, ELO, HiperCard, American Express e Diners.
-              </p>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Forma de pagamento*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Nome (escrito no cartão):*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Número do cartão:*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Validade (mm/aa):*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Código de segurança:*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-1  font-weight-bold">
-                <label for="validationDefault02">CPF/CNPJ do proprietário do cartão:</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Data de nascimento:*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>
+              <app-pagamento-cartao></app-pagamento-cartao>
           </mat-tab>
-          <mat-tab label="Pagar com Boleto"> Content 2 </mat-tab>
+          <mat-tab label="Pagar com Boleto">
+            <app-pagamento-boleto></app-pagamento-boleto></mat-tab>
         </mat-tab-group>
       </div>
     </div>

@@ -12,6 +12,8 @@ import { ClienteGuard } from 'src/app/services/cliente.guard';
 import { MatButtonModule } from '@angular/material/button';
 import { PagamentoComponent } from './pagamento/pagamento.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { PagamentoCartaoComponent } from './pagamento/pagamento-cartao/pagamento-cartao.component';
+import { PagamentoBoletoComponent } from './pagamento/pagamento-boleto/pagamento-boleto.component';
 
 const routes: Routes = [
   { path: '', component: CheckoutComponent },
@@ -34,7 +36,7 @@ const routes: Routes = [
     MatButtonModule,
     MatTabsModule
   ],
-  declarations: [CheckoutComponent, EnderecoEntregaComponent, PagamentoComponent],
+  declarations: [CheckoutComponent, EnderecoEntregaComponent, PagamentoComponent, PagamentoCartaoComponent, PagamentoBoletoComponent],
   exports: [
     RouterModule,
   ],

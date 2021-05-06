@@ -1,0 +1,16 @@
+
+ h3{
+  font-weight: bold;
+}
+.card{
+  background-color: darkgray;
+  max-width: 170px;
+  min-width: 170px;
+  min-height: 80px;
+  border: none;
+}
+.sc-cvbbAY{
+  margin: auto;
+  font-family: bold;
+  font-size: 20px;
+}
