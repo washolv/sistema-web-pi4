@@ -26,6 +26,7 @@ export class LoginService {
   logout() {
     if(this.roleGuardService.getUserRole()){
       localStorage.removeItem('access_token');
+      sessionStorage.removeItem('frete');
       window.location.reload();
     }
     localStorage.removeItem('access_token');

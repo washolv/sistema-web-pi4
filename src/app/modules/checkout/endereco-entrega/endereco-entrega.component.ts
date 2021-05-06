@@ -50,12 +50,12 @@ export class EnderecoEntregaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buscarProdutos();
-    this.calculaTotal();
     let f=sessionStorage.getItem('frete');
     if(f){
       this.freteSelecionado=JSON.parse(f);
     }
+    this.buscarProdutos();
+    this.calculaTotal();
     const user = this.roleGuardService.decodeJWT();
     this.id = user.Id;
     this.clienteService.buscarCliente(this.id).subscribe(resp => {
@@ -67,6 +67,7 @@ export class EnderecoEntregaComponent implements OnInit {
       this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
     })
   }
+
   enderecoEntrega(index: number) {
     this.endereco = this.enderecos[index];
     this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
@@ -74,6 +75,7 @@ export class EnderecoEntregaComponent implements OnInit {
     if(f){
       this.freteSelecionado=f;
       this.selectfrete(this.freteSelecionado);
+      this.calculaTotal();
     }
   }
 
@@ -158,9 +160,11 @@ export class EnderecoEntregaComponent implements OnInit {
   }
   calculaTotal() {
     this.venda.valorTotal = 0;
+    console.log(this.freteSelecionado)
     this.venda.detalhesVenda!.forEach(sub => {
-      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal! + this.freteSelecionado.valorFrete;
+      this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
     })
+    this.venda.valorTotal=this.venda.valorTotal+this.freteSelecionado.valorFrete;
   }
   finalizarCompra() {
     this.router.navigate(['/carrinho/pagamento']);
@@ -169,6 +173,10 @@ export class EnderecoEntregaComponent implements OnInit {
     this.freteSelecionado=event;
     this.freteSelecionado.check=true;
     sessionStorage.setItem('frete', JSON.stringify(this.freteSelecionado));
+    this.calculaTotal();
+  }
+  backPage(){
+    this.router.navigate(['/carrinho'])
   }
 
 }

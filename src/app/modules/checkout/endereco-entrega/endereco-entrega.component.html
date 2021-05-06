@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col-lg-4">
       <div class="row col-lg-12">
-        <div class="row col-lg-12 d-flex justify-content-center mt-4 mb-4">
+        <div class="col-lg-1 mt-4 mb-4">
+          <button class="btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"
+              alt="First slide"></button>
+        </div>
+        <div class="row col-lg-11 d-flex justify-content-center mt-4 mb-4">
           <div class="custom-title"><img class="home-icon" src="./assets/icons/home.svg">
             <p>Endereço de Entrega</p>
           </div>
@@ -82,7 +86,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let frete of fretes">
-              <td><input class="form-check-input ml-auto" [checked]="frete.transportadora == freteSelecionado.transportadora" id="button" type="radio" name="frete" (click)="selectfrete(frete)"></td>
+              <td><input class="form-check-input ml-auto"
+                  [checked]="frete.transportadora == freteSelecionado.transportadora" id="button" type="radio"
+                  name="frete" (click)="selectfrete(frete)"></td>
               <td scope="row">{{frete.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</td>
               <td>{{frete.transportadora}}</td>
               <td>2 DIAS ÚTEIS</td>
@@ -208,7 +214,8 @@
     <div class="col-lg-4"></div>
     <div class="row col-lg-12 justify-content-between" *ngIf="endereco && cliente.enderecoCobranca">
       <button class="btn text-center"></button>
-      <button class="btn btn-primary col-lg-2 text-center" (click)="finalizarCompra()">Próximo<img src="./assets/icons/next.svg" class="img-button"></button>
+      <button class="btn btn-primary col-lg-2 text-center" (click)="finalizarCompra()">Próximo<img
+          src="./assets/icons/next.svg" class="img-button"></button>
     </div>
     <div class="col-lg-12">
       <hr>
