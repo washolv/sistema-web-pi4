@@ -1,0 +1,27 @@
+.custom-title{
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+.custom-title-card{
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+}
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+  min-width: 362px!important;
+  padding: 3px!important;
+  margin: 3px!important;
+ }
+ span, p{overflow:hidden; white-space: nowrap;}
+
+ h3{
+   font-weight: bold;
+ }
+ .custom-form-box {
+  position: relative;
+  background-color: #F1F1F1;
+  border: 3px solid #E6E6E6;
+  border-radius: 5px;
+  height: 120px;
+}

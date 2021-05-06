@@ -46,10 +46,6 @@ const routes: Routes = [
   {
     path: 'carrinho', component: MainNavComponent,
     loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
-    //canActivate: [ClienteGuard],
-   /* data: {
-      expectedRole: ['ROLE_CLIENTE']
-    }*/
   }
 ];
 
