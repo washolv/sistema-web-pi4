@@ -14,12 +14,15 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PagamentoCartaoComponent } from './pagamento/pagamento-cartao/pagamento-cartao.component';
 import { PagamentoBoletoComponent } from './pagamento/pagamento-boleto/pagamento-boleto.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { ResumoPedidoComponent } from './resumo-pedido/resumo-pedido.component';
 
 const routes: Routes = [
   { path: '', component: CheckoutComponent },
   { path: 'carrinho', component: CheckoutComponent },
   { path: 'endereco-entrega', component: EnderecoEntregaComponent, canActivate: [ClienteGuard] },
   { path: 'pagamento', component: PagamentoComponent, canActivate: [ClienteGuard] },
+  { path: 'resumo-do-pedido', component: ResumoPedidoComponent, canActivate: [ClienteGuard] },
 ];
 
 @NgModule({
@@ -34,9 +37,10 @@ const routes: Routes = [
     HttpClientModule,
     MatSelectModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxMaskModule
   ],
-  declarations: [CheckoutComponent, EnderecoEntregaComponent, PagamentoComponent, PagamentoCartaoComponent, PagamentoBoletoComponent],
+  declarations: [CheckoutComponent, EnderecoEntregaComponent, PagamentoComponent, PagamentoCartaoComponent, PagamentoBoletoComponent, ResumoPedidoComponent],
   exports: [
     RouterModule,
   ],

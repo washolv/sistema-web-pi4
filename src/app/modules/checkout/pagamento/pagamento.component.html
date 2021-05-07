@@ -16,12 +16,12 @@
         </div>
       </div>
       <div class="col-lg-12 justify-content-center" *ngIf="cliente && cliente.enderecoCobranca">
-        <mat-tab-group>
+        <mat-tab-group (selectedTabChange)="tabChanged($event)">
           <mat-tab label="Cartão de Crédito">
-              <app-pagamento-cartao></app-pagamento-cartao>
+              <app-pagamento-cartao [venda]="venda"></app-pagamento-cartao>
           </mat-tab>
           <mat-tab label="Pagar com Boleto">
-            <app-pagamento-boleto></app-pagamento-boleto></mat-tab>
+            <app-pagamento-boleto [venda]="venda"></app-pagamento-boleto></mat-tab>
         </mat-tab-group>
       </div>
     </div>
@@ -150,6 +150,11 @@
               cobrança</button>
           </div>
         </div>
+      </div>
+      <div class="row col-lg-12 justify-content-between mb-5">
+        <button class="btn text-center"></button>
+        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Próximo<img
+            src="./assets/icons/next.svg" class="img-button"></button>
       </div>
     </div>
   </div>

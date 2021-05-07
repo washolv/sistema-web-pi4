@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -23,10 +24,11 @@ export class PagamentoComponent implements OnInit {
   cliente: Cliente=new Cliente();
   public venda: Venda = new Venda();
   id: number=0;
+  tabIndex:number=0;
   listaProdutosCarrinho: Carrinho[]=[];
-  constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
+  constructor(private toastr: ToastrService, private roleGuardService: RoleGuardService,
     private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog, private router: Router,
-    private vendaService: VendaService, private produtoService: ProdutoService, private cartService: CartService) {
+    private produtoService: ProdutoService) {
     let frete=sessionStorage.getItem('frete');
     if(frete){
       this.freteSelecionado = JSON.parse(frete);
@@ -48,12 +50,12 @@ export class PagamentoComponent implements OnInit {
     }
     this.buscarProdutos();
     this.calculaTotal();
-    console.log(this.venda)
     const user = this.roleGuardService.decodeJWT();
     this.id = user.Id;
     this.clienteService.buscarCliente(this.id).subscribe(resp => {
       this.cliente = resp;
     })
+
 
   }
   adicionarEnderecoCobranca(){
@@ -93,5 +95,10 @@ export class PagamentoComponent implements OnInit {
   backPage(){
     this.router.navigate(['/endereco-entrega']);
   }
-
+  tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    this.tabIndex=tabChangeEvent.index;
+  }
+  finalizarCompra(){
+    this.router.navigate(['/carrinho/resumo-do-pedido'])
+  }
 }

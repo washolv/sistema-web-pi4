@@ -11,8 +11,10 @@
   </div>
   <div class="col-lg-8">
     <select class="form-control" aria-label="null">
-      <ng-container *ngFor="let i of parcelas;">
-        <option [value]="i">{{i}} vezes de</option>
+      <option [value]="parcelas[0]">{{parcelas[0].totalParcelas}} vez de {{parcelas[0].valor | currency:'BRL':'symbol':'0.2-2'}} com 10% de desconto</option>
+      <ng-container *ngFor="let pagamento of parcelas; let i=index">
+        <option *ngIf="i>0" (onSelectionChange)="setValorVenda(pagamento)">{{pagamento.totalParcelas}} vezes de
+          {{pagamento.valor | currency:'BRL':'symbol':'0.2-2'}} sem juros</option>
       </ng-container>
     </select>
   </div>
@@ -22,7 +24,7 @@
     <label for="validationDefault02">Nome (escrito no cartão):*</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input class="form-control" type="text" minlength="3">
   </div>
 </div>
 <div class="row col-lg-12 mt-2 mb-2">
@@ -30,7 +32,7 @@
     <label for="validationDefault02">Número do cartão:*</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input class="form-control" mask="0000 0000 0000 0000 000" placeholder="Somente números, sem espaços" type="text">
   </div>
 </div>
 <div class="row col-lg-12 mt-2 mb-2">
@@ -38,7 +40,7 @@
     <label for="validationDefault02">Validade (mm/aa):*</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input class="form-control" type="month">
   </div>
 </div>
 <div class="row col-lg-12 mt-2 mb-2">
@@ -46,7 +48,7 @@
     <label for="validationDefault02">Código de segurança:*</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input type="text" class="form-control" mask="000" minlength="3" maxlength="3"  placeholder="Somente números, sem espaços" type="text">
   </div>
 </div>
 <div class="row col-lg-12 mt-2 mb-2">
@@ -54,7 +56,7 @@
     <label for="validationDefault02">CPF/CNPJ do proprietário do cartão:</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input class="form-control" type="text" mask="000.000.000-00">
   </div>
 </div>
 <div class="row col-lg-12 mt-2 mb-2">
@@ -62,6 +64,6 @@
     <label for="validationDefault02">Data de nascimento:*</label>
   </div>
   <div class="col-lg-8">
-    <input class="form-control" type="text">
+    <input class="form-control" type="text" type="date">
   </div>
 </div>

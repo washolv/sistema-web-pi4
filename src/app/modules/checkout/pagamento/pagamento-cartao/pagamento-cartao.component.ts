@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Venda } from '../../models/Venda';
 
 @Component({
   selector: 'app-pagamento-cartao',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pagamento-cartao.component.css']
 })
 export class PagamentoCartaoComponent implements OnInit {
-  parcelas: any[]= new Array([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12]);
-  constructor() { }
-
-  ngOnInit() {
+  @Input() venda: Venda=new Venda();
+  parcelas: any[]=[];
+  constructor(private fb: FormBuilder) {
   }
 
+  ngOnInit() {
+    for(let i=1; i<=12; i++){
+        let valorParcela=this.venda.valorTotal!/i;
+        if(i==1){
+          valorParcela=valorParcela-(valorParcela*0.1);
+        }
+        this.parcelas.push({valor: valorParcela, totalParcelas: i});
+    }
+  }
+  setValorVenda(valor: any){
+    console.log(valor)
+      //this.venda.valorTotal=
+  }
 }
