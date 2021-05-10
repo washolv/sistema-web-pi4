@@ -70,6 +70,7 @@ export class EnderecoEntregaComponent implements OnInit {
 
   enderecoEntrega(index: number) {
     this.endereco = this.enderecos[index];
+    sessionStorage.setItem('endereco-entrega', JSON.stringify(this.endereco));
     this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
     let f=this.fretes.find(x => x.transportadora ==this.freteSelecionado.transportadora);
     if(f){

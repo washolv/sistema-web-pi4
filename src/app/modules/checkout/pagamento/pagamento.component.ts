@@ -26,9 +26,13 @@ export class PagamentoComponent implements OnInit {
   id: number=0;
   tabIndex:number=0;
   listaProdutosCarrinho: Carrinho[]=[];
-  constructor(private toastr: ToastrService, private roleGuardService: RoleGuardService,
-    private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog, private router: Router,
-    private produtoService: ProdutoService) {
+  parcelas: any[]=[];
+  pagamentoSelecionado:any;
+  desconto:number=0;
+  valorTotal:number=0;
+  valorComDesconto:number=0;
+  constructor(private roleGuardService: RoleGuardService,private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog,
+    private router: Router,private produtoService: ProdutoService) {
     let frete=sessionStorage.getItem('frete');
     if(frete){
       this.freteSelecionado = JSON.parse(frete);
@@ -56,7 +60,6 @@ export class PagamentoComponent implements OnInit {
       this.cliente = resp;
     })
 
-
   }
   adicionarEnderecoCobranca(){
 
@@ -64,6 +67,7 @@ export class PagamentoComponent implements OnInit {
   buscarProdutos() {
     if(this.listaProdutosCarrinho && this.listaProdutosCarrinho.length>0){
       this.listaProdutosCarrinho.forEach(x => {
+        this.parcelas=new Array();
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {
           this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
             produto.imagens = response;
@@ -79,6 +83,19 @@ export class PagamentoComponent implements OnInit {
           this.venda.detalhesVenda?.push(itemCarrinho);
           this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;
+          this.valorTotal=this.venda.valorTotal;
+          let teste=new Array();
+          for(let i=1; i<=12; i++){
+            let valorParcela=this.valorTotal!/i;
+            if(i==1){
+              valorParcela=valorParcela-(valorParcela*0.1);
+            }
+            teste.push({valor: valorParcela, totalParcelas: i});
+        }
+        this.parcelas=teste;
+        this.desconto=this.valorTotal!*0.15;
+        this.valorTotal=this.valorTotal!;
+        this.valorComDesconto=this.valorTotal-this.desconto;
         })
       });
     }
@@ -93,12 +110,28 @@ export class PagamentoComponent implements OnInit {
     this.venda.valorTotal=this.venda.valorTotal+this.freteSelecionado.valorFrete;
   }
   backPage(){
-    this.router.navigate(['/endereco-entrega']);
+    this.router.navigate(['/carrinho/endereco-entrega']);
   }
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     this.tabIndex=tabChangeEvent.index;
+    if(this.tabIndex==0){
+      this.venda.pagamento="Cartão";
+    }else{
+      this.venda.pagamento="Boleto";
+      this.venda.parcelasCartao
+    }
+  }
+  validarForm(event: any){
+    console.log(event);
   }
   finalizarCompra(){
+    let frete=sessionStorage.getItem('frete');
+    if(frete){
+      this.venda.frete=JSON.parse(frete);
+    }
+    let detalhesNull=[]=[];
+    this.venda.detalhesVenda=detalhesNull;
+    sessionStorage.setItem('venda', JSON.stringify(this.venda));
     this.router.navigate(['/carrinho/resumo-do-pedido'])
   }
 }

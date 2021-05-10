@@ -12,8 +12,6 @@ import { ClienteGuard } from 'src/app/services/cliente.guard';
 import { MatButtonModule } from '@angular/material/button';
 import { PagamentoComponent } from './pagamento/pagamento.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { PagamentoCartaoComponent } from './pagamento/pagamento-cartao/pagamento-cartao.component';
-import { PagamentoBoletoComponent } from './pagamento/pagamento-boleto/pagamento-boleto.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ResumoPedidoComponent } from './resumo-pedido/resumo-pedido.component';
 
@@ -40,7 +38,7 @@ const routes: Routes = [
     MatTabsModule,
     NgxMaskModule
   ],
-  declarations: [CheckoutComponent, EnderecoEntregaComponent, PagamentoComponent, PagamentoCartaoComponent, PagamentoBoletoComponent, ResumoPedidoComponent],
+  declarations: [CheckoutComponent, PagamentoComponent, ResumoPedidoComponent,EnderecoEntregaComponent],
   exports: [
     RouterModule,
   ],

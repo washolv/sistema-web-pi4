@@ -6,11 +6,15 @@ export class Venda {
   id?: number;
   dataVenda?: Date;
   valorTotal?: number;
+
+  desconto?: number;
+  parcelasCartao?:number;
+  pagamento?:string;
+
   enderecoCliente?: EnderecoCliente;
   cliente?: Cliente;
   detalhesVenda?:DetalhesVenda[]=[];
   quantidadeTotal?:number=0;
-  pagamento?: string;
   frete?: Frete;
 }
 
@@ -20,3 +24,4 @@ export class DetalhesVenda {
   quantidade?:number=1;
   produto?: Produto;
 }
+

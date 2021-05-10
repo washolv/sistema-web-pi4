@@ -18,10 +18,116 @@
       <div class="col-lg-12 justify-content-center" *ngIf="cliente && cliente.enderecoCobranca">
         <mat-tab-group (selectedTabChange)="tabChanged($event)">
           <mat-tab label="Cartão de Crédito">
-              <app-pagamento-cartao [venda]="venda"></app-pagamento-cartao>
+            <div class="col-lg-12 mt-2 mb-2 font-weight-bold">
+              <h3>Aproveite até 10% de desconto* no pagamento à vista ou parcele em até 12x sem juros!</h3>
+            </div>
+            <div class="col-lg-12 mt-2 mb-2">
+              <p>O TlgNé aceita as bandeiras de cartão VISA, MasterCard, ELO, HiperCard, American Express e Diners.
+              </p>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Forma de pagamento*</label>
+              </div>
+              <div class="col-lg-8">
+                <select class="form-control" aria-label="null" #testeselect>
+                  <option [ngValue]="parcelas[0]">{{parcelas[0].totalParcelas}} vez de {{parcelas[0].valor | currency:'BRL':'symbol':'0.2-2'}} com 10% de desconto</option>
+                  <ng-container *ngFor="let pagamento of parcelas; let i=index">
+                    <option [ngValue]="pagamento" *ngIf="i>0">{{pagamento.totalParcelas}} vezes de
+                      {{pagamento.valor | currency:'BRL':'symbol':'0.2-2'}} sem juros</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Nome (escrito no cartão):*</label>
+              </div>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" minlength="3">
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Número do cartão:*</label>
+              </div>
+              <div class="col-lg-8">
+                <input class="form-control" mask="0000 0000 0000 0000 000" placeholder="Somente números, sem espaços" type="text">
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Validade (mm/aa):*</label>
+              </div>
+              <div class="col-lg-8">
+                <input class="form-control" type="month">
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Código de segurança:*</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" mask="000" minlength="3" maxlength="3"  placeholder="Somente números, sem espaços" type="text">
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-1  font-weight-bold">
+                <label for="validationDefault02">CPF/CNPJ do proprietário do cartão:</label>
+              </div>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" mask="000.000.000-00">
+              </div>
+            </div>
+            <div class="row col-lg-12 mt-2 mb-2">
+              <div class="col-lg-4 mt-2  font-weight-bold">
+                <label for="validationDefault02">Data de nascimento:*</label>
+              </div>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" type="date">
+              </div>
+            </div>
           </mat-tab>
           <mat-tab label="Pagar com Boleto">
-            <app-pagamento-boleto [venda]="venda"></app-pagamento-boleto></mat-tab>
+            <div class="col-lg-12 mt-2 mb-2 font-weight-bold">
+              <h3>Economize {{desconto | currency:'BRL':'symbol':'0.2-2'}} no pagamento à vista por boleto bancário!</h3>
+            </div>
+            <div class="col-lg-12 mt-2 mb-2">
+              <p>Ao escolher essa modalidade, você aproveita até 15% de desconto* em sua compra. Basta efetuar o pagamento do
+                documento gerado pelo site via aplicativo de sua instituição financeira
+              </p>
+            </div>
+            <div class="row col-lg-12 justify-content-between">
+              <div class="card-boleto text-center mt-2 mb-2">
+                <div class="sc-iAyFgw NJsFS">
+                  <span class="sub-title">Total da sua compra:</span>
+                </div>
+                <hr>
+                <div class="sc-eHgmQL eOrYbW">
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{valorTotal | currency:'BRL':'symbol':'0.2-2'}}</span>
+                </div>
+              </div>
+              <div class="card-boleto  mt-2 mb-2 text-center" style="background-color: #1e1c99">
+                <div class="sc-iAyFgw NJsFS">
+                  <span class="sub-title">Pagamento no boleto:</span>
+                </div>
+                <hr>
+                <div class="sc-eHgmQL eOrYbW">
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{valorComDesconto | currency:'BRL':'symbol':'0.2-2'}}</span>
+                </div>
+              </div>
+              <div class="card-boleto mt-2 mb-2 text-center" style="background-color: rgb(5, 122, 187);">
+                <div class="sc-iAyFgw NJsFS">
+                  <span class="sub-title">Economia de:</span>
+                </div>
+                <hr>
+                <div class="sc-eHgmQL eOrYbW">
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{desconto | currency:'BRL':'symbol':'0.2-2'}}</span>
+                </div>
+              </div>
+            </div>
+
+          </mat-tab>
         </mat-tab-group>
       </div>
     </div>
@@ -151,9 +257,14 @@
           </div>
         </div>
       </div>
-      <div class="row col-lg-12 justify-content-between mb-5">
+      <div class="row col-lg-12 justify-content-between mb-5" *ngIf="tabIndex==0">
         <button class="btn text-center"></button>
-        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Próximo<img
+        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Pagar com cartão<img
+            src="./assets/icons/next.svg" class="img-button"></button>
+      </div>
+      <div class="row col-lg-12 justify-content-between mb-5" *ngIf="tabIndex==1">
+        <button class="btn text-center"></button>
+        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Pagar com boleto<img
             src="./assets/icons/next.svg" class="img-button"></button>
       </div>
     </div>

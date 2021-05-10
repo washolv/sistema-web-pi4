@@ -1,3 +1,129 @@
-<p>
-  resumo-pedido works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row col-lg-12">
+        <div class="col-lg-1 mt-4 mb-4">
+          <button class="btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"></button>
+        </div>
+        <div class="custom-title col-lg-11 text-center mt-4 mb-4">
+          Confira as informações do seu Pedido
+        </div>
+      </div>
+    </div>
+    <div class="row col-lg-12 mt-2 mb-2">
+      <div class="col-lg-6 mr-auto">
+        <div class="custom-title col-lg-12 text-center mt-4 mb-4">
+          Dados pessoais
+        </div>
+        <div class="col-lg-12">
+          <div class="card w-100 border-dark">
+            <div class="card-body text-center">
+              <div class="row">
+                <h3 class="card-title ml-3">
+                  Nome: {{cliente.nome}} {{cliente.sobrenome}}</h3>
+                <p class="mr-3">
+              </div>
+              <hr>
+              <p class="card-text m-0"></p>
+              <p class="card-text m-0"></p>
+              <p class="card-text m-0">CPF: {{cliente.cpf}}</p>
+              <p class="card-text m-0">Celular: {{cliente.telefone}}</p>
+              <p class="card-text m-0">Data de Nascimento: {{cliente.dataNascimento}}</p>
+            </div>
+            <div class="card-footer border-dark" style="background-color: #0C3758;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="custom-title col-lg-12 text-center mt-4 mb-4">
+          Endereço de entrega
+        </div>
+        <div class="col-lg-12">
+          <div class="card w-100 border-dark">
+            <div class="card-body text-center">
+              <div class="row">
+                <h3 class="card-title ml-3">
+                  {{enderecoEntrega.complemento}}</h3>
+                <p class="mr-3">
+              </div>
+              <hr>
+              <p class="card-text m-0"></p>
+              <p class="card-text m-0"></p>
+              <p class="card-text m-0">{{enderecoEntrega.logradouro}}, {{enderecoEntrega.numero}}</p>
+              <p class="card-text m-0">{{enderecoEntrega.bairro}} - {{enderecoEntrega.cidade}} - {{enderecoEntrega.uf}}
+              </p>
+              <p class="card-text m-0">CEP: {{enderecoEntrega.cep}}</p>
+            </div>
+            <div class="card-footer border-dark" style="background-color: #0C3758;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 mt-2 mb-2">
+      <div class="col-lg-12 mt-2 mb-2">
+        <div class="row custom-title col-lg-12 justify-content-center">
+            Produtos do pedido
+        </div>
+        <div class="col-lg-12">
+          <hr>
+        </div>
+        <div class="boxcart col-12 pb-3 col-md-12 px-0">
+          <div class="bordas-cart">
+            <div class="row text-white px-2 mx-0 border-bottom custom-table">
+              <div class="col-1 py-1 d-none d-md-block">
+                <span class="d-none d-xl-block"><span>Produto </span></span>
+              </div>
+              <div class="col-4 py-1 d-none d-md-block">
+                <span>Descrição </span>
+              </div>
+              <div class="col-3 py-1 text-left d-none d-md-block">
+                <span>Qtd. </span>
+              </div>
+              <div class="col-2 py-1 px-0 text-right d-none d-md-block">
+                <span class="d-none d-lg-inline">Subtotal</span>
+              </div>
+            </div>
+            <div class="row mx-0 custom-b">
+              <div class="col-12" *ngFor="let detalhe of venda.detalhesVenda;let i=index">
+                <div class="row py-3">
+                  <div class="col-4 col-lg-1">
+                    <div class="row">
+                      <div *ngIf="detalhe.produto!.imageToShow" class="col-11 pt-2">
+                        <img [src]="detalhe.produto!.imageToShow[0]" class="img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8 col-lg-4">
+                    <div class="row">
+                      <div class="col-12"><a class="text-dark"
+                          href="http://localhost:4200/#/dashboard/detalhes/{{detalhe.produto!.id}}"><span>{{detalhe.produto!.nome}}</span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 col-lg-3 py-2 py-lg-0 px-0 px-lg-2 text-center">
+                    <div class="row group-rem">
+                      <div class="col-12 d-flex align-items-center">
+                        <p>{{detalhe.quantidade}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 col-lg-4 pl-0">
+                    <div class="row ">
+                      <div class="col-12 col-lg-6 mt-2 mt-lg-0 text-right font-weight-bold">
+                        {{detalhe.subTotal | currency:'BRL':'symbol':'0.2-2'}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
