@@ -10,6 +10,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
+import { textChangeRangeIsUnchanged } from 'typescript';
 import { Cliente } from '../../cliente/models/Cliente';
 import { Carrinho } from '../models/carrinho';
 import { DetalhesVenda, Venda } from '../models/Venda';
@@ -28,7 +29,8 @@ export class PagamentoComponent implements OnInit {
   listaProdutosCarrinho: Carrinho[]=[];
   parcelas: any[]=[];
   pagamentoSelecionado:any;
-  desconto:number=0;
+  descontoBoleto:number=0;
+  descontoCartao:number=0;
   valorTotal:number=0;
   valorComDesconto:number=0;
   constructor(private roleGuardService: RoleGuardService,private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog,
@@ -93,9 +95,10 @@ export class PagamentoComponent implements OnInit {
             teste.push({valor: valorParcela, totalParcelas: i});
         }
         this.parcelas=teste;
-        this.desconto=this.valorTotal!*0.15;
-        this.valorTotal=this.valorTotal!;
-        this.valorComDesconto=this.valorTotal-this.desconto;
+        this.descontoBoleto=this.valorTotal!*0.15;
+        this.descontoCartao=this.valorTotal!*0.1;
+        this.venda.valorParcial=this.valorTotal;
+        this.valorComDesconto=this.valorTotal-this.descontoBoleto;
         })
       });
     }
@@ -113,12 +116,22 @@ export class PagamentoComponent implements OnInit {
     this.router.navigate(['/carrinho/endereco-entrega']);
   }
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    let valor=this.venda.valorParcial;
+    console.log(valor)
     this.tabIndex=tabChangeEvent.index;
     if(this.tabIndex==0){
+      console.log(this.descontoCartao)
       this.venda.pagamento="Cartão";
+      this.venda.desconto=this.descontoBoleto;
+      this.venda.desconto=this.descontoCartao;
+      this.venda.parcelasCartao=1;
+      this.venda.valorTotal=this.venda.valorParcial!-this.venda.desconto!;
     }else{
+      console.log(this.descontoBoleto)
       this.venda.pagamento="Boleto";
-      this.venda.parcelasCartao
+      this.venda.parcelasCartao=0;
+      this.venda.desconto=this.descontoBoleto;
+      this.venda.valorTotal=this.venda.valorParcial!-this.venda.desconto!;
     }
   }
   validarForm(event: any){

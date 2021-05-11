@@ -7,3 +7,20 @@
   background-color: #0C3758;
   border: none;
 }
+
+.img-fluid{
+  width: 80%;
+}
+.pag{
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 5px;
+}
+.valor{
+  font-size: 18px;
+  box-shadow: 5px;
+}
+.card{
+  min-height: 190px;
+  max-height: 190px;
+}

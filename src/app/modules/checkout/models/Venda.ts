@@ -6,7 +6,7 @@ export class Venda {
   id?: number;
   dataVenda?: Date;
   valorTotal?: number;
-
+  valorParcial?:number;
   desconto?: number;
   parcelasCartao?:number;
   pagamento?:string;

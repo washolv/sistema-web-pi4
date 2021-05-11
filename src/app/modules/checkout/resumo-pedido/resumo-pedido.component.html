@@ -5,7 +5,7 @@
         <div class="col-lg-1 mt-4 mb-4">
           <button class="btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"></button>
         </div>
-        <div class="custom-title col-lg-11 text-center mt-4 mb-4">
+        <div class="custom-title col-lg-10 text-center mt-4 mb-4">
           Confira as informações do seu Pedido
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="custom-title col-lg-12 text-center mt-4 mb-4">
           Dados pessoais
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="cliente">
           <div class="card w-100 border-dark">
             <div class="card-body text-center">
               <div class="row">
@@ -26,9 +26,9 @@
               <hr>
               <p class="card-text m-0"></p>
               <p class="card-text m-0"></p>
-              <p class="card-text m-0">CPF: {{cliente.cpf}}</p>
-              <p class="card-text m-0">Celular: {{cliente.telefone}}</p>
-              <p class="card-text m-0">Data de Nascimento: {{cliente.dataNascimento}}</p>
+              <p class="card-text m-0" *ngIf="cliente.cpf">CPF: {{cliente.cpf | mask: '000.000.000-00'}}</p>
+              <p class="card-text m-0" *ngIf="cliente.telefone">Celular: {{cliente.telefone | mask: '(00) 00000-0000'}}</p>
+              <p class="card-text m-0">Data de Nascimento: {{cliente.dataNascimento | date: 'dd/MM/yyyy'}}</p>
             </div>
             <div class="card-footer border-dark" style="background-color: #0C3758;">
             </div>
@@ -64,7 +64,7 @@
     <div class="col-lg-12 mt-2 mb-2">
       <div class="col-lg-12 mt-2 mb-2">
         <div class="row custom-title col-lg-12 justify-content-center">
-            Produtos do pedido
+          Produtos do pedido
         </div>
         <div class="col-lg-12">
           <hr>
@@ -121,9 +121,52 @@
             </div>
           </div>
         </div>
-
-
       </div>
+    </div>
+    <div class="col-lg-12 mt-2 mb-2">
+      <div class="col-lg-12 mt-2 mb-2">
+        <div class="row custom-title col-lg-12 justify-content-center">
+          Valor
+        </div>
+        <div class="col-lg-12">
+          <hr>
+        </div>
+      </div>
+      <div class="row col-lg-12 mb-3" *ngIf="venda.frete">
+        <div class="col-lg-6 mt-2 mb-2">
+          <div class="col-lg-12">
+            <div class="card w-100 border-dark">
+              <div class="card-body">
+                <p class="card-text m-0"></p>
+                <p class="card-text m-0"></p>
+                <p class="card-text m-0">Subtotal: {{venda.valorParcial | currency:'BRL':'symbol':'0.2-2'}}</p>
+                <p class="card-text m-0">Frete: {{venda.frete.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</p>
+                <p class="card-text m-0">Crédito: - R$ 0,00
+                </p>
+                <p class="card-text m-0">Descontos: - {{venda.desconto | currency:'BRL':'symbol':'0.2-2'}}</p>
+              </div>
+              <div class="card-footer border-dark" style="background-color: #0C3758;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-2 mb-2">
+          <div class="col-lg-12">
+            <div class="card w-100 border-dark">
+              <div class="card-body">
+                <p class="card-text m-0" style="color: white;">. </p>
+                <div class="row card-text m-0"><p class="pag mr-2">VALOR TOTAL:</p> <div class="valor">{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}</div></div>
+                <div class="row card-text m-0"><p class="pag mr-2">FORMA DE PAGAMENTO:</p> <div class="valor">À VISTA NO BOLETO</div></div>
+              </div>
+              <div class="card-footer border-dark" style="background-color: #0C3758;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-lg-12 justify-content-center mt-3 mb-5">
+      <button class="btn btn-success font-weight-bold" (click)="enviar()">FINALIZAR COMPRA</button>
     </div>
   </div>
 </div>
