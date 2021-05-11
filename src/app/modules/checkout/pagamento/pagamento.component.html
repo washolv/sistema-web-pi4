@@ -30,70 +30,100 @@
                 <label for="validationDefault02">Forma de pagamento*</label>
               </div>
               <div class="col-lg-8">
-                <select class="form-control" aria-label="null" #testeselect>
-                  <option [ngValue]="parcelas[0]">{{parcelas[0].totalParcelas}} vez de {{parcelas[0].valor | currency:'BRL':'symbol':'0.2-2'}} com 10% de desconto</option>
+                <select class="form-control" aria-label="null" (change)="setParcelas($event.target)">
+                  <option [value]="parcelas[0].totalParcelas">{{parcelas[0].totalParcelas}} vez de {{parcelas[0].valor |
+                    currency:'BRL':'symbol':'0.2-2'}} com 10% de desconto</option>
                   <ng-container *ngFor="let pagamento of parcelas; let i=index">
-                    <option [ngValue]="pagamento" *ngIf="i>0">{{pagamento.totalParcelas}} vezes de
+                    <option [value]="pagamento.totalParcelas" *ngIf="i>0">{{pagamento.totalParcelas}} vezes de
                       {{pagamento.valor | currency:'BRL':'symbol':'0.2-2'}} sem juros</option>
                   </ng-container>
                 </select>
               </div>
             </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Nome (escrito no cartão):*</label>
+            <form [formGroup]="cardForm">
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-2  font-weight-bold">
+                  <label for="validationDefault02">Nome (escrito no cartão):*</label>
+                </div>
+                <div class="col-lg-8">
+                  <input class="form-control" formControlName="nome" type="text" minlength="3" [ngClass]="{ 'is-invalid': !formValid && f.nome.errors }">
+                  <div *ngIf="!formValid && f.nome.errors" class="invalid-feedback">
+                    <div *ngIf="f.nome.errors.required">* Campo obrigatório</div>
+                    <div *ngIf="f.nome.errors.invalid">* Nome inválido</div>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" minlength="3">
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-2  font-weight-bold">
+                  <label for="validationDefault02">Número do cartão:*</label>
+                </div>
+                <div class="col-lg-8">
+                  <input class="form-control" formControlName="numero" mask="0000 0000 0000 0000 0000" placeholder="Somente números, sem espaços"
+                    type="text" [ngClass]="{ 'is-invalid': !formValid && f.numero.errors }">
+                    <div *ngIf="!formValid && f.numero.errors" class="invalid-feedback">
+                      <div *ngIf="f.numero.errors.required">* Campo obrigatório</div>
+                      <div *ngIf="f.numero.errors.invalid">* Número inválido</div>
+                    </div>
+                </div>
               </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Número do cartão:*</label>
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-2  font-weight-bold">
+                  <label for="validationDefault02">Validade (mm/aa):*</label>
+                </div>
+                <div class="col-lg-8">
+                  <input class="form-control" formControlName="validade"  [ngClass]="{ 'is-invalid': !formValid && f.validade.errors }" type="month">
+                  <div *ngIf="!formValid && f.validade.errors" class="invalid-feedback">
+                    <div *ngIf="f.validade.errors.required">* Campo obrigatório</div>
+                  </div>
+                </div>
+                </div>
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-2  font-weight-bold">
+                  <label for="validationDefault02">Código de segurança:*</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" mask="000" minlength="3" maxlength="3"
+                    placeholder="Somente números, sem espaços" [ngClass]="{ 'is-invalid': !formValid && f.codigo.errors }" formControlName="codigo" type="text">
+                    <div *ngIf="!formValid && f.codigo.errors" class="invalid-feedback">
+                      <div *ngIf="f.codigo.errors.required">* Campo obrigatório</div>
+                      <div *ngIf="f.codigo.errors.invalid">Código inválido obrigatório</div>
+                    </div>
+                </div>
               </div>
-              <div class="col-lg-8">
-                <input class="form-control" mask="0000 0000 0000 0000 000" placeholder="Somente números, sem espaços" type="text">
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-1  font-weight-bold">
+                  <label for="validationDefault02">CPF/CNPJ do proprietário do cartão:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" formControlName="cpf" [ngClass]="{ 'is-invalid': !formValid && f.cpf.errors }" mask="000.000.000-00">
+                  <div *ngIf="!formValid && f.cpf.errors" class="invalid-feedback">
+                    <div *ngIf="f.cpf.errors.required">* Campo obrigatório</div>
+                    <div *ngIf="f.cpf.errors.invalid">CPF inválido</div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Validade (mm/aa):*</label>
+              <div class="row col-lg-12 mt-2 mb-2">
+                <div class="col-lg-4 mt-2  font-weight-bold">
+                  <label for="validationDefault02">Data de nascimento:*</label>
+                </div>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" type="date" [ngClass]="{ 'is-invalid': !formValid && f.dataNascimento.errors }"
+                  formControlName="dataNascimento">
+                  <div *ngIf="!formValid && f.dataNascimento.errors" class="invalid-feedback">
+                    <div *ngIf="f.dataNascimento.errors.required">* Campo obrigatório</div>
+                  </div>
+                </div>
               </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="month">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Código de segurança:*</label>
-              </div>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" mask="000" minlength="3" maxlength="3"  placeholder="Somente números, sem espaços" type="text">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-1  font-weight-bold">
-                <label for="validationDefault02">CPF/CNPJ do proprietário do cartão:</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" mask="000.000.000-00">
-              </div>
-            </div>
-            <div class="row col-lg-12 mt-2 mb-2">
-              <div class="col-lg-4 mt-2  font-weight-bold">
-                <label for="validationDefault02">Data de nascimento:*</label>
-              </div>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" type="date">
-              </div>
-            </div>
+            </form>
           </mat-tab>
           <mat-tab label="Pagar com Boleto">
             <div class="col-lg-12 mt-2 mb-2 font-weight-bold">
-              <h3>Economize {{descontoBoleto | currency:'BRL':'symbol':'0.2-2'}} no pagamento à vista por boleto bancário!</h3>
+              <h3>Economize {{descontoBoleto | currency:'BRL':'symbol':'0.2-2'}} no pagamento à vista por boleto
+                bancário!</h3>
             </div>
             <div class="col-lg-12 mt-2 mb-2">
-              <p>Ao escolher essa modalidade, você aproveita até 15% de desconto* em sua compra. Basta efetuar o pagamento do
+              <p>Ao escolher essa modalidade, você aproveita até 15% de desconto* em sua compra. Basta efetuar o
+                pagamento do
                 documento gerado pelo site via aplicativo de sua instituição financeira
               </p>
             </div>
@@ -104,7 +134,7 @@
                 </div>
                 <hr>
                 <div class="sc-eHgmQL eOrYbW">
-                  <span class="sc-cvbbAY pweet font-weight-bold">{{valorTotal | currency:'BRL':'symbol':'0.2-2'}}</span>
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{this.venda.valorParcial | currency:'BRL':'symbol':'0.2-2'}}</span>
                 </div>
               </div>
               <div class="card-boleto  mt-2 mb-2 text-center" style="background-color: #1e1c99">
@@ -113,7 +143,8 @@
                 </div>
                 <hr>
                 <div class="sc-eHgmQL eOrYbW">
-                  <span class="sc-cvbbAY pweet font-weight-bold">{{valorComDesconto | currency:'BRL':'symbol':'0.2-2'}}</span>
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{this.venda.valorTotal |
+                    currency:'BRL':'symbol':'0.2-2'}}</span>
                 </div>
               </div>
               <div class="card-boleto mt-2 mb-2 text-center" style="background-color: rgb(5, 122, 187);">
@@ -122,7 +153,8 @@
                 </div>
                 <hr>
                 <div class="sc-eHgmQL eOrYbW">
-                  <span class="sc-cvbbAY pweet font-weight-bold">{{descontoBoleto | currency:'BRL':'symbol':'0.2-2'}}</span>
+                  <span class="sc-cvbbAY pweet font-weight-bold">{{this.venda.desconto |
+                    currency:'BRL':'symbol':'0.2-2'}}</span>
                 </div>
               </div>
             </div>
@@ -238,9 +270,11 @@
             <div class="d-flex justify-content-between col-lg-12">
               <div class="custom-text-size2 mt-2 ml-2">Descontos:
               </div>
-              <div class="custom-text-size3 mt-2" *ngIf="tabIndex==1">{{descontoBoleto | currency:'BRL':'symbol':'0.2-2'}}
+              <div class="custom-text-size3 mt-2" *ngIf="tabIndex==1">- {{descontoBoleto |
+                currency:'BRL':'symbol':'0.2-2'}}
               </div>
-              <div class="custom-text-size3 mt-2" *ngIf="tabIndex==0">{{descontoCartao | currency:'BRL':'symbol':'0.2-2'}}
+              <div class="custom-text-size3 mt-2" *ngIf="tabIndex==0">- {{descontoCartao |
+                currency:'BRL':'symbol':'0.2-2'}}
               </div>
             </div>
             <div class="d-flex justify-content-between col-lg-12">

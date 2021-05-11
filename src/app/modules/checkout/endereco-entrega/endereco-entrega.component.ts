@@ -171,9 +171,11 @@ export class EnderecoEntregaComponent implements OnInit {
     this.router.navigate(['/carrinho/pagamento']);
   }
   selectfrete(event: any){
+
     this.freteSelecionado=event;
     this.freteSelecionado.check=true;
     sessionStorage.setItem('frete', JSON.stringify(this.freteSelecionado));
+    sessionStorage.setItem('endereco-entrega', JSON.stringify(this.endereco));
     this.calculaTotal();
   }
   backPage(){

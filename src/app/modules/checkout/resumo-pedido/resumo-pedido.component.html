@@ -156,7 +156,10 @@
               <div class="card-body">
                 <p class="card-text m-0" style="color: white;">. </p>
                 <div class="row card-text m-0"><p class="pag mr-2">VALOR TOTAL:</p> <div class="valor">{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}</div></div>
-                <div class="row card-text m-0"><p class="pag mr-2">FORMA DE PAGAMENTO:</p> <div class="valor">À VISTA NO BOLETO</div></div>
+                <div class="row card-text m-0" *ngIf="venda.pagamento=='Boleto'"><p class="pag mr-2">FORMA DE PAGAMENTO:</p> <div class="valor">À VISTA NO BOLETO</div></div>
+                <div class="row card-text m-0" *ngIf="venda.pagamento=='Cartão'">
+                  <p class="pag mr-2">FORMA DE PAGAMENTO:</p> <div class="valor">1 VEZ NO CARTÃO DE CRÉDITO</div>
+                </div>
               </div>
               <div class="card-footer border-dark" style="background-color: #0C3758;">
               </div>

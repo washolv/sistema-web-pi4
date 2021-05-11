@@ -7,6 +7,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
+import { ModalVendaCadastradaComponent } from '../modals/ModalVendaCadastrada/ModalVendaCadastrada.component';
 import { Carrinho } from '../models/carrinho';
 import { DetalhesVenda, Venda } from '../models/Venda';
 
@@ -26,7 +27,7 @@ export class ResumoPedidoComponent implements OnInit {
     if (endereco) {
       this.enderecoEntrega = JSON.parse(endereco);
     } else {
-      this.router.navigate(['/carrinho/pagamento'])
+      this.router.navigate(['/carrinho/endereco-entrega'])
     }
   }
 
@@ -74,8 +75,18 @@ export class ResumoPedidoComponent implements OnInit {
     }
   }
   enviar(){
+    this.venda.dataVenda=new Date();
+    this.venda.cliente=this.cliente;
+    this.venda.frete=JSON.parse(sessionStorage.getItem('frete')!);
+    this.venda.enderecoCliente=this.enderecoEntrega;
+    console.log(this.venda)
     this.vendaService.postVenda(this.venda).subscribe(resp=>{
-      console.log(resp);
+        this.dialog.open(ModalVendaCadastradaComponent, {
+          width: '600px',
+          data: {
+            produto: resp
+          }
+        });
     }, err=>{
       console.log('FALHA AO CADASTRAR VENDA')
     })

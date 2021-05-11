@@ -18,8 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             }else if([403].indexOf(err.status) !== -1){
               this.router.navigate(['']);
             }else if(!([404].indexOf(err.status) !== -1)){
-              sessionStorage.removeItem('frete');
-             this.authenticationService.logout();
+             // sessionStorage.removeItem('frete');
+            // this.authenticationService.logout();
             }
             const error = err.error.message || err.statusText;
             return throwError(error);

@@ -14,6 +14,7 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { NgxMaskModule } from 'ngx-mask';
 import { ResumoPedidoComponent } from './resumo-pedido/resumo-pedido.component';
+import { ModalVendaCadastradaComponent } from './modals/ModalVendaCadastrada/ModalVendaCadastrada.component';
 
 const routes: Routes = [
   { path: '', component: CheckoutComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
     MatTabsModule,
     NgxMaskModule
   ],
-  declarations: [CheckoutComponent, PagamentoComponent, ResumoPedidoComponent,EnderecoEntregaComponent],
+  declarations: [CheckoutComponent, PagamentoComponent, ResumoPedidoComponent,EnderecoEntregaComponent, ModalVendaCadastradaComponent],
   exports: [
     RouterModule,
   ],
