@@ -81,6 +81,10 @@ export class ResumoPedidoComponent implements OnInit {
     this.venda.enderecoCliente=this.enderecoEntrega;
     console.log(this.venda)
     this.vendaService.postVenda(this.venda).subscribe(resp=>{
+      sessionStorage.removeItem('frete');
+      sessionStorage.removeItem('venda');
+      sessionStorage.removeItem('endereco-entrega');
+      localStorage.removeItem('carrinho');
         this.dialog.open(ModalVendaCadastradaComponent, {
           width: '600px',
           data: {
