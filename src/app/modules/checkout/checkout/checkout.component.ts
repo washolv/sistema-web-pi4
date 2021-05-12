@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
     this.venda.valorTotal = 0;
-    let produtosCarrinhoJson = localStorage.getItem('carrinho');
+    let produtosCarrinhoJson = sessionStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {
       this.listaProdutosCarrinho = JSON.parse(produtosCarrinhoJson);
     }

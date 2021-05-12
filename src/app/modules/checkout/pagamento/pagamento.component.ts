@@ -44,7 +44,7 @@ export class PagamentoComponent implements OnInit {
   get f() { return this.cardForm.controls; }
 
   ngOnInit() {
-    let produtos = localStorage.getItem('carrinho');
+    let produtos = sessionStorage.getItem('carrinho');
     if (produtos) {
       this.listaProdutosCarrinho = JSON.parse(produtos);
     } else {
@@ -150,6 +150,7 @@ export class PagamentoComponent implements OnInit {
       this.descontoCartao=0;
     }
     this.venda.desconto=this.descontoCartao;
+    this.venda.valorTotal=this.venda.valorParcial!-this.venda.desconto;
   }
   validarForm(event: any) {
     console.log(event);

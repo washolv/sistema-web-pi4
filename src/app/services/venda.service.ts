@@ -14,6 +14,8 @@ export class VendaService {
 
   postVenda(venda: Venda):Observable<Venda>{
     return this.http.post<Venda>(`${this.apiUrl}/vendas`, venda);
-
+  }
+  getByIdCliente(id: number):Observable<Venda[]>{
+    return this.http.get<Venda[]>(`${this.apiUrl}/vendas/${id}`);
   }
 }

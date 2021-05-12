@@ -21,6 +21,7 @@ export class ResumoPedidoComponent implements OnInit {
   enderecoEntrega = new EnderecoCliente();
   venda = new Venda();
   listaProdutosCarrinho: Carrinho[] = [];
+  valorParcela:number=0;
   constructor(private roleGuardService: RoleGuardService, private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog,
     private router: Router, private produtoService: ProdutoService, private vendaService:VendaService) {
     let endereco = sessionStorage.getItem('endereco-entrega');
@@ -37,7 +38,7 @@ export class ResumoPedidoComponent implements OnInit {
       this.cliente = response;
     });
     let venda = sessionStorage.getItem('venda');
-    let produtos=localStorage.getItem('carrinho');
+    let produtos=sessionStorage.getItem('carrinho');
     if(produtos){
       this.listaProdutosCarrinho = JSON.parse(produtos);
     }else{
@@ -45,6 +46,7 @@ export class ResumoPedidoComponent implements OnInit {
     }
     if (venda) {
       this.venda = JSON.parse(venda);
+      this.valorParcela=this.venda.valorTotal!/this.venda.parcelasCartao!;
     } else {
       this.router.navigate(['/carrinho/pagamento'])
     }
@@ -81,10 +83,10 @@ export class ResumoPedidoComponent implements OnInit {
     this.venda.enderecoCliente=this.enderecoEntrega;
     console.log(this.venda)
     this.vendaService.postVenda(this.venda).subscribe(resp=>{
+      sessionStorage.removeItem('carrinho');
       sessionStorage.removeItem('frete');
       sessionStorage.removeItem('venda');
       sessionStorage.removeItem('endereco-entrega');
-      localStorage.removeItem('carrinho');
         this.dialog.open(ModalVendaCadastradaComponent, {
           width: '600px',
           data: {

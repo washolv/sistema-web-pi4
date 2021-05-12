@@ -19,10 +19,10 @@ export class CartService {
 
 
   public adicionarProduto(id:number, quantidade: number) {
-    let produtosCarrinhoJson = localStorage.getItem('carrinho');
+    let produtosCarrinhoJson = sessionStorage.getItem('carrinho');
 
     if (produtosCarrinhoJson) {
-      produtosCarrinhoJson = localStorage.getItem('carrinho');
+      produtosCarrinhoJson = sessionStorage.getItem('carrinho');
       let produtosCarrinho = <Carrinho[]> JSON.parse(produtosCarrinhoJson!);
       let prodCarrinho = <Carrinho[]> produtosCarrinho.filter(x => x.id == id)
       if(prodCarrinho[0] && prodCarrinho[0].id==id){
@@ -31,21 +31,21 @@ export class CartService {
         produtos.push(prodCarrinho[0])
         produtosCarrinhoJson = JSON.stringify(produtos);
 
-        localStorage.setItem('carrinho', produtosCarrinhoJson!);
+        sessionStorage.setItem('carrinho', produtosCarrinhoJson!);
       }else{
         produtosCarrinho.push(new Carrinho(id, quantidade))
         produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
-        localStorage.setItem('carrinho', produtosCarrinhoJson!);
+        sessionStorage.setItem('carrinho', produtosCarrinhoJson!);
       }
 
     } else {
       let produtoCarrinho: Carrinho[] = new Array();
       produtoCarrinho.push(new Carrinho(id, quantidade))
-      localStorage.setItem('carrinho', JSON.stringify(produtoCarrinho));
+      sessionStorage.setItem('carrinho', JSON.stringify(produtoCarrinho));
     }
   }
   public qtdCarrinho() {
-    let produtosCarrinhoJson = localStorage.getItem('carrinho');
+    let produtosCarrinhoJson = sessionStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {
       let produtosCarrinho = JSON.parse(produtosCarrinhoJson);
       const unique = produtosCarrinho.map((x: any) => x).filter((value: any, index: any, self: string | any[]) => self.indexOf(value) === index)
@@ -54,12 +54,12 @@ export class CartService {
     return 0;
   }
   public removerProduto(id: number) {
-    let produtosCarrinhoJson = localStorage.getItem('carrinho');
+    let produtosCarrinhoJson = sessionStorage.getItem('carrinho');
     if (produtosCarrinhoJson) {
       let produtosCarrinho = <Carrinho[]>JSON.parse(produtosCarrinhoJson);
       produtosCarrinho = produtosCarrinho.filter(x => x.id != id)
       produtosCarrinhoJson = JSON.stringify(produtosCarrinho);
-      localStorage.setItem('carrinho', produtosCarrinhoJson!);
+      sessionStorage.setItem('carrinho', produtosCarrinhoJson!);
     }
   }
 

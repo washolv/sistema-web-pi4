@@ -40,7 +40,7 @@ export class EnderecoEntregaComponent implements OnInit {
   constructor(private toastr: ToastrService, private breakpointObserver: BreakpointObserver, private roleGuardService: RoleGuardService,
     private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog, private router: Router,
     private vendaService: VendaService, private produtoService: ProdutoService, private cartService: CartService) {
-    let produtos=localStorage.getItem('carrinho');
+    let produtos=sessionStorage.getItem('carrinho');
     if(produtos){
       this.listaProdutosCarrinho = JSON.parse(produtos);
     }else{
