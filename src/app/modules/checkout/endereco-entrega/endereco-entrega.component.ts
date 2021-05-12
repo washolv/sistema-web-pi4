@@ -153,7 +153,6 @@ export class EnderecoEntregaComponent implements OnInit {
           this.venda.detalhesVenda?.push(itemCarrinho);
           this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;
-          console.log('**********')
         })
       });
     }

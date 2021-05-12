@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="modal-header">
+    <div class="modal-title">
+      Detalhes do Pedido {{venda.numeroPedido}}
+    </div>
+    <button type="button" class="close" (click)="closeX()" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="col-lg-12 mt-2 mb-2">
+    <h3>Informações do Pedido</h3>
+    <p><span class="font-weight-bold">Data do Pedido:</span> {{venda.dataVenda | date: 'dd/MM/yyyy'}}</p>
+    <p><span class="font-weight-bold">Forma de Pagamento: </span>{{venda.pagamento}}</p>
+    <p><span class="font-weight-bold">Status do Pedido:</span> {{venda.status}}</p>
+    <p><span><hr></span></p>
+  </div>
+  <div class="col-lg-12 mt-2 mb-2">
+    <h3>Dados de entrega</h3>
+    <p>{{endereco.logradouro}}, {{endereco.numero}} - {{endereco.bairro}}</p>
+    <p>{{endereco.complemento}}, {{endereco.cidade}} - {{endereco.cep}}</p>
+    <div class="order-delvery__shipping__type" *ngIf="venda.frete">{{venda.frete.transportadora}}</div>
+    <p><span><hr></span></p>
+  </div>
+  <div class="col-lg-12 mt-2 mb-2">
+    <h3>Produtos</h3>
+    <div class="row col-lg-12" *ngIf="detalhes">
+      <ng-container *ngFor="let produto of detalhes">
+      <div class="col-lg-4 t-2 mb-2" *ngIf="produto.produto && produto.produto.imageToShow">
+        <img [src]="produto!.produto!.imageToShow[0]" class="img-fluid">
+      </div>
+      <div class="col-lg-8 mt-2 mb-2" *ngIf="produto">
+        <span class="font-weight-bold">{{produto.produto!.nome}}</span>
+      </div>
+    </ng-container>
+    </div>
+    <p><span><hr></span></p>
+  </div>
+</div>

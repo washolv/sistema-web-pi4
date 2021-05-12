@@ -26,6 +26,7 @@ import { AlterarSenhaClienteComponent } from './cliente/editar-cliente/alterar-s
 import { EnderecoCobrancaComponent } from './cliente/endereco-cobranca/endereco-cobranca.component';
 import { MeusPedidosComponent } from './cliente/meus-pedidos/meus-pedidos.component';
 import { ModalAdicionarEnderecoCobrancaComponent } from './cliente/endereco-cliente/modals/modal-adicionar-endereco-cobranca/modal-adicionar-endereco-cobranca.component';
+import { ModalDetalhesPedidoComponent } from './cliente/meus-pedidos/modal-detalhes-pedido/modal-detalhes-pedido.component';
 
 
 const routes = [
@@ -73,6 +74,7 @@ const routes = [
     ModalEditarEnderecoClienteComponent,
     EnderecoCobrancaComponent,
     MeusPedidosComponent,
+    ModalDetalhesPedidoComponent,
     ModalAdicionarEnderecoCobrancaComponent,
     ModalAdicionarEnderecoClienteComponent], schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

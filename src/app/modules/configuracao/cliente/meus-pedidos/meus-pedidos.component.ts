@@ -1,10 +1,14 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Venda } from 'src/app/modules/checkout/models/Venda';
 import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
+import { ModalDetalhesPedidoComponent } from './modal-detalhes-pedido/modal-detalhes-pedido.component';
 
 @Component({
   selector: 'app-meus-pedidos',
@@ -13,7 +17,12 @@ import { VendaService } from 'src/app/services/venda.service';
 })
 export class MeusPedidosComponent implements OnInit {
   vendas: Venda[]=[];
-  constructor(private router: Router, private vendaService: VendaService, private roleGuardService: RoleGuardService, private dialog: MatDialog) { }
+  public isSmallScreen = false;
+
+  constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
+     private router: Router, private clienteService: ClienteService,private breakpointObserver: BreakpointObserver, private vendaService: VendaService) {
+  }
+
 
   ngOnInit() {
     const dialogRef = this.dialog.open(LoadingComponent, {
@@ -21,12 +30,37 @@ export class MeusPedidosComponent implements OnInit {
     });
     this.vendaService.getByIdCliente(<number>this.roleGuardService.getUser().Id).subscribe(response=>{
       this.vendas=response;
-      console.log(response)
       dialogRef.close();
     })
   }
   backPage(){
     this.router.navigate(['/configuracoes'])
   }
-
+  openModal(venda: Venda) {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
+    let dialogRef;
+    if (this.isSmallScreen) {
+      dialogRef = this.dialog.open(ModalDetalhesPedidoComponent, {
+        height: '500px', width: '400px',
+        data: {
+          venda: venda
+        }
+      });
+    } else {
+      dialogRef = this.dialog.open(ModalDetalhesPedidoComponent, {
+        maxHeight:'900px', width: '900px',
+        data: {
+          venda: venda
+        }
+      });
+    }
+    return dialogRef;
+  }
+  detalhes(venda: Venda){
+    const dialogRef = this.openModal(venda);
+    dialogRef.afterClosed().subscribe(response => {
+    }, err => {
+      console.log(err);
+    });
+  }
 }

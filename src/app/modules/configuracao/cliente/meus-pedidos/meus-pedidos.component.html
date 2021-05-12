@@ -18,13 +18,13 @@
               <div class="col-3 py-1 d-none d-md-block">
                 <span class="d-none d-xl-block"><span>Número do Pedido</span></span>
               </div>
-              <div class="col-3 py-1 d-none d-md-block">
+              <div class="col-2  py-1 d-none d-md-block">
                 <span>Data</span>
               </div>
-              <div class="col-3 py-1 d-none d-md-block">
+              <div class="col-2 py-1 d-none d-md-block">
                 <span>Pagamento</span>
               </div>
-              <div class="col-3 py-1 d-none d-md-block">
+              <div class="col-2 py-1 d-none d-md-block">
                 <span class="d-none d-lg-inline">Posição</span>
               </div>
             </div>
@@ -37,24 +37,31 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="row">
                       <div class="col-12"><a class="text-dark"><span>{{venda.dataVenda | date: 'dd/MM/yyyy'}}</span>
                           </a>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="row">
                       <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
                         {{venda.pagamento}}
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="row ">
                       <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
                         {{venda.status}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3  d-md-block">
+                    <div class="row">
+                      <div class="col-lg-12 text-center col-lg-6 font-weight-bold">
+                        <button class="k-button" (click)="detalhes(venda)"> + DETALHES </button>
                       </div>
                     </div>
                   </div>
