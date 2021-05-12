@@ -11,8 +11,57 @@
       <div class="col-lg-12">
         <hr>
       </div>
-      <div class="row col-lg-12">
-
+      <div class="col-lg-12">
+        <div class="boxcart col-12 pb-3 col-md-12 px-0">
+          <div class="bordas-cart">
+            <div class="row text-white px-2 mx-0 border-bottom custom-table">
+              <div class="col-3 py-1 d-none d-md-block">
+                <span class="d-none d-xl-block"><span>Número do Pedido</span></span>
+              </div>
+              <div class="col-3 py-1 d-none d-md-block">
+                <span>Data</span>
+              </div>
+              <div class="col-3 py-1 d-none d-md-block">
+                <span>Pagamento</span>
+              </div>
+              <div class="col-3 py-1 d-none d-md-block">
+                <span class="d-none d-lg-inline">Posição</span>
+              </div>
+            </div>
+              <div class="col-12" *ngFor="let venda of vendas;let i=index">
+                <div class="row py-3">
+                  <div class="col-lg-3 col-lg-1">
+                    <div class="row">
+                      <div class="col-11 pt-2">
+                        {{venda.numeroPedido}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="row">
+                      <div class="col-12"><a class="text-dark"><span>{{venda.dataVenda | date: 'dd/MM/yyyy'}}</span>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="row">
+                      <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
+                        {{venda.pagamento}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="row ">
+                      <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
+                        {{venda.status}}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

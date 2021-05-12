@@ -10,7 +10,8 @@ export class Venda {
   desconto?: number;
   parcelasCartao?:number;
   pagamento?:string;
-
+  numeroPedido?: string;
+  status?: string;
   enderecoCliente?: EnderecoCliente;
   cliente?: Cliente;
   detalhesVenda?:DetalhesVenda[]=[];
