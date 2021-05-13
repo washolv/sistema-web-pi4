@@ -31,6 +31,7 @@
       <div class="col-lg-8 mt-2 mb-2" *ngIf="produto">
         <p><span class="font-weight-bold">{{produto.produto!.nome}}</span></p>
        <p><span class="font-weight-bold">Quantidade:</span> {{produto.quantidade}}</p>
+       <p><span class="font-weight-bold">Subtotal:</span> {{produto.subTotal | currency:'BRL':'symbol':'0.2-2'}}</p>
       </div>
     </ng-container>
     </div>

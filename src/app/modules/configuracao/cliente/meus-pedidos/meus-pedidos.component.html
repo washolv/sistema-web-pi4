@@ -29,7 +29,7 @@
               <span>Data</span>
             </div>
             <div class="col-2 py-1 d-none d-md-block">
-              <span>Pagamento</span>
+              <span>Valor Total</span>
             </div>
             <div class="col-2 py-1 d-none d-md-block">
               <span class="d-none d-lg-inline">Posição</span>
@@ -56,8 +56,8 @@
               </div>
               <div class="col-lg-2">
                 <div class="row">
-                  <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
-                    {{venda.pagamento}}
+                  <div class="col-lg-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
+                    {{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}
                   </div>
                 </div>
               </div>
