@@ -17,3 +17,32 @@
   font-family: inherit;
   font-size: 12px;
 }
+.custon-btn-filter{
+  background-image: url('/assets/icons/botao-de-menu.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 50px;
+  height: 35px;
+  border: 1px solid #0C3758;
+  border-radius: 5px;
+  background-color: #0C3758;
+  outline: none;
+}
+.custom-input-search {
+  background-image: url('/assets/icons/search.svg');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-color: #FCFCFC;
+  border: 1px solid #D2D2D2;
+  border-radius: 5px;
+  padding: 0 31px 0 10px;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  box-sizing: border-box;
+  height: 35px;
+  color: #444444;
+}

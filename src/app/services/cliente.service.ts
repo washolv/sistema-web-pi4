@@ -42,6 +42,9 @@ export class ClienteService {
   public buscarEnderecos(idCliente: number): Observable<EnderecoCliente[]> {
     return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/cliente/${idCliente}`);
   }
+  public buscarEnderecosAtivos(idCliente: number): Observable<EnderecoCliente[]> {
+    return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/ativos/cliente/${idCliente}`);
+  }
   public buscarEndereco(idEndereco: number): Observable<EnderecoCliente[]> {
     return this.http.get<EnderecoCliente[]>(`${this.apiUrl}/enderecos/${idEndereco}`);
   }

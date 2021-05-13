@@ -29,10 +29,18 @@
         <img [src]="produto!.produto!.imageToShow[0]" class="img-fluid">
       </div>
       <div class="col-lg-8 mt-2 mb-2" *ngIf="produto">
-        <span class="font-weight-bold">{{produto.produto!.nome}}</span>
+        <p><span class="font-weight-bold">{{produto.produto!.nome}}</span></p>
+       <p><span class="font-weight-bold">Quantidade:</span> {{produto.quantidade}}</p>
       </div>
     </ng-container>
     </div>
+    <p><span><hr></span></p>
+  </div>
+  <div class="col-lg-12 mt-2 mb-2">
+    <p><span class="font-weight-bold"> Total dos produtos: </span><span>{{venda.valorParcial | currency:'BRL':'symbol':'0.2-2'}}</span></p>
+    <p><span class="font-weight-bold">Frete: </span><span>{{venda.frete!.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</span></p>
+    <p><span class="font-weight-bold">Descontos: </span><span>- {{venda.desconto | currency:'BRL':'symbol':'0.2-2'}}</span></p>
+    <p><span class="font-weight-bold total">Total: </span><span>{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}</span></p>
     <p><span><hr></span></p>
   </div>
 </div>

@@ -22,6 +22,9 @@ h3{
 .img-fluid{
   width: 70%;
 }
+.total{
+  font-size: 15px;
+}
 @media (max-width: 768px)   {
   .modal-title{
     font-size: 13px;

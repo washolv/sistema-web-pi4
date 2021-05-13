@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Venda } from 'src/app/modules/checkout/models/Venda';
 import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -18,7 +20,8 @@ import { ModalDetalhesPedidoComponent } from './modal-detalhes-pedido/modal-deta
 export class MeusPedidosComponent implements OnInit {
   vendas: Venda[]=[];
   public isSmallScreen = false;
-
+  searchFilter = new Subject<string>();
+  public filtroPesquisa: string = "";
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
      private router: Router, private clienteService: ClienteService,private breakpointObserver: BreakpointObserver, private vendaService: VendaService) {
   }
@@ -28,6 +31,15 @@ export class MeusPedidosComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
+    this.searchFilter.pipe(
+      debounceTime(1000),
+      distinctUntilChanged())
+      .subscribe(search => {
+        this.vendaService.getByIdNumPedido(this.roleGuardService.getUser().Id!, this.filtroPesquisa)
+          .subscribe((response: Venda[]) => {
+            this.vendas = response;
+          });
+      });
     this.vendaService.getByIdCliente(<number>this.roleGuardService.getUser().Id).subscribe(response=>{
       this.vendas=response;
       dialogRef.close();

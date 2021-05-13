@@ -21,15 +21,18 @@ export class ResumoPedidoComponent implements OnInit {
   enderecoEntrega = new EnderecoCliente();
   venda = new Venda();
   listaProdutosCarrinho: Carrinho[] = [];
-  valorParcela:number=0;
+  valorParcela: number = 0;
   constructor(private roleGuardService: RoleGuardService, private clienteService: ClienteService, private sanitizer: DomSanitizer, private dialog: MatDialog,
-    private router: Router, private produtoService: ProdutoService, private vendaService:VendaService) {
+    private router: Router, private produtoService: ProdutoService, private vendaService: VendaService) {
     let endereco = sessionStorage.getItem('endereco-entrega');
-    if (endereco) {
+    let frete = sessionStorage.getItem('frete');
+    if (endereco && frete) {
       this.enderecoEntrega = JSON.parse(endereco);
+      this.venda.frete = JSON.parse(frete);
     } else {
       this.router.navigate(['/carrinho/endereco-entrega'])
     }
+
   }
 
   ngOnInit() {
@@ -38,15 +41,15 @@ export class ResumoPedidoComponent implements OnInit {
       this.cliente = response;
     });
     let venda = sessionStorage.getItem('venda');
-    let produtos=sessionStorage.getItem('carrinho');
-    if(produtos){
+    let produtos = sessionStorage.getItem('carrinho');
+    if (produtos) {
       this.listaProdutosCarrinho = JSON.parse(produtos);
-    }else{
+    } else {
       this.router.navigate(['/carrinho'])
     }
     if (venda) {
       this.venda = JSON.parse(venda);
-      this.valorParcela=this.venda.valorTotal!/this.venda.parcelasCartao!;
+      this.valorParcela = this.venda.valorTotal! / this.venda.parcelasCartao!;
     } else {
       this.router.navigate(['/carrinho/pagamento'])
     }
@@ -76,25 +79,21 @@ export class ResumoPedidoComponent implements OnInit {
       });
     }
   }
-  enviar(){
-    this.venda.dataVenda=new Date();
-    this.venda.cliente=this.cliente;
-    this.venda.frete=JSON.parse(sessionStorage.getItem('frete')!);
-    this.venda.enderecoCliente=this.enderecoEntrega;
-    console.log(this.venda)
-    this.vendaService.postVenda(this.venda).subscribe(resp=>{
-      sessionStorage.removeItem('carrinho');
-      sessionStorage.removeItem('frete');
-      sessionStorage.removeItem('venda');
-      sessionStorage.removeItem('endereco-entrega');
-        this.dialog.open(ModalVendaCadastradaComponent, {
-          width: '600px',
-          data: {
-            produto: resp
-          }
-        });
-    }, err=>{
+  enviar() {
+    this.venda.dataVenda = new Date();
+    this.venda.cliente = this.cliente;
+    this.venda.frete = JSON.parse(sessionStorage.getItem('frete')!);
+    this.venda.enderecoCliente = this.enderecoEntrega;
+    this.vendaService.postVenda(this.venda).subscribe(resp => {
+      this.dialog.open(ModalVendaCadastradaComponent, {
+        width: '600px',
+        data: {
+          produto: resp
+        }
+      });
+    }, err => {
       console.log('FALHA AO CADASTRAR VENDA')
     })
+
   }
 }

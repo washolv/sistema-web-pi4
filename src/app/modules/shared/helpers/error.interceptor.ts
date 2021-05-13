@@ -9,22 +9,19 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: LoginService, private router: Router, private roleGuardService: RoleGuardService) { }
+  constructor(private authenticationService: LoginService, private router: Router, private roleGuardService: RoleGuardService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
-            if ([401].indexOf(err.status) !== -1) {
-                this.authenticationService.logout();
-            }else if([403].indexOf(err.status) !== -1){
-              this.router.navigate(['']);
-            }else if(!([404].indexOf(err.status) !== -1)){
-              sessionStorage.removeItem('frete');
-              sessionStorage.removeItem('venda');
-              sessionStorage.removeItem('carrinho');
-             this.authenticationService.logout();
-            }
-            const error = err.error.message || err.statusText;
-            return throwError(error);
-        }))
-    }
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(request).pipe(catchError(err => {
+      if ([401].indexOf(err.status) !== -1) {
+        this.authenticationService.logout();
+      } else if ([403].indexOf(err.status) !== -1) {
+        this.router.navigate(['']);
+      } else if (!([404].indexOf(err.status) !== -1)) {
+       // this.authenticationService.logout();
+      }
+      const error = err.error.message || err.statusText;
+      return throwError(error);
+    }))
+  }
 }

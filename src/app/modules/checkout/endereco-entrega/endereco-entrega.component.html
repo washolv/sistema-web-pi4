@@ -80,7 +80,7 @@
             <tr>
               <th></th>
               <th scope="col">VALOR</th>
-              <th scope="col" style="min-width: 200px;">MÉTODO DE ENVIO</th>
+              <th scope="col"   >MÉTODO DE ENVIO</th>
               <th scope="col">PRAZO</th>
             </tr>
           </thead>
@@ -165,22 +165,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!cliente.enderecoCobranca">
-        <div class="row col-lg-12 justify-content-center">
-          <div class="col-lg-12 mt-2 text-center">
-            <div class="custom-text-size1 ml-2">
-              Você ainda não possui um endereço de cobrança
-            </div>
-          </div>
-          <div class="col-lg-5 mt-3">
-            <button mat-button class="col-lg-12" (click)="adicionarEnderecoCobranca()" color="primary">Novo endereço de
-              cobrança</button>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="col-lg-4"></div>
-    <div class="row col-lg-12 justify-content-between" *ngIf="endereco && cliente.enderecoCobranca">
+    <div class="row col-lg-12 justify-content-between" *ngIf="endereco">
       <button class="btn text-center"></button>
       <button class="btn btn-primary col-lg-2 text-center" [disabled]="freteSelecionado.valorFrete==0" (click)="finalizarCompra()">Próximo<img
           src="./assets/icons/next.svg" class="img-button"></button>

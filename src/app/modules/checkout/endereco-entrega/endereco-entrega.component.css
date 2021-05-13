@@ -98,6 +98,9 @@ table{
 td {
   width: 25%;
 }
+th {
+  width: 25%;
+}
 @media (max-width: 768px)   {
   ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
     min-width: auto!important;

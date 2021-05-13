@@ -15,6 +15,7 @@ import { Carrinho } from '../models/carrinho';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from 'src/app/services/cart.service';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -50,6 +51,9 @@ export class EnderecoEntregaComponent implements OnInit {
   }
 
   ngOnInit() {
+    const dialogRef = this.dialog.open(LoadingComponent, {
+      panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
+    });
     let f=sessionStorage.getItem('frete');
     if(f){
       this.freteSelecionado=JSON.parse(f);
@@ -61,10 +65,13 @@ export class EnderecoEntregaComponent implements OnInit {
     this.clienteService.buscarCliente(this.id).subscribe(resp => {
       this.cliente = resp;
     })
-    this.clienteService.buscarEnderecos(this.id).subscribe(resp => {
-      this.enderecos = resp;
+    this.clienteService.buscarEnderecosAtivos(this.id).subscribe(resp => {
       this.endereco = resp[0];
-      this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
+      this.enderecos = resp;
+      if(resp && resp.length>0){
+        this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
+      }
+      dialogRef.close();
     })
   }
 
@@ -114,28 +121,9 @@ export class EnderecoEntregaComponent implements OnInit {
       console.log(err);
     });
   }
-  adicionarEnderecoCobranca() {
-    const dialogRef = this.openModal();
-    dialogRef.afterClosed().subscribe(response => {
-      if (response) {
-        this.cliente.enderecoCobranca = response;
-        this.clienteService.editarCliente(this.cliente).subscribe(response => {
-          this.toastr.success("Novo Endereço Cadastrado", "OK", {
-            timeOut: 3000, positionClass: 'toast-top-center',
-          });
-          this.ngOnInit();
-        }, err => {
-          this.toastr.error("Falha cadastrar endereço", "Erro", {
-            timeOut: 3000, positionClass: 'toast-top-center',
-          });
-        })
-      }
-    }, err => {
-      console.log(err);
-    });
-  }
 
   buscarProdutos() {
+    this.venda=new Venda();
     if(this.listaProdutosCarrinho && this.listaProdutosCarrinho.length>0){
       this.listaProdutosCarrinho.forEach(x => {
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {

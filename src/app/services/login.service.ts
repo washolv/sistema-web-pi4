@@ -27,6 +27,8 @@ export class LoginService {
     if(this.roleGuardService.getUserRole()){
       localStorage.removeItem('access_token');
       sessionStorage.removeItem('frete');
+      sessionStorage.removeItem('endereco-entrega');
+      sessionStorage.removeItem('venda');
       window.location.reload();
     }
     localStorage.removeItem('access_token');

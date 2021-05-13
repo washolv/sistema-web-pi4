@@ -17,13 +17,11 @@ export class ModalVendaCadastradaComponent implements OnInit {
 
   pedidos(){
     this.dialogRef.close();
-    this.cartService.adicionarProduto(this.data.produto.id, 1);
     this.router.navigate(['/configuracoes/meus-pedidos']);
   }
 
   dashboard(){
     this.dialogRef.close();
-    this.cartService.adicionarProduto(this.data.produto.id, 1);
     this.router.navigate(['/dashboard']);
   }
 }

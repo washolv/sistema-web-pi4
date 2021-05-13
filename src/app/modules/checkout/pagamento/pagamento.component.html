@@ -15,7 +15,7 @@
           <hr>
         </div>
       </div>
-      <div class="col-lg-12 justify-content-center" *ngIf="cliente && cliente.enderecoCobranca">
+      <div class="col-lg-12 justify-content-center" *ngIf="cliente ">
         <mat-tab-group (selectedTabChange)="tabChanged($event)">
           <mat-tab label="Cartão de Crédito">
             <div class="col-lg-12 mt-2 mb-2 font-weight-bold">
@@ -30,7 +30,7 @@
                 <label for="validationDefault02">Forma de pagamento*</label>
               </div>
               <div class="col-lg-8">
-                <select class="form-control" aria-label="null" (change)="setParcelas($event.target)">
+                <select class="form-control" aria-label="null" (change)="setParcelas($event.target)" *ngIf="parcelas && parcelas[0]">
                   <option [value]="parcelas[0].totalParcelas">{{parcelas[0].totalParcelas}} vez de {{parcelas[0].valor |
                     currency:'BRL':'symbol':'0.2-2'}} com 10% de desconto</option>
                   <ng-container *ngFor="let pagamento of parcelas; let i=index">
@@ -286,27 +286,14 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!cliente.enderecoCobranca">
-        <div class="row col-lg-12 justify-content-center">
-          <div class="col-lg-12 mt-2 text-center">
-            <div class="custom-text-size1 ml-2">
-              Você ainda não possui um endereço de cobrança
-            </div>
-          </div>
-          <div class="col-lg-5 mt-3">
-            <button mat-button class="col-lg-12" (click)="adicionarEnderecoCobranca()" color="primary">Novo endereço de
-              cobrança</button>
-          </div>
-        </div>
-      </div>
       <div class="row col-lg-12 justify-content-between mb-5" *ngIf="tabIndex==0">
         <button class="btn text-center"></button>
-        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Pagar com cartão<img
+        <button class="btn btn-primary col-lg-7 text-center" [disabled]="!cliente.enderecoCobranca"(click)="finalizarCompra()">Pagar com cartão<img
             src="./assets/icons/next.svg" class="img-button"></button>
       </div>
       <div class="row col-lg-12 justify-content-between mb-5" *ngIf="tabIndex==1">
         <button class="btn text-center"></button>
-        <button class="btn btn-primary col-lg-7 text-center" (click)="finalizarCompra()">Pagar com boleto<img
+        <button class="btn btn-primary col-lg-7 text-center" [disabled]="!cliente.enderecoCobranca" (click)="finalizarCompra()">Pagar com boleto<img
             src="./assets/icons/next.svg" class="img-button"></button>
       </div>
     </div>
