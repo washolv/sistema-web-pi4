@@ -121,6 +121,7 @@ export class PagamentoComponent implements OnInit {
   }
 
   buscarProdutos() {
+    this.venda=new Venda();
     if (this.listaProdutosCarrinho && this.listaProdutosCarrinho.length > 0) {
       this.listaProdutosCarrinho.forEach(x => {
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {
@@ -139,22 +140,22 @@ export class PagamentoComponent implements OnInit {
           this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;
           this.valorTotal = this.venda.valorTotal;
-          let teste = new Array();
+          this.venda.valorParcial=this.valorTotal;
+          let parc = new Array();
           for (let i = 1; i <= 12; i++) {
             let valorParcela = this.valorTotal! / i;
             if (i == 1) {
               valorParcela = valorParcela - (valorParcela * 0.1);
             }
-            teste.push({ valor: valorParcela, totalParcelas: i });
+            parc.push({ valor: valorParcela, totalParcelas: i });
           }
-          this.parcelas = teste;
+          this.parcelas = parc;
           this.descontoBoleto = this.valorTotal! * 0.15;
           this.descontoCartao = this.valorTotal! * 0.1;
-          this.venda.valorParcial = this.valorTotal;
           this.venda.pagamento = "Cartão";
           this.venda.desconto = this.descontoCartao;
           this.venda.parcelasCartao = 1;
-          this.venda.valorTotal = this.venda.valorParcial! - this.venda.desconto!;
+          this.calculaTotal();
         })
       });
     }
@@ -162,7 +163,6 @@ export class PagamentoComponent implements OnInit {
   }
   calculaTotal() {
     this.venda.valorTotal = 0;
-    console.log(this.freteSelecionado)
     this.venda.detalhesVenda!.forEach(sub => {
       this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
     })
@@ -180,7 +180,6 @@ export class PagamentoComponent implements OnInit {
       this.venda.valorTotal = this.venda.valorParcial! - this.venda.desconto!;
     } else {
       this.venda.pagamento = "Boleto";
-      this.venda.parcelasCartao = 0;
       this.venda.desconto = this.descontoBoleto;
       this.venda.valorTotal = this.venda.valorParcial! - this.venda.desconto!;
       this.formValid = true;
@@ -196,12 +195,9 @@ export class PagamentoComponent implements OnInit {
     this.venda.desconto=this.descontoCartao;
     this.venda.valorTotal=this.venda.valorParcial!-this.venda.desconto;
   }
-  validarForm(event: any) {
-    console.log(event);
-  }
+
   finalizarCompra() {
     let detalhesNull = [] = [];
-    console.log(this.venda)
     if (this.tabIndex == 0) {
       if (this.cardForm.valid) {
         let frete = sessionStorage.getItem('frete');
@@ -213,7 +209,6 @@ export class PagamentoComponent implements OnInit {
         this.router.navigate(['/carrinho/resumo-do-pedido'])
       } else {
         this.formValid = false;
-        console.log(this.cardForm.controls)
       }
     } else {
       let frete = sessionStorage.getItem('frete');

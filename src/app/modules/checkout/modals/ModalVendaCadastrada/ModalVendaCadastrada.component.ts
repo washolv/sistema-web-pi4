@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { Venda } from '../../models/Venda';
 
 @Component({
   selector: 'app-ModalVendaCadastrada',
@@ -9,8 +10,12 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./ModalVendaCadastrada.component.css']
 })
 export class ModalVendaCadastradaComponent implements OnInit {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cartService: CartService,private router: Router,public dialogRef: MatDialogRef<ModalVendaCadastradaComponent>) { }
+  venda: Venda =new Venda();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cartService: CartService,private router: Router,public dialogRef: MatDialogRef<ModalVendaCadastradaComponent>) {
+    if(data){
+        this.venda=data.produto;
+    }
+   }
 
   ngOnInit() {
   }

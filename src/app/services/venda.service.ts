@@ -26,6 +26,6 @@ export class VendaService {
     const httpOptions = {
       headers: new HttpHeaders({ numeroPedido : num }),
     };
-    return this.http.get<Venda[]>(`${this.apiUrl}/vendas/numeroPedido/${id},`,httpOptions);
+    return this.http.get<Venda[]>(`${this.apiUrl}/vendas/numeroPedido/cliente/${id},`,httpOptions);
   }
 }

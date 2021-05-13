@@ -22,6 +22,8 @@ export class MeusPedidosComponent implements OnInit {
   public isSmallScreen = false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
+  totalRegistros: number=0;
+  page: number=1
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
      private router: Router, private clienteService: ClienteService,private breakpointObserver: BreakpointObserver, private vendaService: VendaService) {
   }

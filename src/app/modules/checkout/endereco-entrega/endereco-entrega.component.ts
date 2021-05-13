@@ -138,6 +138,7 @@ export class EnderecoEntregaComponent implements OnInit {
           itemCarrinho.produto = produto;
           itemCarrinho.quantidade = x.quantidade;
           itemCarrinho.subTotal = produto.preco! * x.quantidade!;
+          console.log(itemCarrinho.subTotal)
           this.venda.detalhesVenda?.push(itemCarrinho);
           this.venda.valorTotal = this.venda.valorTotal! + itemCarrinho.subTotal;
           this.venda.quantidadeTotal! += x.quantidade!;

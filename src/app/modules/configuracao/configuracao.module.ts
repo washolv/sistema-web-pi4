@@ -43,7 +43,6 @@ const routes = [
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
     MDBBootstrapModule,
     CurrencyMaskModule,
@@ -65,6 +64,7 @@ const routes = [
     CurrencyMaskModule,
     MatProgressSpinnerModule,
     NgxMaskModule.forChild(),
+    NgxPaginationModule
   ],
   declarations: [
     ConfiguracaoComponent,

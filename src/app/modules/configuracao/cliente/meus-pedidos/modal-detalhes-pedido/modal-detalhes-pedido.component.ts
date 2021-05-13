@@ -39,7 +39,6 @@ export class ModalDetalhesPedidoComponent implements OnInit {
           p.imageToShow = [];
           p.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
         })
-        console.log(p);
         detalhe.produto=p;
       })
     }
