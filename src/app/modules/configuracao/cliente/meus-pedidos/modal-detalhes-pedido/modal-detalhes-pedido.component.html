@@ -10,7 +10,7 @@
   <div class="col-lg-12 mt-2 mb-2">
     <h3>Informações do Pedido</h3>
     <p><span class="font-weight-bold">Data do Pedido:</span> {{venda.dataVenda | date: 'dd/MM/yyyy'}}</p>
-    <p><span class="font-weight-bold">Forma de Pagamento: </span>{{venda.pagamento}}</p>
+    <p><span class="font-weight-bold">Forma de Pagamento: </span>{{venda.pagamento}}<span *ngIf="venda.pagamento=='Cartão'">, parcelado em {{venda.parcelasCartao}}x </span> </p>
     <p><span class="font-weight-bold">Status do Pedido:</span> {{venda.status}}</p>
     <p><span><hr></span></p>
   </div>
