@@ -46,7 +46,19 @@ const routes: Routes = [
   {
     path: 'carrinho', component: MainNavComponent,
     loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
-  }
+  },
+  {
+    path: 'vendas', component: MainNavComponent,
+    loadChildren: () => import('./modules/venda/venda.module').then(m => m.VendaModule),
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: ['ROLE_ADMIN', 'ROLE_ESTOQUISTA']
+    }
+  },
+  {
+    path: 'carrinho', component: MainNavComponent,
+    loadChildren: () => import('./modules/checkout/checkout.module').then(m => m.CheckoutModule),
+  },
 ];
 
 @NgModule({

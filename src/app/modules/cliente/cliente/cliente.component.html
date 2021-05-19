@@ -7,18 +7,13 @@
     </div>
   </div>
   <hr>
-  <app-adicionar-endereco></app-adicionar-endereco>
-
   <div class="row col-12 col-sm-12 col-md-12">
     <!--INPUT FILTRAGEM DE clienteS-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 mb-0">
       <div class="row d-flex justify-content-center mt-3 mb-5">
         <input class="ml-0 col-lg-4 col-md-6 col sm-6 custom-input-search" type="text" placeholder="Pesquise"
           (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
-        <label class="ml-1 custom-lbl-filter">
-          <button class=" btn custon-btn-filter">
-          </button>
-        </label>
+
       </div>
       <!--FIM INPUT FILTRAGEM DE clienteS-->
     </div>

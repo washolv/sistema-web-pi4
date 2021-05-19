@@ -9,11 +9,11 @@ import * as moment from 'moment';
 import { CartService } from 'src/app/services/cart.service';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { Produto } from '../../produto/models/Produto';
-import { LoadingComponent } from '../../shared/loading/loading.component';
-import { Carrinho } from '../models/carrinho';
-import { Frete } from '../models/Frete';
-import { DetalhesVenda, Venda } from '../models/Venda';
+import { Produto } from '../../../produto/models/Produto';
+import { LoadingComponent } from '../../../shared/loading/loading.component';
+import { Carrinho } from '../../models/carrinho';
+import { Frete } from '../../models/Frete';
+import { DetalhesVenda, Venda } from '../../models/Venda';
 
 @Component({
   selector: 'app-checkout',
@@ -79,7 +79,6 @@ export class CheckoutComponent implements OnInit {
 
   plus(index: number) {
     let qtd = <number>this.venda.detalhesVenda![index].quantidade;
-    let subTotal = this.venda.detalhesVenda![index].subTotal!;
     let estoque = this.venda.detalhesVenda![index].produto!.quantidadeEstoque;
     if (qtd < estoque!) {
       let qtd = <number>this.venda.detalhesVenda![index].quantidade;

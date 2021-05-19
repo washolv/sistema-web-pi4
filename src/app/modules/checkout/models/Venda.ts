@@ -17,6 +17,7 @@ export class Venda {
   detalhesVenda?:DetalhesVenda[]=[];
   quantidadeTotal?:number=0;
   frete?: Frete;
+  statusvenda?:StatusVenda[];
 }
 
 export class DetalhesVenda {
@@ -24,5 +25,11 @@ export class DetalhesVenda {
   subTotal?: number;
   quantidade?:number=1;
   produto?: Produto;
+}
+
+export class StatusVenda{
+  id?: number;
+  descricao?:string;
+  data?:Date;
 }
 

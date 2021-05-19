@@ -24,6 +24,7 @@ import { MainNavClienteComponent } from './modules/shared/main-nav/main-nav-clie
 import { MainNavComponent } from './modules/shared/main-nav/main-nav/main-nav.component';
 import { ConfiguracaoModule } from './modules/configuracao/configuracao.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { VendaModule } from './modules/venda/venda.module';
 
 
 
@@ -48,6 +49,7 @@ const routes: Routes = [
     LoginModule,
     CheckoutModule,
     SharedModule,
+    VendaModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,

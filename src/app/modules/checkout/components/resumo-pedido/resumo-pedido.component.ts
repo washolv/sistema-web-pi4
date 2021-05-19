@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Cliente, EnderecoCliente } from 'src/app/modules/cliente/models/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
-import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
-import { ModalVendaCadastradaComponent } from '../modals/ModalVendaCadastrada/ModalVendaCadastrada.component';
-import { Carrinho } from '../models/carrinho';
-import { DetalhesVenda, Venda } from '../models/Venda';
+import { ModalVendaCadastradaComponent } from '../../modals/ModalVendaCadastrada/ModalVendaCadastrada.component';
+import { Carrinho } from '../../models/carrinho';
+import { DetalhesVenda, Venda } from '../../models/Venda';
 
 @Component({
   selector: 'app-resumo-pedido',

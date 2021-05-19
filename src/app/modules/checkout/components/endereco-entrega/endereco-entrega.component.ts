@@ -3,19 +3,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
-import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
-import { ModalAdicionarEnderecoClienteComponent } from '../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
+import { Cliente, EnderecoCliente } from '../../../cliente/models/Cliente';
+import { ModalAdicionarEnderecoClienteComponent } from '../../../configuracao/cliente/endereco-cliente/modals/modal-adicionar-endereco-cliente/modal-adicionar-endereco-cliente.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { DetalhesVenda, Venda } from '../models/Venda';
+import { DetalhesVenda, Venda } from '../../models/Venda';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { VendaService } from 'src/app/services/venda.service';
-import { Frete } from '../models/Frete';
-import { Carrinho } from '../models/carrinho';
+import { Frete } from '../../models/Frete';
+import { Carrinho } from '../../models/carrinho';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from 'src/app/services/cart.service';
-import { LoadingComponent } from '../../shared/loading/loading.component';
+import { LoadingComponent } from '../../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-endereco-entrega',
@@ -54,6 +54,7 @@ export class EnderecoEntregaComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
+
     let f=sessionStorage.getItem('frete');
     if(f){
       this.freteSelecionado=JSON.parse(f);

@@ -10,6 +10,7 @@
       <li class="nav-item"><a class="nav-link" routerLink="/produtos">Produtos</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/funcionarios">Funcionarios</a></li>
       <li class="nav-item" *ngIf="userRole==='ROLE_ADMIN'"><a class="nav-link" routerLink="/clientes">Clientes</a></li>
+      <li class="nav-item" *ngIf="userRole==='ROLE_ADMIN'"><a class="nav-link" routerLink="/vendas">Vendas</a></li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">

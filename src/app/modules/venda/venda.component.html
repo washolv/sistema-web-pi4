@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="row col-lg-12">
+      <div class="row col-1 font-bold">
+        <button class="mt-3 btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"
+            alt="First slide"></button>
+      </div>
+      <div class="col-lg-10 font-weight-bold text-center mt-5 mb-3" style="font-size: 18px;">
+        Listagem de Vendas
+      </div>
+      <div class="col-lg-12">
+        <hr>
+      </div>
+      <div class="row col-lg-12">
+        <div class="col-lg-12 d-flex justify-content-center mt-3 mb-5">
+          <input class="ml-0 col-lg-4 col-md-6 col sm-6 custom-input-search" type="text" placeholder="Pesquise"
+            (ngModelChange)="this.searchFilter.next($event)" [(ngModel)]="filtroPesquisa" />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="boxcart col-12 pb-3 col-md-12 px-0">
+        <div class="bordas-cart">
+          <div class="row text-white px-2 mx-0 border-bottom custom-table">
+            <div class="col-2 py-1 d-none d-md-block">
+              <span class="d-none d-xl-block"><span>Número do Pedido</span></span>
+            </div>
+            <div class="col-2  py-1 d-none d-md-block">
+              <span>Data</span>
+            </div>
+            <div class="col-2 py-1 d-none d-md-block">
+              <span>Valor Total</span>
+            </div>
+            <div class="col-2 py-1 d-none d-md-block">
+              <span class="d-none d-lg-inline">Posição</span>
+            </div>
+          </div>
+          <div class="col-12" *ngFor="let venda of vendas  | paginate: {id: 'listing_pagination',
+              itemsPerPage: 10,
+              currentPage: this.page,
+              totalItems: totalRegistros};let i=index">
+            <div class="row py-3">
+              <div class="col-lg-2 col-lg-1">
+                <div class="row">
+                  <div class="col-11 pt-2">
+                    {{venda.numeroPedido}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="row">
+                  <div class="col-12"><a class="text-dark"><span>{{venda.dataVenda | date: 'dd/MM/yyyy'}}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="row">
+                  <div class="col-lg-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
+                    {{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="row ">
+                  <div class="col-12 col-lg-6 mt-2 mt-lg-0 font-weight-bold">
+                    {{venda.status}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2  d-md-block">
+                <div class="row">
+                  <div class="col-lg-12 text-center col-lg-6 font-weight-bold">
+                    <button class="k-button" (click)="detalhes(venda)"> + DETALHES </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2  d-md-block">
+                <div class="row">
+                  <div class="col-lg-12 text-center col-lg-6 font-weight-bold">
+                    <button class="k-button" (click)="modificarStatus(venda)"> MODIFICAR STATUS </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row custom-pagination">
+        <div class="col-lg-8 "></div>
+        <div class="custom-table-container">
+          <pagination-controls id="listing_pagination" maxlength='5' previousLabel="Anterior" nextLabel="próximo"
+            (pageChange)="page = $event">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
