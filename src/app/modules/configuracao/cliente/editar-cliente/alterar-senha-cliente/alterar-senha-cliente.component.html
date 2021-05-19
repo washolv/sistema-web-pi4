@@ -8,12 +8,34 @@
 
   <div class="modal-body">
     <form [formGroup]="formSenha">
-      <input class="form-control" formControlName="senha" type="password" required name="senha" id="senha"
-        [ngClass]="{'is-invalid': !formValid && f.senha.errors}">
-      <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
-        <div *ngIf="f.senha.errors.required">* Campo obrigatório</div>
-        <div *ngIf="f.senha.errors.minlength">* Senha inválida</div>
+      <div class="form-row mt-1 mb-1">
+        <label for="validationDefault01">* Senha Atual</label>
+        <input class="form-control" formControlName="senhaAtual" type="password" required name="senhaAtual"
+          id="senhaAtual" [ngClass]="{'is-invalid': (!formValid && f.senhaAtual.errors ) || !senhaAtualValida  }">
+          <div *ngIf="!senhaAtualValida"  class="invalid-feedback">
+            Senha inválida
+           </div>
+
       </div>
+      <div class="form-row mt-1 mb-1">
+        <label for="validationDefault01">* Nova senha</label>
+        <input class="form-control" formControlName="senha" type="password" required name="senha" id="senha"
+          [ngClass]="{'is-invalid': (!formValid && f.senha.errors ) || !senhasIguais}" (change)="compararSenhas()">
+        <div *ngIf="!formValid && f.senha.errors" class="invalid-feedback">
+          <div *ngIf="f.senha.errors.minlength">* A senha deve conter ao menos 3 caracteres</div>
+        </div>
+        <div *ngIf="!f.senha.errors" style="color: white;">*</div>
+      </div>
+      <div class="form-row mt-1 mb-1">
+        <label for="validationDefault01">* Nova senha</label>
+        <input class="form-control" formControlName="confirmasenha" type="password" required name="confirmasenha"
+          id="confirmasenha" [ngClass]="{'is-invalid': (!formValid && f.confirmasenha.errors) || !senhasIguais }"
+          (change)="compararSenhas()">
+        <div *ngIf="!senhasIguais" class="invalid-feedback">
+          * As senhas não são iguais
+        </div>
+      </div>
+
     </form>
   </div>
   <div class="modal-footer">

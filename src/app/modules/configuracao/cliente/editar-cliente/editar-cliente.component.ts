@@ -109,7 +109,7 @@ export class EditarClienteComponent implements OnInit {
 
   alterarSenha() {
     const dialogRef = this.dialog.open(AlterarSenhaClienteComponent, {
-      panelClass: 'custom-modais', backdropClass: 'blur',
+      minHeight: '300px', minWidth:'500px',
       data: {
         cliente: this.cliente
       }

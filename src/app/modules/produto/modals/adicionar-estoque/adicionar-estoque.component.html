@@ -6,8 +6,15 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="qtdEstoque">
-    <label>Qtd de entrada: </label>
-    <input type="number" class="form-control" formControlName="estoque">
+    <div class="form-row col-lg-12">
+      <label>Qtd de entrada: </label>
+      <input type="number" class="form-control" formControlName="estoque" [ngClass]="{ 'is-invalid': !formValid && estoqueNegativo }">
+      <div *ngIf="!formValid" class="invalid-feedback">
+        <div *ngIf="estoqueNegativo">
+          * Estoque não pode ser negativo
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 <div class="modal-footer">

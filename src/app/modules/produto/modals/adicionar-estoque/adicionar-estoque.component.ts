@@ -13,7 +13,7 @@ export class AdicionarEstoqueComponent implements OnInit {
   public produto: Produto = new Produto();
   public qtdEstoque: FormGroup;
   public formValid = true;
-
+  public estoqueNegativo = false;
   constructor(public dialogRef: MatDialogRef<AdicionarEstoqueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -42,14 +42,16 @@ export class AdicionarEstoqueComponent implements OnInit {
 
   confirmar() {
     if (this.qtdEstoque.valid) {
-      this.produto.quantidadeEstoque = this.produto.quantidadeEstoque + this.qtdEstoque.value.estoque;
+      let novoValor = this.produto.quantidadeEstoque + this.qtdEstoque.value.estoque;
+      if (novoValor < 0) {
+        this.estoqueNegativo = true;
+        this.formValid = false;
+        return;
+      }
+      this.produto.quantidadeEstoque = novoValor;
       this.closeX();
     } else {
       this.formValid = false;
     }
   }
-
-
-
-
 }

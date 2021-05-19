@@ -24,7 +24,8 @@ export class CriarContaComponent implements OnInit {
   public localidade: string = '';
   public uf: string = '';
   public logradouro: string = '';
-
+  public senhasIguais: boolean=true;
+   primeira=true;
   constructor(private toastr: ToastrService, private clienteService: ClienteService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formCliente = this.createFormCliente();
     let endereco: EnderecoCliente=new EnderecoCliente();
@@ -79,9 +80,21 @@ export class CriarContaComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
+        ])),
+        confirmasenha: new FormControl('',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
         ]))});
   }
-
+  comparaSenhas(){
+    if(this.f.confirmasenha.value==this.f.senha.value){
+      this.senhasIguais=true;
+    }else{
+      this.senhasIguais=false;
+    }
+    this.primeira=false;
+  }
   public addCliente() {
     if (this.formCliente.valid) {
       console.log('*********************');
