@@ -27,7 +27,7 @@
         <div *ngIf="!f.senha.errors" style="color: white;">*</div>
       </div>
       <div class="form-row mt-1 mb-1">
-        <label for="validationDefault01">* Nova senha</label>
+        <label for="validationDefault01">* Confirmar senha</label>
         <input class="form-control" formControlName="confirmasenha" type="password" required name="confirmasenha"
           id="confirmasenha" [ngClass]="{'is-invalid': (!formValid && f.confirmasenha.errors) || !senhasIguais }"
           (change)="compararSenhas()">
