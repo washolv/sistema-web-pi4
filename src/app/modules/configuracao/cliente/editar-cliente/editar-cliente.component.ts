@@ -13,6 +13,7 @@ import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { TokenDecoded } from 'src/app/modules/login/login/models/TokenDecoded';
 import { AlterarSenhaClienteComponent } from './alterar-senha-cliente/alterar-senha-cliente.component';
 import { LoadingComponent } from 'src/app/modules/shared/loading/loading.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 @Component({
@@ -28,8 +29,9 @@ export class EditarClienteComponent implements OnInit {
   private usuario: Usuario = new Usuario;
   public color: ThemePalette = 'primary';
   public id?: number;
+  isSmallScreen=false;
   constructor(private dialog: MatDialog, private toastr: ToastrService, private route: ActivatedRoute, private clienteService: ClienteService, private fb: FormBuilder,
-    public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService) {
+    public router: Router, private http: HttpClient, private roleGuardService: RoleGuardService,private breakpointObserver: BreakpointObserver) {
     let user = this.roleGuardService.getUser();
     this.id = user.Id;
     this.formCliente = this.createFormCliente(this.cliente);
@@ -108,28 +110,54 @@ export class EditarClienteComponent implements OnInit {
   }
 
   alterarSenha() {
-    const dialogRef = this.dialog.open(AlterarSenhaClienteComponent, {
-      minHeight: '300px', minWidth:'500px',
-      data: {
-        cliente: this.cliente
-      }
-    });
-    dialogRef.afterClosed().subscribe(response => {
-      if (response) {
-        this.cliente = response;
-        this.clienteService.editarCliente(this.cliente).subscribe(response => {
-          this.toastr.success("Senha alterada com sucesso", "OK", {
-            timeOut: 3000, positionClass: 'toast-top-center',
-          });
-        }, err => {
-          this.toastr.error("Falha ao alterar senha", "Erro", {
-            timeOut: 3000, positionClass: 'toast-top-center',
-          });
-        })
-      }
-    }, err => {
-      console.log(err);
-    });
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
+    if(this.isSmallScreen){
+      const dialogRef = this.dialog.open(AlterarSenhaClienteComponent, {
+        data: {
+          cliente: this.cliente
+        }
+      });
+      dialogRef.afterClosed().subscribe(response => {
+        if (response) {
+          this.cliente = response;
+          this.clienteService.editarCliente(this.cliente).subscribe(response => {
+            this.toastr.success("Senha alterada com sucesso", "OK", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+          }, err => {
+            this.toastr.error("Falha ao alterar senha", "Erro", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+          })
+        }
+      }, err => {
+        console.log(err);
+      });
+    }else{
+      const dialogRef = this.dialog.open(AlterarSenhaClienteComponent, {
+        minHeight: '300px', minWidth:'500px',
+        data: {
+          cliente: this.cliente
+        }
+      });
+      dialogRef.afterClosed().subscribe(response => {
+        if (response) {
+          this.cliente = response;
+          this.clienteService.editarCliente(this.cliente).subscribe(response => {
+            this.toastr.success("Senha alterada com sucesso", "OK", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+          }, err => {
+            this.toastr.error("Falha ao alterar senha", "Erro", {
+              timeOut: 3000, positionClass: 'toast-top-center',
+            });
+          })
+        }
+      }, err => {
+        console.log(err);
+      });
+    }
+
   }
 }
 
