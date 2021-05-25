@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseAPIUrl: 'https://api-sistemawebtlgne.herokuapp.com',
+  baseAPIUrl: 'https://api-sistemaweb.herokuapp.com',
   urlFront:'https://ecommercetlgne.vercel.app/',
   production: false,
   clientId:'my-angular-app',
