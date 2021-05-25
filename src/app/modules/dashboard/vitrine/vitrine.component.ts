@@ -70,7 +70,7 @@ export class VitrineComponent implements OnInit {
 
     if (categoria == "") {
       this.produtoService.getProdutosHabilitados().subscribe((response: HttpResponse<Produto[]>) => {
-        this.produtos = <Produto[]>response.body,
+        this.produtos = <Produto[]>response.body?.filter(x=> x.status=1),
           this.produtos.forEach(produto => {
             produto.imageToShow = [];
             this.produtoService.getImagensProduto(produto.id!).subscribe(response => {

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   public formValid = true;
   public floating = true;
   public usuarioAutenticado: AuthenticatedUser = new AuthenticatedUser();
-
+  public apiUrl: string;
   constructor(private toastr: ToastrService, private fb: FormBuilder, private router: Router, private loginService: LoginService, private roleGuardService: RoleGuardService) {
     this.floating = true;
     this.loginForm = this.fb.group({
@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         Validators.email
       ])),
     });
+    this.apiUrl = environment.baseAPIUrl;
   }
   get f() { return this.loginForm.controls; }
 
