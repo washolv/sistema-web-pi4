@@ -68,7 +68,7 @@ export class EnderecoEntregaComponent implements OnInit {
     })
     this.clienteService.buscarEnderecosAtivos(this.id).subscribe(resp => {
       this.endereco = resp[0];
-      this.enderecos = resp;
+      this.enderecos = resp.filter(x=> x.status=true);
       if(resp && resp.length>0){
         this.fretes=this.cartService.calculaFrete(this.endereco.cep!);
       }
