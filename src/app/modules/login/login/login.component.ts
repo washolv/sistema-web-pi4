@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         Validators.email
       ])),
     });
-    this.apiUrl = environment.baseAPIUrl;
+    this.apiUrl = environment.urlFront;
   }
   get f() { return this.loginForm.controls; }
 

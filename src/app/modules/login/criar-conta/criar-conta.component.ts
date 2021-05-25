@@ -32,7 +32,7 @@ export class CriarContaComponent implements OnInit {
     this.formCliente = this.createFormCliente();
     let endereco: EnderecoCliente=new EnderecoCliente();
     this.cliente.enderecos=[];
-    this.apiUrl = environment.baseAPIUrl;
+    this.apiUrl = environment.urlFront;
 
   }
 
