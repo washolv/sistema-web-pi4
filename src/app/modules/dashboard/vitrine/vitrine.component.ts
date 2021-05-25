@@ -77,9 +77,9 @@ export class VitrineComponent implements OnInit {
               response.forEach(element =>
                 produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
               )
+              dialogRef.close()
             })
           });
-        dialogRef.close()
         this.slides = this.chunk(this.produtos, 4);
       });
     } else {
