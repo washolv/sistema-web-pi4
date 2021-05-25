@@ -56,7 +56,7 @@ export class AlterarSenhaClienteComponent implements OnInit {
     if(this.senhaAtual!=this.f.senha.value){
       this.senhaAtualValida=false;
     }else{
-      this.senhaAtualValida=true;
+      this.senhaAtualValida=false;
     }
 
     if((this.formSenha.valid && this.senhasIguais) && this.senhaAtualValida){

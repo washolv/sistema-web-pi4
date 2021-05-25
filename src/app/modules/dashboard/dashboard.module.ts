@@ -20,7 +20,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import localePt from '@angular/common/locales/pt';
 import { DashboardAdministradorComponent } from './dashboard-funcionario/dashboard-administrador/dashboard-administrador.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { GraficoVendasComponent } from './dashboard-funcionario/graficos/GraficoVendas/GraficoVendas.component';
 import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
 import { TabelaVendasComponent } from './dashboard-funcionario/dashboard-administrador/tabela-vendas/tabela-vendas.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -69,7 +68,6 @@ registerLocaleData(localePt, 'pt');
     DashboardFuncionarioComponent,
     DetalhesProdutoComponent,
     DashboardAdministradorComponent,
-    GraficoVendasComponent,
     GraficoVendasCategoriaComponent,
     TabelaVendasComponent,
     ModalProdutoCarrinhoComponent

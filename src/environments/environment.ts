@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseAPIUrl: 'http://localhost:8080',
+  baseAPIUrl: 'https://dashboard.heroku.com/apps/api-sistemawebtlgne',
   production: false,
   clientId:'my-angular-app',
   clientSecret:'@321',

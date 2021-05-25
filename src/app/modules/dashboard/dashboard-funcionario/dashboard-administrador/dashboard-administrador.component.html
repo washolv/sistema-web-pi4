@@ -60,7 +60,11 @@
     <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
       <div class="row">
         <div class="col-lg-7">
-          <app-GraficoVendas></app-GraficoVendas>
+          <div id="chart">
+            <apx-chart baseChart *ngIf="chartOptions && chartOptions.chart" [series]="chartOptions.series"
+              [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis" [colors]="chartOptions.colors"
+              [title]="chartOptions.title" [stroke]="chartOptions.stroke" [grid]="chartOptions.ApexGrid"></apx-chart>
+              </div>
         </div>
         <div class="col-lg-5">
           <app-GraficoVendasCategoria></app-GraficoVendasCategoria>
