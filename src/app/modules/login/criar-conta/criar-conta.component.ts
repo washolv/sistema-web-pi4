@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ConsultaCepService } from 'src/app/services/consulta-cep.service';
+import { environment } from 'src/environments/environment';
 import { Cliente, EnderecoCliente } from '../../cliente/models/Cliente';
 import { Usuario } from '../../funcionario/models/Funcionario';
 
@@ -26,10 +27,13 @@ export class CriarContaComponent implements OnInit {
   public logradouro: string = '';
   public senhasIguais: boolean=true;
    primeira=true;
+  public  apiUrl: string;
   constructor(private toastr: ToastrService, private clienteService: ClienteService, private fb: FormBuilder, private buscarCepService: ConsultaCepService, public router: Router, private http: HttpClient) {
     this.formCliente = this.createFormCliente();
     let endereco: EnderecoCliente=new EnderecoCliente();
     this.cliente.enderecos=[];
+    this.apiUrl = environment.baseAPIUrl;
+
   }
 
   ngOnInit() {
