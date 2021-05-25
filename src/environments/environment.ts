@@ -4,7 +4,7 @@
 
 export const environment = {
   baseAPIUrl: 'https://api-sistemawebtlgne.herokuapp.com',
-  urlFront:'https://ecommercetlgne.vercel.app/#/',
+  urlFront:'https://ecommercetlgne.vercel.app/',
   production: false,
   clientId:'my-angular-app',
   clientSecret:'@321',
