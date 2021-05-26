@@ -14,17 +14,7 @@
   display: grid;
 }
 
-.custon-btn-filter{
-  background-image: url('/assets/icons/botao-de-menu.svg');
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  width: 50px;
-  height: 35px;
-  border: 1px solid #a09be9;
-  border-radius: 5px;
-  background-color: #a09be9;
-  outline: none;
-}
+
 .custom-input-search {
   background-image: url('/assets/icons/search.svg');
   background-repeat: no-repeat;

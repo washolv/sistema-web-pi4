@@ -16,8 +16,8 @@ import { VendidosCategoria, VendidosMes } from './models/VendidosCategoria';
 export class DashboardAdministradorComponent implements OnInit {
   public vendidosPorMes: VendidosMes[] = [];
   public vendidosCategoria: VendidosCategoria[] = [];
-  public totalProdutosVendidos:number=0;
-  public totalVendas:number=0;
+  public totalProdutosVendidos: number = 0;
+  public totalVendas: number = 0;
   @Output() messageEvent = new EventEmitter<VendidosMes[]>();
   chartOptionsCat: any;
   chartOptionsMonth: any;
@@ -38,11 +38,11 @@ export class DashboardAdministradorComponent implements OnInit {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-    this.relatorioVendasService.getTotalProdutosVendidos(startDate.toDate(), endDate.toDate()).subscribe(resp=>{
-      this.totalProdutosVendidos=resp;
+    this.relatorioVendasService.getTotalProdutosVendidos(startDate.toDate(), endDate.toDate()).subscribe(resp => {
+      this.totalProdutosVendidos = resp;
     })
-    this.relatorioVendasService.getTotalVendas(startDate.toDate(), endDate.toDate()).subscribe(resp=>{
-      this.totalVendas=resp;
+    this.relatorioVendasService.getTotalVendas(startDate.toDate(), endDate.toDate()).subscribe(resp => {
+      this.totalVendas = resp;
     })
     this.relatorioVendasService.getByCategory(startDate.toDate(), endDate.toDate()).subscribe(res => {
       this.vendidosCategoria = res;
@@ -66,6 +66,7 @@ export class DashboardAdministradorComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.selected = response;
+        console.log(response)
         this.getInfoCharts(this.selected?.startDate!, this.selected?.endDate!);
       }
     }, err => {
@@ -78,9 +79,15 @@ export class DashboardAdministradorComponent implements OnInit {
       series: this.getPorcentagem(),
       chart: {
         type: 'donut',
-        width: '66%',
+        width: '65%',
       },
       labels: this.getCategoria(),
+      dataLabels: {
+        enabled: true,
+        formatter: function (val: string) {
+          return val + "%"
+        }
+      },
       responsive: [{
         breakpoint: 480,
         options: {
@@ -154,6 +161,7 @@ export class DashboardAdministradorComponent implements OnInit {
         data.push(y.categoria!)
       })
     }
+    console.log(data)
     return data;
   }
   getPorcentagem() {

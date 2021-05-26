@@ -60,7 +60,7 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
       <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-7 grafico">
           <div id="chart">
             <apx-chart baseChart *ngIf="chartOptionsMonth && chartOptionsMonth.chart"
               [series]="chartOptionsMonth.series" [chart]="chartOptionsMonth.chart" [xaxis]="chartOptionsMonth.xaxis"
@@ -68,7 +68,7 @@
               [stroke]="chartOptionsMonth.stroke" [grid]="chartOptionsMonth.ApexGrid"></apx-chart>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5 grafico">
           <apx-chart baseChart *ngIf="chartOptionsCat && chartOptionsCat.chart" [series]="chartOptionsCat.series"
             [chart]="chartOptionsCat.chart" [xaxis]="chartOptionsCat.xaxis" [labels]="chartOptionsCat.labels"
             [yaxis]="chartOptionsCat.yaxis" [colors]="chartOptionsCat.colors" [title]="chartOptionsCat.title"

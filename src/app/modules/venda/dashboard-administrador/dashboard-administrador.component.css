@@ -29,8 +29,10 @@
 .custom-text-size30{
   font-size: 16px;
 }
-#grafico1, #grafico2{
-  background-color: white;
-  margin-right: auto;
-}
 
+
+@media(max-width: 768px)  {
+  .grafico{
+    display: none;
+  }
+}
