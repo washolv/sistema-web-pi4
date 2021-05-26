@@ -1,0 +1,105 @@
+.custom-table{
+  background-color: #0C3758;
+  border: none;
+}
+.k-button, .k-button--disabled {
+  padding: 9px 14px;
+  text-transform: uppercase;
+  border-width: 0;
+  box-shadow: 0 0 0 transparent;
+  -webkit-box-shadow: 0 0 0 transparent;
+  color: #ff5b23;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  display: inline-block;
+  outline: 0;
+  font-family: inherit;
+  font-size: 12px;
+}
+.custon-btn-filter{
+  background-image: url('/assets/icons/botao-de-menu.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 50px;
+  height: 35px;
+  border: 1px solid #0C3758;
+  border-radius: 5px;
+  background-color: #0C3758;
+  outline: none;
+}
+.custom-input-search {
+  background-image: url('/assets/icons/search.svg');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-color: #FCFCFC;
+  border: 1px solid #D2D2D2;
+  border-radius: 5px;
+  padding: 0 31px 0 10px;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  box-sizing: border-box;
+  height: 35px;
+  color: #444444;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #F1F1F1;
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #0C3750;
+}
+
+
+::ng-deep  .custom-table-container .ngx-pagination {
+  padding: 0;
+  font-size: 13px;
+  color: #F1F1F1;
+}
+
+::ng-deep .custom-table-container .ngx-pagination a:hover {
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+::ng-deep .custom-table-container .ngx-pagination .current {
+  background: #0C3750;
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+::ng-deep .custom-table-container .ngx-pagination a:hover {
+  border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+::ng-deep .ngx-pagination .pagination-previous,
+.ngx-pagination .pagination-previous.disabled,
+.ngx-pagination .pagination-previous.disabled:hover,
+.ngx-pagination .pagination-next,
+.ngx-pagination .pagination-next.disabled,
+.ngx-pagination .pagination-next.disabled:hover {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+::ng-deep .ngx-pagination .pagination-next::after,
+.ngx-pagination .pagination-next.disabled::after,
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-previous::before,
+.ngx-pagination .pagination-previous.disabled::before,
+.ngx-pagination .pagination-previous a::before {
+    content: "" !important;
+}
+
+::ng-deep .ngx-pagination a:hover,
+.ngx-pagination button:hover {
+    background: none !important;
+}
+

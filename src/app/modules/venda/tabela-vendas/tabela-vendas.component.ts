@@ -8,29 +8,26 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
-import { Venda } from '../checkout/models/Venda';
-import { ModalDetalhesPedidoComponent } from '../configuracao/cliente/meus-pedidos/modal-detalhes-pedido/modal-detalhes-pedido.component';
-import { LoadingComponent } from '../shared/loading/loading.component';
-import { StatusPedidoComponent } from './status-pedido/status-pedido.component';
+import { Venda } from '../../checkout/models/Venda';
+import { ModalDetalhesPedidoComponent } from '../../configuracao/cliente/meus-pedidos/modal-detalhes-pedido/modal-detalhes-pedido.component';
+import { LoadingComponent } from '../../shared/loading/loading.component';
+import { StatusPedidoComponent } from '../status-pedido/status-pedido.component';
+
 
 @Component({
-  selector: 'app-venda',
-  templateUrl: './venda.component.html',
-  styleUrls: ['./venda.component.css']
+  selector: 'app-tabela-vendas',
+  templateUrl: './tabela-vendas.component.html',
+  styleUrls: ['./tabela-vendas.component.css']
 })
-export class VendaComponent implements OnInit {
+export class TabelaVendasComponent implements OnInit {
   vendas: Venda[]=[];
   public isSmallScreen = false;
   searchFilter = new Subject<string>();
   public filtroPesquisa: string = "";
   totalRegistros: number=0;
   page: number=1;
-  public isAdmin=false;
-  public userRole;
   constructor(private toastr: ToastrService,private roleGuardService: RoleGuardService,private dialog: MatDialog,
     private router: Router, private clienteService: ClienteService,private breakpointObserver: BreakpointObserver, private vendaService: VendaService) {
-      this.userRole=this.roleGuardService.getUserRole();
-      this.isAdmin=this.userRole=='ROLE_ADMIN';
  }
 
 
@@ -118,4 +115,5 @@ export class VendaComponent implements OnInit {
       console.log(err);
     });
   }
+
 }

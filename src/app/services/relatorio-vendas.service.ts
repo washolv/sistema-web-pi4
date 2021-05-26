@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { VendidosCategoria, VendidosMes } from '../modules/dashboard/dashboard-funcionario/dashboard-administrador/models/VendidosCategoria';
+import { VendidosCategoria, VendidosMes } from '../modules/venda/dashboard-administrador/models/VendidosCategoria';
 
 @Injectable({
   providedIn: 'root'

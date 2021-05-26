@@ -18,10 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import localePt from '@angular/common/locales/pt';
-import { DashboardAdministradorComponent } from './dashboard-funcionario/dashboard-administrador/dashboard-administrador.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { GraficoVendasCategoriaComponent } from './dashboard-funcionario/graficos/GraficoVendasCategoria/GraficoVendasCategoria.component';
-import { TabelaVendasComponent } from './dashboard-funcionario/dashboard-administrador/tabela-vendas/tabela-vendas.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalProdutoCarrinhoComponent } from './modals/modal-produto-carrinho/modal-produto-carrinho.component';
 import { MainNavComponent } from '../shared/main-nav/main-nav/main-nav.component';
@@ -67,9 +64,6 @@ registerLocaleData(localePt, 'pt');
     VitrineComponent,
     DashboardFuncionarioComponent,
     DetalhesProdutoComponent,
-    DashboardAdministradorComponent,
-    GraficoVendasCategoriaComponent,
-    TabelaVendasComponent,
     ModalProdutoCarrinhoComponent
   ],
   exports: [

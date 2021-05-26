@@ -1,16 +1,6 @@
-<app-dashboard-administrador *ngIf="isAdmin"></app-dashboard-administrador>
-<app-tabela-vendas *ngIf="isAdmin"></app-tabela-vendas>
-
-<div class="container-fluid" *ngIf="!isAdmin">
+<div class="container-fluid">
   <div class="row">
     <div class="row col-lg-12">
-      <div class="row col-1 font-bold">
-        <button class="mt-3 btn" type="submit" (click)="backPage()"><img src="./assets/icons/voltar.svg"
-            alt="First slide"></button>
-      </div>
-      <div class="col-lg-10 font-weight-bold text-center mt-5 mb-3" style="font-size: 18px;">
-        Listagem de Vendas
-      </div>
       <div class="col-lg-12">
         <hr>
       </div>
@@ -39,7 +29,7 @@
             </div>
           </div>
           <div class="col-12" *ngFor="let venda of vendas  | paginate: {id: 'listing_pagination',
-              itemsPerPage: 10,
+              itemsPerPage: 5,
               currentPage: this.page,
               totalItems: totalRegistros};let i=index">
             <div class="row py-3">

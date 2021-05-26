@@ -19,6 +19,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { VendaComponent } from './venda.component';
 import { StatusPedidoComponent } from './status-pedido/status-pedido.component';
+import { DashboardAdministradorComponent } from './dashboard-administrador/dashboard-administrador.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { TabelaVendasComponent } from './tabela-vendas/tabela-vendas.component';
 
 
 const routes: Routes = [
@@ -52,8 +55,9 @@ const routes: Routes = [
     CurrencyMaskModule,
     MatProgressSpinnerModule,
     NgxMaskModule.forChild(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgApexchartsModule
   ],
-  declarations: [VendaComponent, StatusPedidoComponent  ]
+  declarations: [VendaComponent, StatusPedidoComponent, DashboardAdministradorComponent, TabelaVendasComponent]
 })
 export class VendaModule { }
