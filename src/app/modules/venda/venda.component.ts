@@ -50,7 +50,6 @@ export class VendaComponent implements OnInit {
      //<number>this.roleGuardService.getUser().Id
    this.vendaService.getByIdCliente(7).subscribe(response=>{
      this.vendas=response;
-     console.log(response)
      dialogRef.close();
    })
  }
@@ -89,7 +88,7 @@ export class VendaComponent implements OnInit {
       });
     } else {
       dialogRef = this.dialog.open(StatusPedidoComponent, {
-        maxHeight:'900px', width: '900px',
+        maxHeight:'600px', width: '500px',
         data: {
           venda: venda
         }

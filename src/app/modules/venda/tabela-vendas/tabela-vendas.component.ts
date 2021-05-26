@@ -86,18 +86,21 @@ export class TabelaVendasComponent implements OnInit {
       });
     } else {
       dialogRef = this.dialog.open(StatusPedidoComponent, {
-        maxHeight:'900px', width: '900px',
+        maxHeight:'600px', width: '500px',
         data: {
           venda: venda
         }
       });
     }
     dialogRef.afterClosed().subscribe(resp => {
-      this.vendaService.putVenda(resp).subscribe(resp => {
-        this.toastr.success("Status do Pedido "+venda.numeroPedido+" atualizado", "OK", {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
-      })
+      console.log(resp)
+      if(resp){
+        this.vendaService.putVenda(resp).subscribe(resp => {
+          this.toastr.success("Status do Pedido "+venda.numeroPedido+" atualizado", "OK", {
+            timeOut: 3000, positionClass: 'toast-top-center',
+          });
+        })
+      }
     })
     return dialogRef;
   }

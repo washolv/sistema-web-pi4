@@ -23,7 +23,7 @@ export class ProdutoService {
   }
   public getProdutosHabilitados(): Observable<HttpResponse<Produto[]>> {
     const httpOptions = {
-      headers: new HttpHeaders({ habilitado: 'false' }),
+      headers: new HttpHeaders({ habilitado: 'true' }),
     };
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
   }

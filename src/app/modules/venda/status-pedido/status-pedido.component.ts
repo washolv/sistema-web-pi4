@@ -50,8 +50,12 @@ export class StatusPedidoComponent implements OnInit {
     this.dialogRef.close();
   }
   closeX() {
-    this.venda.status=this.status.descricao;
-    this.dialogRef.close(this.venda);
+    if(this.status.descricao){
+      this.venda.status=this.status.descricao;
+      this.dialogRef.close(this.venda);
+      return;
+    }
+    this.close();
   }
   selectStatus(status : Status){
     this.status=status;

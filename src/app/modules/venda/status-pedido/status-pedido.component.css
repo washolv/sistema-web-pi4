@@ -21,7 +21,7 @@ h3{
     color: rgba(78,84,97,.8);
 }
 td{
-  min-width: 200px;
+  min-width: 211px;
 }
 .img-fluid{
   width: 70%;
@@ -55,6 +55,7 @@ td{
  }
  td{
   font-size: 10px;
+  min-width: 105px;
 
  }
 

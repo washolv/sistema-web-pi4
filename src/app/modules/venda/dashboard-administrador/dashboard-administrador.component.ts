@@ -66,7 +66,6 @@ export class DashboardAdministradorComponent implements OnInit {
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.selected = response;
-        console.log(response)
         this.getInfoCharts(this.selected?.startDate!, this.selected?.endDate!);
       }
     }, err => {
@@ -155,7 +154,6 @@ export class DashboardAdministradorComponent implements OnInit {
         data.push(y.categoria!)
       })
     }
-    console.log(data)
     return data;
   }
   getPorcentagem() {
