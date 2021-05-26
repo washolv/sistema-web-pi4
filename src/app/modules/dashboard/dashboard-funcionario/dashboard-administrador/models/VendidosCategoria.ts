@@ -1,6 +1,6 @@
 export class VendidosCategoria {
   categoria?: string;
-  porcentagem?: string;
+  porcentagem?: number;
 }
 export class VendidosMes {
   mes?: string;

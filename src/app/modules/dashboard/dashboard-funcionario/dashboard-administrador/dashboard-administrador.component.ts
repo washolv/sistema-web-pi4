@@ -16,8 +16,11 @@ import { VendidosCategoria, VendidosMes } from './models/VendidosCategoria';
 export class DashboardAdministradorComponent implements OnInit {
   public vendidosPorMes: VendidosMes[] = [];
   public vendidosCategoria: VendidosCategoria[] = [];
+  public totalProdutosVendidos:number=0;
+  public totalVendas:number=0;
   @Output() messageEvent = new EventEmitter<VendidosMes[]>();
-  chartOptions: any;
+  chartOptionsCat: any;
+  chartOptionsMonth: any;
 
   selected?: { chosenLabel: string, startDate: Moment, endDate: Moment };
   orderByConfig = {
@@ -26,19 +29,26 @@ export class DashboardAdministradorComponent implements OnInit {
     isCaseInsensitive: true
   };
   constructor(private dialog: MatDialog, private router: Router, private relatorioVendasService: RelatorioVendasService) {
-    this.getInfoCharts();
+    this.getInfoCharts(moment().startOf('day'), moment().endOf('day'));
   }
   ngOnInit() {
   }
 
-  getInfoCharts() {
+  getInfoCharts(startDate: Moment, endDate: Moment) {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-    /* this.relatorioVendasService.getByCategory(moment().startOf('day').toDate(), moment().endOf('day').toDate()).subscribe(res =>{
-       console.log(res);
-     });*/
-    this.relatorioVendasService.getByMonth(moment().startOf('day').toDate(), moment().endOf('day').toDate()).subscribe(res => {
+    this.relatorioVendasService.getTotalProdutosVendidos(startDate.toDate(), endDate.toDate()).subscribe(resp=>{
+      this.totalProdutosVendidos=resp;
+    })
+    this.relatorioVendasService.getTotalVendas(startDate.toDate(), endDate.toDate()).subscribe(resp=>{
+      this.totalVendas=resp;
+    })
+    this.relatorioVendasService.getByCategory(startDate.toDate(), endDate.toDate()).subscribe(res => {
+      this.vendidosCategoria = res;
+      this.criarGraficoCategoria();
+    });
+    this.relatorioVendasService.getByMonth(startDate.toDate(), endDate.toDate()).subscribe(res => {
       this.vendidosPorMes = res;
       this.criarGraficoMeses();
       dialogRef.close();
@@ -57,23 +67,38 @@ export class DashboardAdministradorComponent implements OnInit {
       if (response) {
         this.selected = response;
         console.log(response)
-        this.relatorioVendasService.getByMonth(this.selected?.startDate.toDate()!, this.selected?.endDate.toDate()!).subscribe((res: VendidosMes[]) => {
-          this.vendidosPorMes = res;
-          console.log(this.vendidosPorMes)
-          this.criarGraficoMeses();
-          dialogRef.close();
-        });
+        this.getInfoCharts(this.selected?.startDate!, this.selected?.endDate!);
       }
     }, err => {
       console.log(err);
       dialogRef.close();
     });
   }
-
+  criarGraficoCategoria() {
+    this.chartOptionsCat = {
+      series: this.getPorcentagem(),
+      chart: {
+        type: 'donut',
+        width: '66%',
+      },
+      labels: this.getCategoria(),
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }],
+    };
+  }
   criarGraficoMeses() {
-    this.chartOptions = {
+    this.chartOptionsMonth = {
       series: [{
-        name: "Desktops",
+        name: "Vendas",
         data: this.getDataMonth()
       }],
       chart: {
@@ -107,7 +132,7 @@ export class DashboardAdministradorComponent implements OnInit {
   }
   getDataMonth() {
     let data: number[] = [];
-    if (this.vendidosCategoria) {
+    if (this.vendidosPorMes) {
       this.vendidosPorMes.forEach(x => {
         data.push(x.qtdVendida!)
       })
@@ -116,12 +141,31 @@ export class DashboardAdministradorComponent implements OnInit {
   }
   getMonths() {
     let data: string[] = [];
-    if (this.vendidosCategoria) {
+    if (this.vendidosPorMes) {
       this.vendidosPorMes.forEach(y => {
         data.push(y.mes!)
+      })
+    }
+    return data;
+  }
+  getCategoria() {
+    let data: string[] = [];
+    if (this.vendidosCategoria) {
+      this.vendidosCategoria.forEach(y => {
+        data.push(y.categoria!)
       })
     }
     console.log(data)
     return data;
   }
+  getPorcentagem() {
+    let data: number[] = [];
+    if (this.vendidosCategoria) {
+      this.vendidosCategoria.forEach(y => {
+        data.push(y.porcentagem!)
+      })
+    }
+    return data;
+  }
+
 }
