@@ -159,7 +159,7 @@
             <div class="d-flex justify-content-between col-lg-12">
               <div class="custom-text-size2 mt-3 ml-2">Total:
               </div>
-              <div class="custom-text-size3 mt-2">{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}
+              <div class="custom-text-size3 mt-3">{{venda.valorTotal! + freteSelecionado!.valorFrete | currency:'BRL':'symbol':'0.2-2'}}
               </div>
             </div>
           </div>

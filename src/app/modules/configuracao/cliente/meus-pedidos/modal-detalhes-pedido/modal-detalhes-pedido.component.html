@@ -38,7 +38,7 @@
     <p><span><hr></span></p>
   </div>
   <div class="col-lg-12 mt-2 mb-2">
-    <p><span class="font-weight-bold"> Total dos produtos: </span><span>{{venda.valorParcial | currency:'BRL':'symbol':'0.2-2'}}</span></p>
+    <p><span class="font-weight-bold"> Total dos produtos: </span><span>{{venda.valorParcial!-venda.frete!.valorFrete| currency:'BRL':'symbol':'0.2-2'}}</span></p>
     <p><span class="font-weight-bold">Frete: </span><span>{{venda.frete!.valorFrete | currency:'BRL':'symbol':'0.2-2'}}</span></p>
     <p><span class="font-weight-bold">Descontos: </span><span>- {{venda.desconto | currency:'BRL':'symbol':'0.2-2'}}</span></p>
     <p><span class="font-weight-bold total">Total: </span><span>{{venda.valorTotal | currency:'BRL':'symbol':'0.2-2'}}</span></p>

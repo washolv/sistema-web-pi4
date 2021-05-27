@@ -150,11 +150,9 @@ export class EnderecoEntregaComponent implements OnInit {
   }
   calculaTotal() {
     this.venda.valorTotal = 0;
-    console.log(this.freteSelecionado)
     this.venda.detalhesVenda!.forEach(sub => {
       this.venda.valorTotal = sub.subTotal! + this.venda.valorTotal!;
     })
-    this.venda.valorTotal=this.venda.valorTotal+this.freteSelecionado.valorFrete;
   }
   finalizarCompra() {
     this.router.navigate(['/carrinho/pagamento']);
@@ -165,7 +163,6 @@ export class EnderecoEntregaComponent implements OnInit {
     this.freteSelecionado.check=true;
     sessionStorage.setItem('frete', JSON.stringify(this.freteSelecionado));
     sessionStorage.setItem('endereco-entrega', JSON.stringify(this.endereco));
-    this.calculaTotal();
   }
   backPage(){
     this.router.navigate(['/carrinho'])
