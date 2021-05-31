@@ -1,15 +1,12 @@
 <div class="container-fluid">
   <div class="col-12">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-3 mb-5">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3 mt-3 mx-auto">
-              <button class="mt-3 btn btn-dark" type="submit" (click)="backProdutos()">Produtos</button>
-              <div class="text-center mt-2">Edição de imagens do Produto</div>
-            </div>
-          </div>
-        </div>
+    <div class="row col-lg-12">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold">
+        <button class="mt-3 btn" type="submit" (click)="backProdutos()"><img src="./assets/icons/voltar.svg"
+            alt="First slide"></button>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-12 custom-text-size24 font-bold mt-4">
+        Edição de Imagens do Produto
       </div>
     </div>
     <mat-tab-group>
@@ -26,21 +23,17 @@
                 <img [src]="img.imageToShow" class="img-fluid mb-3" style="width: 300px;">
                 <div class="row">
                   <button class="btn custom-btn mr-0">
-                    <img src="../../../assets/icons/Icon material-delete.svg" (click)="deleteImageBanco(img)" class="btn-icon-add"
-                      alt="add">
+                    <img src="../../../assets/icons/Icon material-delete.svg" (click)="deleteImageBanco(img)"
+                      class="btn-icon-add" alt="add">
                   </button>
-                    <button mat-icon-button (click)="toggleSelected(img)">
-                      <mat-icon
-                        *ngIf="img.imagemPrincipal"
-                        aria-label="Example icon-button with a heart icon">
-                        favorite
-                      </mat-icon>
-                      <mat-icon
-                        *ngIf="!img.imagemPrincipal"
-                        aria-label="Example icon-button with a heart icon">
-                        favorite_border
-                      </mat-icon>
-                    </button>
+                  <button mat-icon-button (click)="toggleSelected(img)">
+                    <mat-icon *ngIf="img.imagemPrincipal" aria-label="Example icon-button with a heart icon">
+                      favorite
+                    </mat-icon>
+                    <mat-icon *ngIf="!img.imagemPrincipal" aria-label="Example icon-button with a heart icon">
+                      favorite_border
+                    </mat-icon>
+                  </button>
                 </div>
               </div>
             </ng-container>
@@ -57,8 +50,7 @@
           <div class="row">
             <div class="col-md-5 mt-3 mb-3">
               <label class="image-upload-container btn btn-bwm">
-                <div class=row><input type="file" accept="image/*" multiple
-                    (change)="processFile($event)">
+                <div class=row><input type="file" accept="image/*" multiple (change)="processFile($event)">
                 </div>
               </label>
             </div>
@@ -69,8 +61,8 @@
                 <img [src]="img" class="img-fluid mb-3" style="width: 300px;">
                 <div class="row">
                   <button class="btn custom-btn mr-0">
-                    <img src="../../../assets/icons/Icon material-delete.svg" (click)="deleteImage(img,i)" class="btn-icon-add"
-                      alt="add">
+                    <img src="../../../assets/icons/Icon material-delete.svg" (click)="deleteImage(img,i)"
+                      class="btn-icon-add" alt="add">
                   </button>
                 </div>
               </div>

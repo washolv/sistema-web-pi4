@@ -112,7 +112,7 @@ export class ProdutoComponent implements OnInit {
 
   adicionarEstoque(produto: Produto) {
     const dialogRef = this.dialog.open(AdicionarEstoqueComponent, {
-      minWidth: '500px',
+
       data: {
         produto: produto
       }

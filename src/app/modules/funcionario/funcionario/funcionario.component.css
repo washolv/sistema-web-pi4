@@ -108,3 +108,8 @@
     background: none !important;
 }
 
+@media (max-width: 768px)   {
+  .custom-table-container {
+    overflow-x: scroll;
+  }
+}
