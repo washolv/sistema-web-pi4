@@ -26,6 +26,9 @@ export class VendaService {
   getByIdCliente(id: number):Observable<Venda[]>{
     return this.http.get<Venda[]>(`${this.apiUrl}/vendas/cliente/${id}`);
   }
+  getVendas():Observable<Venda[]>{
+    return this.http.get<Venda[]>(`${this.apiUrl}/vendas`);
+  }
   getByIdNumPedido(id: number, num: string):Observable<Venda[]>{
     const httpOptions = {
       headers: new HttpHeaders({ numeroPedido : num }),

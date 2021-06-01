@@ -8,10 +8,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { RoleGuardService } from 'src/app/services/RoleGuard.service';
 import { VendaService } from 'src/app/services/venda.service';
-import { Venda } from '../checkout/models/Venda';
-import { ModalDetalhesPedidoComponent } from '../configuracao/cliente/meus-pedidos/modal-detalhes-pedido/modal-detalhes-pedido.component';
-import { LoadingComponent } from '../shared/loading/loading.component';
-import { StatusPedidoComponent } from './status-pedido/status-pedido.component';
+import { Venda } from '../../checkout/models/Venda';
+import { ModalDetalhesPedidoComponent } from '../../configuracao/cliente/meus-pedidos/modal-detalhes-pedido/modal-detalhes-pedido.component';
+import { LoadingComponent } from '../../shared/loading/loading.component';
+import { StatusPedidoComponent } from '../status-pedido/status-pedido.component';
 
 @Component({
   selector: 'app-venda',
@@ -48,7 +48,7 @@ export class VendaComponent implements OnInit {
          });
      });
      //<number>this.roleGuardService.getUser().Id
-   this.vendaService.getByIdCliente(7).subscribe(response=>{
+   this.vendaService.getVendas().subscribe(response=>{
      this.vendas=response;
      dialogRef.close();
    })

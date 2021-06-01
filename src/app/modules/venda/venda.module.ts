@@ -17,11 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { VendaComponent } from './venda.component';
 import { StatusPedidoComponent } from './status-pedido/status-pedido.component';
 import { DashboardAdministradorComponent } from './dashboard-administrador/dashboard-administrador.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TabelaVendasComponent } from './tabela-vendas/tabela-vendas.component';
+import { VendaComponent } from './venda/venda.component';
 
 
 const routes: Routes = [

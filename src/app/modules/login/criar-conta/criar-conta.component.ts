@@ -101,7 +101,6 @@ export class CriarContaComponent implements OnInit {
   }
   public addCliente() {
     if (this.formCliente.valid) {
-      console.log('*********************');
       this.clienteService.emailNaoCadastrado(this.formCliente.value.email).subscribe(response => {
         if (!response) {
          this.clienteService.cpfNaoCadastrado(this.formCliente.value.cpf).subscribe(r => {
@@ -145,9 +144,6 @@ export class CriarContaComponent implements OnInit {
     } else {
       this.formValid = false;
     }
-  }
-  public backPage() {
-    this.router.navigate(['/clientes'])
   }
 
 

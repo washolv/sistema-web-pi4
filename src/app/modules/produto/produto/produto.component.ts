@@ -49,17 +49,6 @@ export class ProdutoComponent implements OnInit {
       this.isAdmin=this.userRole=='ROLE_ADMIN';
   }
 
-  public habilitarProduto(p: Produto) {
-    if(this.userRole=='ROLE_ADMIN'){
-      if (p.status) {
-        p.status = 1;
-      } else {
-        p.status = 0;
-      }
-      this.produtoService.editarProduto(p).subscribe((response: any) => {
-      });
-    }
-  }
   ngOnInit() {
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
@@ -73,6 +62,18 @@ export class ProdutoComponent implements OnInit {
         console.log(err);
       });
   }
+  public habilitarProduto(p: Produto) {
+    if(this.userRole=='ROLE_ADMIN'){
+      if (p.status) {
+        p.status = 1;
+      } else {
+        p.status = 0;
+      }
+      this.produtoService.editarProduto(p).subscribe((response: any) => {
+      });
+    }
+  }
+
 
 
 
