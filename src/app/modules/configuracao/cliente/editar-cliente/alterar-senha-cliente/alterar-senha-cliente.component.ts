@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cliente } from 'src/app/modules/cliente/models/Cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-alterar-senha-cliente',
@@ -15,7 +16,7 @@ export class AlterarSenhaClienteComponent implements OnInit {
   senhasIguais=true;
   senhaAtual="";
   senhaAtualValida=true;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AlterarSenhaClienteComponent>){
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AlterarSenhaClienteComponent>, private clienteService: ClienteService){
     if(data.cliente){
       this.cliente=this.data.cliente;
     }
@@ -53,18 +54,17 @@ export class AlterarSenhaClienteComponent implements OnInit {
     this.dialogRef.close(this.cliente);
   }
   confirmar(){
-    if(this.senhaAtual!=this.f.senha.value){
-      this.senhaAtualValida=false;
-    }else{
-      this.senhaAtualValida=false;
-    }
-
-    if((this.formSenha.valid && this.senhasIguais) && this.senhaAtualValida){
-      this.cliente.usuario!.password=this.formSenha.value.senha;
-      this.closeX();
-    }else{
+    this.clienteService.comparaSenhas(this.f.senhaAtual.value, <number> this.cliente.usuario!.id).subscribe(response=>{
+      if(response==true){
+        if(this.formSenha.valid && this.senhasIguais){
+          this.cliente.usuario!.password=this.formSenha.value.senha;
+          this.closeX();
+        }
+      }else{
+        this.senhaAtualValida=false;
+      }
       this.formValid=false;
-    }
+    })
   }
 
 

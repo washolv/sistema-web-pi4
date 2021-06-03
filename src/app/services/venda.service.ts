@@ -35,6 +35,12 @@ export class VendaService {
     };
     return this.http.get<Venda[]>(`${this.apiUrl}/vendas/numeroPedido/cliente/${id}`,httpOptions);
   }
+  getByNumPedido(num: string):Observable<Venda[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({ numeroPedido : num }),
+    };
+    return this.http.get<Venda[]>(`${this.apiUrl}/vendas/numeroPedido`,httpOptions);
+  }
 
   getStatusVenda(): Status[]{
     let listaStatus: Status[]=new Array();

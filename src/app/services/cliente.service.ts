@@ -61,4 +61,10 @@ export class ClienteService {
     };
     return this.http.get<Cliente>(`${this.apiUrl}/clientes/cpf`, httpOptions)
   };
+  public comparaSenhas(senha: string, id: number)/*:Observable<any>*/ {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'senha': senha })
+    };
+    return this.http.get<Cliente>(`${this.apiUrl}/clientes/buscarSenha/${id}`, httpOptions)
+  };
 }

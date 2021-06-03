@@ -39,13 +39,13 @@ export class TabelaVendasComponent implements OnInit {
      debounceTime(1000),
      distinctUntilChanged())
      .subscribe(search => {
-       this.vendaService.getByIdNumPedido(this.roleGuardService.getUser().Id!, this.filtroPesquisa)
+       this.vendaService.getByNumPedido(this.filtroPesquisa)
          .subscribe((response: Venda[]) => {
            this.vendas = response;
          });
      });
      //<number>this.roleGuardService.getUser().Id
-   this.vendaService.getByIdCliente(7).subscribe(response=>{
+   this.vendaService.getVendas().subscribe(response=>{
      this.vendas=response;
      console.log(response)
      dialogRef.close();
