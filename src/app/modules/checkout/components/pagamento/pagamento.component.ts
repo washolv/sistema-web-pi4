@@ -53,6 +53,7 @@ export class PagamentoComponent implements OnInit {
   get f() { return this.cardForm.controls; }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });

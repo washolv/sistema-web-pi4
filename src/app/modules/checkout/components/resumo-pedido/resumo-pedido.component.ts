@@ -36,6 +36,7 @@ export class ResumoPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     let id = <number>this.roleGuardService.getUser().Id;
     this.clienteService.buscarCliente(id).subscribe(response => {
       this.cliente = response;
