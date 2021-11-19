@@ -35,10 +35,7 @@ export class ModalDetalhesPedidoComponent implements OnInit {
       let p = <Produto>detalhe.produto;
       this.produtoService.getImagensProduto(p.id!).subscribe(response => {
         p.imagens = response;
-        response.forEach(element => {
-          p.imageToShow = [];
-          p.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
-        })
+        p.imageToShow=response;
         detalhe.produto=p;
       })
     }

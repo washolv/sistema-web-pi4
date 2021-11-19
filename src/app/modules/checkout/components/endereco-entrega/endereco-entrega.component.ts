@@ -130,11 +130,7 @@ export class EnderecoEntregaComponent implements OnInit {
       this.listaProdutosCarrinho.forEach(x => {
         this.produtoService.getProdutoById(x.id!).subscribe(produto => {
           this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-            produto.imagens = response;
-            response.forEach(element => {
-              produto.imageToShow = [];
-              produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)));
-            })
+            produto.imageToShow = response;
           })
           let itemCarrinho: DetalhesVenda = new DetalhesVenda();
           itemCarrinho.produto = produto;

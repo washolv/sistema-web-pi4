@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Imagem, Produto } from '../modules/produto/models/Produto';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProdutoService {
   apiUrl = environment.baseAPIUrl;
   urlImage = environment.baseAPIUrl + '/imagens';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private sanitizer: DomSanitizer) {
   }
 
   public getProdutos(): Observable<HttpResponse<Produto[]>> {
@@ -21,17 +22,41 @@ export class ProdutoService {
     };
     return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
   }
-  public getProdutosHabilitados(): Observable<HttpResponse<Produto[]>> {
+  public getProdutosHabilitados(): Observable<Produto[]> {
     const httpOptions = {
       headers: new HttpHeaders({ habilitado: 'true' }),
     };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions });
+    return new Observable((obs)=>{
+      return this.http.get<Produto[]>(`${this.apiUrl}/produtos`, { observe: 'response', ...httpOptions }).subscribe((response)=>{
+        let produtos=<Produto[]>response.body;
+        produtos.map((produto)=>{
+            this.getImagensProduto(produto.id!).subscribe((imagens)=>{
+              produto.imageToShow=imagens;
+            })
+            obs.next(produtos);
+            obs.complete();
+          })
+      })
+
+    })
   }
-  public getProdutosHabilitadosPorCategoria(categoria: string): Observable<HttpResponse<Produto[]>> {
+  public getProdutosHabilitadosPorCategoria(categoria: string): Observable<Produto[]> {
     const httpOptions = {
       headers: new HttpHeaders({ habilitado: 'true', categoria: categoria }),
     };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/categoria`, { observe: 'response', ...httpOptions });
+    return new Observable((obs)=>{
+      return this.http.get<Produto[]>(`${this.apiUrl}/produtos/categoria`, { observe: 'response', ...httpOptions }).subscribe((response)=>{
+        let produtos=<Produto[]>response.body;
+        produtos.map((produto)=>{
+            this.getImagensProduto(produto.id!).subscribe((imagens)=>{
+              produto.imageToShow=imagens;
+              obs.next(produtos);
+              obs.complete();
+            })
+          })
+      })
+
+    })
   }
   public getProdutoById(id: number): Observable<Produto> {
     return this.http.get<Produto>(`${this.apiUrl}/produtos/find/${id}`);
@@ -40,10 +65,24 @@ export class ProdutoService {
     const httpOptions = {
       headers: new HttpHeaders({ habilitado: habilitado.toString() }),
     };
-    return this.http.get<Produto[]>(`${this.apiUrl}/produtos/${search}`, httpOptions);
+    return new Observable((obs)=>{
+      return this.http.get<Produto[]>(`${this.apiUrl}/produtos/${search}`, httpOptions).subscribe((produtos)=>{
+        produtos.map((produto)=>{
+            this.getImagensProduto(produto.id!).subscribe((imagens)=>{
+              produto.imageToShow=imagens;
+            })
+          })
+      })
+    })
   }
   public getImagensProduto(id: number): Observable<Imagem[]> {
-    return this.http.get<Imagem[]>(`${this.apiUrl}/imagens/produto/${id}`);
+    return new Observable((obs)=>{
+      this.http.get<Imagem[]>(`${this.apiUrl}/imagens/produto/${id}`).subscribe((imagens)=>{
+        const imgs=imagens.map((img)=>this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img.imagem}`));
+        obs.next(imgs);
+        obs.complete();
+      })
+    })
   }
   public deleteImagensProduto(id: number): Observable<Imagem[]> {
     return this.http.delete<Imagem[]>(`${this.apiUrl}/imagens/${id}`);

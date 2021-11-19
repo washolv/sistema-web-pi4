@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { pipe, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
+import { forkJoin, pipe, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, first, mergeMap } from 'rxjs/operators';
 import { CartService } from 'src/app/services/cart.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from '../../produto/models/Produto';
@@ -37,22 +37,13 @@ export class VitrineComponent implements OnInit {
         this.produtoService.getProdutoByDescricao(search, true)
           .subscribe((response: Produto[]) => {
             this.produtos = response;
-            this.produtos.forEach(produto => {
-              produto.imageToShow = [];
-              this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-                response.forEach(element =>
-                  produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
-                )
-              }
-              )
-            });
           });
       });
   }
 
   ngOnInit() {
     this.filtrarPorCategoria("");
-    let produtosCarrinhoJson = localStorage.getItem('carrinho');
+    localStorage.getItem('carrinho');
   }
 
   chunk(arr: any, chunkSize: number) {
@@ -63,54 +54,27 @@ export class VitrineComponent implements OnInit {
     return R;
   }
   filtrarPorCategoria(categoria?: string) {
-
     const dialogRef = this.dialog.open(LoadingComponent, {
       panelClass: 'custom-modais', backdropClass: 'blur', height: 'auto', width: '180px', disableClose: true
     });
-
     if (categoria == "") {
-      this.produtoService.getProdutosHabilitados().subscribe((response: HttpResponse<Produto[]>) => {
-        this.produtos = <Produto[]>response.body,
-          this.produtos.forEach(produto => {
-            produto.imageToShow = [];
-            this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-              response.forEach(element =>
-                produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`))),
-              )
-            })
-            dialogRef.close()
-          });
+      this.produtoService.getProdutosHabilitados().subscribe((response) => {
+        this.produtos = response;
+        dialogRef.close();
         this.slides = this.chunk(this.produtos, 4);
       });
     } else {
-      this.produtoService.getProdutosHabilitadosPorCategoria(categoria!).subscribe((response: HttpResponse<Produto[]>) => {
-        this.produtos = <Produto[]>response.body,
-          this.produtos.forEach(produto => {
-            produto.imageToShow = [];
-            this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-              response.forEach(element =>
-                produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-              )
-            }
-            )
-          });
+      this.produtoService.getProdutosHabilitadosPorCategoria(categoria!).subscribe((response) => {
+        this.produtos = response;
+        dialogRef.close();
       });
     }
   }
 
   filtrarPorSubCategoria(item: string) {
     this.produtoService.getProdutoByDescricao(item, true)
-      .subscribe((response: Produto[]) => {
+      .subscribe((response) => {
         this.produtos = response;
-        this.produtos.forEach(produto => {
-          produto.imageToShow = [];
-          this.produtoService.getImagensProduto(produto.id!).subscribe(response => {
-            response.forEach(element =>
-              produto.imageToShow.push((this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${element.imagem}`)))
-            )
-          }
-          )
-        });
       });
   }
 
@@ -122,3 +86,5 @@ export class VitrineComponent implements OnInit {
     }
   }
 }
+
+
